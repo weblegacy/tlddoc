@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
 <!--
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
@@ -32,44 +33,47 @@
   -->
 
 <!--
-    Document   : index.html.xsl
-    Created on : October 1, 2002, 5:37 PM
-    Author     : mroth
-    Description:
-        Creates the index page for Tag Library Documentation Generator
+
+  Identity transformation, added for flexibility.  
+         
+  1. Remove any tag-extension, function-extension and taglib-extension
+     elements.
+         
+  Author: Mark Roth
+
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:javaee="http://java.sun.com/xml/ns/javaee" 
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format">
-    
-    <xsl:output method="html" indent="yes"/>
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:javaee="http://java.sun.com/xml/ns/javaee">               
+  <xsl:output method="xml" indent="yes"/>  
 
-    <!-- template rule matching source root element -->
-    <xsl:template match="/">
-      <html>
-        <head>
-          <title>
-            <xsl:value-of select="/javaee:tlds/javaee:config/javaee:window-title"/>
-          </title>
-        </head>
-        <frameset cols="20%,80%">
-          <frameset rows="30%,70%">
-            <frame src="overview-frame.html" name="tldListFrame"/>
-            <frame src="alltags-frame.html" name="tldFrame"/>
-          </frameset>
-          <frame src="overview-summary.html" name="tagFrame"/>
-        </frameset>
-        <noframes>
-          <h2>Frame Alert</h2>
-          <p/>
-          This document is designed to be viewed using the frames feature.  
-          If you see this message, you are using a non-frame-capable web 
-          client.
-          <br/>
-          Link to <a href="overview-summary.html">Non-frame version.</a>
-        </noframes>
-      </html>
-    </xsl:template>
-</xsl:stylesheet> 
+  <xsl:template match="/javaee:taglib">
+      <xsl:element name="taglib" namespace="http://java.sun.com/xml/ns/javaee">
+          <xsl:attribute name="xsi:schemaLocation"
+                         namespace="http://www.w3.org/2001/XMLSchema-instance">http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd</xsl:attribute>
+          <xsl:attribute name="version">2.1</xsl:attribute>
+          <xsl:apply-templates select="*"/>
+      </xsl:element>      
+  </xsl:template>
+  
+  <xsl:template match="javaee:tag-extension">
+  </xsl:template>
+  
+  <xsl:template match="javaee:function-extension">
+  </xsl:template>
+  
+  <xsl:template match="javaee:taglib-extension">
+  </xsl:template>
+
+  <xsl:template match="@*|node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="text()">
+    <xsl:value-of select="normalize-space(.)" />
+  </xsl:template>
+  
+</xsl:stylesheet>

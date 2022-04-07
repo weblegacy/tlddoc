@@ -42,13 +42,16 @@ public final class Constants {
     private Constants() {
     }
     
-    public static final String VERSION = "1.2";
+    public static final String VERSION = "1.3";
     
     public static final String DEFAULT_WINDOW_TITLE = 
         "Tag Library Documentation Generator - Generated Documentation";
     
     public static final String DEFAULT_DOC_TITLE =
         "Tag Library Documentation Generator - Generated Documentation";
+    
+    /** Namespace for Java EE */
+    public static final String NS_JAVAEE = "http://java.sun.com/xml/ns/javaee";
     
     /** Namespace for J2EE */
     public static final String NS_J2EE = "http://java.sun.com/xml/ns/j2ee";

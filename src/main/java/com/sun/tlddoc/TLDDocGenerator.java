@@ -498,24 +498,24 @@ public class TLDDocGenerator {
         summaryTLD = documentBuilder.newDocument();
         
         // Create root <tlds> element:
-        Element rootElement = summaryTLD.createElementNS( Constants.NS_J2EE, 
+        Element rootElement = summaryTLD.createElementNS( Constants.NS_JAVAEE, 
             "tlds" );
         summaryTLD.appendChild( rootElement );
         // JDK 1.4 does not add xmlns for some reason - add it manually:
         rootElement.setAttributeNS( "http://www.w3.org/2000/xmlns/", 
-            "xmlns", Constants.NS_J2EE );
+            "xmlns", Constants.NS_JAVAEE );
         
         // Create configuration element:
-        Element configElement = summaryTLD.createElementNS( Constants.NS_J2EE, 
+        Element configElement = summaryTLD.createElementNS( Constants.NS_JAVAEE, 
             "config" );
         rootElement.appendChild( configElement );
         
-        Element windowTitle = summaryTLD.createElementNS( Constants.NS_J2EE, 
+        Element windowTitle = summaryTLD.createElementNS( Constants.NS_JAVAEE, 
             "window-title" );
         windowTitle.appendChild( summaryTLD.createTextNode( this.windowTitle));
         configElement.appendChild( windowTitle );
         
-        Element docTitle = summaryTLD.createElementNS( Constants.NS_J2EE, 
+        Element docTitle = summaryTLD.createElementNS( Constants.NS_JAVAEE, 
             "doc-title" );
         docTitle.appendChild( summaryTLD.createTextNode( this.docTitle));
         configElement.appendChild( docTitle );
@@ -530,7 +530,7 @@ public class TLDDocGenerator {
             TagLibrary tagLibrary = (TagLibrary)iter.next();
             Document doc = tagLibrary.getTLDDocument( documentBuilder );
             
-            // Convert document to JSP 2.0 TLD
+            // Convert document to JSP 2.1 TLD
             doc = upgradeTLD( doc );
             
             // If this tag library has no tags, no validators, 
@@ -550,10 +550,11 @@ public class TLDDocGenerator {
 
                 Element taglibNode = (Element)summaryTLD.importNode( 
                     doc.getDocumentElement(), true );
-                if( !taglibNode.getNamespaceURI().equals( Constants.NS_J2EE )) {
+                if( !taglibNode.getNamespaceURI().equals( Constants.NS_JAVAEE )
+                    && !taglibNode.getNamespaceURI().equals( Constants.NS_J2EE )) {
                     throw new GeneratorException( "Error: " + 
                         tagLibrary.getPathDescription() + 
-                        " does not have xmlns=\"" + Constants.NS_J2EE + "\"" );
+                        " does not have xmlns=\"" + Constants.NS_JAVAEE + "\"" );
                 }
                 if( !taglibNode.getLocalName().equals( "taglib" ) ) {
                     throw new GeneratorException( "Error: " + 
@@ -574,7 +575,7 @@ public class TLDDocGenerator {
     }
     
     /**
-     * Converts the given TLD to a JSP 2.0 TLD
+     * Converts the given TLD to a JSP 2.1 TLD
      */
     private Document upgradeTLD( Document doc ) 
         throws TransformerConfigurationException, ParserConfigurationException,
@@ -598,10 +599,16 @@ public class TLDDocGenerator {
             root = doc.getDocumentElement();
         }
         
-        // Final conversion to remove unwanted elements
-        doc = convertTLD( doc, RESOURCE_PATH + "/tld2_0-tld2_0.xsl" );
+        if ( "2.0".equals(root.getAttribute( "version" ))) {
+            
+            doc = convertTLD( doc, RESOURCE_PATH + "/tld2_0-tld2_1.xsl" );
+            
+        }
         
-        // We should now have a JSP 2.0 TLD in doc.
+        // Final conversion to remove unwanted elements
+        doc = convertTLD( doc, RESOURCE_PATH + "/tld2_1-tld2_1.xsl" );
+        
+        // We should now have a JSP 2.1 TLD in doc.
         return doc;
     }
 
@@ -741,7 +748,7 @@ public class TLDDocGenerator {
                 name.equals( "description" ) ||
                 name.equals( "example" ) )
             {
-                element = doc.createElementNS( Constants.NS_J2EE, name );
+                element = doc.createElementNS( Constants.NS_JAVAEE, name );
                 element.appendChild( doc.createTextNode( value ) );
                 tagFileNode.appendChild( element );
             }
@@ -751,13 +758,13 @@ public class TLDDocGenerator {
                 NodeList icons = tagFileNode.getElementsByTagNameNS( "*", "icon" );
                 Element icon;
                 if( icons.getLength() == 0 ) {
-                    icon = doc.createElementNS( Constants.NS_J2EE, "icon" );
+                    icon = doc.createElementNS( Constants.NS_JAVAEE, "icon" );
                     tagFileNode.appendChild( icon );
                 }
                 else {
                     icon = (Element)icons.item( 0 );
                 }
-                element = doc.createElementNS( Constants.NS_J2EE, name );
+                element = doc.createElementNS( Constants.NS_JAVAEE, name );
                 element.appendChild( doc.createTextNode( value ) );
                 icon.appendChild( element );
             }
@@ -797,7 +804,7 @@ public class TLDDocGenerator {
         String defaultValue ) 
     {
         if( findElementValue( parent, tagName ) == null ) {
-            Element element = doc.createElementNS( Constants.NS_J2EE, tagName );
+            Element element = doc.createElementNS( Constants.NS_JAVAEE, tagName );
             element.appendChild( doc.createTextNode( defaultValue ) );
             parent.appendChild( element );
         }
@@ -816,9 +823,11 @@ public class TLDDocGenerator {
         Element tagFileNode, Document doc, Directive directive )
     {
         Iterator attributes = directive.getAttributes();
-        Element attributeNode = doc.createElementNS( Constants.NS_J2EE, 
+        Element attributeNode = doc.createElementNS( Constants.NS_JAVAEE, 
             "attribute" );
         tagFileNode.appendChild( attributeNode );
+        String deferredValueType = null;
+        String deferredMethodSignature = null;
         while( attributes.hasNext() ) {
             Attribute attribute = (Attribute)attributes.next();
             String name = attribute.getName();
@@ -831,10 +840,45 @@ public class TLDDocGenerator {
                 name.equals( "type" ) ||
                 name.equals( "description" ) )
             {
-                element = doc.createElementNS( Constants.NS_J2EE, name );
+                element = doc.createElementNS( Constants.NS_JAVAEE, name );
                 element.appendChild( doc.createTextNode( value ) );
                 attributeNode.appendChild( element );
             }
+            else if(name.equals("deferredValue")) {
+                if(deferredValueType == null) {
+                    deferredValueType = "java.lang.Object";
+                }
+            }
+            else if(name.equals("deferredValueType")) {
+                deferredValueType = value;
+            }
+            else if(name.equals("deferredMethod")) {
+                if(deferredMethodSignature == null) {
+                    deferredMethodSignature = "void methodname()";
+                }
+            }
+            else if(name.equals("deferredMethodSignature")) {
+                deferredMethodSignature = value;
+            }
+        }
+        if(deferredValueType != null) {
+            Element deferredValueElement =
+                doc.createElementNS(Constants.NS_JAVAEE, "deferred-value");
+            attributeNode.appendChild(deferredValueElement);
+            Element typeElement =
+                doc.createElementNS(Constants.NS_JAVAEE, "type");
+            typeElement.appendChild(doc.createTextNode(deferredValueType));
+            deferredValueElement.appendChild(typeElement);
+        }
+        if(deferredMethodSignature != null) {
+            Element deferredMethodElement =
+                doc.createElementNS(Constants.NS_JAVAEE, "deferred-method");
+            attributeNode.appendChild(deferredMethodElement);
+            Element methodSignatureElement =
+                doc.createElementNS(Constants.NS_JAVAEE, "method-signature");
+            methodSignatureElement.appendChild(
+                doc.createTextNode(deferredMethodSignature));
+            deferredMethodElement.appendChild(methodSignatureElement);
         }
         populateDefault( doc, attributeNode, "required", "false" );
         populateDefault( doc, attributeNode, "fragment", "false" );
@@ -863,7 +907,7 @@ public class TLDDocGenerator {
         Element tagFileNode, Document doc, Directive directive )
     {
         Iterator attributes = directive.getAttributes();
-        Element variableNode = doc.createElementNS( Constants.NS_J2EE, 
+        Element variableNode = doc.createElementNS( Constants.NS_JAVAEE, 
             "variable" );
         tagFileNode.appendChild( variableNode );
         while( attributes.hasNext() ) {
@@ -878,7 +922,7 @@ public class TLDDocGenerator {
                 name.equals( "scope" ) ||
                 name.equals( "description" ) )
             {
-                element = doc.createElementNS( Constants.NS_J2EE, name );
+                element = doc.createElementNS( Constants.NS_JAVAEE, name );
                 element.appendChild( doc.createTextNode( value ) );
                 variableNode.appendChild( element );
             }
@@ -905,7 +949,7 @@ public class TLDDocGenerator {
         {
             String prefix = "prefix" + substitutePrefix;
             substitutePrefix++;
-            Element shortName = doc.createElementNS( Constants.NS_J2EE, 
+            Element shortName = doc.createElementNS( Constants.NS_JAVAEE, 
                 "short-name" );
             shortName.appendChild( doc.createTextNode( prefix ) );
             root.appendChild( shortName );
@@ -954,7 +998,7 @@ public class TLDDocGenerator {
                     
                     // Create <type> element and append to attribute
                     Element typeElement = doc.createElementNS( 
-                        Constants.NS_J2EE, "type" );
+                        Constants.NS_JAVAEE, "type" );
                     typeElement.appendChild( 
                         doc.createTextNode( defaultType ) );
                     attributeElement.appendChild( typeElement );

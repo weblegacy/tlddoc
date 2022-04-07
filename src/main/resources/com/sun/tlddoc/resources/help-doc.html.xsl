@@ -40,7 +40,7 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:javaee="http://java.sun.com/xml/ns/javaee" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
     
@@ -51,13 +51,13 @@
       <HTML>
         <HEAD>
           <TITLE>
-            API Help (<xsl:value-of select="/j2ee:tlds/j2ee:config/j2ee:window-title"/>)
+            API Help (<xsl:value-of select="/javaee:tlds/javaee:config/javaee:window-title"/>)
           </TITLE>
           <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style"/>
         </HEAD>
         <SCRIPT>
           function asd() {
-            parent.document.title="API Help (<xsl:value-of select="normalize-space(/j2ee:tlds/j2ee:config/j2ee:window-title)"/>)";
+            parent.document.title="API Help (<xsl:value-of select="normalize-space(/javaee:tlds/javaee:config/javaee:window-title)"/>)";
           }
         </SCRIPT>
         <BODY BGCOLOR="white" onload="asd();">

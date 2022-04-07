@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:javaee="http://java.sun.com/xml/ns/javaee" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
     
@@ -51,18 +51,18 @@
 
     <!-- template rule matching source root element -->
     <xsl:template match="/">
-      <xsl:apply-templates select="j2ee:tlds/j2ee:taglib"/>
+      <xsl:apply-templates select="javaee:tlds/javaee:taglib"/>
     </xsl:template>
     
-    <xsl:template match="j2ee:taglib">
-      <xsl:if test="j2ee:short-name=$tlddoc-shortName">
+    <xsl:template match="javaee:taglib">
+      <xsl:if test="javaee:short-name=$tlddoc-shortName">
         <xsl:variable name="tldname">
           <xsl:choose>
-            <xsl:when test="j2ee:display-name!=''">
-              <xsl:value-of select="j2ee:display-name"/>
+            <xsl:when test="javaee:display-name!=''">
+              <xsl:value-of select="javaee:display-name"/>
             </xsl:when>
-            <xsl:when test="j2ee:short-name!=''">
-              <xsl:value-of select="j2ee:short-name"/>
+            <xsl:when test="javaee:short-name!=''">
+              <xsl:value-of select="javaee:short-name"/>
             </xsl:when>
             <xsl:otherwise>
               Unnamed TLD
@@ -72,8 +72,8 @@
         <xsl:variable name="tldfull">
           <xsl:value-of select="$tldname"/>
           <xsl:choose>
-            <xsl:when test="j2ee:description!=''">
-              (<xsl:value-of select="j2ee:description" disable-output-escaping="yes"/>)
+            <xsl:when test="javaee:description!=''">
+              (<xsl:value-of select="javaee:description" disable-output-escaping="yes"/>)
             </xsl:when>
             <xsl:otherwise>
               No Description
@@ -102,50 +102,50 @@
               </a>
             </font>
             <table border="0" width="100%">
-              <xsl:if test="(count(j2ee:tag)+count(j2ee:tag-file))>0">
+              <xsl:if test="(count(javaee:tag)+count(javaee:tag-file))>0">
                 <tr>
                   <td nowrap="true">
                     <font size="+1" class="FrameHeadingFont">
                       Tags
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="j2ee:tag|j2ee:tag-file"/>
+                      <xsl:apply-templates select="javaee:tag|javaee:tag-file"/>
                     </font>
                   </td>
                 </tr>
               </xsl:if>
-              <xsl:if test="count(j2ee:function)>0">
+              <xsl:if test="count(javaee:function)>0">
                 <tr>
                   <td nowrap="true">
                     <font size="+1" class="FrameHeadingFont">
                       Functions
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="j2ee:function"/>
+                      <xsl:apply-templates select="javaee:function"/>
                     </font>
                   </td>
                 </tr>
               </xsl:if>
-              <xsl:if test="count(j2ee:validator)>0">
+              <xsl:if test="count(javaee:validator)>0">
                 <tr>
                   <td nowrap="true">
                     <font size="+1" class="FrameHeadingFont">
                       Validator
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="j2ee:validator"/>
+                      <xsl:apply-templates select="javaee:validator"/>
                     </font>
                   </td>
                 </tr>
               </xsl:if>
-              <xsl:if test="count(j2ee:listener)>0">
+              <xsl:if test="count(javaee:listener)>0">
                 <tr>
                   <td nowrap="true">
                     <font size="+1" class="FrameHeadingFont">
                       Listeners
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="j2ee:listener"/>
+                      <xsl:apply-templates select="javaee:listener"/>
                     </font>
                   </td>
                 </tr>
@@ -157,32 +157,32 @@
       </xsl:if>
     </xsl:template>
     
-    <xsl:template match="j2ee:tag|j2ee:tag-file">
+    <xsl:template match="javaee:tag|javaee:tag-file">
       <br/>
       <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:value-of select="j2ee:name"/>.html</xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="javaee:name"/>.html</xsl:attribute>
         <xsl:attribute name="target">tagFrame</xsl:attribute>
-        <xsl:value-of select="../j2ee:short-name"/>:<xsl:value-of select="j2ee:name"/>
+        <xsl:value-of select="../javaee:short-name"/>:<xsl:value-of select="javaee:name"/>
       </xsl:element>
     </xsl:template>
     
-    <xsl:template match="j2ee:function">
+    <xsl:template match="javaee:function">
       <br/>
       <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:value-of select="j2ee:name"/>.fn.html</xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="javaee:name"/>.fn.html</xsl:attribute>
         <xsl:attribute name="target">tagFrame</xsl:attribute>
-        <i><xsl:value-of select="../j2ee:short-name"/>:<xsl:value-of select="j2ee:name"/>()</i>
+        <i><xsl:value-of select="../javaee:short-name"/>:<xsl:value-of select="javaee:name"/>()</i>
       </xsl:element>
     </xsl:template>
     
-    <xsl:template match="j2ee:validator">
+    <xsl:template match="javaee:validator">
       <br/>
-      <xsl:value-of select="j2ee:validator-class"/>
+      <xsl:value-of select="javaee:validator-class"/>
     </xsl:template>
     
-    <xsl:template match="j2ee:listener">
+    <xsl:template match="javaee:listener">
       <br/>
-      <xsl:value-of select="j2ee:listener-class"/>
+      <xsl:value-of select="javaee:listener-class"/>
     </xsl:template>
     
 </xsl:stylesheet> 

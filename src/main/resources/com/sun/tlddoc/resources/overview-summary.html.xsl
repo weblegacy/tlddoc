@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:javaee="http://java.sun.com/xml/ns/javaee" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
     
@@ -52,13 +52,13 @@
       <html>
         <head>
           <title>
-            Overview (<xsl:value-of select="/j2ee:tlds/j2ee:config/j2ee:window-title"/>)
+            Overview (<xsl:value-of select="/javaee:tlds/javaee:config/javaee:window-title"/>)
           </title>
           <link rel="stylesheet" type="text/css" href="stylesheet.css" title="Style"/>
         </head>
         <script>
           function asd() {
-            parent.document.title="Overview (<xsl:value-of select="normalize-space(/j2ee:tlds/j2ee:config/j2ee:window-title)"/>)";
+            parent.document.title="Overview (<xsl:value-of select="normalize-space(/javaee:tlds/javaee:config/javaee:window-title)"/>)";
           }
         </script>
         <body bgcolor="white" onload="asd();">
@@ -105,7 +105,7 @@
           <!-- =========== END OF NAVBAR =========== -->
           <hr/>
           <center>
-            <h2><xsl:value-of select="/j2ee:tlds/j2ee:config/j2ee:doc-title"/></h2>
+            <h2><xsl:value-of select="/javaee:tlds/javaee:config/javaee:doc-title"/></h2>
           </center>
           <table BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
             <tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -113,7 +113,7 @@
                 <b>Tag Libraries</b>
               </font></td>
             </tr>
-            <xsl:apply-templates select="/j2ee:tlds/j2ee:taglib"/>
+            <xsl:apply-templates select="/javaee:tlds/javaee:taglib"/>
           </table>
           <p/>
           <hr/>
@@ -173,17 +173,17 @@
       </html>
     </xsl:template>
     
-    <xsl:template match="j2ee:taglib">
+    <xsl:template match="javaee:taglib">
       <tr BGCOLOR="white" valign="top" CLASS="TableRowColor">
         <td WIDTH="20%"><b>
           <xsl:element name="a">
-            <xsl:attribute name="href"><xsl:value-of select="j2ee:short-name"/>/tld-summary.html</xsl:attribute>
+            <xsl:attribute name="href"><xsl:value-of select="javaee:short-name"/>/tld-summary.html</xsl:attribute>
             <xsl:choose>
-              <xsl:when test="j2ee:display-name!=''">
-                <xsl:value-of select="j2ee:display-name"/>
+              <xsl:when test="javaee:display-name!=''">
+                <xsl:value-of select="javaee:display-name"/>
               </xsl:when>
-              <xsl:when test="j2ee:short-name!=''">
-                <xsl:value-of select="j2ee:short-name"/>
+              <xsl:when test="javaee:short-name!=''">
+                <xsl:value-of select="javaee:short-name"/>
               </xsl:when>
               <xsl:otherwise>
                 Unnamed TLD
@@ -193,9 +193,9 @@
         </b></td>
         <td>
           <xsl:choose>
-              <xsl:when test="j2ee:description!=''">
+              <xsl:when test="javaee:description!=''">
                 <pre>
-                  <xsl:value-of select="j2ee:description" disable-output-escaping="yes"/>
+                  <xsl:value-of select="javaee:description" disable-output-escaping="yes"/>
                 </pre>
               </xsl:when>
               <xsl:otherwise>
