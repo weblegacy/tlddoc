@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Build Instructions</title>
+	</properties>
+
+	<body>
+
+		<section name="Build Instructions">
+			<p>To build Tag Library Documentation Generator, follow these steps:</p>
+			<ol>
+				<li>Download and install <code>ant</code> 1.5.1 or greater from
+					<a href="http://ant.apache.org" target="_blank">http://ant.apache.org/</a>.</li>
+				<li>Download and install <code>JavaCC</code> 3.2 on your system. You can download
+					<code>JavaCC</code> here:
+					<a href="http://javacc.dev.java.net/" target="_blank">http://javacc.dev.java.net/</a></li>
+				<li>Check out the <code>taglibrarydoc</code> source code from java.net. You can do so here:
+					<a href="http://taglibrarydoc.dev.java.net/source/browse/taglibrarydoc/"
+						target="_blank">http://taglibrarydoc.dev.java.net/source/browse/taglibrarydoc/</a></li>
+				<li>Change your directory to <code>taglibrarydoc</code> and copy the
+					<code>build.properties.sample</code> template to
+					<code>build.properties</code>.</li>
+				<li>Edit <code>build.properties</code> and set
+					<code>JAVACC_HOME</code> to the directory in which you installed
+					<code>JavaCC</code>.</li>
+				<li>Run '<code>ant dist</code>'. A <code>dist</code>
+					directory will be created with <code>tlddoc.jar</code>.</li>
+				<li>Try a test run with '<code>ant test</code>'. A <code>out</code>
+					directory will be created with documentation for all the tag
+					libraries in the <code>testcases/</code> directory.</li>
+				<li>See the following instructions for how to use the Tag Library
+					Documentation Generator.</li>
+			</ol>
+		</section>
+
+	</body>
+
+</document>

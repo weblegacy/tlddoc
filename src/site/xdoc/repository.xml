@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Tag Library Repository</title>
+	</properties>
+
+	<body>
+
+		<section name="Tag Library Repository">
+			<p>We're attempting to produce a comprehensive collection of tag
+				libraries and their corresponding documentation on the Wiki page for
+				this project. Please consider adding your tag library to the Wiki
+				once you've generated and posted your documentation.</p>
+			<p>Visit the
+				<a href="http://wiki.java.net/bin/view/Projects/TagLibraries">Tag Library Repository Wiki</a>.</p>
+		</section>
+
+	</body>
+
+</document>

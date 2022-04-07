@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+	<properties>
+		<title>Usage Instructions</title>
+	</properties>
+
+	<body>
+
+		<section name="Usage Instructions">
+			<p>To use the Tag Library Documentation Generator, first, build the
+				tool using the above instructions or download a precompiled binary,
+				and make sure you can run it. Then, follow the instructions below.
+				The first set of instructions assumes you are using JDK 1.4 or JDK
+				5.0. Instructions for running with JDK 1.3 are included below.</p>
+
+			<subsection name="Generating Tag Library documentation">
+				<p>First, locate the tag libraries you wish to generate
+					documentation for. You can generate documentation for a single TLD
+					file, a set of TLD files, a JAR file, a WAR file, a directory of
+					tag files, or all the tag libraries in a web application. Then,
+					simply invoke as follows:</p>
+				<source>java -jar tlddoc.jar -d &lt;outdir&gt; &lt;tlds&gt;</source>
+				<p>Where &lt;outdir&gt; is the directory in which to produce the
+					output and &lt;tlds&gt; is the list of files or directories to
+					examine. The -doctitle and -windowtitle options can be used to
+					customize the title for the index and the browser window title,
+					respectively. You can run with -help to list all options.</p>
+			</subsection>
+
+			<subsection name="Customizing the Output">
+				<p>The look and feel of the output can be customized. The generator
+					collects all the information from various tag libraries into a
+					single XML document, annotates it in various ways, and then runs
+					that document through a number of XSLT stylesheets to produce the
+					final output. You can edit or replace the XSLT stylesheets to
+					change how the output looks or the way it is structured.</p>
+				<p>To do this, first extract the contents of tlddoc.jar to an empty
+					directory. Then, edit the files in com/sun/tlddoc/resources/* to
+					change the output. Finally, run with the -xslt option, pointing to
+					the directory with the modified files. For any file that does not
+					appear in the directory pointed to by -xslt, the default file will
+					be used instead.</p>
+			</subsection>
+
+			<subsection name="Running With JDK 1.3">
+				<p>Tag Library Documentation Generator uses the JAXP APIs that are
+					included in JDK 1.4 / JDK 5.0. However, it is also possible to run
+					with JDK 1.3. To invoke using JDK 1.3 on Unix, type:</p>
+				<source>java
+  -classpath tlddoc.jar:xml-apis.jar:xercesImpl.jar:xalan.jar
+  com.sun.tlddoc.TLDDoc -d &lt;outdir&gt; &lt;tlds&gt;</source>
+				<p>Or on Windows, use semi-colons (';') instead of colons (':'):</p>
+				<source>java
+  -classpath tlddoc.jar;xml-apis.jar;xercesImpl.jar;xalan.jar
+  com.sun.tlddoc.TLDDoc -d &lt;outdir&gt; &lt;tlds&gt;</source>
+				<p>You can obtain <code>xml-apis.jar</code>,
+					<code>xercesImpl.jar</code> and
+					<code>xalan.jar</code> from the Xalan 2.5.1 release which can be
+					downloaded
+					<a href="http://xml.apache.org/xalan-j/index.html">here</a>.</p>
+				<em>Thanks to Doug Kenyon from ATG for sending this tip on how to run
+					with JDK 1.3!</em>
+			</subsection>
+
+			<subsection name="Running With Ant">
+				<p>You can run the Tag Library Documentation Generator in ant as part
+					of your build process using the
+					<code>&lt;java&gt;</code>
+					task. Just add the following code to your
+					<code>build.xml</code>.</p>
+				<p>Using JDK 1.4, JDK 5.0, or greater:</p>
+				<source>&lt;java fork="true" jar="${tlddoc.path}/tlddoc.jar"
+      failonerror="true"&gt;
+  &lt;arg line="-d ${build}/taglibs/doc"/&gt;
+  &lt;arg value="${src}/taglibs/tld/my1.tld"/&gt;
+  &lt;arg value="${src}/taglibs/tld/my2.tld"/&gt;
+  &lt;arg value="${src}/taglibs/tld/my3.tld"/&gt;
+&lt;/java&gt;</source>
+				<p>Or, using JDK 1.3:</p>
+				<source>&lt;java fork="true" classname="com.sun.tlddoc.TLDDoc"
+      failonerror="true"&gt;
+  &lt;arg line="-d ${build}/taglibs/doc"/&gt;
+  &lt;arg value="${src}/taglibs/tld/my1.tld"/&gt;
+  &lt;arg value="${src}/taglibs/tld/my2.tld"/&gt;
+  &lt;arg value="${src}/taglibs/tld/my3.tld"/&gt;
+  &lt;classpath&gt;
+    &lt;pathelement location="${tools.lib}/tlddoc.jar"/&gt;
+    &lt;pathelement location="${tools.lib}/xml-apis.jar"/&gt;
+    &lt;pathelement location="${tools.lib}/xercesImpl.jar"/&gt;
+    &lt;pathelement location="${tools.lib}/xalan.jar"/&gt;
+  &lt;/classpath&gt;
+&lt;/java&gt;</source>
+			</subsection>
+
+		</section>
+
+	</body>
+
+</document>

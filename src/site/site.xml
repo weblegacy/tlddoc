@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
+	name="Tag Library Documentation Generator ${project.version}">
+
+	<bannerLeft>
+		<src>images/header_jnet_new.jpg</src>
+		<alt>The Source for Java Technology Collaboration</alt>
+		<href>http://www.java.net/</href>
+		<width>500</width>
+		<height>60</height>
+	</bannerLeft>
+
+	<body>
+		<breadcrumbs>
+			<item name="Projects"
+				href="https://www.dev.java.net/servlets/ProjectList" />
+			<item name="java-enterprise"
+				href="https://java-enterprise.dev.java.net/" />
+			<item name="taglibrarydoc"
+				href="https://taglibrarydoc.dev.java.net/" />
+		</breadcrumbs>
+
+		<menu name="TLDDoc">
+			<item name="Welcome" href="index.html" />
+			<item name="Tag Library Repository" href="repository.html" />
+			<item name="Screenshot" href="screenshot.html" />
+			<item name="Download and Installation" href="download.html" />
+		</menu>
+
+		<menu name="Documentation">
+			<item name="Features" href="features.html" />
+			<item name="Building From Source" href="building.html" />
+			<item name="Usage Instructions" href="usage.html" />
+			<item name="Support" href="support.html" />
+			<item name="FAQs" href="faq.html" />
+			<item name="Revision History" href="revision.html" />
+			<item name="Javadoc" href="apidocs/index.html" />
+		</menu>
+
+		<menu ref="reports" />
+
+		<menu name="Get Involved">
+			<item name="java-net Project"
+				href="https://java-net.dev.java.net/" />
+			<item name="Request a Project"
+				href="http://www.java.net/request_project.csp" />
+			<item name="Project Help Wanted Ads"
+				href="http://community.java.net/help_wanted/" />
+			<item name="Publicize your Project"
+				href="http://community.java.net/projects/publicize.csp" />
+			<item name="Submit Content"
+				href="http://today.java.net/cs/user/create/bl?x-layout=content" />
+		</menu>
+
+		<footer><![CDATA[<small><cite>Java and JSP are trademarks or registered
+			trademarks of Sun Microsystems, Inc. in the US and other countries.
+			Copyright 2002-3 Sun Microsystems, Inc. 4150 Network Circle Santa
+			Clara, CA 95054, U.S.A. All Rights Reserved.</cite></small>]]></footer>
+
+	</body>
+</project>
