@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:tld="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
     
@@ -52,24 +52,24 @@
 
     <!-- template rule matching source root element -->
     <xsl:template match="/">
-      <xsl:apply-templates select="tlds/tld:taglib"/>
+      <xsl:apply-templates select="j2ee:tlds/j2ee:taglib"/>
     </xsl:template>
     
-    <xsl:template match="tld:taglib">
-      <xsl:if test="short-name=$tlddoc-shortName">
-        <xsl:apply-templates select="function"/>
+    <xsl:template match="j2ee:taglib">
+      <xsl:if test="j2ee:short-name=$tlddoc-shortName">
+        <xsl:apply-templates select="j2ee:function"/>
       </xsl:if>
     </xsl:template>
     
-    <xsl:template match="function">
-      <xsl:if test="name=$tlddoc-functionName">
+    <xsl:template match="j2ee:function">
+      <xsl:if test="j2ee:name=$tlddoc-functionName">
         <xsl:variable name="tldname">
           <xsl:choose>
-            <xsl:when test="../display-name!=''">
-              <xsl:value-of select="../display-name"/>
+            <xsl:when test="../j2ee:display-name!=''">
+              <xsl:value-of select="../j2ee:display-name"/>
             </xsl:when>
-            <xsl:when test="../short-name!=''">
-              <xsl:value-of select="../short-name"/>
+            <xsl:when test="../j2ee:short-name!=''">
+              <xsl:value-of select="../j2ee:short-name"/>
             </xsl:when>
             <xsl:otherwise>
               Unnamed TLD
@@ -77,12 +77,12 @@
           </xsl:choose>
         </xsl:variable>
         <xsl:variable name="title">
-          <xsl:value-of select="name"/>
-          (<xsl:value-of select="/tlds/config/window-title"/>)
+          <xsl:value-of select="j2ee:name"/>
+          (<xsl:value-of select="/j2ee:tlds/j2ee:config/j2ee:window-title"/>)
         </xsl:variable>
         <html>
           <head>
-            <title><xsl:copy-of select="$title"/></title>
+            <title><xsl:value-of select="$title"/></title>
             <meta name="keywords" content="$title"/>
             <link rel="stylesheet" type="text/css" href="../stylesheet.css" 
                   title="Style"/>
@@ -90,7 +90,7 @@
           <script>
             function asd()
             {
-            parent.document.title="<xsl:copy-of select="normalize-space($title)"/>";
+            parent.document.title="<xsl:value-of select="normalize-space($title)"/>";
             }
           </script>
           <body bgcolor="white" onload="asd();">
@@ -121,7 +121,7 @@
               <td BGCOLOR="white" CLASS="NavBarCell2"><font SIZE="-2">
                 &#160;<a HREF="../index.html" TARGET="_top"><b>FRAMES</b></a>&#160;
                 &#160;<xsl:element name="a">
-                  <xsl:attribute name="href"><xsl:value-of select="name"/>.html</xsl:attribute>
+                  <xsl:attribute name="href"><xsl:value-of select="j2ee:name"/>.fn.html</xsl:attribute>
                   <xsl:attribute name="target">_top</xsl:attribute>
                   <b>NO FRAMES</b>
                 </xsl:element>&#160;
@@ -141,20 +141,20 @@
             <!-- =========== END OF NAVBAR =========== -->
             
             <hr/>
-            <h2><font size="-1"><xsl:copy-of select="$tldname"/></font><br/>
-            Function <xsl:value-of select="name"/></h2>
+            <h2><font size="-1"><xsl:value-of select="$tldname"/></font><br/>
+            Function <xsl:value-of select="j2ee:name"/></h2>
             <code>
-              <xsl:value-of select='substring-before(normalize-space(function-signature)," ")'/>
-              <b>&#160;<xsl:value-of select="name"/></b>(<xsl:value-of 
-              select='substring-after(normalize-space(function-signature),"(")'/>
+              <xsl:value-of select='substring-before(normalize-space(j2ee:function-signature)," ")'/>
+              <b>&#160;<xsl:value-of select="j2ee:name"/></b>(<xsl:value-of 
+              select='substring-after(normalize-space(j2ee:function-signature),"(")'/>
             </code>
             <hr/>
-            <xsl:value-of select="description"/><br/>
+            <xsl:value-of select="j2ee:description" disable-output-escaping="yes"/><br/>
             <p/>
-            <xsl:if test="example!=''">
+            <xsl:if test="j2ee:example!=''">
               <b>Example:</b><br/>
               <pre>
-<xsl:value-of select="example"/>              
+<xsl:value-of select="j2ee:example"/>              
               </pre>
               <p/>
             </xsl:if>
@@ -173,8 +173,8 @@
                 <td>Function Class</td>
                 <td>
                   <xsl:choose>
-                    <xsl:when test="function-class!=''">
-                      <xsl:value-of select="function-class"/>
+                    <xsl:when test="j2ee:function-class!=''">
+                      <xsl:value-of select="j2ee:function-class"/>
                     </xsl:when>
                     <xsl:otherwise>
                       <i>None</i>
@@ -186,8 +186,8 @@
                 <td>Function Signature</td>
                 <td>
                   <xsl:choose>
-                    <xsl:when test="function-signature!=''">
-                      <xsl:value-of select="function-signature"/>
+                    <xsl:when test="j2ee:function-signature!=''">
+                      <xsl:value-of select="j2ee:function-signature"/>
                     </xsl:when>
                     <xsl:otherwise>
                       <i>None</i>
@@ -199,8 +199,8 @@
                 <td>Display Name</td>
                 <td>
                   <xsl:choose>
-                    <xsl:when test="display-name!=''">
-                      <xsl:value-of select="display-name"/>
+                    <xsl:when test="j2ee:display-name!=''">
+                      <xsl:value-of select="j2ee:display-name"/>
                     </xsl:when>
                     <xsl:otherwise>
                       <i>None</i>
@@ -239,7 +239,7 @@
               <td BGCOLOR="white" CLASS="NavBarCell2"><font SIZE="-2">
                 &#160;<a HREF="../index.html" TARGET="_top"><b>FRAMES</b></a>&#160;
                 &#160;<xsl:element name="a">
-                  <xsl:attribute name="href"><xsl:value-of select="name"/>.html</xsl:attribute>
+                  <xsl:attribute name="href"><xsl:value-of select="j2ee:name"/>.fn.html</xsl:attribute>
                   <xsl:attribute name="target">_top</xsl:attribute>
                   <b>NO FRAMES</b>
                 </xsl:element>&#160;

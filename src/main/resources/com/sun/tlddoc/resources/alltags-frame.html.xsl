@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:tld="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
     
@@ -68,9 +68,9 @@
             <tr>
               <td nowrap="true"><font class="FrameItemFont">
                 <xsl:apply-templates 
-                    select="tlds/tld:taglib/tag|tlds/tld:taglib/tag-file|tlds/tld:taglib/function">
-                  <xsl:sort select="../short-name"/>
-                  <xsl:sort select="name"/>
+                    select="j2ee:tlds/j2ee:taglib/j2ee:tag|j2ee:tlds/j2ee:taglib/j2ee:tag-file|j2ee:tlds/j2ee:taglib/j2ee:function">
+                  <xsl:sort select="../j2ee:short-name"/>
+                  <xsl:sort select="j2ee:name"/>
                 </xsl:apply-templates>
               </font></td>
             </tr>
@@ -79,11 +79,11 @@
       </html>    
     </xsl:template>
     
-    <xsl:template match="tag|tag-file">
+    <xsl:template match="j2ee:tag|j2ee:tag-file">
       <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:value-of select="../short-name"/>/<xsl:value-of select="name"/>.html</xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="../j2ee:short-name"/>/<xsl:value-of select="j2ee:name"/>.html</xsl:attribute>
         <xsl:attribute name="target">tagFrame</xsl:attribute>
-        <xsl:value-of select="../short-name"/>:<xsl:value-of select="name"/>
+        <xsl:value-of select="../j2ee:short-name"/>:<xsl:value-of select="j2ee:name"/>
       </xsl:element>
       <br/>
     </xsl:template>
@@ -92,11 +92,11 @@
       - Same as above, but add the () to indicate it's a function 
       - and change the HTML to .fn.html
       -->
-    <xsl:template match="function">
+    <xsl:template match="j2ee:function">
       <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:value-of select="../short-name"/>/<xsl:value-of select="name"/>.fn.html</xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="../j2ee:short-name"/>/<xsl:value-of select="j2ee:name"/>.fn.html</xsl:attribute>
         <xsl:attribute name="target">tagFrame</xsl:attribute>
-        <i><xsl:value-of select="../short-name"/>:<xsl:value-of select="name"/>()</i>
+        <i><xsl:value-of select="../j2ee:short-name"/>:<xsl:value-of select="j2ee:name"/>()</i>
       </xsl:element>
       <br/>
     </xsl:template>

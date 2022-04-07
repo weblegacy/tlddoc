@@ -483,7 +483,7 @@ public class TLDDocGenerator {
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating( false );
-        factory.setNamespaceAware( false );
+        factory.setNamespaceAware( true );
         factory.setExpandEntityReferences( false );
         DocumentBuilder documentBuilder = factory.newDocumentBuilder();
         documentBuilder.setEntityResolver( 
@@ -498,18 +498,25 @@ public class TLDDocGenerator {
         summaryTLD = documentBuilder.newDocument();
         
         // Create root <tlds> element:
-        Element rootElement = summaryTLD.createElement( "tlds" );
+        Element rootElement = summaryTLD.createElementNS( Constants.NS_J2EE, 
+            "tlds" );
         summaryTLD.appendChild( rootElement );
+        // JDK 1.4 does not add xmlns for some reason - add it manually:
+        rootElement.setAttributeNS( "http://www.w3.org/2000/xmlns/", 
+            "xmlns", Constants.NS_J2EE );
         
         // Create configuration element:
-        Element configElement = summaryTLD.createElement( "config" );
+        Element configElement = summaryTLD.createElementNS( Constants.NS_J2EE, 
+            "config" );
         rootElement.appendChild( configElement );
         
-        Element windowTitle = summaryTLD.createElement( "window-title" );
+        Element windowTitle = summaryTLD.createElementNS( Constants.NS_J2EE, 
+            "window-title" );
         windowTitle.appendChild( summaryTLD.createTextNode( this.windowTitle));
         configElement.appendChild( windowTitle );
         
-        Element docTitle = summaryTLD.createElement( "doc-title" );
+        Element docTitle = summaryTLD.createElementNS( Constants.NS_J2EE, 
+            "doc-title" );
         docTitle.appendChild( summaryTLD.createTextNode( this.docTitle));
         configElement.appendChild( docTitle );
         
@@ -529,17 +536,26 @@ public class TLDDocGenerator {
             // If this tag library has no tags, no validators, 
             // and no functions, omit it
             int numTags = 
-                doc.getDocumentElement().getElementsByTagName( "tag" ).getLength() + 
-                doc.getDocumentElement().getElementsByTagName( "tag-file" ).getLength() +
-                doc.getDocumentElement().getElementsByTagName( "validator" ).getLength() +
-                doc.getDocumentElement().getElementsByTagName( "function" ).getLength();
+                doc.getDocumentElement().getElementsByTagNameNS( "*", 
+                    "tag" ).getLength() + 
+                doc.getDocumentElement().getElementsByTagNameNS( "*", 
+                    "tag-file" ).getLength() +
+                doc.getDocumentElement().getElementsByTagNameNS( "*", 
+                    "validator" ).getLength() +
+                doc.getDocumentElement().getElementsByTagNameNS( "*", 
+                    "function" ).getLength();
             if( numTags > 0 ) {
                 // Populate the root element with extra information
                 populateTLD( tagLibrary, doc );
 
                 Element taglibNode = (Element)summaryTLD.importNode( 
                     doc.getDocumentElement(), true );
-                if( !taglibNode.getNodeName().equals( "taglib" ) ) {
+                if( !taglibNode.getNamespaceURI().equals( Constants.NS_J2EE )) {
+                    throw new GeneratorException( "Error: " + 
+                        tagLibrary.getPathDescription() + 
+                        " does not have xmlns=\"" + Constants.NS_J2EE + "\"" );
+                }
+                if( !taglibNode.getLocalName().equals( "taglib" ) ) {
                     throw new GeneratorException( "Error: " + 
                         tagLibrary.getPathDescription() + 
                         " does not have <taglib> as root." );
@@ -633,7 +649,7 @@ public class TLDDocGenerator {
     private void populateTagFileDetails( TagLibrary tagLibrary, Document doc, 
         Element root )
     {
-        NodeList tagFileNodes = root.getElementsByTagName( "tag-file" );
+        NodeList tagFileNodes = root.getElementsByTagNameNS( "*", "tag-file" );
         for( int i = 0; i < tagFileNodes.getLength(); i++ ) {
             Element tagFileNode = (Element)tagFileNodes.item( i );
             String path = findElementValue( tagFileNode, "path" );
@@ -725,23 +741,23 @@ public class TLDDocGenerator {
                 name.equals( "description" ) ||
                 name.equals( "example" ) )
             {
-                element = doc.createElement( name );
+                element = doc.createElementNS( Constants.NS_J2EE, name );
                 element.appendChild( doc.createTextNode( value ) );
                 tagFileNode.appendChild( element );
             }
             else if( name.equals( "small-icon" ) ||
                      name.equals( "large-icon" ) )
             {
-                NodeList icons = tagFileNode.getElementsByTagName( "icon" );
+                NodeList icons = tagFileNode.getElementsByTagNameNS( "*", "icon" );
                 Element icon;
                 if( icons.getLength() == 0 ) {
-                    icon = doc.createElement( "icon" );
+                    icon = doc.createElementNS( Constants.NS_J2EE, "icon" );
                     tagFileNode.appendChild( icon );
                 }
                 else {
                     icon = (Element)icons.item( 0 );
                 }
-                element = doc.createElement( name );
+                element = doc.createElementNS( Constants.NS_J2EE, name );
                 element.appendChild( doc.createTextNode( value ) );
                 icon.appendChild( element );
             }
@@ -781,7 +797,7 @@ public class TLDDocGenerator {
         String defaultValue ) 
     {
         if( findElementValue( parent, tagName ) == null ) {
-            Element element = doc.createElement( tagName );
+            Element element = doc.createElementNS( Constants.NS_J2EE, tagName );
             element.appendChild( doc.createTextNode( defaultValue ) );
             parent.appendChild( element );
         }
@@ -800,7 +816,8 @@ public class TLDDocGenerator {
         Element tagFileNode, Document doc, Directive directive )
     {
         Iterator attributes = directive.getAttributes();
-        Element attributeNode = doc.createElement( "attribute" );
+        Element attributeNode = doc.createElementNS( Constants.NS_J2EE, 
+            "attribute" );
         tagFileNode.appendChild( attributeNode );
         while( attributes.hasNext() ) {
             Attribute attribute = (Attribute)attributes.next();
@@ -814,7 +831,7 @@ public class TLDDocGenerator {
                 name.equals( "type" ) ||
                 name.equals( "description" ) )
             {
-                element = doc.createElement( name );
+                element = doc.createElementNS( Constants.NS_J2EE, name );
                 element.appendChild( doc.createTextNode( value ) );
                 attributeNode.appendChild( element );
             }
@@ -846,7 +863,8 @@ public class TLDDocGenerator {
         Element tagFileNode, Document doc, Directive directive )
     {
         Iterator attributes = directive.getAttributes();
-        Element variableNode = doc.createElement( "variable" );
+        Element variableNode = doc.createElementNS( Constants.NS_J2EE, 
+            "variable" );
         tagFileNode.appendChild( variableNode );
         while( attributes.hasNext() ) {
             Attribute attribute = (Attribute)attributes.next();
@@ -860,7 +878,7 @@ public class TLDDocGenerator {
                 name.equals( "scope" ) ||
                 name.equals( "description" ) )
             {
-                element = doc.createElement( name );
+                element = doc.createElementNS( Constants.NS_J2EE, name );
                 element.appendChild( doc.createTextNode( value ) );
                 variableNode.appendChild( element );
             }
@@ -883,11 +901,12 @@ public class TLDDocGenerator {
     private void checkOrAddShortName( TagLibrary tagLibrary, Document doc, 
         Element root ) 
     {
-        if( root.getElementsByTagName( "short-name" ).getLength() == 0 ) 
+        if( root.getElementsByTagNameNS( "*", "short-name" ).getLength() == 0 ) 
         {
             String prefix = "prefix" + substitutePrefix;
             substitutePrefix++;
-            Element shortName = doc.createElement( "short-name" );
+            Element shortName = doc.createElementNS( Constants.NS_J2EE, 
+                "short-name" );
             shortName.appendChild( doc.createTextNode( prefix ) );
             root.appendChild( shortName );
             println( "WARNING: " + 
@@ -910,14 +929,15 @@ public class TLDDocGenerator {
     private void checkOrAddAttributeType( TagLibrary tagLibrary, Document doc, 
         Element root ) 
     {
-        NodeList tagNodes = root.getElementsByTagName( "tag" );
+        NodeList tagNodes = root.getElementsByTagNameNS( "*", "tag" );
         for( int i = 0; i < tagNodes.getLength(); i++ ) {
             Element tagElement = (Element)tagNodes.item( i );
             NodeList attributeNodes = 
-                tagElement.getElementsByTagName( "attribute" );
+                tagElement.getElementsByTagNameNS( "*", "attribute" );
             for( int j = 0; j < attributeNodes.getLength(); j++ ) {
                 Element attributeElement = (Element)attributeNodes.item( j );
-                if( attributeElement.getElementsByTagName( "type" ).getLength() == 0 ) 
+                if( attributeElement.getElementsByTagNameNS( "*", 
+                    "type" ).getLength() == 0 ) 
                 {
                     // No attribute type specified.
                     String defaultType = "java.lang.String";
@@ -933,7 +953,8 @@ public class TLDDocGenerator {
                     }
                     
                     // Create <type> element and append to attribute
-                    Element typeElement = doc.createElement( "type" );
+                    Element typeElement = doc.createElementNS( 
+                        Constants.NS_J2EE, "type" );
                     typeElement.appendChild( 
                         doc.createTextNode( defaultType ) );
                     attributeElement.appendChild( typeElement );
@@ -970,7 +991,7 @@ public class TLDDocGenerator {
     {
         ArrayList shortNames = new ArrayList();
         Element root = summaryTLD.getDocumentElement();
-        NodeList taglibs = root.getElementsByTagName( "taglib" );
+        NodeList taglibs = root.getElementsByTagNameNS( "*", "taglib" );
         int size = taglibs.getLength();
         for( int i = 0; i < size; i++ ) {
             Element taglib = (Element)taglibs.item( i );
@@ -992,7 +1013,7 @@ public class TLDDocGenerator {
             generateTLDDetail( outDir, shortName );
             
             // Generate information for each tag:
-            NodeList tags = taglib.getElementsByTagName( "tag" );
+            NodeList tags = taglib.getElementsByTagNameNS( "*", "tag" );
             int numTags = tags.getLength();
             for( int j = 0; j < numTags; j++ ) {
                 Element tag = (Element)tags.item( j );
@@ -1001,7 +1022,7 @@ public class TLDDocGenerator {
             }
             
             // Generate information for each tag-file:
-            NodeList tagFiles = taglib.getElementsByTagName( "tag-file" );
+            NodeList tagFiles = taglib.getElementsByTagNameNS( "*", "tag-file" );
             int numTagFiles = tagFiles.getLength();
             for( int j = 0; j < numTagFiles; j++ ) {
                 Element tagFile = (Element)tagFiles.item( j );
@@ -1010,7 +1031,7 @@ public class TLDDocGenerator {
             }
             
             // Generate information for each function:
-            NodeList functions = taglib.getElementsByTagName( "function" );
+            NodeList functions = taglib.getElementsByTagNameNS( "*", "function" );
             int numFunctions = functions.getLength();
             for( int j = 0; j < numFunctions; j++ ) {
                 Element function = (Element)functions.item( j );
@@ -1077,7 +1098,7 @@ public class TLDDocGenerator {
      */
     private String findElementValue( Element parent, String tagName ) {
         String result = null;
-        NodeList elements = parent.getElementsByTagName( tagName );
+        NodeList elements = parent.getElementsByTagNameNS( "*", tagName );
         if( elements.getLength() >= 1 ) {
             Element child = (Element)elements.item( 0 );
             Node body = child.getFirstChild();

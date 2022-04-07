@@ -41,9 +41,9 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:tld="http://java.sun.com/xml/ns/j2ee" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee">
     
     <xsl:output method="html" indent="yes"/>
 
@@ -52,13 +52,13 @@
       <html>
         <head>
           <title>
-            Overview (<xsl:value-of select="/tlds/config/window-title"/>)
+            Overview (<xsl:value-of select="/j2ee:tlds/j2ee:config/j2ee:window-title"/>)
           </title>
           <link rel="stylesheet" type="text/css" href="stylesheet.css" title="Style"/>
         </head>
         <script>
           function asd() {
-            parent.document.title="Overview (<xsl:value-of select="normalize-space(/tlds/config/window-title)"/>)";
+            parent.document.title="Overview (<xsl:value-of select="normalize-space(/j2ee:tlds/j2ee:config/j2ee:window-title)"/>)";
           }
         </script>
         <body bgcolor="white" onload="asd();">
@@ -66,7 +66,7 @@
             <tr>
               <td nowrap="true">
                 <font size="+1" class="FrameTitleFont">
-                  <b><xsl:value-of select="/tlds/config/doc-title"/></b>
+                  <b><xsl:value-of select="/j2ee:tlds/j2ee:config/j2ee:doc-title"/></b>
                 </font>
               </td>
             </tr>
@@ -82,7 +82,7 @@
                   Tag Libraries
                 </font>
                 <br/>
-                <xsl:apply-templates select="tlds/tld:taglib"/>
+                <xsl:apply-templates select="j2ee:tlds/j2ee:taglib"/>
               </td>
             </tr>
           </table>
@@ -91,17 +91,17 @@
       </html>
     </xsl:template>
     
-    <xsl:template match="tld:taglib">
+    <xsl:template match="j2ee:taglib">
       <font class="FrameItemFont">
         <xsl:element name="a">
-          <xsl:attribute name="href"><xsl:value-of select="short-name"/>/tld-frame.html</xsl:attribute>
+          <xsl:attribute name="href"><xsl:value-of select="j2ee:short-name"/>/tld-frame.html</xsl:attribute>
           <xsl:attribute name="target">tldFrame</xsl:attribute>
           <xsl:choose>
-            <xsl:when test="display-name!=''">
-              <xsl:value-of select="display-name"/>
+            <xsl:when test="j2ee:display-name!=''">
+              <xsl:value-of select="j2ee:display-name"/>
             </xsl:when>
-            <xsl:when test="short-name!=''">
-              <xsl:value-of select="short-name"/>
+            <xsl:when test="j2ee:short-name!=''">
+              <xsl:value-of select="j2ee:short-name"/>
             </xsl:when>
             <xsl:otherwise>
               Unnamed TLD

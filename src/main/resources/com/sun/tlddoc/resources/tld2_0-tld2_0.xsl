@@ -51,7 +51,8 @@
 -->
 
 <xsl:stylesheet version="1.0"
-		xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns="http://java.sun.com/xml/ns/j2ee">
   <xsl:output method="xml" indent="yes"/>
 
   <xsl:template match="/taglib">

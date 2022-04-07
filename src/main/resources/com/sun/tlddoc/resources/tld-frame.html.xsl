@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:tld="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
     
@@ -51,18 +51,18 @@
 
     <!-- template rule matching source root element -->
     <xsl:template match="/">
-      <xsl:apply-templates select="tlds/tld:taglib"/>
+      <xsl:apply-templates select="j2ee:tlds/j2ee:taglib"/>
     </xsl:template>
     
-    <xsl:template match="tld:taglib">
-      <xsl:if test="short-name=$tlddoc-shortName">
+    <xsl:template match="j2ee:taglib">
+      <xsl:if test="j2ee:short-name=$tlddoc-shortName">
         <xsl:variable name="tldname">
           <xsl:choose>
-            <xsl:when test="display-name!=''">
-              <xsl:value-of select="display-name"/>
+            <xsl:when test="j2ee:display-name!=''">
+              <xsl:value-of select="j2ee:display-name"/>
             </xsl:when>
-            <xsl:when test="short-name!=''">
-              <xsl:value-of select="short-name"/>
+            <xsl:when test="j2ee:short-name!=''">
+              <xsl:value-of select="j2ee:short-name"/>
             </xsl:when>
             <xsl:otherwise>
               Unnamed TLD
@@ -70,10 +70,10 @@
           </xsl:choose>
         </xsl:variable>
         <xsl:variable name="tldfull">
-          <xsl:copy-of select="$tldname"/>
+          <xsl:value-of select="$tldname"/>
           <xsl:choose>
-            <xsl:when test="description!=''">
-              (<xsl:value-of select="description"/>)
+            <xsl:when test="j2ee:description!=''">
+              (<xsl:value-of select="j2ee:description" disable-output-escaping="yes"/>)
             </xsl:when>
             <xsl:otherwise>
               No Description
@@ -83,7 +83,7 @@
         <html>
           <head>
             <title>
-              <xsl:copy-of select="$tldfull"/>
+              <xsl:value-of select="$tldfull"/>
             </title>
             <meta name="keywords" content="$tldfull"/>
             <link rel="stylesheet" type="text/css" href="../stylesheet.css" 
@@ -91,61 +91,61 @@
             <script>
               function asd()
               {
-              parent.document.title="<xsl:copy-of select="normalize-space($tldfull)"/>";
+              parent.document.title="<xsl:value-of select="normalize-space($tldfull)"/>";
               }
             </script>
           </head>
           <body bgcolor="white" onload="asd();">
             <font size="+1" class="FrameTitleFont">
               <a href="tld-summary.html" target="tagFrame">
-                <xsl:copy-of select="$tldname"/>
+                <xsl:value-of select="$tldname"/>
               </a>
             </font>
             <table border="0" width="100%">
-              <xsl:if test="(count(tag)+count(tag-file))>0">
+              <xsl:if test="(count(j2ee:tag)+count(j2ee:tag-file))>0">
                 <tr>
                   <td nowrap="true">
                     <font size="+1" class="FrameHeadingFont">
                       Tags
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="tag|tag-file"/>
+                      <xsl:apply-templates select="j2ee:tag|j2ee:tag-file"/>
                     </font>
                   </td>
                 </tr>
               </xsl:if>
-              <xsl:if test="count(function)>0">
+              <xsl:if test="count(j2ee:function)>0">
                 <tr>
                   <td nowrap="true">
                     <font size="+1" class="FrameHeadingFont">
                       Functions
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="function"/>
+                      <xsl:apply-templates select="j2ee:function"/>
                     </font>
                   </td>
                 </tr>
               </xsl:if>
-              <xsl:if test="count(validator)>0">
+              <xsl:if test="count(j2ee:validator)>0">
                 <tr>
                   <td nowrap="true">
                     <font size="+1" class="FrameHeadingFont">
                       Validator
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="validator"/>
+                      <xsl:apply-templates select="j2ee:validator"/>
                     </font>
                   </td>
                 </tr>
               </xsl:if>
-              <xsl:if test="count(listener)>0">
+              <xsl:if test="count(j2ee:listener)>0">
                 <tr>
                   <td nowrap="true">
                     <font size="+1" class="FrameHeadingFont">
                       Listeners
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="listener"/>
+                      <xsl:apply-templates select="j2ee:listener"/>
                     </font>
                   </td>
                 </tr>
@@ -157,32 +157,32 @@
       </xsl:if>
     </xsl:template>
     
-    <xsl:template match="tag|tag-file">
+    <xsl:template match="j2ee:tag|j2ee:tag-file">
       <br/>
       <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:copy-of select="name"/>.html</xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="j2ee:name"/>.html</xsl:attribute>
         <xsl:attribute name="target">tagFrame</xsl:attribute>
-        <xsl:copy-of select="../short-name"/>:<xsl:copy-of select="name"/>
+        <xsl:value-of select="../j2ee:short-name"/>:<xsl:value-of select="j2ee:name"/>
       </xsl:element>
     </xsl:template>
     
-    <xsl:template match="function">
+    <xsl:template match="j2ee:function">
       <br/>
       <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:copy-of select="name"/>.fn.html</xsl:attribute>
+        <xsl:attribute name="href"><xsl:value-of select="j2ee:name"/>.fn.html</xsl:attribute>
         <xsl:attribute name="target">tagFrame</xsl:attribute>
-        <i><xsl:copy-of select="../short-name"/>:<xsl:copy-of select="name"/>()</i>
+        <i><xsl:value-of select="../j2ee:short-name"/>:<xsl:value-of select="j2ee:name"/>()</i>
       </xsl:element>
     </xsl:template>
     
-    <xsl:template match="validator">
+    <xsl:template match="j2ee:validator">
       <br/>
-      <xsl:copy-of select="validator-class"/>
+      <xsl:value-of select="j2ee:validator-class"/>
     </xsl:template>
     
-    <xsl:template match="listener">
+    <xsl:template match="j2ee:listener">
       <br/>
-      <xsl:copy-of select="listener-class"/>
+      <xsl:value-of select="j2ee:listener-class"/>
     </xsl:template>
     
 </xsl:stylesheet> 

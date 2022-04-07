@@ -42,11 +42,16 @@ public final class Constants {
     private Constants() {
     }
     
+    public static final String VERSION = "1.2";
+    
     public static final String DEFAULT_WINDOW_TITLE = 
         "Tag Library Documentation Generator - Generated Documentation";
     
     public static final String DEFAULT_DOC_TITLE =
         "Tag Library Documentation Generator - Generated Documentation";
+    
+    /** Namespace for J2EE */
+    public static final String NS_J2EE = "http://java.sun.com/xml/ns/j2ee";
     
     /** If true, outputs the input to the transform before generation */
     public static final boolean DEBUG_INPUT_DOCUMENT = false;

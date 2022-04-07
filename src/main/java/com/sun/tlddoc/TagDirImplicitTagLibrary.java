@@ -40,10 +40,15 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
@@ -157,6 +162,15 @@ public class TagDirImplicitTagLibrary
             }
         }
         
+        // Output implicit tag library, as a test.
+        StringWriter buffer = new StringWriter();
+        Transformer transformer = 
+            TransformerFactory.newInstance().newTransformer();
+        transformer.transform( new DOMSource( result ), 
+            new StreamResult( buffer ) ); 
+        result = documentBuilder.parse( new InputSource( new StringReader( 
+            buffer.toString() ) ) );
+        
         return result;
         
     }
@@ -168,17 +182,18 @@ public class TagDirImplicitTagLibrary
     protected static Element createRootTaglibNode( Document result,
         String path ) 
     {
-        Element taglibElement = result.createElementNS( 
-            "http://java.sun.com/xml/ns/j2ee",
-            "taglib" );
+        Element taglibElement = result.createElementNS(
+            Constants.NS_J2EE, "taglib" );
         // JDK 1.4 does not add xmlns for some reason - add it manually:
-        taglibElement.setAttribute( "xmlns", "http://java.sun.com/xml/ns/j2ee" );
+        taglibElement.setAttributeNS( "http://www.w3.org/2000/xmlns/", 
+            "xmlns", Constants.NS_J2EE );
         taglibElement.setAttributeNS( "http://www.w3.org/2000/xmlns/", 
             "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance" );
         taglibElement.setAttributeNS( 
-            "http://www.w3.org/2000/xmlns/",
-            "xmlns:schemaLocation", 
-            "http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd" );
+            "http://www.w3.org/2001/XMLSchema-instance",
+            "xsi:schemaLocation", 
+            Constants.NS_J2EE + 
+            " http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" );
         taglibElement.setAttribute( "version", "2.0" );
         result.appendChild( taglibElement );
         

@@ -44,10 +44,15 @@ import java.util.jar.JarFile;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
@@ -158,6 +163,17 @@ public class WARTagDirImplicitTagLibrary
             }
         }
         warFile.close();
+        
+        // JDK 1.4 does not correctly import the node into the tree, so
+        // simulate reading this entry from a file.  There might be a
+        // better / more efficient way to do this, but this works.
+        StringWriter buffer = new StringWriter();
+        Transformer transformer = 
+            TransformerFactory.newInstance().newTransformer();
+        transformer.transform( new DOMSource( result ), 
+            new StreamResult( buffer ) ); 
+        result = documentBuilder.parse( new InputSource( new StringReader( 
+            buffer.toString() ) ) );
         
         return result;
         

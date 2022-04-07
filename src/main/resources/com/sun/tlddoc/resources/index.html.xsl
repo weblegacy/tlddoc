@@ -40,6 +40,7 @@
 -->
 
 <xsl:stylesheet version="1.0"
+    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
     
@@ -50,7 +51,7 @@
       <html>
         <head>
           <title>
-            <xsl:value-of select="/tlds/config/window-title"/>
+            <xsl:value-of select="/j2ee:tlds/j2ee:config/j2ee:window-title"/>
           </title>
         </head>
         <frameset cols="20%,80%">

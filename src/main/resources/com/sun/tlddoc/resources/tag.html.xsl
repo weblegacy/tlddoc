@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:tld="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
     
@@ -52,24 +52,24 @@
 
     <!-- template rule matching source root element -->
     <xsl:template match="/">
-      <xsl:apply-templates select="tlds/tld:taglib"/>
+      <xsl:apply-templates select="j2ee:tlds/j2ee:taglib"/>
     </xsl:template>
     
-    <xsl:template match="tld:taglib">
-      <xsl:if test="short-name=$tlddoc-shortName">
-        <xsl:apply-templates select="tag|tag-file"/>
+    <xsl:template match="j2ee:taglib">
+      <xsl:if test="j2ee:short-name=$tlddoc-shortName">
+        <xsl:apply-templates select="j2ee:tag|j2ee:tag-file"/>
       </xsl:if>
     </xsl:template>
     
-    <xsl:template match="tag|tag-file">
-      <xsl:if test="name=$tlddoc-tagName">
+    <xsl:template match="j2ee:tag|j2ee:tag-file">
+      <xsl:if test="j2ee:name=$tlddoc-tagName">
         <xsl:variable name="tldname">
           <xsl:choose>
-            <xsl:when test="../display-name!=''">
-              <xsl:value-of select="../display-name"/>
+            <xsl:when test="../j2ee:display-name!=''">
+              <xsl:value-of select="../j2ee:display-name"/>
             </xsl:when>
-            <xsl:when test="../short-name!=''">
-              <xsl:value-of select="../short-name"/>
+            <xsl:when test="../j2ee:short-name!=''">
+              <xsl:value-of select="../j2ee:short-name"/>
             </xsl:when>
             <xsl:otherwise>
               Unnamed TLD
@@ -77,12 +77,12 @@
           </xsl:choose>
         </xsl:variable>
         <xsl:variable name="title">
-          <xsl:value-of select="name"/>
-          (<xsl:value-of select="/tlds/config/window-title"/>)
+          <xsl:value-of select="j2ee:name"/>
+          (<xsl:value-of select="/j2ee:tlds/j2ee:config/j2ee:window-title"/>)
         </xsl:variable>
         <html>
           <head>
-            <title><xsl:copy-of select="$title"/></title>
+            <title><xsl:value-of select="$title"/></title>
             <meta name="keywords" content="$title"/>
             <link rel="stylesheet" type="text/css" href="../stylesheet.css" 
                   title="Style"/>
@@ -90,7 +90,7 @@
           <script>
             function asd()
             {
-            parent.document.title="<xsl:copy-of select="normalize-space($title)"/>";
+            parent.document.title="<xsl:value-of select="normalize-space($title)"/>";
             }
           </script>
           <body bgcolor="white" onload="asd();">
@@ -121,7 +121,7 @@
               <td BGCOLOR="white" CLASS="NavBarCell2"><font SIZE="-2">
                 &#160;<a HREF="../index.html" TARGET="_top"><b>FRAMES</b></a>&#160;
                 &#160;<xsl:element name="a">
-                  <xsl:attribute name="href"><xsl:value-of select="name"/>.html</xsl:attribute>
+                  <xsl:attribute name="href"><xsl:value-of select="j2ee:name"/>.html</xsl:attribute>
                   <xsl:attribute name="target">_top</xsl:attribute>
                   <b>NO FRAMES</b>
                 </xsl:element>&#160;
@@ -141,15 +141,15 @@
             <!-- =========== END OF NAVBAR =========== -->
             
             <hr/>
-            <h2><font size="-1"><xsl:copy-of select="$tldname"/></font><br/>
-            Tag <xsl:value-of select="name"/></h2>
+            <h2><font size="-1"><xsl:value-of select="$tldname"/></font><br/>
+            Tag <xsl:value-of select="j2ee:name"/></h2>
             <hr/>
-            <xsl:value-of select="description"/><br/>
+            <xsl:value-of select="j2ee:description" disable-output-escaping="yes"/><br/>
             <p/>
-            <xsl:if test="example!=''">
+            <xsl:if test="j2ee:example!=''">
               <b>Example:</b><br/>
               <pre>
-<xsl:value-of select="example"/>              
+<xsl:value-of select="j2ee:example"/>              
               </pre>
               <p/>
             </xsl:if>
@@ -168,8 +168,8 @@
                 <td>Tag Class</td>
                 <td>
                   <xsl:choose>
-                    <xsl:when test="tag-class!=''">
-                      <xsl:value-of select="tag-class"/>
+                    <xsl:when test="j2ee:tag-class!=''">
+                      <xsl:value-of select="j2ee:tag-class"/>
                     </xsl:when>
                     <xsl:otherwise>
                       <i>None</i>
@@ -181,8 +181,8 @@
                 <td>TagExtraInfo Class</td>
                 <td>
                   <xsl:choose>
-                    <xsl:when test="tei-class!=''">
-                      <xsl:value-of select="tei-class"/>
+                    <xsl:when test="j2ee:tei-class!=''">
+                      <xsl:value-of select="j2ee:tei-class"/>
                     </xsl:when>
                     <xsl:otherwise>
                       <i>None</i>
@@ -194,8 +194,8 @@
                 <td>Body Content</td>
                 <td>
                   <xsl:choose>
-                    <xsl:when test="body-content!=''">
-                      <xsl:value-of select="body-content"/>
+                    <xsl:when test="j2ee:body-content!=''">
+                      <xsl:value-of select="j2ee:body-content"/>
                     </xsl:when>
                     <xsl:otherwise>
                       <i>None</i>
@@ -207,8 +207,8 @@
                 <td>Display Name</td>
                 <td>
                   <xsl:choose>
-                    <xsl:when test="display-name!=''">
-                      <xsl:value-of select="display-name"/>
+                    <xsl:when test="j2ee:display-name!=''">
+                      <xsl:value-of select="j2ee:display-name"/>
                     </xsl:when>
                     <xsl:otherwise>
                       <i>None</i>
@@ -230,7 +230,7 @@
                 </td>
               </tr>
               <xsl:choose>
-                <xsl:when test="count(attribute)>0">
+                <xsl:when test="count(j2ee:attribute)>0">
                   <tr>
                     <td><b>Name</b></td>
                     <td><b>Required</b></td>
@@ -238,7 +238,7 @@
                     <td><b>Type</b></td>
                     <td><b>Description</b></td>
                   </tr>
-                  <xsl:apply-templates select="attribute"/>
+                  <xsl:apply-templates select="j2ee:attribute"/>
                 </xsl:when>
                 <xsl:otherwise>
                   <td colspan="5"><i>No Attributes Defined.</i></td>
@@ -258,7 +258,7 @@
                 </td>
               </tr>
               <xsl:choose>
-                <xsl:when test="count(variable)>0">
+                <xsl:when test="count(j2ee:variable)>0">
                   <tr>
                     <td><b>Name</b></td>
                     <td><b>Type</b></td>
@@ -266,7 +266,7 @@
                     <td><b>Scope</b></td>
                     <td><b>Description</b></td>
                   </tr>
-                  <xsl:apply-templates select="variable"/>
+                  <xsl:apply-templates select="j2ee:variable"/>
                 </xsl:when>
                 <xsl:otherwise>
                   <td colspan="2"><i>No Variables Defined.</i></td>
@@ -303,7 +303,7 @@
               <td BGCOLOR="white" CLASS="NavBarCell2"><font SIZE="-2">
                 &#160;<a HREF="../index.html" TARGET="_top"><b>FRAMES</b></a>&#160;
                 &#160;<xsl:element name="a">
-                  <xsl:attribute name="href"><xsl:value-of select="name"/>.html</xsl:attribute>
+                  <xsl:attribute name="href"><xsl:value-of select="j2ee:name"/>.html</xsl:attribute>
                   <xsl:attribute name="target">_top</xsl:attribute>
                   <b>NO FRAMES</b>
                 </xsl:element>&#160;
@@ -337,37 +337,37 @@
       </xsl:if>
     </xsl:template>
 
-    <xsl:template match="attribute">
+    <xsl:template match="j2ee:attribute">
       <tr valign="top">
-        <td><xsl:apply-templates select="name"/></td>
+        <td><xsl:apply-templates select="j2ee:name"/></td>
         <td>
           <xsl:choose>
-            <xsl:when test="required!=''">
-              <xsl:value-of select="required"/>
+            <xsl:when test="j2ee:required!=''">
+              <xsl:value-of select="j2ee:required"/>
             </xsl:when>
             <xsl:otherwise>false</xsl:otherwise>
           </xsl:choose>
         </td>
         <td>
           <xsl:choose>
-            <xsl:when test="rtexprvalue!=''">
-              <xsl:value-of select="rtexprvalue"/>
+            <xsl:when test="j2ee:rtexprvalue!=''">
+              <xsl:value-of select="j2ee:rtexprvalue"/>
             </xsl:when>
             <xsl:otherwise>false</xsl:otherwise>
           </xsl:choose>
         </td>
         <td>
           <xsl:choose>
-            <xsl:when test="type!=''">
-              <code><xsl:value-of select="type"/></code>
+            <xsl:when test="j2ee:type!=''">
+              <code><xsl:value-of select="j2ee:type"/></code>
             </xsl:when>
             <xsl:otherwise><code>java.lang.String</code></xsl:otherwise>
           </xsl:choose>
         </td>
         <td>
           <xsl:choose>
-            <xsl:when test="description!=''">
-              <xsl:value-of select="description"/>
+            <xsl:when test="j2ee:description!=''">
+              <xsl:value-of select="j2ee:description" disable-output-escaping="yes"/>
             </xsl:when>
             <xsl:otherwise><i>No Description</i></xsl:otherwise>
           </xsl:choose>
@@ -375,15 +375,15 @@
       </tr>
     </xsl:template>
     
-    <xsl:template match="variable">
+    <xsl:template match="j2ee:variable">
       <tr>
         <td>
           <xsl:choose>
-            <xsl:when test="name-given!=''">
-              <xsl:value-of select="name-given"/>
+            <xsl:when test="j2ee:name-given!=''">
+              <xsl:value-of select="j2ee:name-given"/>
             </xsl:when>
-            <xsl:when test="name-from-attribute!=''">
-              <i>From attribute '<xsl:value-of select="name-from-attribute"/>'</i>
+            <xsl:when test="j2ee:name-from-attribute!=''">
+              <i>From attribute '<xsl:value-of select="j2ee:name-from-attribute"/>'</i>
             </xsl:when>
             <xsl:otherwise>
               <i>Unknown</i>
@@ -392,32 +392,32 @@
         </td>
         <td>
           <xsl:choose>
-            <xsl:when test="variable-class!=''">
-              <code><xsl:value-of select="variable-class"/></code>
+            <xsl:when test="j2ee:variable-class!=''">
+              <code><xsl:value-of select="j2ee:variable-class"/></code>
             </xsl:when>
             <xsl:otherwise><code>java.lang.String</code></xsl:otherwise>
           </xsl:choose>
         </td>
         <td>
           <xsl:choose>
-            <xsl:when test="declare!=''">
-              <xsl:value-of select="declare"/>
+            <xsl:when test="j2ee:declare!=''">
+              <xsl:value-of select="j2ee:declare"/>
             </xsl:when>
             <xsl:otherwise>true</xsl:otherwise>
           </xsl:choose>
         </td>
         <td>
           <xsl:choose>
-            <xsl:when test="scope!=''">
-              <xsl:value-of select="scope"/>
+            <xsl:when test="j2ee:scope!=''">
+              <xsl:value-of select="j2ee:scope"/>
             </xsl:when>
             <xsl:otherwise>NESTED</xsl:otherwise>
           </xsl:choose>
         </td>
         <td>
           <xsl:choose>
-            <xsl:when test="description!=''">
-              <xsl:value-of select="description"/>
+            <xsl:when test="j2ee:description!=''">
+              <xsl:value-of select="j2ee:description" disable-output-escaping="yes"/>
             </xsl:when>
             <xsl:otherwise><i>No Description</i></xsl:otherwise>
           </xsl:choose>
