@@ -15,7 +15,8 @@
 		Faces UI components.
 
 		Included in the output is a full description of each defined tag library, the tags
-		contained within those tag libraries, and how to use those tags.</description>
+		contained within those tag libraries, and how to use those tags.
+	</description>
 	<url>https://taglibrarydoc.dev.java.net</url>
 	<inceptionYear>2003</inceptionYear>
 
@@ -31,6 +32,31 @@
 		<name>Sun Microsystems, Inc.</name>
 		<url>http://www.sun.com/</url>
 	</organization>
+
+	<developers>
+		<developer>
+			<id>markroth8 </id>
+			<name>Mark Roth</name>
+			<email>markroth8@gmail.com</email>
+			<url>https://github.com/markroth8</url>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>America/New_York</timezone>
+		</developer>
+	</developers>
+
+	<contributors>
+		<contributor>
+			<name>Ryan Lubke</name>
+			<url>https://github.com/rlubke</url>
+			<roles>
+				<role>tester</role>
+			</roles>
+			<timezone>America/California</timezone>
+		</contributor>
+	</contributors>
 
 	<properties>
 		<encoding>UTF-8</encoding>
