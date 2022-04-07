@@ -11,8 +11,11 @@
 
 		<section name="Download and Installation">
 			<p>You can download the latest binary build from the
-				<a href="http://taglibrarydoc.dev.java.net/servlets/ProjectDocumentList">Files Section</a>
-				on java.net.</p>
+				<a href="servlets/ProjectDocumentList">Files Section</a>.</p>
+			<p>To use a tag library, you can write a web application with JSP
+				pages and deploy it on a J2EE compatible application server
+				such as the
+				<a href="http://java.sun.com/j2ee/1.4/download.html">J2EE 1.4 SDK</a>.</p>
 		</section>
 
 	</body>

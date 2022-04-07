@@ -12,12 +12,13 @@
 		<section name="Features">
 			<p>Tag Library Documentation Generator has the following features:</p>
 			<ul>
-				<li>
-					Cross-platform, implemented using
+				<li>Cross-platform, implemented using
 					Java<sup><small>TM</small></sup> technology.</li>
 				<li>Uses stylesheets, so output is easy to customize.</li>
 				<li>Pluggable XSLT templates enable alternate look and feel.</li>
-				<li>Works with JSP 1.1, JSP 1.2 and JSP 2.0 TLDs</li>
+				<li>Works with JSP 1.1, JSP 1.2, JSP 2.0 and JSP 2.1 TLDs</li>
+				<li>Support for the new deferred variable and method features in
+					JSP 2.1 in both TLDs and tag files</li>
 				<li>Enhanced support for JSP 2.0 Tag Files</li>
 				<li>Flexible command-line interface allows you to generate
 					documentation for a single TLD file, a set of TLD files, a JAR
