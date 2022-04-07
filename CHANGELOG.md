@@ -1,5 +1,6 @@
 # 1.3 / 2022-04-07
 
+* Add CHANGELOG to assemblies
 * Update site-documentation
 * Source from TLDDoc 1.3 without tests
 

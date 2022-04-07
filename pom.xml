@@ -73,10 +73,10 @@
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>3.3.0</version>
 					<configuration>
-						<descriptorRefs>
-							<descriptorRef>bin</descriptorRef>
-							<descriptorRef>src</descriptorRef>
-						</descriptorRefs>
+						<descriptors>
+							<descriptor>src/assemblies/bin.xml</descriptor>
+							<descriptor>src/assemblies/src.xml</descriptor>
+						</descriptors>
 					</configuration>
 				</plugin>
 				<plugin>

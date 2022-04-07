@@ -2,6 +2,8 @@
 
 Clone of `Tag Library Documentation Generator`
 
+Full [CHANGELOG](CHANGELOG.md)
+
 # Building TLDDoc
 
 ## Prerequesits
