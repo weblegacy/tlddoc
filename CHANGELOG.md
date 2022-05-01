@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add new maintainer
 * Set Version to 1.4-SNAPSHOT
 
 # 1.3 / 2022-04-07

@@ -35,13 +35,24 @@
 
 	<developers>
 		<developer>
-			<id>markroth8 </id>
+			<id>ste-gr</id>
+			<name>Stefan Graff</name>
+			<email>stefan.graff@gmx.at</email>
+			<url>https://github.com/ste-gr</url>
+			<roles>
+				<role>architect (since 2022)</role>
+				<role>developer (since 2022)</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>markroth8</id>
 			<name>Mark Roth</name>
 			<email>markroth8@gmail.com</email>
 			<url>https://github.com/markroth8</url>
 			<roles>
-				<role>architect</role>
-				<role>developer</role>
+				<role>architect (till 2021)</role>
+				<role>developer (till 2021)</role>
 			</roles>
 			<timezone>America/New_York</timezone>
 		</developer>
