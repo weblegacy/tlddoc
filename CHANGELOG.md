@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Set License-URL and new License-Name
 * Add new maintainer
 * Set Version to 1.4-SNAPSHOT
 
