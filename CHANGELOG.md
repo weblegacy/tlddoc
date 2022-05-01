@@ -1,3 +1,7 @@
+# 1.4 / YYYY-MM-DD
+
+* Set Version to 1.4-SNAPSHOT
+
 # 1.3 / 2022-04-07
 
 * Add CHANGELOG to assemblies
