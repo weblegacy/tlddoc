@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Improvement at `TLDDocGenerator`
 * Improvement at `tag-file.jjt`
 * Improvements at JavaDoc
 * Compile with JJTree/JavaCC
