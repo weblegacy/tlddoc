@@ -31,9 +31,7 @@
 
 package com.sun.tlddoc;
 
-import com.sun.tlddoc.GeneratorException;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -42,10 +40,7 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -64,32 +59,41 @@ import org.xml.sax.SAXException;
 public class WARTagDirImplicitTagLibrary 
     extends TagLibrary 
 {
-    /** The WAR file that contains this tag library */
-    private File war;
+    /**
+     * The WAR file that contains this tag library
+     */
+    final private File war;
     
-    /** The directory containing the tag files */
-    private String dir;
+    /**
+     * The directory containing the tag files
+     */
+    final private String dir;
     
-    /** Creates a new instance of TagDirImplicitTagLibrary */
+    /**
+     * Creates a new instance of TagDirImplicitTagLibrary
+     *
+     * @param war WAR file that contains this tag library
+     * @param dir directory containing the tag files
+     */
     public WARTagDirImplicitTagLibrary(File war, String dir) {
         this.war = war;
         this.dir = dir;
     }
     
     /** 
-     * Returns a String that the user would recognize as a location for this
-     * tag library.
+     * {@inheritDoc}
      */
+    @Override
     public String getPathDescription() {
         return war.getAbsolutePath() + "!" + dir;
     }
     
-    /** 
-     * Returns an input stream for the given resource, or null if the
-     * resource could not be found.
+    /**
+     * {@inheritDoc}
      */
-    public InputStream getResource(String path) 
-        throws IOException 
+    @Override
+    public InputStream getResource(String path)
+        throws IOException
     {
         InputStream result = null;
         if( path.startsWith( "/" ) ) path = path.substring( 1 );
@@ -98,18 +102,16 @@ public class WARTagDirImplicitTagLibrary
         if( warEntry != null ) {
             result = warFile.getInputStream( warEntry );
         }
-        
+
         return result;
     }
     
-    /** 
-     * Returns a Document of the effective tag library descriptor for this
-     * tag library.  This might come from a file or be implicitly generated.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public Document getTLDDocument(DocumentBuilder documentBuilder) 
-        throws IOException, SAXException, ParserConfigurationException, 
-            TransformerConfigurationException, TransformerException, 
-            GeneratorException 
+        throws IOException, SAXException, TransformerException
     {
         Document result = documentBuilder.newDocument();
         
@@ -123,46 +125,46 @@ public class WARTagDirImplicitTagLibrary
         // According to the JSP 2.0 specification:
         // A <tag-file> element is considered to exist for each tag file in 
         // this directory, with the following sub-elements:
-        //    - The <name> for each is the filename of the tag file, 
-        //      without the .tag extension.   
-        //    - The <path> for each is the path of the tag file, relative 
-        //      to the root of the web application.        
-        JarFile warFile = new JarFile( this.war );
-        Enumeration entries = warFile.entries();
-        while( entries.hasMoreElements() ) {
-            JarEntry warEntry = (JarEntry)entries.nextElement();
-            String entryName = warEntry.getName();
-            if( !warEntry.isDirectory() &&
-                entryName.startsWith( path ) )
-            {
-                String relativeName = entryName.replace( File.separatorChar, 
-                    '/' );
-                relativeName = relativeName.substring( path.length() );
-                if( relativeName.indexOf( '/' ) == -1 ) {
-                    // We're not in a subdirectory.
-                    if( relativeName.toLowerCase().endsWith( ".tag" ) ||
-                        relativeName.toLowerCase().endsWith( ".tagx" ) ) 
-                    {
-                        String tagName = relativeName.substring( 0, 
-                            relativeName.lastIndexOf( '.' ) );
-                        String tagPath = "/" + entryName;
-
-                        Element tagFileElement = result.createElement( 
-                            "tag-file" );
-                        Element nameElement = result.createElement( "name" );
-                        nameElement.appendChild( result.createTextNode( 
-                            tagName ) );
-                        tagFileElement.appendChild( nameElement );
-                        Element pathElement = result.createElement( "path" );
-                        pathElement.appendChild( result.createTextNode( 
-                            tagPath ) );
-                        tagFileElement.appendChild( pathElement );
-                        taglibElement.appendChild( tagFileElement );
+        //    - The <name> for each is the filename of the tag file,
+        //      without the .tag extension.
+        //    - The <path> for each is the path of the tag file, relative
+        //      to the root of the web application.
+        try ( JarFile warFile = new JarFile( this.war ) ) {
+            Enumeration<JarEntry> entries = warFile.entries();
+            while( entries.hasMoreElements() ) {
+                JarEntry warEntry = entries.nextElement();
+                String entryName = warEntry.getName();
+                if( !warEntry.isDirectory() &&
+                        entryName.startsWith( path ) )
+                {
+                    String relativeName = entryName.replace( File.separatorChar,
+                            '/' );
+                    relativeName = relativeName.substring( path.length() );
+                    if( relativeName.indexOf( '/' ) == -1 ) {
+                        // We're not in a subdirectory.
+                        if( relativeName.toLowerCase().endsWith( ".tag" ) ||
+                                relativeName.toLowerCase().endsWith( ".tagx" ) )
+                        {
+                            String tagName = relativeName.substring( 0,
+                                    relativeName.lastIndexOf( '.' ) );
+                            String tagPath = "/" + entryName;
+                            
+                            Element tagFileElement = result.createElement(
+                                    "tag-file" );
+                            Element nameElement = result.createElement( "name" );
+                            nameElement.appendChild( result.createTextNode(
+                                    tagName ) );
+                            tagFileElement.appendChild( nameElement );
+                            Element pathElement = result.createElement( "path" );
+                            pathElement.appendChild( result.createTextNode(
+                                    tagPath ) );
+                            tagFileElement.appendChild( pathElement );
+                            taglibElement.appendChild( tagFileElement );
+                        }
                     }
                 }
             }
         }
-        warFile.close();
         
         // JDK 1.4 does not correctly import the node into the tree, so
         // simulate reading this entry from a file.  There might be a

@@ -41,13 +41,19 @@ import java.util.Iterator;
  */
 public class Directive {
   
-    /** The name of this directive. */
+    /**
+     * The name of this directive.
+     */
     private String directiveName;
     
-    /** The attributes for this directive. */
-    private ArrayList attributes = new ArrayList();
+    /**
+     * The attributes for this directive.
+     */
+    final private ArrayList<Attribute> attributes = new ArrayList<>();
     
-    /** Creates a new instance of Directive */
+    /**
+     * Creates a new instance of Directive
+     */
     public Directive() {
     }
     
@@ -55,7 +61,7 @@ public class Directive {
      * Getter for property directiveName.
      * @return Value of property directiveName.
      */
-    public java.lang.String getDirectiveName() {
+    public String getDirectiveName() {
         return directiveName;
     }
     
@@ -63,12 +69,14 @@ public class Directive {
      * Setter for property directiveName.
      * @param directiveName New value of property directiveName.
      */
-    public void setDirectiveName(java.lang.String directiveName) {
+    public void setDirectiveName(String directiveName) {
         this.directiveName = directiveName;
     }
 
     /**
      * Adds an attribute to the list of attributes for this directive.
+     *
+     * @param attribute to add to the list of attributes for this directive
      */
     public void addAttribute( Attribute attribute ) {
         this.attributes.add( attribute );
@@ -76,21 +84,26 @@ public class Directive {
     
     /**
      * Returns an iterator through the set of attributes in this directive.
+     *
+     * @return an iterator through the set of attributes in this directive
      */
-    public Iterator getAttributes() {
+    public Iterator<Attribute> getAttributes() {
         return this.attributes.iterator();
     }
     
     /**
-     * Returns a string representation of this directive.
+     * Returns a string representation of this directive
+     *
+     * @return a string representation of this directive
      */
+    @Override
     public String toString() {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         result.append( "[Directive;name=" );
         result.append( directiveName );
         result.append( ",attributes={" );
         for( int i = 0; i < attributes.size(); i++ ) {
-            Attribute attr = (Attribute)attributes.get( i );
+            Attribute attr = attributes.get( i );
             result.append( attr.toString() );
             if( i < (attributes.size()-1) ) {
                 result.append( ", " );

@@ -31,7 +31,6 @@
 
 package com.sun.tlddoc;
 
-import com.sun.tlddoc.GeneratorException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,9 +38,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -59,26 +56,32 @@ import org.xml.sax.SAXException;
 public class TagDirImplicitTagLibrary 
     extends TagLibrary 
 {
-    /** The directory containing the tag files */
-    private File dir;
+    /**
+     * The directory containing the tag files
+     */
+    final private File dir;
     
-    /** Creates a new instance of TagDirImplicitTagLibrary */
+    /**
+     * Creates a new instance of TagDirImplicitTagLibrary
+     * 
+     * @param dir directory containing the tag files
+     */
     public TagDirImplicitTagLibrary( File dir ) {
         this.dir = dir;
     }
     
-    /** 
-     * Returns a String that the user would recognize as a location for this
-     * tag library.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public String getPathDescription() {
         return dir.getAbsolutePath();
     }
     
-    /** 
-     * Returns an input stream for the given resource, or null if the
-     * resource could not be found.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public InputStream getResource(String path) 
         throws IOException 
     {
@@ -90,13 +93,13 @@ public class TagDirImplicitTagLibrary
         //      TLD:  /home/mroth/test/sample/WEB-INF/tags/mytags
         //      path: /WEB-INF/tags/mytags/tag1.tag
         
-        File dir = this.dir;
+        File dir_ = this.dir;
         if( path.startsWith( "/" ) ) {
             path = path.substring( 1 );
         }
         File look = null;
-        while( (dir != null) && !(look = new File( dir, path )).exists() ) {
-            dir = dir.getParentFile();
+        while( (dir_ != null) && !(look = new File( dir_, path )).exists() ) {
+            dir_ = dir_.getParentFile();
         }
         
         if( (look != null) && look.exists() ) {
@@ -107,14 +110,12 @@ public class TagDirImplicitTagLibrary
         return result;
     }
     
-    /** 
-     * Returns a Document of the effective tag library descriptor for this
-     * tag library.  This might come from a file or be implicitly generated.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public Document getTLDDocument(DocumentBuilder documentBuilder) 
-        throws IOException, SAXException, ParserConfigurationException, 
-            TransformerConfigurationException, TransformerException, 
-            GeneratorException 
+        throws IOException, SAXException, TransformerException
     {
         Document result = documentBuilder.newDocument();
         
@@ -178,6 +179,11 @@ public class TagDirImplicitTagLibrary
     /**
      * Creates an implicit tag library root node, with default values.
      * Shared by WARTagDirImplicitTagLibrary.
+     *
+     * @param result XML-document to add new tag-element
+     * @param path path to the TLD Files
+     *
+     * @return new created tag library root node
      */
     protected static Element createRootTaglibNode( Document result,
         String path ) 
@@ -216,27 +222,28 @@ public class TagDirImplicitTagLibrary
         // with -, which yields the short name. Note that short names are 
         // not guaranteed to be unique.
         String shortName;
-        if( path.equals( "unknown" ) ) {
-            shortName = path;
-        }
-        else if( path.equals( "/WEB-INF/tags" ) || 
-            path.equals( "/WEB-INF/tags/" ) ) 
-        {
-            shortName = "tags";
-        }
-        else {
-            shortName = path;
-            if( shortName.startsWith( "/WEB-INF/tags" ) ) {
-                shortName = shortName.substring( "/WEB-INF/tags".length() );
-            }
-            if( shortName.startsWith( "/" ) ) {
-                shortName = shortName.substring( 1 );
-            }
-            if( shortName.endsWith( "/" ) ) {
-                shortName = shortName.substring( 0, shortName.length() - 1 );
-            }
-            shortName = shortName.replace( File.separatorChar, '/' );
-            shortName = shortName.replace( '/', '-' );
+        switch (path) {
+            case "unknown":
+                shortName = path;
+                break;
+            case "/WEB-INF/tags":
+            case "/WEB-INF/tags/":
+                shortName = "tags";
+                break;
+            default:
+                shortName = path;
+                if( shortName.startsWith( "/WEB-INF/tags" ) ) {
+                    shortName = shortName.substring( "/WEB-INF/tags".length() );
+                }
+                if( shortName.startsWith( "/" ) ) {
+                    shortName = shortName.substring( 1 );
+                }
+                if( shortName.endsWith( "/" ) ) {
+                    shortName = shortName.substring( 0, shortName.length() - 1 );
+                }
+                shortName = shortName.replace( File.separatorChar, '/' );
+                shortName = shortName.replace( '/', '-' );
+                break;
         }
         Element shortNameElement = result.createElement( "short-name" );
         shortNameElement.appendChild( result.createTextNode( shortName ) );

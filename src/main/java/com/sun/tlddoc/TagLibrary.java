@@ -34,8 +34,6 @@ package com.sun.tlddoc;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -48,8 +46,11 @@ import org.xml.sax.SAXException;
  */
 public abstract class TagLibrary {
     
-    /**
+    /** 
      * Returns a String that the user would recognize as a location for this
+     * tag library.
+     *
+     * @return a String that the user would recognize as a location for this
      * tag library.
      */
     public abstract String getPathDescription();
@@ -57,15 +58,30 @@ public abstract class TagLibrary {
     /**
      * Returns a Document of the effective tag library descriptor for this
      * tag library.  This might come from a file or be implicitly generated.
+     *
+     * @param documentBuilder {@code DocumentBuilder} to obtain DOM Document for
+     * creating an XML-document.
+     *
+     * @return created XML-Document
+     *
+     * @throws IOException if an I/O error has occurred
+     * @throws SAXException If any parse errors occur.
+     * @throws TransformerException If an unrecoverable error occurs
+     *   during the course of the transformation.
      */
     public abstract Document getTLDDocument( DocumentBuilder documentBuilder ) 
-        throws IOException, SAXException, ParserConfigurationException,
-            TransformerConfigurationException, TransformerException,
-            GeneratorException;
+        throws IOException, SAXException, TransformerException;
     
     /**
-     * Returns an input stream for the given resource, or null if the
+     * Returns an input stream for the given resource, or {@code null} if the
      * resource could not be found.
+     *
+     * @param path the path to the resource into war-file
+     *
+     * @return the input stream for the given resource or {@code null} if the
+     * resource could not be found
+     *
+     * @throws IOException if an I/O error has occurred
      */
     public abstract InputStream getResource( String path )
         throws IOException;

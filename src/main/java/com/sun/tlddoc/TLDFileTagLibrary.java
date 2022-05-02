@@ -36,8 +36,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -52,30 +50,34 @@ public class TLDFileTagLibrary
     extends TagLibrary 
 {
     
-    /** The location of the TLD file for this tag library */
-    private File tldFile;
+    /**
+     * The location of the TLD file for this tag library
+     */
+    final private File tldFile;
     
-    /** Creates a new instance of TLDFileTagLibrary */
+    /**
+     * Creates a new instance of TLDFileTagLibrary
+     *
+     * @param tldFile location of the TLD file for this tag library
+     */
     public TLDFileTagLibrary( File tldFile ) {
         this.tldFile = tldFile;
     }
     
-    /** 
-     * Returns a String that the user would recognize as a location for this
-     * tag library.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public String getPathDescription() {
         return this.tldFile.getAbsolutePath();
     }
     
-    /** 
-     * Returns a Document of the effective tag library descriptor for this
-     * tag library.  This might come from a file or be implicitly generated.
+    /**
+     * {@inheritDoc}
      */
-    public Document getTLDDocument( DocumentBuilder documentBuilder ) 
-        throws IOException, SAXException, ParserConfigurationException, 
-            TransformerConfigurationException, TransformerException, 
-            GeneratorException 
+    @Override
+    public Document getTLDDocument(DocumentBuilder documentBuilder) 
+        throws IOException, SAXException, TransformerException
     {
         FileInputStream in = new FileInputStream( this.tldFile );
         InputSource source;
@@ -90,10 +92,10 @@ public class TLDFileTagLibrary
         return result;
     }
     
-    /** 
-     * Returns an input stream for the given resource, or null if the
-     * resource could not be found.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public InputStream getResource(String path) 
         throws IOException 
     {

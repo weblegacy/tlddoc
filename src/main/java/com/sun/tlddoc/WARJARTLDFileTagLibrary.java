@@ -32,15 +32,12 @@
 package com.sun.tlddoc;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -54,16 +51,27 @@ import org.xml.sax.SAXException;
  */
 public class WARJARTLDFileTagLibrary extends TagLibrary {
     
-    /** The WAR containing the JAR */
-    private File war;
+    /**
+     * The WAR containing the JAR
+     */
+    final private File war;
     
-    /** The JAR containing the TLD file */
-    private String warEntryName;
+    /**
+     * The JAR containing the TLD file
+     */
+    final private String warEntryName;
     
-    /** The name of the JarEntry containing the TLD file */
-    private String tldPath;
+    /**
+     * The name of the JarEntry containing the TLD file
+     */
+    final private String tldPath;
     
-    /** Creates a new instance of JARTLDFileTagLibrary */
+    /**
+     * Creates a new instance of {@link JARTLDFileTagLibrary}
+     * @param war WAR containing the JAR
+     * @param warEntryName JAR containing the TLD file
+     * @param tldPath name of the {@code JarEntry} containing the TLD file
+     */
     public WARJARTLDFileTagLibrary(File war, String warEntryName, 
         String tldPath) 
     {
@@ -73,17 +81,17 @@ public class WARJARTLDFileTagLibrary extends TagLibrary {
     }
     
     /** 
-     * Returns a String that the user would recognize as a location for this
-     * tag library.
+     * {@inheritDoc}
      */
+    @Override
     public String getPathDescription() {
         return war.getAbsolutePath() + "!" + warEntryName + "!" + tldPath;
     }
     
-    /** 
-     * Returns an input stream for the given resource, or null if the
-     * resource could not be found.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public InputStream getResource(String path) 
         throws IOException 
     {
@@ -109,40 +117,37 @@ public class WARJARTLDFileTagLibrary extends TagLibrary {
         return result;
     }
     
-    /** 
-     * Returns a Document of the effective tag library descriptor for this
-     * tag library.  This might come from a file or be implicitly generated.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public Document getTLDDocument(DocumentBuilder documentBuilder) 
-        throws IOException, SAXException, ParserConfigurationException, 
-            TransformerConfigurationException, TransformerException, 
-            GeneratorException 
+        throws IOException, SAXException, TransformerException
     {
         Document result = null;
         
-        JarFile warFile = new JarFile( this.war );
-        JarEntry warEntry = warFile.getJarEntry( this.warEntryName );
-        JarInputStream in = new JarInputStream(
-            warFile.getInputStream( warEntry ) );
-        
-        // in is now the input stream to the JAR in the WAR.
-        
-        JarEntry jarEntry;
-        while( (jarEntry = in.getNextJarEntry()) != null ) {
-            if( jarEntry.getName().equals( tldPath ) ) {
-                InputSource source;
-                try {
-                    source = new InputSource( in );
-                    result = documentBuilder.parse( source );
+        try ( JarFile warFile = new JarFile( this.war ) ) {
+            JarEntry warEntry = warFile.getJarEntry( this.warEntryName );
+            JarInputStream in = new JarInputStream(
+                    warFile.getInputStream( warEntry ) );
+            
+            // in is now the input stream to the JAR in the WAR.
+            
+            JarEntry jarEntry;
+            while( (jarEntry = in.getNextJarEntry()) != null ) {
+                if( jarEntry.getName().equals( tldPath ) ) {
+                    InputSource source;
+                    try {
+                        source = new InputSource( in );
+                        result = documentBuilder.parse( source );
+                    }
+                    finally {
+                        in.close();
+                    }
+                    break;
                 }
-                finally {
-                    in.close();
-                }
-                break;
             }
         }
-        
-        warFile.close();
         
         return result;
     }

@@ -32,15 +32,11 @@
 package com.sun.tlddoc;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.jar.JarInputStream;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -53,30 +49,39 @@ import org.xml.sax.SAXException;
  */
 public class JARTLDFileTagLibrary extends TagLibrary {
     
-    /** The JAR containing the TLD file */
-    private File jar;
+    /**
+     * The JAR containing the TLD file
+     */
+    final private File jar;
     
-    /** The name of the JarEntry containing the TLD file */
-    private String tldPath;
+    /**
+     * The name of the JarEntry containing the TLD file
+     */
+    final private String tldPath;
     
-    /** Creates a new instance of JARTLDFileTagLibrary */
+    /**
+     * Creates a new instance of JARTLDFileTagLibrary
+     *
+     * @param jar JAR containing the TLD file
+     * @param tldPath name of the JarEntry containing the TLD file
+     */
     public JARTLDFileTagLibrary( File jar, String tldPath ) {
         this.jar = jar;
         this.tldPath = tldPath;
     }
     
-    /** 
-     * Returns a String that the user would recognize as a location for this
-     * tag library.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public String getPathDescription() {
         return jar.getAbsolutePath() + "!" + tldPath;
     }
     
-    /** 
-     * Returns an input stream for the given resource, or null if the
-     * resource could not be found.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public InputStream getResource(String path) 
         throws IOException 
     {
@@ -93,30 +98,28 @@ public class JARTLDFileTagLibrary extends TagLibrary {
         return result;
     }
     
-    /** 
-     * Returns a Document of the effective tag library descriptor for this
-     * tag library.  This might come from a file or be implicitly generated.
+    /**
+     * {@inheritDoc}
      */
+    @Override
     public Document getTLDDocument(DocumentBuilder documentBuilder) 
-        throws IOException, SAXException, ParserConfigurationException, 
-            TransformerConfigurationException, TransformerException, 
-            GeneratorException 
+        throws IOException, SAXException, TransformerException
     {
         Document result = null;
-        JarFile jarFile = new JarFile( this.jar );
-        JarEntry jarEntry = jarFile.getJarEntry( this.tldPath );
-        if( jarEntry != null ) {
-            InputStream in = jarFile.getInputStream( jarEntry );
-            InputSource source;
-            try {
-                source = new InputSource( in );
-                result = documentBuilder.parse( source );
-            }
-            finally {
-                in.close();
+        try ( JarFile jarFile = new JarFile( this.jar ) ) {
+            JarEntry jarEntry = jarFile.getJarEntry( this.tldPath );
+            if( jarEntry != null ) {
+                InputStream in = jarFile.getInputStream( jarEntry );
+                InputSource source;
+                try {
+                    source = new InputSource( in );
+                    result = documentBuilder.parse( source );
+                }
+                finally {
+                    in.close();
+                }
             }
         }
-        jarFile.close();
         return result;
     }
     

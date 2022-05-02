@@ -38,11 +38,13 @@ package com.sun.tlddoc;
  */
 public final class Constants {
     
-    /** Private constructor as this is a utility class. */
+    /**
+     * Private constructor as this is a utility class.
+     */
     private Constants() {
     }
     
-    public static final String VERSION = "1.3";
+    public static final String VERSION = "1.4-SNAPSHOT";
     
     public static final String DEFAULT_WINDOW_TITLE = 
         "Tag Library Documentation Generator - Generated Documentation";
@@ -50,12 +52,18 @@ public final class Constants {
     public static final String DEFAULT_DOC_TITLE =
         "Tag Library Documentation Generator - Generated Documentation";
     
-    /** Namespace for Java EE */
+    /**
+     * Namespace for Java EE
+     */
     public static final String NS_JAVAEE = "http://java.sun.com/xml/ns/javaee";
     
-    /** Namespace for J2EE */
+    /**
+     * Namespace for J2EE
+     */
     public static final String NS_J2EE = "http://java.sun.com/xml/ns/j2ee";
     
-    /** If true, outputs the input to the transform before generation */
+    /**
+     * If true, outputs the input to the transform before generation
+     */
     public static final boolean DEBUG_INPUT_DOCUMENT = false;
 }

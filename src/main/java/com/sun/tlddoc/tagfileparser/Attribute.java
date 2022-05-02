@@ -38,13 +38,22 @@ package com.sun.tlddoc.tagfileparser;
  */
 public class Attribute {
     
-    /** The name of this attribute */
+    /**
+     * The name of this attribute
+     */
     private String name;
     
-    /** The value of this attribute */
+    /**
+     * The value of this attribute
+     */
     private String value;
     
-    /** Creates a new instance of Attribute */
+    /**
+     * Creates a new instance of Attribute
+     *
+     * @param name of this attribute
+     * @param value of this attribute
+     */
     public Attribute( String name, String value ) {
         this.name = name;
         this.value = value;
@@ -54,7 +63,7 @@ public class Attribute {
      * Getter for property name.
      * @return Value of property name.
      */
-    public java.lang.String getName() {
+    public String getName() {
         return name;
     }
     
@@ -62,7 +71,7 @@ public class Attribute {
      * Setter for property name.
      * @param name New value of property name.
      */
-    public void setName(java.lang.String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
@@ -70,7 +79,7 @@ public class Attribute {
      * Getter for property value.
      * @return Value of property value.
      */
-    public java.lang.String getValue() {
+    public String getValue() {
         return value;
     }
     
@@ -84,7 +93,10 @@ public class Attribute {
     
     /**
      * Returns a String representation of this attribute.
+     *
+     * @return a String representation of this attribute
      */
+    @Override
     public String toString() {
         return "[Attribute;name=" + name + ", value=" + value + "]";
     }
