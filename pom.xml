@@ -33,6 +33,12 @@
         <url>http://www.sun.com/</url>
     </organization>
 
+    <scm>
+        <connection>scm:git:https://github.com/ste-gr/taglibrarydoc.git</connection>
+        <developerConnection>scm:git:https://github.com/ste-gr/taglibrarydoc.git</developerConnection>
+        <url>https://github.com/ste-gr/taglibrarydoc</url>
+    </scm>    
+
     <developers>
         <developer>
             <id>ste-gr</id>

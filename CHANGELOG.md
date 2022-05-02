@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add scm-infos to pom
 * Improvement at `TLDDocGenerator`
 * Improvement at `tag-file.jjt`
 * Improvements at JavaDoc
