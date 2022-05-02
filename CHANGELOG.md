@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Improvement at `tag-file.jjt`
 * Improvements at JavaDoc
 * Compile with JJTree/JavaCC
 * Upgrade JDK 8: Generics, JavaDoc, try-with-resources, switch-with-strings, ...

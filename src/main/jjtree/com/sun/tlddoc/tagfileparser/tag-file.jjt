@@ -59,8 +59,7 @@ public class TagFile {
 
     public static void main(String args[]) throws ParseException {
         TagFile parser = new TagFile(System.in);
-        parser.Input();
-        ((SimpleNode)parser.jjtree.rootNode()).dump(">");
+        parser.Input().dump(">");
     }
 
     /**
@@ -221,10 +220,11 @@ TOKEN :
 }
 
 
-void Input() :
+SimpleNode Input() :
 {}
 {
   JSPTagDef() <EOF>
+  { return jjtThis; }
 }
 
 void JSPTagDef() :
