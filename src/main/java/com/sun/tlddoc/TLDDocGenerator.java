@@ -428,7 +428,7 @@ public class TLDDocGenerator {
     /**
      * Commences documentation generation.
      *
-     * @throws GeneratorException
+     * @throws GeneratorException any error during generation
      */
     public void generate()
         throws GeneratorException 
@@ -462,10 +462,18 @@ public class TLDDocGenerator {
      * Creates a summary document, comprising all input TLDs.  This document
      * is later used as input into XSLT to generate all non-static output 
      * pages.  Stores the result as a DOM tree in the summaryTLD attribute.
+     * 
+     * @throws IOException if an I/O error has occurred
+     * @throws SAXException If any parse errors occur.
+     * @throws ParserConfigurationException if a DocumentBuilder
+     *   cannot be created which satisfies the configuration requested.
+     * @throws TransformerException If an unrecoverable error occurs
+     *   during the course of the transformation.
+     * @throws GeneratorException taglib is not valid
      */
     private void createTLDSummaryDoc()
-          throws IOException, SAXException, ParserConfigurationException,
-            TransformerException, GeneratorException 
+            throws IOException, SAXException, ParserConfigurationException,
+              TransformerException, GeneratorException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating( false );
