@@ -2,25 +2,25 @@
  * <license>
  * Copyright (c) 2003-2004, Sun Microsystems, Inc.
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without 
+ *
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *     * Redistributions of source code must retain the above copyright 
+ *
+ *     * Redistributions of source code must retain the above copyright
  *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright 
+ *     * Redistributions in binary form must reproduce the above copyright
  *       notice, this list of conditions and the following disclaimer in the
  *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of Sun Microsystems, Inc. nor the names of its 
+ *     * Neither the name of Sun Microsystems, Inc. nor the names of its
  *       contributors may be used to endorse or promote products derived from
  *       this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
  * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * ROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
@@ -28,6 +28,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * </license>
  */
+
+options {
+    STATIC=false;
+}
 
 PARSER_BEGIN(TagFile)
 
@@ -45,7 +49,7 @@ import java.util.ArrayList;
 public class TagFile {
 
     /** The set of directives in this tag file */
-    public ArrayList directives = new ArrayList();
+    public ArrayList<Directive> directives = new ArrayList<Directive>();
 
     public static TagFile parse( InputStream in ) throws ParseException {
         TagFile parser = new TagFile( in );
@@ -61,8 +65,10 @@ public class TagFile {
 
     /**
      * Returns the list of directives in this tag file.
+     *
+     * @return the list of directives in this tag file
      */
-    public ArrayList getDirectives() {  
+    public ArrayList<Directive> getDirectives() {
         return this.directives;
     }
 
@@ -98,7 +104,7 @@ TOKEN :
 
 <JSPDirectiveName> TOKEN :
 {
-    < JSP_DIRECTIVE_NAME  : (["A"-"Z","a"-"z","0"-"9","_",":","-"])+ > : 
+    < JSP_DIRECTIVE_NAME  : (["A"-"Z","a"-"z","0"-"9","_",":","-"])+ > :
 						JSPDirectiveAttributeName
 }
 
@@ -109,7 +115,7 @@ TOKEN :
 
 <JSPDirectiveAttributeName> TOKEN :
 {
-    < EQ                  : "="  > 
+    < EQ                  : "="  >
   | < BEGIN_QUOTE_SINGLE  : ("'") >  : JSPDirectiveAttributeValueSingle
   | < BEGIN_QUOTE_DOUBLE  : ("\"") > : JSPDirectiveAttributeValueDouble
   | < END_DIRECTIVE       : "%>" >  : DEFAULT
@@ -154,7 +160,7 @@ TOKEN :
 
 <XMLDirectiveName> TOKEN :
 {
-    < XML_DIRECTIVE_NAME  : (["A"-"Z","a"-"z","0"-"9","_",":","-"])+ > : 
+    < XML_DIRECTIVE_NAME  : (["A"-"Z","a"-"z","0"-"9","_",":","-"])+ > :
 						XMLDirectiveAttributeName
 }
 
@@ -165,7 +171,7 @@ TOKEN :
 
 <XMLDirectiveAttributeName> TOKEN :
 {
-    < X_EQ                  : "="  > 
+    < X_EQ                  : "="  >
   | < X_BEGIN_QUOTE_SINGLE  : ("'") >  : XMLDirectiveAttributeValueSingle
   | < X_BEGIN_QUOTE_DOUBLE  : ("\"") > : XMLDirectiveAttributeValueDouble
   | < X_END_DIRECTIVE       : "/>" >  : DEFAULT
@@ -246,21 +252,21 @@ void JSPDirective() :
   String attributeValue;
 }
 {
-  <JSP_DIRECTIVE> 
-  directiveName = JSPDirectiveName() 
+  <JSP_DIRECTIVE>
+  directiveName = JSPDirectiveName()
   {
     result.setDirectiveName( directiveName );
   }
-  ( 
-    attributeName = JSPAttributeName() 
+  (
+    attributeName = JSPAttributeName()
     <EQ>
-    (   ( <BEGIN_QUOTE_SINGLE> 
-          (attributeValue = JSPAttributeValue()) 
-          <END_QUOTE_SINGLE> 
-        )
-      | ( <BEGIN_QUOTE_DOUBLE> 
+    (   ( <BEGIN_QUOTE_SINGLE>
           (attributeValue = JSPAttributeValue())
-          <END_QUOTE_DOUBLE> 
+          <END_QUOTE_SINGLE>
+        )
+      | ( <BEGIN_QUOTE_DOUBLE>
+          (attributeValue = JSPAttributeValue())
+          <END_QUOTE_DOUBLE>
         )
     )
     {
@@ -301,7 +307,7 @@ String JSPAttributeValue() :
 }
 {
   (
-      (result = <JSP_ATTRIBUTE_VALUE1>) 
+      (result = <JSP_ATTRIBUTE_VALUE1>)
     | (result = <JSP_ATTRIBUTE_VALUE2>)
   )
   {
@@ -318,21 +324,21 @@ void XMLDirective() :
   String attributeValue;
 }
 {
-  <XML_DIRECTIVE> 
-  directiveName = XMLDirectiveName() 
+  <XML_DIRECTIVE>
+  directiveName = XMLDirectiveName()
   {
     result.setDirectiveName( directiveName );
   }
-  ( 
-    attributeName = XMLAttributeName() 
+  (
+    attributeName = XMLAttributeName()
     <X_EQ>
-    (   ( <X_BEGIN_QUOTE_SINGLE> 
-          attributeValue = XMLAttributeValue() 
-          <X_END_QUOTE_SINGLE> 
+    (   ( <X_BEGIN_QUOTE_SINGLE>
+          attributeValue = XMLAttributeValue()
+          <X_END_QUOTE_SINGLE>
         )
-      | ( <X_BEGIN_QUOTE_DOUBLE> 
-          attributeValue = XMLAttributeValue() 
-          <X_END_QUOTE_DOUBLE> 
+      | ( <X_BEGIN_QUOTE_DOUBLE>
+          attributeValue = XMLAttributeValue()
+          <X_END_QUOTE_DOUBLE>
         )
     )
     {
@@ -373,7 +379,7 @@ String XMLAttributeValue() :
 }
 {
   (
-      (result = <XML_ATTRIBUTE_VALUE1>) 
+      (result = <XML_ATTRIBUTE_VALUE1>)
     | (result = <XML_ATTRIBUTE_VALUE2>)
   )
   {
