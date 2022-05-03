@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Bump `maven-site-plugin` from 3.11.0 to 4.0.0-M1
 * Bump `maven-project-info-reports-plugin` from 3.2.2 to 3.3.0
 * Bump `maven-javadoc-plugin` from 3.3.2 to 3.4.0
 * Remove `PMD`-Warnings
