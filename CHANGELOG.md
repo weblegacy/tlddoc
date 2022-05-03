@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Correction mem-leak in TagLibrary-implementation-classes
 * Reformating: Remove eof-empty-lines, end-spaces, tabs to spaces
 * Add scm-infos to pom
 * Improvement at `TLDDocGenerator`

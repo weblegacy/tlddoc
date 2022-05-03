@@ -65,12 +65,17 @@ public class WARTagDirImplicitTagLibrary
     final private File war;
 
     /**
+     * The WAR-file itself
+     */
+    private JarFile warFile = null;
+
+    /**
      * The directory containing the tag files
      */
     final private String dir;
 
     /**
-     * Creates a new instance of TagDirImplicitTagLibrary
+     * Creates a new instance of {@link WARTagDirImplicitTagLibrary}
      *
      * @param war WAR file that contains this tag library
      * @param dir directory containing the tag files
@@ -95,15 +100,11 @@ public class WARTagDirImplicitTagLibrary
     public InputStream getResource(String path)
         throws IOException
     {
-        InputStream result = null;
         if( path.startsWith( "/" ) ) path = path.substring( 1 );
-        JarFile warFile = new JarFile( this.war );
-        JarEntry warEntry = warFile.getJarEntry( path );
-        if( warEntry != null ) {
-            result = warFile.getInputStream( warEntry );
-        }
 
-        return result;
+        ensureOpen();
+        final JarEntry warEntry = warFile.getJarEntry( path );
+        return warEntry == null ? null : warFile.getInputStream( warEntry );
     }
 
     /**
@@ -129,38 +130,37 @@ public class WARTagDirImplicitTagLibrary
         //      without the .tag extension.
         //    - The <path> for each is the path of the tag file, relative
         //      to the root of the web application.
-        try ( JarFile warFile = new JarFile( this.war ) ) {
-            Enumeration<JarEntry> entries = warFile.entries();
-            while( entries.hasMoreElements() ) {
-                JarEntry warEntry = entries.nextElement();
-                String entryName = warEntry.getName();
-                if( !warEntry.isDirectory() &&
-                        entryName.startsWith( path ) )
-                {
-                    String relativeName = entryName.replace( File.separatorChar,
-                            '/' );
-                    relativeName = relativeName.substring( path.length() );
-                    if( relativeName.indexOf( '/' ) == -1 ) {
-                        // We're not in a subdirectory.
-                        if( relativeName.toLowerCase().endsWith( ".tag" ) ||
-                                relativeName.toLowerCase().endsWith( ".tagx" ) )
-                        {
-                            String tagName = relativeName.substring( 0,
-                                    relativeName.lastIndexOf( '.' ) );
-                            String tagPath = "/" + entryName;
+        ensureOpen();
+        Enumeration<JarEntry> entries = warFile.entries();
+        while( entries.hasMoreElements() ) {
+            JarEntry warEntry = entries.nextElement();
+            String entryName = warEntry.getName();
+            if( !warEntry.isDirectory() &&
+                    entryName.startsWith( path ) )
+            {
+                String relativeName = entryName.replace( File.separatorChar,
+                        '/' );
+                relativeName = relativeName.substring( path.length() );
+                if( relativeName.indexOf( '/' ) == -1 ) {
+                    // We're not in a subdirectory.
+                    if( relativeName.toLowerCase().endsWith( ".tag" ) ||
+                            relativeName.toLowerCase().endsWith( ".tagx" ) )
+                    {
+                        String tagName = relativeName.substring( 0,
+                                relativeName.lastIndexOf( '.' ) );
+                        String tagPath = "/" + entryName;
 
-                            Element tagFileElement = result.createElement(
-                                    "tag-file" );
-                            Element nameElement = result.createElement( "name" );
-                            nameElement.appendChild( result.createTextNode(
-                                    tagName ) );
-                            tagFileElement.appendChild( nameElement );
-                            Element pathElement = result.createElement( "path" );
-                            pathElement.appendChild( result.createTextNode(
-                                    tagPath ) );
-                            tagFileElement.appendChild( pathElement );
-                            taglibElement.appendChild( tagFileElement );
-                        }
+                        Element tagFileElement = result.createElement(
+                                "tag-file" );
+                        Element nameElement = result.createElement( "name" );
+                        nameElement.appendChild( result.createTextNode(
+                                tagName ) );
+                        tagFileElement.appendChild( nameElement );
+                        Element pathElement = result.createElement( "path" );
+                        pathElement.appendChild( result.createTextNode(
+                                tagPath ) );
+                        tagFileElement.appendChild( pathElement );
+                        taglibElement.appendChild( tagFileElement );
                     }
                 }
             }
@@ -179,6 +179,36 @@ public class WARTagDirImplicitTagLibrary
 
         return result;
 
+    }
+
+    /**
+     * Opens the WAR-file if it is not open yet.
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    private void ensureOpen()
+        throws IOException
+    {
+        if( warFile == null ) {
+            warFile = new JarFile( war );
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws IOException {
+        if( warFile == null ) {
+            return;
+        }
+
+        try {
+            warFile.close();
+        }
+        finally {
+            warFile = null;
+        }
     }
 
 }

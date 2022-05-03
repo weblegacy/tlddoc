@@ -509,47 +509,48 @@ public class TLDDocGenerator {
         configElement.appendChild( docTitle_ );
 
         // Append each <taglib> element from each TLD:
-        Iterator<TagLibrary> iter = tagLibraries.iterator();
         println( "Loading and translating " + tagLibraries.size() +
             " Tag Librar" +
             ((tagLibraries.size() == 1) ? "y" : "ies") +
             "..." );
-        while( iter.hasNext() ) {
-            TagLibrary tagLibrary = iter.next();
-            Document doc = tagLibrary.getTLDDocument( documentBuilder );
+        for( final TagLibrary tagLibrary_ : tagLibraries) {
+            // to AutoClose internal files at TagLibrary-Implementations
+            try( final TagLibrary tagLibrary = tagLibrary_ ) {
+                Document doc = tagLibrary.getTLDDocument( documentBuilder );
 
-            // Convert document to JSP 2.1 TLD
-            doc = upgradeTLD( doc );
+                // Convert document to JSP 2.1 TLD
+                doc = upgradeTLD( doc );
 
-            // If this tag library has no tags, no validators,
-            // and no functions, omit it
-            int numTags =
-                doc.getDocumentElement().getElementsByTagNameNS( "*",
-                    "tag" ).getLength() +
-                doc.getDocumentElement().getElementsByTagNameNS( "*",
-                    "tag-file" ).getLength() +
-                doc.getDocumentElement().getElementsByTagNameNS( "*",
-                    "validator" ).getLength() +
-                doc.getDocumentElement().getElementsByTagNameNS( "*",
-                    "function" ).getLength();
-            if( numTags > 0 ) {
-                // Populate the root element with extra information
-                populateTLD( tagLibrary, doc );
+                // If this tag library has no tags, no validators,
+                // and no functions, omit it
+                int numTags =
+                    doc.getDocumentElement().getElementsByTagNameNS( "*",
+                        "tag" ).getLength() +
+                    doc.getDocumentElement().getElementsByTagNameNS( "*",
+                        "tag-file" ).getLength() +
+                    doc.getDocumentElement().getElementsByTagNameNS( "*",
+                        "validator" ).getLength() +
+                    doc.getDocumentElement().getElementsByTagNameNS( "*",
+                        "function" ).getLength();
+                if( numTags > 0 ) {
+                    // Populate the root element with extra information
+                    populateTLD( tagLibrary, doc );
 
-                Element taglibNode = (Element)summaryTLD.importNode(
-                    doc.getDocumentElement(), true );
-                if( !taglibNode.getNamespaceURI().equals( Constants.NS_JAVAEE )
-                    && !taglibNode.getNamespaceURI().equals( Constants.NS_J2EE )) {
-                    throw new GeneratorException( "Error: " +
-                        tagLibrary.getPathDescription() +
-                        " does not have xmlns=\"" + Constants.NS_JAVAEE + "\"" );
+                    Element taglibNode = (Element)summaryTLD.importNode(
+                        doc.getDocumentElement(), true );
+                    if( !taglibNode.getNamespaceURI().equals( Constants.NS_JAVAEE )
+                        && !taglibNode.getNamespaceURI().equals( Constants.NS_J2EE )) {
+                        throw new GeneratorException( "Error: " +
+                            tagLibrary.getPathDescription() +
+                            " does not have xmlns=\"" + Constants.NS_JAVAEE + "\"" );
+                    }
+                    if( !taglibNode.getLocalName().equals( "taglib" ) ) {
+                        throw new GeneratorException( "Error: " +
+                            tagLibrary.getPathDescription() +
+                            " does not have <taglib> as root." );
+                    }
+                    rootElement.appendChild( taglibNode );
                 }
-                if( !taglibNode.getLocalName().equals( "taglib" ) ) {
-                    throw new GeneratorException( "Error: " +
-                        tagLibrary.getPathDescription() +
-                        " does not have <taglib> as root." );
-                }
-                rootElement.appendChild( taglibNode );
             }
         }
 
@@ -654,8 +655,7 @@ public class TLDDocGenerator {
                     " contains a tag-file element with no path.  Skipping." );
             }
             else {
-                try {
-                    InputStream tagFileIn = tagLibrary.getResource( path );
+                try( InputStream tagFileIn = tagLibrary.getResource( path ) ) {
                     if( tagFileIn == null ) {
                         println( "WARNING: Could not find tag file '" +
                             path + "' for tag library " +
@@ -696,14 +696,7 @@ public class TLDDocGenerator {
                         ".  Data will be incomplete for this tag." +
                         "  Reason: " + e.getMessage() );
                 }
-                catch( ParseException e ) {
-                    println( "WARNING: Could not parse tag file '" +
-                        path + "' for tag library " +
-                        tagLibrary.getPathDescription() +
-                        ".  Data will be incomplete for this tag." +
-                        "  Reason: " + e.getMessage() );
-                }
-                catch( TokenMgrError e ) {
+                catch( ParseException | TokenMgrError e ) {
                     println( "WARNING: Could not parse tag file '" +
                         path + "' for tag library " +
                         tagLibrary.getPathDescription() +

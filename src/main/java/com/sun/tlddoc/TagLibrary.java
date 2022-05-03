@@ -44,14 +44,14 @@ import org.xml.sax.SAXException;
  *
  * @author  mroth
  */
-public abstract class TagLibrary {
+public abstract class TagLibrary implements AutoCloseable {
 
     /**
      * Returns a String that the user would recognize as a location for this
      * tag library.
      *
      * @return a String that the user would recognize as a location for this
-     * tag library.
+     * tag library
      */
     public abstract String getPathDescription();
 
@@ -65,9 +65,9 @@ public abstract class TagLibrary {
      * @return created XML-Document
      *
      * @throws IOException if an I/O error has occurred
-     * @throws SAXException If any parse errors occur.
+     * @throws SAXException If any parse errors occur
      * @throws TransformerException If an unrecoverable error occurs
-     *   during the course of the transformation.
+     *   during the course of the transformation
      */
     public abstract Document getTLDDocument( DocumentBuilder documentBuilder )
         throws IOException, SAXException, TransformerException;
@@ -76,7 +76,7 @@ public abstract class TagLibrary {
      * Returns an input stream for the given resource, or {@code null} if the
      * resource could not be found.
      *
-     * @param path the path to the resource into war-file
+     * @param path the path to the resource
      *
      * @return the input stream for the given resource or {@code null} if the
      * resource could not be found
@@ -85,4 +85,10 @@ public abstract class TagLibrary {
      */
     public abstract InputStream getResource( String path )
         throws IOException;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract void close() throws IOException;
 }

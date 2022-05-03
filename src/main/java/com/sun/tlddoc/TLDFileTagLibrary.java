@@ -56,7 +56,7 @@ public class TLDFileTagLibrary
     final private File tldFile;
 
     /**
-     * Creates a new instance of TLDFileTagLibrary
+     * Creates a new instance of {@link TLDFileTagLibrary}
      *
      * @param tldFile location of the TLD file for this tag library
      */
@@ -123,5 +123,13 @@ public class TLDFileTagLibrary
         }
 
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws IOException {
+        // Nothing to do
     }
 }

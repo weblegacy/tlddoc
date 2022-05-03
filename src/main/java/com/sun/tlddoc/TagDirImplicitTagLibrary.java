@@ -62,7 +62,7 @@ public class TagDirImplicitTagLibrary
     final private File dir;
 
     /**
-     * Creates a new instance of TagDirImplicitTagLibrary
+     * Creates a new instance of {@link TagDirImplicitTagLibrary}
      *
      * @param dir directory containing the tag files
      */
@@ -254,6 +254,14 @@ public class TagDirImplicitTagLibrary
         taglibElement.appendChild( uriElement );
 
         return taglibElement;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws IOException {
+        // Nothing to do
     }
 
 }

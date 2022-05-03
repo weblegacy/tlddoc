@@ -39,7 +39,6 @@ import java.util.jar.JarFile;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
@@ -55,15 +54,20 @@ public class JARTLDFileTagLibrary extends TagLibrary {
     final private File jar;
 
     /**
+     * The JAR-file itself
+     */
+    private JarFile jarFile = null;
+
+    /**
      * The name of the JarEntry containing the TLD file
      */
     final private String tldPath;
 
     /**
-     * Creates a new instance of JARTLDFileTagLibrary
+     * Creates a new instance of {@link JARTLDFileTagLibrary}
      *
      * @param jar JAR containing the TLD file
-     * @param tldPath name of the JarEntry containing the TLD file
+     * @param tldPath name of the {@code JarEntry} containing the TLD file
      */
     public JARTLDFileTagLibrary( File jar, String tldPath ) {
         this.jar = jar;
@@ -85,17 +89,9 @@ public class JARTLDFileTagLibrary extends TagLibrary {
     public InputStream getResource(String path)
         throws IOException
     {
-        InputStream result = null;
         if( path.startsWith( "/" ) ) path = path.substring( 1 );
-        JarFile jarFile = new JarFile( this.jar );
-        JarEntry jarEntry = jarFile.getJarEntry( path );
-        if( jarEntry != null ) {
-            result = jarFile.getInputStream( jarEntry );
-        }
 
-        // XXX - JAR File is left unclosed.
-
-        return result;
+        return getInputStream( path );
     }
 
     /**
@@ -105,22 +101,52 @@ public class JARTLDFileTagLibrary extends TagLibrary {
     public Document getTLDDocument(DocumentBuilder documentBuilder)
         throws IOException, SAXException, TransformerException
     {
-        Document result = null;
-        try ( JarFile jarFile = new JarFile( this.jar ) ) {
-            JarEntry jarEntry = jarFile.getJarEntry( this.tldPath );
-            if( jarEntry != null ) {
-                InputStream in = jarFile.getInputStream( jarEntry );
-                InputSource source;
-                try {
-                    source = new InputSource( in );
-                    result = documentBuilder.parse( source );
-                }
-                finally {
-                    in.close();
-                }
+        try( final InputStream in = getInputStream( this.tldPath ) ) {
+            if( in != null ) {
+                return documentBuilder.parse( in );
             }
         }
-        return result;
+
+        return null;
+    }
+
+    /**
+     * Returns an input stream for reading the contents of the specified
+     * JAR-file entry.
+     *
+     * @param path the path to the resource
+     *
+     * @return an input stream for reading the contents of the specified
+     *         JAR-file entry
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    private InputStream getInputStream( String path )
+        throws IOException
+    {
+        if( jarFile == null ) {
+            jarFile = new JarFile( jar );
+        }
+
+        final JarEntry jarEntry = jarFile.getJarEntry( path );
+        return jarEntry == null ? null : jarFile.getInputStream( jarEntry );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws IOException {
+        if( jarFile == null ) {
+            return;
+        }
+
+        try {
+            jarFile.close();
+        }
+        finally {
+            jarFile = null;
+        }
     }
 
 }

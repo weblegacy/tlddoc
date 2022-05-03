@@ -40,7 +40,6 @@ import java.util.jar.JarInputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
@@ -57,6 +56,11 @@ public class WARJARTLDFileTagLibrary extends TagLibrary {
     final private File war;
 
     /**
+     * The WAR-file itself
+     */
+    private JarFile warFile = null;
+
+    /**
      * The JAR containing the TLD file
      */
     final private String warEntryName;
@@ -67,7 +71,8 @@ public class WARJARTLDFileTagLibrary extends TagLibrary {
     final private String tldPath;
 
     /**
-     * Creates a new instance of {@link JARTLDFileTagLibrary}
+     * Creates a new instance of {@link WARJARTLDFileTagLibrary}
+     *
      * @param war WAR containing the JAR
      * @param warEntryName JAR containing the TLD file
      * @param tldPath name of the {@code JarEntry} containing the TLD file
@@ -95,26 +100,9 @@ public class WARJARTLDFileTagLibrary extends TagLibrary {
     public InputStream getResource(String path)
         throws IOException
     {
-        InputStream result = null;
         if( path.startsWith( "/" ) ) path = path.substring( 1 );
-        JarFile warFile = new JarFile( this.war );
-        JarEntry warEntry = warFile.getJarEntry( warEntryName );
-        JarInputStream in = new JarInputStream(
-            warFile.getInputStream( warEntry ) );
 
-        // in is now the input stream to the JAR in the WAR.
-
-        JarEntry jarEntry;
-        while( (jarEntry = in.getNextJarEntry()) != null ) {
-            if( jarEntry.getName().equals( path ) ) {
-                result = in;
-                break;
-            }
-        }
-
-        // XXX - warFile is left unclosed.
-
-        return result;
+        return getInputStream( path );
     }
 
     /**
@@ -124,32 +112,68 @@ public class WARJARTLDFileTagLibrary extends TagLibrary {
     public Document getTLDDocument(DocumentBuilder documentBuilder)
         throws IOException, SAXException, TransformerException
     {
-        Document result = null;
-
-        try ( JarFile warFile = new JarFile( this.war ) ) {
-            JarEntry warEntry = warFile.getJarEntry( this.warEntryName );
-            JarInputStream in = new JarInputStream(
-                    warFile.getInputStream( warEntry ) );
-
-            // in is now the input stream to the JAR in the WAR.
-
-            JarEntry jarEntry;
-            while( (jarEntry = in.getNextJarEntry()) != null ) {
-                if( jarEntry.getName().equals( tldPath ) ) {
-                    InputSource source;
-                    try {
-                        source = new InputSource( in );
-                        result = documentBuilder.parse( source );
-                    }
-                    finally {
-                        in.close();
-                    }
-                    break;
-                }
+        try( final InputStream in = getInputStream( this.tldPath ) ) {
+            if( in != null ) {
+                return documentBuilder.parse( in );
             }
         }
 
-        return result;
+        return null;
+    }
+
+    /**
+     * Returns an input stream for reading the contents of the specified
+     * JAR-file entry from the JAR-file in the WAR-file.
+     *
+     * @param path the path to the resource
+     *
+     * @return an input stream for reading the contents of the specified
+     *         JAR-file entry
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    private InputStream getInputStream( String path )
+        throws IOException
+    {
+        if( warFile == null ) {
+            warFile = new JarFile( war );
+        }
+
+        final JarEntry warEntry = warFile.getJarEntry( warEntryName );
+        if( warEntry == null ) {
+            return null;
+        }
+
+        final JarInputStream in = new JarInputStream(
+            warFile.getInputStream( warEntry ) );
+        
+        // in is now the input stream to the JAR in the WAR.
+
+        JarEntry jarEntry;
+        while( (jarEntry = in.getNextJarEntry()) != null ) {
+            if( jarEntry.getName().equals( path ) ) {
+                return in;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws IOException {
+        if( warFile == null ) {
+            return;
+        }
+
+        try {
+            warFile.close();
+        }
+        finally {
+            warFile = null;
+        }
     }
 
 }
