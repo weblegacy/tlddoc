@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Use of `maven-changes-plugin` and remove old `revision`-site
 * Remove unnecessary dependency `junit`
 * avoid duplicate generation of Source and JavaDoc
 * Correction mem-leak in TagLibrary-implementation-classes

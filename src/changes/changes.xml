@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+
+  <properties>
+    <title>Changes</title>
+    <author email="stefan.graff@gmx.at">Stefan Graff</author>
+  </properties>
+  <body>
+    <release version="1.4" date="03-05-2022" description="">
+      <action type="update" dev="ste-gr">Upgrade to JDK 8</action>
+      <action type="update" dev="ste-gr">Building with MAVEN</action>
+      <action type="fix" dev="ste-gr">Correction memory-leak</action>
+      <action type="update" dev="ste-gr">Move to new home: "https://github.com/ste-gr/tlddoc"</action>
+    </release>
+    <release version="1.3" date="04-12-2005" description="">
+      <action type="add" dev="markroth8" issue="Issue 12">Support for JSP 2.1 TLD schema. Support for new JSP 2.1 TLD elements, including: deferred value attributes and associated type, deferred method attributes, and associated signature</action>
+    </release>
+    <release version="1.2" date="10-11-2004" description="">
+      <action type="add" dev="markroth8" issue="Issue 2">Now supports CDATA-escaped HTML tags in any JSP 1.1 info or JSP 1.2 / JSP 2.0 description tag. Note: If you have any customized stylesheets you will have to regenerate them for this release. For the most part, you just have to add the j2ee: prefix when referring to the input source. See the default stylesheets for details.</action>
+      <action type="fix" dev="markroth8" issue="Issue 4">Fixed a bug that prevented taglibrarydoc from working with JDK 5.0.</action>
+    </release>
+    <release version="1.1" date="16-02-2003" description="First pulbic release">
+      <action type="add" dev="markroth8">Open source release to java.net.</action>
+      <action type="update" dev="markroth8">Updated JSP 1.2 to JSP 2.0 TLD conversion logic to always supply body-content element, which is now mandatory.</action>
+      <action type="add" dev="markroth8">Now omits empty tag libraries.</action>
+      <action type="fix" dev="markroth8">Default attribute type in tags and tag files now takes fragment attribute into account.</action>
+    </release>
+    <release version="1.0" date="27-03-2003" description="Initial release">
+      <action type="add" dev="markroth8">Initial release to Cool Stuff with full support for JSP 2.0 Technology.</action>
+    </release>
+    <release version="0.1" date="19-12-2002" description="Internal release">
+      <action type="add" dev="markroth8">Internal release.</action>
+    </release>
+  </body>
+</document>

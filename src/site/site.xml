@@ -35,7 +35,7 @@
             <item name="Usage Instructions" href="usage.html" />
             <item name="Support" href="support.html" />
             <item name="FAQs" href="faq.html" />
-            <item name="Revision History" href="revision.html" />
+            <item name="Revision History" href="changes-report.html" />
             <item name="Javadoc" href="apidocs/index.html" />
         </menu>
 
