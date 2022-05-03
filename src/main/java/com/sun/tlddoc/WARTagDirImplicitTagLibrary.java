@@ -141,27 +141,26 @@ public class WARTagDirImplicitTagLibrary
                 String relativeName = entryName.replace( File.separatorChar,
                         '/' );
                 relativeName = relativeName.substring( path.length() );
-                if( relativeName.indexOf( '/' ) == -1 ) {
-                    // We're not in a subdirectory.
-                    if( relativeName.toLowerCase().endsWith( ".tag" ) ||
-                            relativeName.toLowerCase().endsWith( ".tagx" ) )
-                    {
-                        String tagName = relativeName.substring( 0,
-                                relativeName.lastIndexOf( '.' ) );
-                        String tagPath = "/" + entryName;
+                if( relativeName.indexOf( '/' ) == -1 && 
+                    ( relativeName.toLowerCase().endsWith( ".tag" ) ||
+                      relativeName.toLowerCase().endsWith( ".tagx" ) ) )
+                {
+                    // We're not in a subdirectory and file and ends with .tag or .tagx.
+                    String tagName = relativeName.substring( 0,
+                            relativeName.lastIndexOf( '.' ) );
+                    String tagPath = "/" + entryName;
 
-                        Element tagFileElement = result.createElement(
-                                "tag-file" );
-                        Element nameElement = result.createElement( "name" );
-                        nameElement.appendChild( result.createTextNode(
-                                tagName ) );
-                        tagFileElement.appendChild( nameElement );
-                        Element pathElement = result.createElement( "path" );
-                        pathElement.appendChild( result.createTextNode(
-                                tagPath ) );
-                        tagFileElement.appendChild( pathElement );
-                        taglibElement.appendChild( tagFileElement );
-                    }
+                    Element tagFileElement = result.createElement(
+                            "tag-file" );
+                    Element nameElement = result.createElement( "name" );
+                    nameElement.appendChild( result.createTextNode(
+                            tagName ) );
+                    tagFileElement.appendChild( nameElement );
+                    Element pathElement = result.createElement( "path" );
+                    pathElement.appendChild( result.createTextNode(
+                            tagPath ) );
+                    tagFileElement.appendChild( pathElement );
+                    taglibElement.appendChild( tagFileElement );
                 }
             }
         }

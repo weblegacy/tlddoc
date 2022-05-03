@@ -98,11 +98,11 @@ public class TagDirImplicitTagLibrary
             path = path.substring( 1 );
         }
         File look = null;
-        while( (dir_ != null) && !(look = new File( dir_, path )).exists() ) {
+        while( dir_ != null && !(look = new File( dir_, path )).exists() ) {
             dir_ = dir_.getParentFile();
         }
 
-        if( (look != null) && look.exists() ) {
+        if( look != null && look.exists() ) {
             // Found it:
             result = new FileInputStream( look );
         }
@@ -142,24 +142,27 @@ public class TagDirImplicitTagLibrary
         //    - The <path> for each is the path of the tag file, relative
         //      to the root of the web application.
         File[] files = this.dir.listFiles();
-        for( int i = 0; (files != null) && (i < files.length); i++ ) {
-            if( !files[i].isDirectory() &&
-                ( files[i].getName().toLowerCase().endsWith( ".tag" ) ||
-                  files[i].getName().toLowerCase().endsWith( ".tagx" ) ) )
-            {
-                String tagName = files[i].getName().substring( 0,
-                    files[i].getName().lastIndexOf( '.' ) );
-                String tagPath = path + files[i].getName();
+        if( files != null ) {
+            for( File file : files ) {
+                final String fileName = file.getName();
+                final String fileNameLower = fileName.toLowerCase();
+                if( !file.isDirectory() &&
+                    ( fileNameLower.endsWith( ".tag" ) ||
+                      fileNameLower.endsWith( ".tagx" ) ) )
+                {
+                    String tagName = fileName.substring( 0,
+                        fileName.lastIndexOf( '.' ) );
+                    String tagPath = path + fileName;
 
-                Element tagFileElement = result.createElement( "tag-file" );
-                Element nameElement = result.createElement( "name" );
-                nameElement.appendChild( result.createTextNode( tagName ) );
-                tagFileElement.appendChild( nameElement );
-                Element pathElement = result.createElement( "path" );
-                pathElement.appendChild( result.createTextNode( tagPath ) );
-                tagFileElement.appendChild( pathElement );
-                taglibElement.appendChild( tagFileElement );
-                files[i].getName();
+                    Element tagFileElement = result.createElement( "tag-file" );
+                    Element nameElement = result.createElement( "name" );
+                    nameElement.appendChild( result.createTextNode( tagName ) );
+                    tagFileElement.appendChild( nameElement );
+                    Element pathElement = result.createElement( "path" );
+                    pathElement.appendChild( result.createTextNode( tagPath ) );
+                    tagFileElement.appendChild( pathElement );
+                    taglibElement.appendChild( tagFileElement );
+                }
             }
         }
 

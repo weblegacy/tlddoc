@@ -113,11 +113,11 @@ public class TLDFileTagLibrary
             path = path.substring( 1 );
         }
         File look = null;
-        while( (dir != null) && !(look = new File( dir, path )).exists() ) {
+        while( dir != null && !(look = new File( dir, path )).exists() ) {
             dir = dir.getParentFile();
         }
 
-        if( (look != null) && look.exists() ) {
+        if( look != null && look.exists() ) {
             // Found it (or something pretty close to it anyway)
             result = new FileInputStream( look );
         }

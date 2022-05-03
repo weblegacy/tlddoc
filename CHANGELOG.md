@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Remove `PMD`-Warnings
 * Update site-documentation
 * Use of `maven-changes-plugin` and remove old `revision`-site
 * Remove unnecessary dependency `junit`

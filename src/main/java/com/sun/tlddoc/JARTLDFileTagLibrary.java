@@ -101,7 +101,7 @@ public class JARTLDFileTagLibrary extends TagLibrary {
     public Document getTLDDocument(DocumentBuilder documentBuilder)
         throws IOException, SAXException, TransformerException
     {
-        try( final InputStream in = getInputStream( this.tldPath ) ) {
+        try( InputStream in = getInputStream( this.tldPath ) ) {
             if( in != null ) {
                 return documentBuilder.parse( in );
             }

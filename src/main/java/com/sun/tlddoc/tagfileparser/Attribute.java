@@ -87,7 +87,7 @@ public class Attribute {
      * Setter for property value.
      * @param value New value of property value.
      */
-    public void setValue(java.lang.String value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

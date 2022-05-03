@@ -515,7 +515,7 @@ public class TLDDocGenerator {
             "..." );
         for( final TagLibrary tagLibrary_ : tagLibraries) {
             // to AutoClose internal files at TagLibrary-Implementations
-            try( final TagLibrary tagLibrary = tagLibrary_ ) {
+            try( TagLibrary tagLibrary = tagLibrary_ ) {
                 Document doc = tagLibrary.getTLDDocument( documentBuilder );
 
                 // Convert document to JSP 2.1 TLD
@@ -873,7 +873,7 @@ public class TLDDocGenerator {
         // javax.servlet.jsp.tagext.JspFragment if this is a fragment
         // attribute.
         String fragmentValue = findElementValue( attributeNode, "fragment" );
-        boolean fragment = !( (fragmentValue == null) ||
+        boolean fragment = !( fragmentValue == null ||
             fragmentValue.equalsIgnoreCase( "false" ) );
         populateDefault( doc, attributeNode, "type",
           fragment ? "javax.servlet.jsp.tagext.JspFragment" :
@@ -972,7 +972,7 @@ public class TLDDocGenerator {
                     // Check if there is a fragment element set to true:
                     String fragment = findElementValue( attributeElement,
                         "fragment" );
-                    if( (fragment != null) &&
+                    if( fragment != null &&
                         ( fragment.trim().equalsIgnoreCase( "true" ) ||
                          fragment.trim().equalsIgnoreCase( "yes" ) ) )
                     {
@@ -1227,6 +1227,7 @@ public class TLDDocGenerator {
             }
             catch( FileNotFoundException e ) {
                 // result will be null and we'll default to default stylesheet
+                println( "XSLT-Directory not found, use default-stylesheet: " + e.getMessage() );
             }
         }
 
