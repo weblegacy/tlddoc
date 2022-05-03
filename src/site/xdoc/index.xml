@@ -12,8 +12,7 @@
         <section name="Welcome">
             <p>Tag Library Documentation Generator is a utility for automatically
                 generating javadoc-style documentation for JavaServer
-                Pages<sup><small>TM</small></sup>
-                (JSP<sup><small>TM</small></sup>) Technology Tag Libraries. It
+                Pages&#x2122; (JSP&#x2122;) Technology Tag Libraries. It
                 accepts a set of tag libraries as input, and generates a set of
                 HTML files as output. It can also be used to generate tag library
                 documentation for JavaServer Faces UI components.</p>

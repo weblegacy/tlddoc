@@ -13,7 +13,7 @@
             <p>Tag Library Documentation Generator has the following features:</p>
             <ul>
                 <li>Cross-platform, implemented using
-                    Java<sup><small>TM</small></sup> technology.</li>
+                    Java&#x2122; technology.</li>
                 <li>Uses stylesheets, so output is easy to customize.</li>
                 <li>Pluggable XSLT templates enable alternate look and feel.</li>
                 <li>Works with JSP 1.1, JSP 1.2, JSP 2.0 and JSP 2.1 TLDs</li>
