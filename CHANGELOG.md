@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Remove unnecessary dependency `junit`
 * avoid duplicate generation of Source and JavaDoc
 * Correction mem-leak in TagLibrary-implementation-classes
 * Reformating: Remove eof-empty-lines, end-spaces, tabs to spaces

@@ -345,6 +345,12 @@
             <artifactId>javacc</artifactId>
             <version>7.0.11</version>
             <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
