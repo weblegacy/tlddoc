@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Bump `maven-javadoc-plugin` from 3.3.2 to 3.4.0
 * Remove `PMD`-Warnings
 * Update site-documentation
 * Use of `maven-changes-plugin` and remove old `revision`-site
