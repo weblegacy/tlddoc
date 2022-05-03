@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://maven.apache.org/XDOC/2.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
-	<properties>
-		<title>Download and Installation</title>
-	</properties>
+    <properties>
+        <title>Download and Installation</title>
+    </properties>
 
-	<body>
+    <body>
 
-		<section name="Download and Installation">
-			<p>You can download the latest binary build from the
-				<a href="servlets/ProjectDocumentList">Files Section</a>.</p>
-			<p>To use a tag library, you can write a web application with JSP
-				pages and deploy it on a J2EE compatible application server
-				such as the
-				<a href="http://java.sun.com/j2ee/1.4/download.html">J2EE 1.4 SDK</a>.</p>
-		</section>
+        <section name="Download and Installation">
+            <p>You can download the latest binary build from the
+                <a href="servlets/ProjectDocumentList">Files Section</a>.</p>
+            <p>To use a tag library, you can write a web application with JSP
+                pages and deploy it on a J2EE compatible application server
+                such as the
+                <a href="http://java.sun.com/j2ee/1.4/download.html">J2EE 1.4 SDK</a>.</p>
+        </section>
 
-	</body>
+    </body>
 
 </document>

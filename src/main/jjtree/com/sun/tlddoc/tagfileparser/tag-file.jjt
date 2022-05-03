@@ -104,7 +104,7 @@ TOKEN :
 <JSPDirectiveName> TOKEN :
 {
     < JSP_DIRECTIVE_NAME  : (["A"-"Z","a"-"z","0"-"9","_",":","-"])+ > :
-						JSPDirectiveAttributeName
+                                                JSPDirectiveAttributeName
 }
 
 <JSPDirectiveAttributeName> SKIP :
@@ -144,9 +144,9 @@ TOKEN :
 {
     < END_QUOTE_DOUBLE    : ("\"") > : JSPDirectiveAttributeName
   | < JSP_ATTRIBUTE_VALUE2 : (   ~["\"","\\"]
-			       | ( "\\'" )
-			       | ( "\\\"" )
-			       | ( "\\\\" ) )+ >
+                               | ( "\\'" )
+                               | ( "\\\"" )
+                               | ( "\\\\" ) )+ >
 }
 
 
@@ -160,7 +160,7 @@ TOKEN :
 <XMLDirectiveName> TOKEN :
 {
     < XML_DIRECTIVE_NAME  : (["A"-"Z","a"-"z","0"-"9","_",":","-"])+ > :
-						XMLDirectiveAttributeName
+                                                XMLDirectiveAttributeName
 }
 
 <XMLDirectiveAttributeName> SKIP :
@@ -200,9 +200,9 @@ TOKEN :
 {
     < X_END_QUOTE_DOUBLE   : ("\"") > : XMLDirectiveAttributeName
   | < XML_ATTRIBUTE_VALUE2 : (   ~["\"","\\"]
-			       | ( "\\'" )
-			       | ( "\\\"" )
-			       | ( "\\\\" ) )+ >
+                               | ( "\\'" )
+                               | ( "\\\"" )
+                               | ( "\\\\" ) )+ >
 }
 
 

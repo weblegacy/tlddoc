@@ -32,7 +32,7 @@
       <outputDirectory></outputDirectory>
       <includes>
         <include>README*</include>
-		<include>CHANGELOG*</include>
+        <include>CHANGELOG*</include>
         <include>LICENSE*</include>
         <include>NOTICE*</include>
       </includes>

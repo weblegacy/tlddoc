@@ -2,25 +2,25 @@
  * <license>
  * Copyright (c) 2003-2004, Sun Microsystems, Inc.
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without 
+ *
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *     * Redistributions of source code must retain the above copyright 
+ *
+ *     * Redistributions of source code must retain the above copyright
  *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright 
+ *     * Redistributions in binary form must reproduce the above copyright
  *       notice, this list of conditions and the following disclaimer in the
  *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of Sun Microsystems, Inc. nor the names of its 
+ *     * Neither the name of Sun Microsystems, Inc. nor the names of its
  *       contributors may be used to endorse or promote products derived from
  *       this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
  * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * ROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
@@ -80,18 +80,18 @@ import java.util.jar.JarInputStream;
  */
 public class TLDDocGenerator {
 
-    /** 
-     * The set of tag libraries we are parsing.  
-     * Each element is a TagLibrary instance. 
+    /**
+     * The set of tag libraries we are parsing.
+     * Each element is a TagLibrary instance.
      */
     final private ArrayList<TagLibrary> tagLibraries = new ArrayList<>();
 
-    /** 
-     * The directory containing the stylesheets, or null if the 
-     * default stylesheets are to be used. 
-     */    
+    /**
+     * The directory containing the stylesheets, or null if the
+     * default stylesheets are to be used.
+     */
     private File xsltDirectory = null;
-    
+
     /**
      * The output directory for generated files
      */
@@ -101,32 +101,32 @@ public class TLDDocGenerator {
      * The browser window title for the documentation
      */
     private String windowTitle = Constants.DEFAULT_WINDOW_TITLE;
-    
+
     /**
      * The title for the TLD index (first) page.
      */
     private String docTitle = Constants.DEFAULT_DOC_TITLE;
-    
+
     /**
      * True if no stdout is to be produced during generation
      */
     private boolean quiet;
-    
+
     /**
      * The summary TLD document, used as input into XSLT */
     private Document summaryTLD;
-    
+
     /**
      * Path to tlddoc resources
      */
     private static final String RESOURCE_PATH = "/com/sun/tlddoc/resources";
 
-    /** 
-     * Helps uniquely generate subsitutute prefixes in the case of missing 
-     * or duplicate short-names 
+    /**
+     * Helps uniquely generate subsitutute prefixes in the case of missing
+     * or duplicate short-names
      */
     private int substitutePrefix = 1;
-        
+
     /**
      * Creates a new TLDDocGenerator.
      */
@@ -134,13 +134,13 @@ public class TLDDocGenerator {
     }
 
     /**
-     * Adds the given Tag Library to the list of Tag Libraries to generate 
+     * Adds the given Tag Library to the list of Tag Libraries to generate
      * documentation for.
      *
      * @param tagLibrary The tag library to add.
      */
     public void addTagLibrary( TagLibrary tagLibrary ) {
-	tagLibraries.add( tagLibrary );
+        tagLibraries.add( tagLibrary );
     }
 
     /**
@@ -151,7 +151,7 @@ public class TLDDocGenerator {
     public void addTLD( File tld ) {
         addTagLibrary( new TLDFileTagLibrary( tld ) );
     }
-    
+
     /**
      * Adds all the tag libraries found in the given web application.
      *
@@ -159,18 +159,18 @@ public class TLDDocGenerator {
      */
     public void addWebApp( File path ) {
         File webinf = new File( path, "WEB-INF" );
-        
+
         // Scan all subdirectories of /WEB-INF/ for .tld files
         addWebAppTLDsIn( webinf );
-        
+
         // Add all JAR files in /WEB-INF/lib that might potentially
         // contain TLDs.
         addWebAppJARsIn( new File( webinf, "lib" ) );
-        
+
         // Add all implicit tag libraries in /WEB-INF/tags
         addWebAppTagDirsIn( new File( webinf, "tags" ) );
     }
-    
+
     /**
      * Adds all TLD files under the given directory, recursively.
      *
@@ -187,14 +187,14 @@ public class TLDDocGenerator {
             }
         }
     }
-    
+
     /**
      * Adds all TLD files under the given directory, recursively.
      *
      * @param war The WAR file to search
      * @param path The path to search (recursively) for TLDs in.
      */
-    private void addWARTLDsIn( File war, String path ) 
+    private void addWARTLDsIn( File war, String path )
         throws IOException
     {
         try ( JarFile warFile = new JarFile( war ) ) {
@@ -211,7 +211,7 @@ public class TLDDocGenerator {
             }
         }
     }
-    
+
     /**
      * Adds all JAR files under the given directory, recursively.
      *
@@ -227,14 +227,14 @@ public class TLDDocGenerator {
             }
         }
     }
-    
+
     /**
      * Adds all JAR files under the given directory, recursively.
      *
      * @param war The WAR file to search
      * @param path The path to search (recursively) for JARs in.
      */
-    private void addWARJARsIn( File war, String path ) 
+    private void addWARJARsIn( File war, String path )
         throws IOException
     {
         try ( JarFile warFile = new JarFile( war ) ) {
@@ -271,7 +271,7 @@ public class TLDDocGenerator {
             }
         }
     }
-    
+
     /**
      * Adds all implicit tag libraries under the given directory, recursively.
      *
@@ -291,14 +291,14 @@ public class TLDDocGenerator {
             }
         }
     }
-    
+
     /**
      * Adds all implicit tag libraries under the given directory, recursively.
      *
      * @param war The WAR file to search
      * @param path The path to search (recursively) for tag file directories in
      */
-    private void addWARTagDirsIn( File war, String path ) 
+    private void addWARTagDirsIn( File war, String path )
         throws IOException
     {
         try ( JarFile warFile = new JarFile( war ) ) {
@@ -314,7 +314,7 @@ public class TLDDocGenerator {
             }
         }
     }
-    
+
     /**
      * Adds all the tag libraries found in the given JAR.
      *
@@ -327,14 +327,14 @@ public class TLDDocGenerator {
             while( entries.hasMoreElements() ) {
                 JarEntry jarEntry = entries.nextElement();
                 if( jarEntry.getName().toLowerCase().endsWith( ".tld" ) ) {
-                    addTagLibrary( new JARTLDFileTagLibrary( jar, 
+                    addTagLibrary( new JARTLDFileTagLibrary( jar,
                         jarEntry.getName() ) );
                 }
             }
         }
         catch( IOException e ) {
-            println( "WARNING: Could not access one or more entries in " + 
-                jar.getAbsolutePath() + 
+            println( "WARNING: Could not access one or more entries in " +
+                jar.getAbsolutePath() +
                 ".  Skipping JAR.  Reason: " + e.getMessage() );
         }
     }
@@ -359,11 +359,11 @@ public class TLDDocGenerator {
         }
         catch( IOException e ) {
             println( "WARNING: Could not access one or more entries in " +
-                path.getAbsolutePath() + ".  Skipping WAR.  Reason: " + 
+                path.getAbsolutePath() + ".  Skipping WAR.  Reason: " +
                 e.getMessage() );
         }
     }
-    
+
     /**
      * Adds the given directory of tag files.
      *
@@ -372,7 +372,7 @@ public class TLDDocGenerator {
     public void addTagDir( File tagdir ) {
         addTagLibrary( new TagDirImplicitTagLibrary( tagdir ) );
     }
-    
+
     /**
      * Sets the directory from which to obtain the XSLT stylesheets.
      * This allows the user to change the look and feel of the
@@ -383,7 +383,7 @@ public class TLDDocGenerator {
     public void setXSLTDirectory( File dir ) {
         this.xsltDirectory = dir;
     }
-    
+
     /**
      * Sets the output directory for generated files.  If not specified,
      * defaults to "."
@@ -391,16 +391,16 @@ public class TLDDocGenerator {
      * @param dir The base directory for generated files.
      */
     public void setOutputDirectory( File dir ) {
-	this.outputDirectory = dir;
+        this.outputDirectory = dir;
     }
 
     /**
-     * Sets the browser window title for the documentation 
+     * Sets the browser window title for the documentation
      *
      * @param title The browser window title
      */
     public void setWindowTitle( String title ) {
-	this.windowTitle = title;
+        this.windowTitle = title;
     }
 
     /**
@@ -409,9 +409,9 @@ public class TLDDocGenerator {
      * @param title The title for the TLD index
      */
     public void setDocTitle( String title ) {
-	this.docTitle = title;
+        this.docTitle = title;
     }
-    
+
     /**
      * Sets quiet mode (produce no stdout during generation)
      *
@@ -420,7 +420,7 @@ public class TLDDocGenerator {
     public void setQuiet( boolean quiet ) {
         this.quiet = quiet;
     }
-    
+
     /**
      * Returns true if the generator is in quiet mode or false if not.
      */
@@ -431,7 +431,7 @@ public class TLDDocGenerator {
      * @throws GeneratorException any error during generation
      */
     public void generate()
-        throws GeneratorException 
+        throws GeneratorException
     {
         try {
             this.outputDirectory.mkdirs();
@@ -445,24 +445,24 @@ public class TLDDocGenerator {
             throw new GeneratorException( e );
         }
     }
-    
+
     /////////////////////////////////////////////////////////////////////
-    
+
     /**
      * Copies all static files to target directory.
      */
-    private void copyStaticFiles() 
+    private void copyStaticFiles()
         throws IOException
     {
-        copyResourceToFile( new File( this.outputDirectory, "stylesheet.css" ), 
+        copyResourceToFile( new File( this.outputDirectory, "stylesheet.css" ),
             RESOURCE_PATH + "/stylesheet.css" );
     }
-    
+
     /**
      * Creates a summary document, comprising all input TLDs.  This document
-     * is later used as input into XSLT to generate all non-static output 
+     * is later used as input into XSLT to generate all non-static output
      * pages.  Stores the result as a DOM tree in the summaryTLD attribute.
-     * 
+     *
      * @throws IOException if an I/O error has occurred
      * @throws SAXException If any parse errors occur.
      * @throws ParserConfigurationException if a DocumentBuilder
@@ -484,93 +484,93 @@ public class TLDDocGenerator {
                 new InputSource(new CharArrayReader(new char[0]))
         );
         summaryTLD = documentBuilder.newDocument();
-        
+
         // Create root <tlds> element:
-        Element rootElement = summaryTLD.createElementNS( Constants.NS_JAVAEE, 
+        Element rootElement = summaryTLD.createElementNS( Constants.NS_JAVAEE,
             "tlds" );
         summaryTLD.appendChild( rootElement );
         // JDK 1.4 does not add xmlns for some reason - add it manually:
-        rootElement.setAttributeNS( "http://www.w3.org/2000/xmlns/", 
+        rootElement.setAttributeNS( "http://www.w3.org/2000/xmlns/",
             "xmlns", Constants.NS_JAVAEE );
-        
+
         // Create configuration element:
-        Element configElement = summaryTLD.createElementNS( Constants.NS_JAVAEE, 
+        Element configElement = summaryTLD.createElementNS( Constants.NS_JAVAEE,
             "config" );
         rootElement.appendChild( configElement );
-        
-        Element windowTitle_ = summaryTLD.createElementNS( Constants.NS_JAVAEE, 
+
+        Element windowTitle_ = summaryTLD.createElementNS( Constants.NS_JAVAEE,
             "window-title" );
         windowTitle_.appendChild( summaryTLD.createTextNode( this.windowTitle));
         configElement.appendChild( windowTitle_ );
-        
-        Element docTitle_ = summaryTLD.createElementNS( Constants.NS_JAVAEE, 
+
+        Element docTitle_ = summaryTLD.createElementNS( Constants.NS_JAVAEE,
             "doc-title" );
         docTitle_.appendChild( summaryTLD.createTextNode( this.docTitle));
         configElement.appendChild( docTitle_ );
-        
+
         // Append each <taglib> element from each TLD:
         Iterator<TagLibrary> iter = tagLibraries.iterator();
-        println( "Loading and translating " + tagLibraries.size() + 
-            " Tag Librar" + 
-            ((tagLibraries.size() == 1) ? "y" : "ies") + 
+        println( "Loading and translating " + tagLibraries.size() +
+            " Tag Librar" +
+            ((tagLibraries.size() == 1) ? "y" : "ies") +
             "..." );
         while( iter.hasNext() ) {
             TagLibrary tagLibrary = iter.next();
             Document doc = tagLibrary.getTLDDocument( documentBuilder );
-            
+
             // Convert document to JSP 2.1 TLD
             doc = upgradeTLD( doc );
-            
-            // If this tag library has no tags, no validators, 
+
+            // If this tag library has no tags, no validators,
             // and no functions, omit it
-            int numTags = 
-                doc.getDocumentElement().getElementsByTagNameNS( "*", 
-                    "tag" ).getLength() + 
-                doc.getDocumentElement().getElementsByTagNameNS( "*", 
+            int numTags =
+                doc.getDocumentElement().getElementsByTagNameNS( "*",
+                    "tag" ).getLength() +
+                doc.getDocumentElement().getElementsByTagNameNS( "*",
                     "tag-file" ).getLength() +
-                doc.getDocumentElement().getElementsByTagNameNS( "*", 
+                doc.getDocumentElement().getElementsByTagNameNS( "*",
                     "validator" ).getLength() +
-                doc.getDocumentElement().getElementsByTagNameNS( "*", 
+                doc.getDocumentElement().getElementsByTagNameNS( "*",
                     "function" ).getLength();
             if( numTags > 0 ) {
                 // Populate the root element with extra information
                 populateTLD( tagLibrary, doc );
 
-                Element taglibNode = (Element)summaryTLD.importNode( 
+                Element taglibNode = (Element)summaryTLD.importNode(
                     doc.getDocumentElement(), true );
                 if( !taglibNode.getNamespaceURI().equals( Constants.NS_JAVAEE )
                     && !taglibNode.getNamespaceURI().equals( Constants.NS_J2EE )) {
-                    throw new GeneratorException( "Error: " + 
-                        tagLibrary.getPathDescription() + 
+                    throw new GeneratorException( "Error: " +
+                        tagLibrary.getPathDescription() +
                         " does not have xmlns=\"" + Constants.NS_JAVAEE + "\"" );
                 }
                 if( !taglibNode.getLocalName().equals( "taglib" ) ) {
-                    throw new GeneratorException( "Error: " + 
-                        tagLibrary.getPathDescription() + 
+                    throw new GeneratorException( "Error: " +
+                        tagLibrary.getPathDescription() +
                         " does not have <taglib> as root." );
                 }
                 rootElement.appendChild( taglibNode );
             }
         }
-        
+
         // If debug enabled, output the resulting document, as a test:
         if( Constants.DEBUG_INPUT_DOCUMENT ) {
-            Transformer transformer = 
+            Transformer transformer =
                 TransformerFactory.newInstance().newTransformer();
-            transformer.transform( new DOMSource( summaryTLD ), 
-                new StreamResult( System.out ) ); 
+            transformer.transform( new DOMSource( summaryTLD ),
+                new StreamResult( System.out ) );
         }
     }
-    
+
     /**
      * Converts the given TLD to a JSP 2.1 TLD
      */
-    private Document upgradeTLD( Document doc ) 
+    private Document upgradeTLD( Document doc )
         throws TransformerConfigurationException, ParserConfigurationException,
         TransformerException
     {
         Element root = doc.getDocumentElement();
-        
+
         // We use getElementsByTagName instead of getElementsByTagNameNS
         // here since JSP 1.1 TLDs have no namespace.
         if( root.getElementsByTagName( "jspversion" ).getLength() > 0 ) {
@@ -586,16 +586,16 @@ public class TLDDocGenerator {
             doc = convertTLD( doc, RESOURCE_PATH + "/tld1_2-tld2_0.xsl" );
             root = doc.getDocumentElement();
         }
-        
+
         if ( "2.0".equals(root.getAttribute( "version" ))) {
-            
+
             doc = convertTLD( doc, RESOURCE_PATH + "/tld2_0-tld2_1.xsl" );
-            
+
         }
-        
+
         // Final conversion to remove unwanted elements
         doc = convertTLD( doc, RESOURCE_PATH + "/tld2_1-tld2_1.xsl" );
-        
+
         // We should now have a JSP 2.1 TLD in doc.
         return doc;
     }
@@ -608,16 +608,16 @@ public class TLDDocGenerator {
         TransformerException
     {
         InputStream xsl = getResourceAsStream( stylesheet );
-        Transformer transformer = 
-            TransformerFactory.newInstance().newTransformer( 
+        Transformer transformer =
+            TransformerFactory.newInstance().newTransformer(
             new StreamSource( xsl ) );
         Document result = DocumentBuilderFactory.newInstance().
-            newDocumentBuilder().newDocument();      
-        transformer.transform( new DOMSource( doc ), 
+            newDocumentBuilder().newDocument();
+        transformer.transform( new DOMSource( doc ),
             new DOMResult( result ) );
         return result;
     }
-    
+
     /**
      * Populates the root element with any additional information needed
      * before adding this to our tree.
@@ -632,7 +632,7 @@ public class TLDDocGenerator {
         checkOrAddAttributeType( doc, root );
         populateTagFileDetails( tagLibrary, doc, root );
     }
-    
+
     /**
      * Find all tag-file elements and populate them with the actual
      * parsed meta information, found in the tag file's attributes:
@@ -641,7 +641,7 @@ public class TLDDocGenerator {
      * @param doc The document we're populating
      * @param root The root element of the TLD DOM being populated.
      */
-    private void populateTagFileDetails( TagLibrary tagLibrary, Document doc, 
+    private void populateTagFileDetails( TagLibrary tagLibrary, Document doc,
         Element root )
     {
         NodeList tagFileNodes = root.getElementsByTagNameNS( "*", "tag-file" );
@@ -649,7 +649,7 @@ public class TLDDocGenerator {
             Element tagFileNode = (Element)tagFileNodes.item( i );
             String path = findElementValue( tagFileNode, "path" );
             if( path == null ) {
-                println( "WARNING: " + 
+                println( "WARNING: " +
                     tagLibrary.getPathDescription() +
                     " contains a tag-file element with no path.  Skipping." );
             }
@@ -658,8 +658,8 @@ public class TLDDocGenerator {
                     InputStream tagFileIn = tagLibrary.getResource( path );
                     if( tagFileIn == null ) {
                         println( "WARNING: Could not find tag file '" +
-                            path + "' for tag library " + 
-                            tagLibrary.getPathDescription() + 
+                            path + "' for tag library " +
+                            tagLibrary.getPathDescription() +
                             ".  Data will be incomplete for this tag." );
                     }
                     else {
@@ -684,7 +684,7 @@ public class TLDDocGenerator {
                                     break;
                             }
                         }
-                        
+
                         populateTagFileDetailsTagDefaults( tagFileNode, doc,
                             path );
                     }
@@ -698,14 +698,14 @@ public class TLDDocGenerator {
                 }
                 catch( ParseException e ) {
                     println( "WARNING: Could not parse tag file '" +
-                        path + "' for tag library " + 
+                        path + "' for tag library " +
                         tagLibrary.getPathDescription() +
                         ".  Data will be incomplete for this tag." +
                         "  Reason: " + e.getMessage() );
                 }
                 catch( TokenMgrError e ) {
                     println( "WARNING: Could not parse tag file '" +
-                        path + "' for tag library " + 
+                        path + "' for tag library " +
                         tagLibrary.getPathDescription() +
                         ".  Data will be incomplete for this tag." +
                         "  Reason: " + e.getMessage() );
@@ -722,7 +722,7 @@ public class TLDDocGenerator {
      * @param doc The document we're populating
      * @param directive The tag directive to process.
      */
-    private void populateTagFileDetailsTagDirective( 
+    private void populateTagFileDetailsTagDirective(
         Element tagFileNode, Document doc, Directive directive )
     {
         Iterator<Attribute> attributes = directive.getAttributes();
@@ -731,7 +731,7 @@ public class TLDDocGenerator {
             String name = attribute.getName();
             String value = attribute.getValue();
             Element element;
-            if( name.equals( "display-name" ) || 
+            if( name.equals( "display-name" ) ||
                 name.equals( "body-content" ) ||
                 name.equals( "dynamic-attributes" ) ||
                 name.equals( "description" ) ||
@@ -759,7 +759,7 @@ public class TLDDocGenerator {
             }
         }
     }
-    
+
     /**
      * Populates the given tag-file node with default values, for those
      * values not specified via tag directives.
@@ -768,18 +768,18 @@ public class TLDDocGenerator {
      * @param doc The document we're populating
      * @param path The path to the tag file
      */
-    private void populateTagFileDetailsTagDefaults( 
+    private void populateTagFileDetailsTagDefaults(
         Element tagFileNode, Document doc, String path )
     {
-        String displayName = path.substring( 
+        String displayName = path.substring(
             path.lastIndexOf( '/' ) + 1 );
-        displayName = displayName.substring( 0, 
+        displayName = displayName.substring( 0,
             displayName.lastIndexOf( '.' ) );
         populateDefault( doc, tagFileNode, "display-name", displayName );
         populateDefault( doc, tagFileNode, "body-content", "scriptless" );
         populateDefault( doc, tagFileNode, "dynamic-attributes", "false" );
     }
-    
+
     /**
      * Searches for the value of the given element.  If no value is found,
      * a default value is inserted.
@@ -789,8 +789,8 @@ public class TLDDocGenerator {
      * @param tagName The name of the element we're looking for
      * @param defaultValue The default value to insert, if not found.
      */
-    private void populateDefault( Document doc, Element parent, String tagName, 
-        String defaultValue ) 
+    private void populateDefault( Document doc, Element parent, String tagName,
+        String defaultValue )
     {
         if( findElementValue( parent, tagName ) == null ) {
             Element element = doc.createElementNS( Constants.NS_JAVAEE, tagName );
@@ -798,8 +798,8 @@ public class TLDDocGenerator {
             parent.appendChild( element );
         }
     }
-    
-    
+
+
     /**
      * Populates the given tag-file node with information from the given
      * attribute directive.
@@ -808,11 +808,11 @@ public class TLDDocGenerator {
      * @param doc The document we're populating
      * @param directive The attribute directive to process.
      */
-    private void populateTagFileDetailsAttributeDirective( 
+    private void populateTagFileDetailsAttributeDirective(
         Element tagFileNode, Document doc, Directive directive )
     {
         Iterator<Attribute> attributes = directive.getAttributes();
-        Element attributeNode = doc.createElementNS( Constants.NS_JAVAEE, 
+        Element attributeNode = doc.createElementNS( Constants.NS_JAVAEE,
             "attribute" );
         tagFileNode.appendChild( attributeNode );
         String deferredValueType = null;
@@ -875,18 +875,18 @@ public class TLDDocGenerator {
         populateDefault( doc, attributeNode, "required", "false" );
         populateDefault( doc, attributeNode, "fragment", "false" );
         populateDefault( doc, attributeNode, "rtexprvalue", "false" );
-        
-        // Default is String if this is not a fragment attribute, or 
+
+        // Default is String if this is not a fragment attribute, or
         // javax.servlet.jsp.tagext.JspFragment if this is a fragment
         // attribute.
         String fragmentValue = findElementValue( attributeNode, "fragment" );
-        boolean fragment = !( (fragmentValue == null) || 
+        boolean fragment = !( (fragmentValue == null) ||
             fragmentValue.equalsIgnoreCase( "false" ) );
         populateDefault( doc, attributeNode, "type",
-          fragment ? "javax.servlet.jsp.tagext.JspFragment" : 
+          fragment ? "javax.servlet.jsp.tagext.JspFragment" :
                      "java.lang.String" );
     }
-        
+
     /**
      * Populates the given tag-file node with information from the given
      * variable directive.
@@ -895,11 +895,11 @@ public class TLDDocGenerator {
      * @param doc The document we're populating
      * @param directive The variable directive to process.
      */
-    private void populateTagFileDetailsVariableDirective( 
+    private void populateTagFileDetailsVariableDirective(
         Element tagFileNode, Document doc, Directive directive )
     {
         Iterator<Attribute> attributes = directive.getAttributes();
-        Element variableNode = doc.createElementNS( Constants.NS_JAVAEE, 
+        Element variableNode = doc.createElementNS( Constants.NS_JAVAEE,
             "variable" );
         tagFileNode.appendChild( variableNode );
         while( attributes.hasNext() ) {
@@ -907,7 +907,7 @@ public class TLDDocGenerator {
             String name = attribute.getName();
             String value = attribute.getValue();
             Element element;
-            if( name.equals( "name-given" ) || 
+            if( name.equals( "name-given" ) ||
                 name.equals( "name-from-attribute" ) ||
                 name.equals( "variable-class" ) ||
                 name.equals( "declare" ) ||
@@ -919,12 +919,12 @@ public class TLDDocGenerator {
                 variableNode.appendChild( element );
             }
         }
-        populateDefault( doc, variableNode, "variable-class", 
+        populateDefault( doc, variableNode, "variable-class",
             "java.lang.String" );
         populateDefault( doc, variableNode, "declare", "true" );
         populateDefault( doc, variableNode, "scope", "NESTED" );
     }
-        
+
     /**
      * Check to see if there's a short-name element.  If not, the
      * TLD is technically invalid, but supply one anyway, and give a
@@ -934,24 +934,24 @@ public class TLDDocGenerator {
      * @param doc The TLD DOM to populate.
      * @param root The root element of the TLD DOM being populated.
      */
-    private void checkOrAddShortName( TagLibrary tagLibrary, Document doc, 
-        Element root ) 
+    private void checkOrAddShortName( TagLibrary tagLibrary, Document doc,
+        Element root )
     {
-        if( root.getElementsByTagNameNS( "*", "short-name" ).getLength() == 0 ) 
+        if( root.getElementsByTagNameNS( "*", "short-name" ).getLength() == 0 )
         {
             String prefix = "prefix" + substitutePrefix;
             substitutePrefix++;
-            Element shortName = doc.createElementNS( Constants.NS_JAVAEE, 
+            Element shortName = doc.createElementNS( Constants.NS_JAVAEE,
                 "short-name" );
             shortName.appendChild( doc.createTextNode( prefix ) );
             root.appendChild( shortName );
-            println( "WARNING: " + 
-                tagLibrary.getPathDescription() + 
-                " is missing a short-name element.  Using " + 
+            println( "WARNING: " +
+                tagLibrary.getPathDescription() +
+                " is missing a short-name element.  Using " +
                 prefix + "." );
         }
     }
-        
+
     /**
      * Check for empty attribute types and fill in the correct value.
      * This is more difficult for the XSLT transform to do since the
@@ -961,42 +961,42 @@ public class TLDDocGenerator {
      * @param doc The TLD DOM to populate.
      * @param root The root element of the TLD DOM being populated.
      */
-    private void checkOrAddAttributeType( Document doc, Element root ) 
+    private void checkOrAddAttributeType( Document doc, Element root )
     {
         NodeList tagNodes = root.getElementsByTagNameNS( "*", "tag" );
         for( int i = 0; i < tagNodes.getLength(); i++ ) {
             Element tagElement = (Element)tagNodes.item( i );
-            NodeList attributeNodes = 
+            NodeList attributeNodes =
                 tagElement.getElementsByTagNameNS( "*", "attribute" );
             for( int j = 0; j < attributeNodes.getLength(); j++ ) {
                 Element attributeElement = (Element)attributeNodes.item( j );
-                if( attributeElement.getElementsByTagNameNS( "*", 
-                    "type" ).getLength() == 0 ) 
+                if( attributeElement.getElementsByTagNameNS( "*",
+                    "type" ).getLength() == 0 )
                 {
                     // No attribute type specified.
                     String defaultType = "java.lang.String";
-                    
+
                     // Check if there is a fragment element set to true:
-                    String fragment = findElementValue( attributeElement, 
+                    String fragment = findElementValue( attributeElement,
                         "fragment" );
                     if( (fragment != null) &&
                         ( fragment.trim().equalsIgnoreCase( "true" ) ||
-                         fragment.trim().equalsIgnoreCase( "yes" ) ) ) 
+                         fragment.trim().equalsIgnoreCase( "yes" ) ) )
                     {
                         defaultType = "javax.servlet.jsp.tagext.JspFragment";
                     }
-                    
+
                     // Create <type> element and append to attribute
-                    Element typeElement = doc.createElementNS( 
+                    Element typeElement = doc.createElementNS(
                         Constants.NS_JAVAEE, "type" );
-                    typeElement.appendChild( 
+                    typeElement.appendChild(
                         doc.createTextNode( defaultType ) );
                     attributeElement.appendChild( typeElement );
                 }
             }
         }
     }
-        
+
     /**
      * Generates all overview files, summarizing all TLDs.
      */
@@ -1016,11 +1016,11 @@ public class TLDDocGenerator {
         generatePage( new File( this.outputDirectory, "overview-summary.html" ),
             RESOURCE_PATH + "/overview-summary.html.xsl" );
     }
-    
+
     /**
      * Generates all the detail folders for each TLD
      */
-    private void generateTLDDetail() 
+    private void generateTLDDetail()
         throws IOException, GeneratorException, TransformerException
     {
         ArrayList<String> shortNames = new ArrayList<>();
@@ -1033,7 +1033,7 @@ public class TLDDocGenerator {
             String displayName = findElementValue( taglib, "display-name" );
             if( shortNames.contains( shortName ) ) {
                 throw new GeneratorException( "Two tag libraries exist with " +
-                    "the same short-name '" + shortName + 
+                    "the same short-name '" + shortName +
                     "'.  This is not yet supported." );
             }
             String name = displayName;
@@ -1042,10 +1042,10 @@ public class TLDDocGenerator {
             shortNames.add( shortName );
             File outDir = new File( this.outputDirectory, shortName );
             outDir.mkdir();
-            
+
             // Generate information for each TLD:
             generateTLDDetail( outDir, shortName );
-            
+
             // Generate information for each tag:
             NodeList tags = taglib.getElementsByTagNameNS( "*", "tag" );
             int numTags = tags.getLength();
@@ -1054,7 +1054,7 @@ public class TLDDocGenerator {
                 String tagName = findElementValue( tag, "name" );
                 generateTagDetail( outDir, shortName, tagName );
             }
-            
+
             // Generate information for each tag-file:
             NodeList tagFiles = taglib.getElementsByTagNameNS( "*", "tag-file" );
             int numTagFiles = tagFiles.getLength();
@@ -1063,7 +1063,7 @@ public class TLDDocGenerator {
                 String tagFileName = findElementValue( tagFile, "name" );
                 generateTagDetail( outDir, shortName, tagFileName );
             }
-            
+
             // Generate information for each function:
             NodeList functions = taglib.getElementsByTagNameNS( "*", "function" );
             int numFunctions = functions.getLength();
@@ -1074,58 +1074,58 @@ public class TLDDocGenerator {
             }
         }
     }
-    
+
     /**
      * Generates the detail content for the tag library with the given
-     * short-name.  
+     * short-name.
      * Files will be placed in outdir.
      */
-    private void generateTLDDetail( File outDir, String shortName ) 
+    private void generateTLDDetail( File outDir, String shortName )
         throws IOException, TransformerException
     {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put( "tlddoc-shortName", shortName );
-        
+
         generatePage( new File( outDir, "tld-frame.html" ),
             RESOURCE_PATH + "/tld-frame.html.xsl", parameters );
         generatePage( new File( outDir, "tld-summary.html" ),
             RESOURCE_PATH + "/tld-summary.html.xsl", parameters );
     }
-    
+
     /**
-     * Generates the detail content for the tag with the given name 
-     * in the tag library with the given short-name.  
+     * Generates the detail content for the tag with the given name
+     * in the tag library with the given short-name.
      * Files will be placed in outdir.
      */
-    private void generateTagDetail( File outDir, String shortName, 
-        String tagName ) 
+    private void generateTagDetail( File outDir, String shortName,
+        String tagName )
         throws IOException, TransformerException
     {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put( "tlddoc-shortName", shortName );
         parameters.put( "tlddoc-tagName", tagName );
-        
+
         generatePage( new File( outDir, tagName + ".html" ),
             RESOURCE_PATH + "/tag.html.xsl", parameters );
     }
-    
+
     /**
-     * Generates the detail content for the function with the given name 
-     * in the tag library with the given short-name.  
+     * Generates the detail content for the function with the given name
+     * in the tag library with the given short-name.
      * Files will be placed in outdir.
      */
-    private void generateFunctionDetail( File outDir, String shortName, 
-        String functionName ) 
+    private void generateFunctionDetail( File outDir, String shortName,
+        String functionName )
         throws IOException, TransformerException
     {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put( "tlddoc-shortName", shortName );
         parameters.put( "tlddoc-functionName", functionName );
-        
+
         generatePage( new File( outDir, functionName + ".fn.html" ),
             RESOURCE_PATH + "/function.html.xsl", parameters );
     }
-    
+
     /**
      * Searches through the given element and returns the value of the body
      * of the element.  Returns null if the element was not found.
@@ -1142,7 +1142,7 @@ public class TLDDocGenerator {
         }
         return result;
     }
-    
+
     /**
      * Generates the given page dynamically, by running the summary document
      * through the given XSLT transform.  Assumes no parameters.
@@ -1150,27 +1150,27 @@ public class TLDDocGenerator {
      * @param outFile The target file
      * @param inputXSL The stylesheet to use for the transformation
      */
-    private void generatePage( File outFile, String inputXSL ) 
+    private void generatePage( File outFile, String inputXSL )
         throws IOException, TransformerException
     {
         generatePage( outFile, inputXSL, null );
     }
-    
+
     /**
      * Generates the given page dynamically, by running the summary document
      * through the given XSLT transform.
      *
      * @param outFile The target file
      * @param inputXSL The stylesheet to use for the transformation
-     * @param parameters String key and Object value pairs to pass to 
+     * @param parameters String key and Object value pairs to pass to
      *     the transformation.
      */
-    private void generatePage( File outFile, String inputXSL, Map<String, String> parameters ) 
+    private void generatePage( File outFile, String inputXSL, Map<String, String> parameters )
         throws IOException, TransformerException
     {
         InputStream xsl = getResourceAsStream( inputXSL );
-        Transformer transformer = 
-            TransformerFactory.newInstance().newTransformer( 
+        Transformer transformer =
+            TransformerFactory.newInstance().newTransformer(
             new StreamSource( xsl ) );
         if( parameters != null ) {
             for( String key : parameters.keySet() ) {
@@ -1178,10 +1178,10 @@ public class TLDDocGenerator {
                 transformer.setParameter( key, value );
             }
         }
-        transformer.transform( new DOMSource( summaryTLD ), 
+        transformer.transform( new DOMSource( summaryTLD ),
             new StreamResult( outFile ) );
     }
-    
+
     /**
      * Copy the given resource to the given output file.  The classloader
      * that loaded TLDDocGenerator will be used to find the resource.
@@ -1191,7 +1191,7 @@ public class TLDDocGenerator {
      * @param outputFile The destination file
      * @param resource The resource to copy, starting with '/'
      */
-    private void copyResourceToFile( File outputFile, String resource ) 
+    private void copyResourceToFile( File outputFile, String resource )
         throws IOException
     {
         try ( InputStream in = getResourceAsStream( resource );
@@ -1204,7 +1204,7 @@ public class TLDDocGenerator {
             }
         }
     }
-    
+
     /**
      * Outputs the given message to stdout, only if !quiet
      */
@@ -1225,9 +1225,9 @@ public class TLDDocGenerator {
      */
     private InputStream getResourceAsStream( String resource ) {
         InputStream result = null;
-        
+
         if( xsltDirectory != null ) {
-            File resourceFile = new File( xsltDirectory, 
+            File resourceFile = new File( xsltDirectory,
                 resource.substring( RESOURCE_PATH.length() + 1 ) );
             try {
                 result = new FileInputStream( resourceFile );
@@ -1236,14 +1236,14 @@ public class TLDDocGenerator {
                 // result will be null and we'll default to default stylesheet
             }
         }
-        
+
         if( result == null ) {
             result = TLDDocGenerator.class.getResourceAsStream( resource );
         }
-        
+
         return result;
     }
-    
+
     /**
      * Displays a "success" message and plugs the tag library registry
      * on java.net.

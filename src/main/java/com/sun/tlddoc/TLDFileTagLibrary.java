@@ -2,25 +2,25 @@
  * <license>
  * Copyright (c) 2003-2004, Sun Microsystems, Inc.
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without 
+ *
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *     * Redistributions of source code must retain the above copyright 
+ *
+ *     * Redistributions of source code must retain the above copyright
  *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright 
+ *     * Redistributions in binary form must reproduce the above copyright
  *       notice, this list of conditions and the following disclaimer in the
  *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of Sun Microsystems, Inc. nor the names of its 
+ *     * Neither the name of Sun Microsystems, Inc. nor the names of its
  *       contributors may be used to endorse or promote products derived from
  *       this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
  * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * ROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
@@ -46,15 +46,15 @@ import org.xml.sax.SAXException;
  *
  * @author  mroth
  */
-public class TLDFileTagLibrary 
-    extends TagLibrary 
+public class TLDFileTagLibrary
+    extends TagLibrary
 {
-    
+
     /**
      * The location of the TLD file for this tag library
      */
     final private File tldFile;
-    
+
     /**
      * Creates a new instance of TLDFileTagLibrary
      *
@@ -63,7 +63,7 @@ public class TLDFileTagLibrary
     public TLDFileTagLibrary( File tldFile ) {
         this.tldFile = tldFile;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -71,12 +71,12 @@ public class TLDFileTagLibrary
     public String getPathDescription() {
         return this.tldFile.getAbsolutePath();
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public Document getTLDDocument(DocumentBuilder documentBuilder) 
+    public Document getTLDDocument(DocumentBuilder documentBuilder)
         throws IOException, SAXException, TransformerException
     {
         FileInputStream in = new FileInputStream( this.tldFile );
@@ -91,23 +91,23 @@ public class TLDFileTagLibrary
         }
         return result;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public InputStream getResource(String path) 
-        throws IOException 
+    public InputStream getResource(String path)
+        throws IOException
     {
         InputStream result = null;
-        
+
         // This is a bit of a guess, since we don't know where the TLD is.
         // Start from the directory containing the TLD, and backtrack,
         // using the path as a relative path.
         //   For example:
         //      TLD:  /home/mroth/test/sample/WEB-INF/tld/test.tld
         //      path: /WEB-INF/tags/tag1.tag
-        
+
         File dir = tldFile.getParentFile();
         if( path.startsWith( "/" ) ) {
             path = path.substring( 1 );
@@ -116,12 +116,12 @@ public class TLDFileTagLibrary
         while( (dir != null) && !(look = new File( dir, path )).exists() ) {
             dir = dir.getParentFile();
         }
-        
+
         if( (look != null) && look.exists() ) {
             // Found it (or something pretty close to it anyway)
             result = new FileInputStream( look );
         }
-        
+
         return result;
     }
 }

@@ -4,25 +4,25 @@
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
   - All rights reserved.
-  - 
-  - Redistribution and use in source and binary forms, with or without 
+  -
+  - Redistribution and use in source and binary forms, with or without
   - modification, are permitted provided that the following conditions are met:
-  - 
-  -     * Redistributions of source code must retain the above copyright 
+  -
+  -     * Redistributions of source code must retain the above copyright
   -       notice, this list of conditions and the following disclaimer.
-  -     * Redistributions in binary form must reproduce the above copyright 
+  -     * Redistributions in binary form must reproduce the above copyright
   -       notice, this list of conditions and the following disclaimer in the
   -       documentation and/or other materials provided with the distribution.
-  -     * Neither the name of Sun Microsystems, Inc. nor the names of its 
+  -     * Neither the name of Sun Microsystems, Inc. nor the names of its
   -       contributors may be used to endorse or promote products derived from
   -       this software without specific prior written permission.
-  - 
-  - THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+  -
+  - THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
   - "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-  - TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+  - TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
   - PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
   - CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-  - EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+  - EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   - ROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
   - PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
   - LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
@@ -37,24 +37,24 @@
     Author     : mroth
     Description:
         Creates the TLD summary (right frame), listing the tags
-        and functions that are in this particular tag library and 
+        and functions that are in this particular tag library and
         their descriptions.
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:javaee="http://java.sun.com/xml/ns/javaee" 
+    xmlns:javaee="http://java.sun.com/xml/ns/javaee"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
-    
+
     <xsl:output method="html" indent="yes"/>
-    
+
     <xsl:param name="tlddoc-shortName">default</xsl:param>
 
     <!-- template rule matching source root element -->
     <xsl:template match="/">
       <xsl:apply-templates select="javaee:tlds/javaee:taglib"/>
     </xsl:template>
-    
+
     <xsl:template match="javaee:taglib">
       <xsl:if test="javaee:short-name=$tlddoc-shortName">
         <xsl:variable name="tldname">
@@ -77,7 +77,7 @@
         <html>
           <head>
             <title><xsl:value-of select="$title"/></title>
-            <link rel="stylesheet" type="text/css" href="../stylesheet.css" 
+            <link rel="stylesheet" type="text/css" href="../stylesheet.css"
                  title="styie"/>
           </head>
           <script>
@@ -128,7 +128,7 @@
             </tr>
             </table>
             <!-- =========== END OF NAVBAR =========== -->
-            
+
             <hr/>
             <h2><xsl:value-of select="$tldname"/></h2>
             <hr/>
@@ -324,18 +324,18 @@
             <!-- =========== END OF NAVBAR =========== -->
             <hr/>
             <small><i>
-            Java, JSP, and JavaServer Pages are trademarks or registered 
+            Java, JSP, and JavaServer Pages are trademarks or registered
             trademarks of Sun Microsystems, Inc. in the US and other countries.
             Copyright 2002-3 Sun Microsystems, Inc.
             4150 Network Circle
             Santa Clara, CA 95054, U.S.A.
-            All Rights Reserved. 
+            All Rights Reserved.
             </i></small>
           </body>
         </html>
       </xsl:if>
     </xsl:template>
-    
+
     <xsl:template match="javaee:tag|javaee:tag-file">
       <tr bgcolor="white" class="TableRowColor">
         <td width="15%">
@@ -370,7 +370,7 @@
               <xsl:attribute name="href"><xsl:value-of select="javaee:name"/>.fn.html</xsl:attribute>
               <xsl:value-of select="javaee:name"/>
             </xsl:element>
-            </b>( <xsl:value-of select='substring-after(normalize-space(javaee:function-signature),"(")'/>            
+            </b>( <xsl:value-of select='substring-after(normalize-space(javaee:function-signature),"(")'/>
           </code>
         </td>
         <td>
@@ -385,7 +385,7 @@
         </td>
       </tr>
     </xsl:template>
-        
+
     <xsl:template match="javaee:validator">
       <tr valign="top" bgcolor="white" class="TableRowColor">
         <td width="15%">
@@ -416,7 +416,7 @@
         </td>
       </tr>
     </xsl:template>
-    
+
     <xsl:template match="javaee:init-param">
       <tr valign="top">
         <td><xsl:value-of select="javaee:param-name"/></td>
@@ -433,7 +433,7 @@
         </td>
       </tr>
     </xsl:template>
-    
+
     <xsl:template match="javaee:listener">
       <tr valign="top" bgcolor="white" class="TableRowColor">
         <td>
@@ -441,5 +441,5 @@
         </td>
       </tr>
     </xsl:template>
-    
-</xsl:stylesheet> 
+
+</xsl:stylesheet>

@@ -4,25 +4,25 @@
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
   - All rights reserved.
-  - 
-  - Redistribution and use in source and binary forms, with or without 
+  -
+  - Redistribution and use in source and binary forms, with or without
   - modification, are permitted provided that the following conditions are met:
-  - 
-  -     * Redistributions of source code must retain the above copyright 
+  -
+  -     * Redistributions of source code must retain the above copyright
   -       notice, this list of conditions and the following disclaimer.
-  -     * Redistributions in binary form must reproduce the above copyright 
+  -     * Redistributions in binary form must reproduce the above copyright
   -       notice, this list of conditions and the following disclaimer in the
   -       documentation and/or other materials provided with the distribution.
-  -     * Neither the name of Sun Microsystems, Inc. nor the names of its 
+  -     * Neither the name of Sun Microsystems, Inc. nor the names of its
   -       contributors may be used to endorse or promote products derived from
   -       this software without specific prior written permission.
-  - 
-  - THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+  -
+  - THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
   - "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-  - TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+  - TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
   - PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
   - CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-  - EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+  - EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   - ROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
   - PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
   - LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
@@ -36,7 +36,7 @@
     Created on : October 1, 2002, 5:37 PM
     Author     : mroth
     Description:
-        Creates the overview frame (upper left corner), listing all tag 
+        Creates the overview frame (upper left corner), listing all tag
         libraries included in this generation.
 -->
 
@@ -44,7 +44,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format"
     xmlns:javaee="http://java.sun.com/xml/ns/javaee">
-    
+
     <xsl:output method="html" indent="yes"/>
 
     <!-- template rule matching source root element -->
@@ -90,7 +90,7 @@
         </body>
       </html>
     </xsl:template>
-    
+
     <xsl:template match="javaee:taglib">
       <font class="FrameItemFont">
         <xsl:element name="a">
@@ -111,4 +111,4 @@
       </font>
       <br/>
     </xsl:template>
-</xsl:stylesheet> 
+</xsl:stylesheet>

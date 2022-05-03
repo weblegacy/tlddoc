@@ -4,25 +4,25 @@
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
   - All rights reserved.
-  - 
-  - Redistribution and use in source and binary forms, with or without 
+  -
+  - Redistribution and use in source and binary forms, with or without
   - modification, are permitted provided that the following conditions are met:
-  - 
-  -     * Redistributions of source code must retain the above copyright 
+  -
+  -     * Redistributions of source code must retain the above copyright
   -       notice, this list of conditions and the following disclaimer.
-  -     * Redistributions in binary form must reproduce the above copyright 
+  -     * Redistributions in binary form must reproduce the above copyright
   -       notice, this list of conditions and the following disclaimer in the
   -       documentation and/or other materials provided with the distribution.
-  -     * Neither the name of Sun Microsystems, Inc. nor the names of its 
+  -     * Neither the name of Sun Microsystems, Inc. nor the names of its
   -       contributors may be used to endorse or promote products derived from
   -       this software without specific prior written permission.
-  - 
-  - THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+  -
+  - THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
   - "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-  - TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+  - TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
   - PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
   - CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-  - EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+  - EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   - ROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
   - PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
   - LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
@@ -41,12 +41,12 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:javaee="http://java.sun.com/xml/ns/javaee" 
+    xmlns:javaee="http://java.sun.com/xml/ns/javaee"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
-    
+
     <xsl:output method="html" indent="yes"/>
-    
+
     <xsl:param name="tlddoc-shortName">default</xsl:param>
     <xsl:param name="tlddoc-tagName">default</xsl:param>
 
@@ -54,13 +54,13 @@
     <xsl:template match="/">
       <xsl:apply-templates select="javaee:tlds/javaee:taglib"/>
     </xsl:template>
-    
+
     <xsl:template match="javaee:taglib">
       <xsl:if test="javaee:short-name=$tlddoc-shortName">
         <xsl:apply-templates select="javaee:tag|javaee:tag-file"/>
       </xsl:if>
     </xsl:template>
-    
+
     <xsl:template match="javaee:tag|javaee:tag-file">
       <xsl:if test="javaee:name=$tlddoc-tagName">
         <xsl:variable name="tldname">
@@ -84,7 +84,7 @@
           <head>
             <title><xsl:value-of select="$title"/></title>
             <meta name="keywords" content="$title"/>
-            <link rel="stylesheet" type="text/css" href="../stylesheet.css" 
+            <link rel="stylesheet" type="text/css" href="../stylesheet.css"
                   title="Style"/>
           </head>
           <script>
@@ -139,7 +139,7 @@
             </tr>
             </table>
             <!-- =========== END OF NAVBAR =========== -->
-            
+
             <hr/>
             <h2><font size="-1"><xsl:value-of select="$tldname"/></font><br/>
             Tag <xsl:value-of select="javaee:name"/></h2>
@@ -149,12 +149,12 @@
             <xsl:if test="javaee:example!=''">
               <b>Example:</b><br/>
               <pre>
-<xsl:value-of select="javaee:example"/>              
+<xsl:value-of select="javaee:example"/>
               </pre>
               <p/>
             </xsl:if>
             <hr/>
-            
+
             <!-- Tag Information -->
             <table border="1" cellpadding="3" cellspacing="0" width="100%">
               <tr bgcolor="#CCCCFF" class="TableHeadingColor">
@@ -219,7 +219,7 @@
             </table>
             <br/>
             <p/>
-            
+
             <!-- Attribute Information -->
             <table border="1" cellpadding="3" cellspacing="0" width="100%">
               <tr bgcolor="#CCCCFF" class="TableHeadingColor">
@@ -234,7 +234,7 @@
                   <tr>
                     <td><b>Name</b></td>
                     <td><b>Required</b></td>
-                    <td><b>Request-time</b></td>                    
+                    <td><b>Request-time</b></td>
                     <td><b>Type</b></td>
                     <td><b>Description</b></td>
                   </tr>
@@ -275,7 +275,7 @@
             </table>
             <br/>
             <p/>
-            
+
             <!-- =========== START OF NAVBAR =========== -->
             <a name="navbar_bottom"><!-- --></a>
             <table border="0" width="100%" cellpadding="1" cellspacing="0">
@@ -321,16 +321,16 @@
             </tr>
             </table>
             <!-- =========== END OF NAVBAR =========== -->
-            <hr/>            
+            <hr/>
             <small><i>
-            Output Generated by 
+            Output Generated by
             <a href="http://taglibrarydoc.dev.java.net/" target="_blank">Tag Library Documentation Generator</a>.
-            Java, JSP, and JavaServer Pages are trademarks or 
+            Java, JSP, and JavaServer Pages are trademarks or
             registered trademarks of Sun Microsystems, Inc. in the US and other
             countries.  Copyright 2002-4 Sun Microsystems, Inc.
             4150 Network Circle
             Santa Clara, CA 95054, U.S.A.
-            All Rights Reserved. 
+            All Rights Reserved.
             </i></small>
           </body>
         </html>
@@ -355,7 +355,7 @@
             </xsl:when>
             <xsl:otherwise>false</xsl:otherwise>
           </xsl:choose>
-        </td>        
+        </td>
         <td>
           <xsl:choose>
             <xsl:when test="javaee:deferred-value">
@@ -369,7 +369,7 @@
                         <code>javax.el.ValueExpression</code>
                         <br/>(<i>must evaluate to </i><code>java.lang.Object</code>)
                     </xsl:otherwise>
-                </xsl:choose>                                
+                </xsl:choose>
             </xsl:when>
             <xsl:when test="javaee:deferred-method">
                 <xsl:choose>
@@ -388,7 +388,7 @@
               <code><xsl:value-of select="javaee:type"/></code>
             </xsl:when>
             <xsl:otherwise>
-                <code>java.lang.String</code>                
+                <code>java.lang.String</code>
             </xsl:otherwise>
           </xsl:choose>
         </td>
@@ -402,7 +402,7 @@
         </td>
       </tr>
     </xsl:template>
-    
+
     <xsl:template match="javaee:variable">
       <tr>
         <td>
@@ -452,5 +452,5 @@
         </td>
       </tr>
     </xsl:template>
-    
-</xsl:stylesheet> 
+
+</xsl:stylesheet>

@@ -4,25 +4,25 @@
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
   - All rights reserved.
-  - 
-  - Redistribution and use in source and binary forms, with or without 
+  -
+  - Redistribution and use in source and binary forms, with or without
   - modification, are permitted provided that the following conditions are met:
-  - 
-  -     * Redistributions of source code must retain the above copyright 
+  -
+  -     * Redistributions of source code must retain the above copyright
   -       notice, this list of conditions and the following disclaimer.
-  -     * Redistributions in binary form must reproduce the above copyright 
+  -     * Redistributions in binary form must reproduce the above copyright
   -       notice, this list of conditions and the following disclaimer in the
   -       documentation and/or other materials provided with the distribution.
-  -     * Neither the name of Sun Microsystems, Inc. nor the names of its 
+  -     * Neither the name of Sun Microsystems, Inc. nor the names of its
   -       contributors may be used to endorse or promote products derived from
   -       this software without specific prior written permission.
-  - 
-  - THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+  -
+  - THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
   - "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-  - TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+  - TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
   - PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
   - CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-  - EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+  - EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   - ROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
   - PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
   - LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
@@ -40,10 +40,10 @@
 -->
 
 <xsl:stylesheet version="1.0"
-    xmlns:javaee="http://java.sun.com/xml/ns/javaee" 
+    xmlns:javaee="http://java.sun.com/xml/ns/javaee"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:fo="http://www.w3.org/1999/XSL/Format">
-    
+
     <xsl:output method="html" indent="yes"/>
 
     <!-- template rule matching source root element -->
@@ -104,19 +104,19 @@
           <CENTER>
             <H1>How This Tag Library Document Is Organized</H1>
           </CENTER>
-          This TLD (Tag Library Descriptor) document has pages corresponding 
+          This TLD (Tag Library Descriptor) document has pages corresponding
           to the items in the navigation bar, described as follows.
           <H3>Overview</H3>
           <BLOCKQUOTE>
             <P/>
-            The <A HREF="overview-summary.html">Overview</A> page is the front 
+            The <A HREF="overview-summary.html">Overview</A> page is the front
             page of this TLD document and provides a list of all tag libraries
             with a summary for each.
           </BLOCKQUOTE>
           <H3>Library</H3>
           <BLOCKQUOTE>
             <P/>
-            Each tag library has a page that contains a list of its 
+            Each tag library has a page that contains a list of its
             validator, listeners, tags, and functions, with a summary for each.
             This page can contain four categories:
             <UL>
@@ -148,7 +148,7 @@
             page that describes the tag, its display name, its unique action
             name, the class that implements the tag, the TagExtraInfo class,
             the body content type, scripting variable information, attributes,
-            whether the tag supports dynamic attributes, and an optional 
+            whether the tag supports dynamic attributes, and an optional
             example use of the tag.
           </blockquote>
           <h3>Functions</h3>
@@ -162,19 +162,19 @@
           <!--
           <H3>Index</H3>
           <BLOCKQUOTE>
-            The <A HREF="index-files/index-1.html">Index</A> contains an 
-            alphabetic list of all validators, listeners, tags, functions, 
+            The <A HREF="index-files/index-1.html">Index</A> contains an
+            alphabetic list of all validators, listeners, tags, functions,
             variables, and attributes.
           </BLOCKQUOTE>
           -->
           <H3>Prev/Next</H3>
           <blockquote>
-            These links take you to the next or previous validator, listener, 
+            These links take you to the next or previous validator, listener,
             tag, function, or related page.
           </blockquote>
           <H3>Frames/No Frames</H3>
           <blockquote>
-            These links show and hide the HTML frames.  All pages are available 
+            These links show and hide the HTML frames.  All pages are available
             with or without frames.
           </blockquote>
           <BR/>
@@ -220,16 +220,16 @@
           </table>
           <HR/>
           <small><i>
-          Output Generated by 
+          Output Generated by
           <a href="http://taglibrarydoc.dev.java.net/" target="_blank">Tag Library Documentation Generator</a>.
-          Java, JSP, and JavaServer Pages are trademarks or 
+          Java, JSP, and JavaServer Pages are trademarks or
           registered trademarks of Sun Microsystems, Inc. in the US and other
           countries.  Copyright 2002-4 Sun Microsystems, Inc.
           4150 Network Circle
           Santa Clara, CA 95054, U.S.A.
-          All Rights Reserved. 
+          All Rights Reserved.
           </i></small>
         </BODY>
       </HTML>
     </xsl:template>
-</xsl:stylesheet> 
+</xsl:stylesheet>
