@@ -11,11 +11,9 @@
 
         <section name="Support">
             <p>Tag Library Documentation Generator is a community-supported
-                open-source product. You can find support by subscribing to the
-                various
-                <a href="servlets/ProjectMailingListList">mailing lists</a>
-                offered in this java.net project. Also, see the
-                <a href="faq.html">FAQ</a>.</p>
+                open-source product. You can find support at GitHub
+                <a href="https://github.com/ste-gr/tlddoc/issues">issues</a>.
+                Also, see the <a href="faq.html">FAQ</a>.</p>
         </section>
 
     </body>

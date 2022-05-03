@@ -32,7 +32,7 @@
             <answer>
                 <p>Tag Library Documentation Generator was first released as TLDDoc
                     1.0 as part of Sun's
-                    <a href="http://sun.com/coolstuff">CoolStuff</a>
+                    <a href="https://web.archive.org/web/20030803035309/http://developers.sun.com/dev/coolstuff/tlddoc">CoolStuff</a>
                     program. It has since been open-sourced on java.net and is now
                     referred to as "Tag Library Documentation Generator". Many people
                     still call it "TLDDoc" for short.</p>
@@ -46,20 +46,8 @@
             </question>
             <answer>
                 <p>See the
-                    <a href="http://wiki.java.net/bin/view/Projects/TagLibraries">Tag Library Repository</a>.</p>
-            </answer>
-        </faq>
-
-        <faq id="repository">
-            <question>
-                What is the Tag Library Repository?
-            </question>
-            <answer>
-                <p>The
-                    <a href="http://wiki.java.net/bin/view/Projects/TagLibraries">Tag Library Repository</a>
-                    is a community-maintained Wiki page with links to tag libraries you
-                    can use in your applications. Developers are encouraged to add
-                    their own libraries to the list!</p>
+                    <a href="https://projects.eclipse.org/projects/ee4j.jstl">
+                        Jakarta Standard Tag Library<sup><small>TM</small></sup></a>.</p>
             </answer>
         </faq>
 
@@ -93,9 +81,21 @@
             </question>
             <answer>
                 <p>See the
-                    <a href="usage.html">Usage</a>
+                    <a href="usage.html#Running_With_Ant">Usage</a>
                     section on the main project page for information about how to run
                     with ant.</p>
+            </answer>
+        </faq>
+
+        <faq id="maven">
+            <question>
+                How can I generate tag library documentation with maven?
+            </question>
+            <answer>
+                <p>See the
+                    <a href="usage.html#Running_With_Maven">Usage</a>
+                    section on the main project page for information about how to run
+                    with maven.</p>
             </answer>
         </faq>
 
@@ -105,8 +105,8 @@
             </question>
             <answer>
                 <p>Not yet. We're looking for volunteers to help write such plugins.
-                    If you'd like to help, please post a message to one of our
-                    <a href="servlets/ProjectMailingListList">mailing lists</a>.</p>
+                    If you'd like to help, please post a issue to 
+                    <a href="https://github.com/ste-gr/tlddoc/issues">GitHub</a>.</p>
             </answer>
         </faq>
 
@@ -115,25 +115,16 @@
                 What version of Java do I need?
             </question>
             <answer>
-                <p>Tag Library Documentation Generator requires a minimum of JDK 1.4
-                    but can be convinced to run using JDK 1.3 with some work. See the
-                    <a href="usage.html">Usage</a>
-                    section on the main project page for information about how to run
-                    with JDK 1.3. Taglibrarydoc 1.2 adds support for JDK 5.0. You
-                    cannot use earlier versions with JDK 5.0 due to a bug.</p>
+                <p>Tag Library Documentation Generator requires a minimum of JDK 8.</p>
             </answer>
         </faq>
 
         <faq id="wrongversion">
             <question>
-                What if I get the error "xyz.tld does not have
-                &lt;taglib&gt; as root?
+                What if I get the error "xyz.tld does not have &lt;taglib&gt; as root?
             </question>
             <answer>
-                <p>This error will happen if you are running an earlier version of
-                    taglibrarydoc with JDK 5.0. Please upgrade to taglibrarydoc 1.2 if
-                    you see this error. If that still does not solve your problem and
-                    you are using a JSP 2.0 TLD, make sure you have
+                <p>This error will happen if you are using a JSP 2.0 TLD, make sure you have
                     xmlns="http://java.sun.com/xml/ns/j2ee" in your &lt;taglib&gt;
                     element.</p>
             </answer>
@@ -145,8 +136,8 @@
                 help?
             </question>
             <answer>
-                <p>Post your question to one of our
-                    <a href="servlets/ProjectMailingListList">mailing lists</a>
+                <p>Post your question as a issue to
+                    <a href="https://github.com/ste-gr/tlddoc/issues">GitHub</a>
                     for further assistance.</p>
             </answer>
         </faq>

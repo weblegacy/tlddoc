@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Build Instructions</title>
+    </properties>
+
+    <body>
+
+        <section name="Build Instructions">
+            <p>To build Tag Library Documentation Generator, follow these steps:</p>
+            <ol>
+                <li>Download and install <code>maven</code> 3.2.5 or greater from
+                    <a href="http://maven.apache.org" target="_blank">http://maven.apache.org/</a>.</li>
+                <li>Check out the <code>taglibrarydoc</code> source code from github.com. You can do so here:
+                    <a href="https://github.com/ste-gr/tlddoc"
+                        target="_blank">https://github.com/ste-gr/tlddoc</a></li>
+                <li>Run '<code>mvn clean package</code>'. A <code>target</code>
+                    directory will be created with <code>tlddoc-${project.version}.jar</code>.</li>
+                <li>See the following instructions for how to use the Tag Library
+                    Documentation Generator.</li>
+            </ol>
+        </section>
+
+    </body>
+
+</document>

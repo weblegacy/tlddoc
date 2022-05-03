@@ -10,12 +10,11 @@
     <body>
 
         <section name="Tag Library Repository">
-            <p>We're attempting to produce a comprehensive collection of tag
-                libraries and their corresponding documentation on the Wiki page for
-                this project. Please consider adding your tag library to the Wiki
-                once you've generated and posted your documentation.</p>
-            <p>Visit the
-                <a href="http://wiki.java.net/bin/view/Projects/TagLibraries">Tag Library Repository Wiki</a>.</p>
+            <p>A comprehensive collection of tag libraries and their
+                corresponding documentation can you find under
+                <a href="https://projects.eclipse.org/projects/ee4j.jstl">
+                    Jakarta Standard Tag Library<sup><small>TM</small></sup>
+                </a>.</p>
         </section>
 
     </body>

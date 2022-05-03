@@ -11,11 +11,11 @@
 
         <section name="Download and Installation">
             <p>You can download the latest binary build from the
-                <a href="servlets/ProjectDocumentList">Files Section</a>.</p>
+                <a href="https://github.com/ste-gr/tlddoc/releases">GitHub.com</a>.</p>
             <p>To use a tag library, you can write a web application with JSP
-                pages and deploy it on a J2EE compatible application server
+                pages and deploy it on a Jakarta EE compatible application server
                 such as the
-                <a href="http://java.sun.com/j2ee/1.4/download.html">J2EE 1.4 SDK</a>.</p>
+                <a href="https://glassfish.org/download">Eclipse GlassFish</a>.</p>
         </section>
 
     </body>
