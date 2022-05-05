@@ -44,11 +44,20 @@ public final class Constants {
     private Constants() {
     }
 
+    /**
+     * Program-Version
+     */
     public static final String VERSION = "1.4-SNAPSHOT";
 
+    /**
+     * Default Window-title
+     */
     public static final String DEFAULT_WINDOW_TITLE =
         "Tag Library Documentation Generator - Generated Documentation";
 
+    /**
+     * Default Document-title
+     */
     public static final String DEFAULT_DOC_TITLE =
         "Tag Library Documentation Generator - Generated Documentation";
 
