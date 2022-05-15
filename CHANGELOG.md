@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Replace trademark-sign at FAQs
 * Convert documentation from XDoc to Markdown
 * Remove JavaDoc-warnings
 * Remove warnings in xdoc-files

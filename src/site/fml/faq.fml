@@ -13,9 +13,8 @@
             </question>
             <answer>
                 <p>Tag Library Documentation Generator is a utility for automatically
-                    generating javadoc-style documentation for JavaServer
-                    Pages<sup><small>TM</small></sup>
-                    (JSP<sup><small>TM</small></sup>) Technology Tag Libraries. It
+                    generating javadoc-style documentation for JavaServer Pages&#8482;
+                    (JSP&#8482;) Technology Tag Libraries. It
                     accepts a set of tag libraries as input, and generates a set of
                     HTML files as output. It can also be used to generate tag library
                     documentation for JavaServer Faces UI components.</p>
@@ -47,7 +46,7 @@
             <answer>
                 <p>See the
                     <a href="https://projects.eclipse.org/projects/ee4j.jstl">
-                        Jakarta Standard Tag Library<sup><small>TM</small></sup></a>.</p>
+                        Jakarta Standard Tag Library&#8482;</a>.</p>
             </answer>
         </faq>
 
