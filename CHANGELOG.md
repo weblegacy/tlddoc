@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Remove double used template `info` at `tld1_1-tld1_2.xsl`
 * Use HTTPS in xsi:schemaLocation
 * Replace trademark-sign at FAQs
 * Convert documentation from XDoc to Markdown
