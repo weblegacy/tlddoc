@@ -1,0 +1,61 @@
+Usage Instructions
+------------------
+
+To use the Tag Library Documentation Generator, first, build the tool using the
+above instructions or download a precompiled binary, and make sure you can run
+it. Then, follow the instructions below. The first set of instructions assumes
+you are using JDK 8 or greater.
+
+#[[###]]# Generating Tag Library documentation
+
+First, locate the tag libraries you wish to generate documentation for. You can
+generate documentation for a single TLD file, a set of TLD files, a JAR file, a
+WAR file, a directory of tag files, or all the tag libraries in a web
+application. Then, simply invoke as follows:
+
+~~~~~~~~~~~
+java -jar tlddoc-${project.version}.jar -d <outdir> <tlds>
+~~~~~~~~~~~
+
+Where \<outdir> is the directory in which to produce the output and \<tlds> is
+the list of files or directories to examine. The -doctitle and -windowtitle
+options can be used to customize the title for the index and the browser window
+title, respectively. You can run with -help to list all options.
+
+#[[###]]# Customizing the Output
+
+The look and feel of the output can be customized. The generator collects all
+the information from various tag libraries into a single XML document,
+annotates it in various ways, and then runs that document through a number of
+XSLT stylesheets to produce the final output. You can edit or replace the XSLT
+stylesheets to change how the output looks or the way it is structured.
+
+To do this, first extract the contents of tlddoc-${project.version}.jar to an
+empty directory. Then, edit the files in com/sun/tlddoc/resources/* to change
+the output. Finally, run with the -xslt option, pointing to the directory with
+the modified files. For any file that does not appear in the directory pointed
+to by -xslt, the default file will be used instead.
+
+#[[###]]# Running With Ant
+
+You can run the Tag Library Documentation Generator in ant as part of your
+build process using the `<java>` task. Just add the following code to your
+`build.xml`.
+
+Using JDK 8 or greater:
+
+~~~~~~~~~~~
+<java fork="true" jar="${tlddoc.path}/tlddoc-${project.version}.jar"
+      failonerror="true">
+  <arg line="-d ${build}/taglibs/doc"/>
+  <arg value="${src}/taglibs/tld/my1.tld"/>
+  <arg value="${src}/taglibs/tld/my2.tld"/>
+  <arg value="${src}/taglibs/tld/my3.tld"/>
+</java>
+~~~~~~~~~~~
+
+#[[###]]# Running With Maven
+
+You can run the Tag Library Documentation Generator in maven as part of your
+build process using the maven-plugin `taglib-maven-plugin`, which you can find
+at [GitHub](https://github.com/ste-gr/taglib-maven-plugin).

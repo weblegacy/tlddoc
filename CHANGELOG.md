@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Convert documentation from XDoc to Markdown
 * Remove JavaDoc-warnings
 * Remove warnings in xdoc-files
 * Bump `maven-site-plugin` from 3.11.0 to 4.0.0-M1
