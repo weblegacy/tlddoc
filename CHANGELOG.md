@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* push new site-documentation with `site-deploy`
 * Set new home-url
 * Remove double used template `info` at `tld1_1-tld1_2.xsl`
 * Use HTTPS in xsi:schemaLocation
