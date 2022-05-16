@@ -1239,13 +1239,9 @@ public class TLDDocGenerator {
     }
 
     /**
-     * Displays a "success" message and plugs the tag library registry
-     * on java.net.
+     * Displays a "success" message.
      */
     private void outputSuccessMessage() {
-        println( "\nDocumentation generated.  If your tag library is " +
-            "intended for public use, \n" +
-            "please add it to the repository at " +
-            "http://taglibrarydoc.dev.java.net/" );
+        println( "\nDocumentation generated." );
     }
 }

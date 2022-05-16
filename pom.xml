@@ -19,7 +19,7 @@
         Included in the output is a full description of each defined tag library, the tags
         contained within those tag libraries, and how to use those tags.
     </description>
-    <url>https://github.com/ste-gr/taglibrarydoc</url>
+    <url>https://ste-gr.github.io/tlddoc</url>
     <inceptionYear>2003</inceptionYear>
 
     <licenses>
@@ -36,9 +36,9 @@
     </organization>
 
     <scm>
-        <connection>scm:git:https://github.com/ste-gr/taglibrarydoc.git</connection>
-        <developerConnection>scm:git:https://github.com/ste-gr/taglibrarydoc.git</developerConnection>
-        <url>https://github.com/ste-gr/taglibrarydoc</url>
+        <connection>scm:git:https://github.com/ste-gr/tlddoc.git</connection>
+        <developerConnection>scm:git:git@github.com:ste-gr/tlddoc.git</developerConnection>
+        <url>https://github.com/ste-gr/tlddoc</url>
     </scm>
 
     <developers>
