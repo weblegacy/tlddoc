@@ -38,7 +38,6 @@ PARSER_BEGIN(TagFile)
 package com.sun.tlddoc.tagfileparser;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 
 /**
  * Simple parser for tag files that only actually parses the directives.
@@ -49,7 +48,7 @@ import java.util.ArrayList;
 public class TagFile {
 
     /** The set of directives in this tag file */
-    public ArrayList<Directive> directives = new ArrayList<Directive>();
+    public Directives directives = new Directives();
 
     public static TagFile parse( InputStream in ) throws ParseException {
         TagFile parser = new TagFile( in );
@@ -67,7 +66,7 @@ public class TagFile {
      *
      * @return the list of directives in this tag file
      */
-    public ArrayList<Directive> getDirectives() {
+    public Directives getDirectives() {
         return this.directives;
     }
 
@@ -275,7 +274,7 @@ void JSPDirective() :
   )*
   <END_DIRECTIVE>
   {
-    directives.add( result );
+    directives.addDirective( result );
   }
 }
 
@@ -347,7 +346,7 @@ void XMLDirective() :
   )*
   <X_END_DIRECTIVE>
   {
-    directives.add( result );
+    directives.addDirective( result );
   }
 }
 

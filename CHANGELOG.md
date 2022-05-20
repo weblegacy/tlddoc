@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* New Class `Directives` to remove compiler-waring in generated code
 * push new site-documentation with `site-deploy`
 * Set new home-url
 * Remove double used template `info` at `tld1_1-tld1_2.xsl`
