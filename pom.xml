@@ -389,6 +389,17 @@
                 <artifactId>maven-project-info-reports-plugin</artifactId>
             </plugin>
             <plugin>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>jxr-no-fork</report>
+                            <report>test-jxr-no-fork</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
                 <artifactId>maven-changes-plugin</artifactId>
                 <reportSets>
                     <reportSet>
@@ -414,18 +425,12 @@
                 </reportSets>
             </plugin>
             <plugin>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>jxr-no-fork</report>
-                            <report>test-jxr-no-fork</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <excludeRoots>
+                        <excludeRoot>target/generated-sources</excludeRoot>
+                    </excludeRoots>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>

@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Exclude generated classes form PMD-report
 * Move generated classes to own package
 * New Class `Directives` to remove compiler-waring in generated code
 * push new site-documentation with `site-deploy`
