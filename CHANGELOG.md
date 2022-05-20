@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Correct parameters for github-report
 * Ignore missing Javadoc comments or tags during javadoc-generation
 * Add dependency-plugin
 * Add checkstyle-plugin
