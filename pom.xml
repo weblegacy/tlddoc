@@ -317,8 +317,8 @@
                                     <dependency>net.java.dev.javacc:javacc</dependency>
                                 </classpath>
                                 <argument>jjtree</argument>
-                                <argument>-OUTPUT_DIRECTORY=${outputDirectoryJavacc}/com/sun/tlddoc/tagfileparser</argument>
-                                <argument>${project.basedir}/src/main/jjtree/com/sun/tlddoc/tagfileparser/tag-file.jjt</argument>
+                                <argument>-OUTPUT_DIRECTORY=${outputDirectoryJavacc}/com/sun/tlddoc/tagfileparser/javacc</argument>
+                                <argument>${project.basedir}/src/main/jjtree/com/sun/tlddoc/tagfileparser/javacc/tag-file.jjt</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -335,8 +335,8 @@
                                     <dependency>net.java.dev.javacc:javacc</dependency>
                                 </classpath>
                                 <argument>javacc</argument>
-                                <argument>-OUTPUT_DIRECTORY=${outputDirectoryJavacc}/com/sun/tlddoc/tagfileparser</argument>
-                                <argument>${outputDirectoryJavacc}/com/sun/tlddoc/tagfileparser/tag-file.jj</argument>
+                                <argument>-OUTPUT_DIRECTORY=${outputDirectoryJavacc}/com/sun/tlddoc/tagfileparser/javacc</argument>
+                                <argument>${outputDirectoryJavacc}/com/sun/tlddoc/tagfileparser/javacc/tag-file.jj</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -358,7 +358,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>${project.build.directory}/generated-sources/javacc</source>
+                                <source>${outputDirectoryJavacc}</source>
                             </sources>
                         </configuration>
                     </execution>

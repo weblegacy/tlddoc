@@ -35,9 +35,12 @@ options {
 
 PARSER_BEGIN(TagFile)
 
-package com.sun.tlddoc.tagfileparser;
+package com.sun.tlddoc.tagfileparser.javacc;
 
 import java.io.InputStream;
+import com.sun.tlddoc.tagfileparser.Attribute;
+import com.sun.tlddoc.tagfileparser.Directive;
+import com.sun.tlddoc.tagfileparser.Directives;
 
 /**
  * Simple parser for tag files that only actually parses the directives.

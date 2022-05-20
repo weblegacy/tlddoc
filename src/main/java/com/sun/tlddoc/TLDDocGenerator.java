@@ -62,9 +62,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.sun.tlddoc.tagfileparser.ParseException;
-import com.sun.tlddoc.tagfileparser.TagFile;
-import com.sun.tlddoc.tagfileparser.TokenMgrError;
+import com.sun.tlddoc.tagfileparser.javacc.ParseException;
+import com.sun.tlddoc.tagfileparser.javacc.TagFile;
+import com.sun.tlddoc.tagfileparser.javacc.TokenMgrError;
 import java.io.FileNotFoundException;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
