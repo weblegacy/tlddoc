@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Ignore missing Javadoc comments or tags during javadoc-generation
 * Add dependency-plugin
 * Add checkstyle-plugin
 * Add spotbugs-plugin

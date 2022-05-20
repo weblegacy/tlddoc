@@ -182,6 +182,7 @@
                     <configuration>
                         <quiet>true</quiet>
                         <failOnError>false</failOnError>
+                        <doclint>all,-missing</doclint>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -421,6 +422,10 @@
             </plugin>
             <plugin>
                 <artifactId>maven-changes-plugin</artifactId>
+                <configuration>
+                    <githubAPIScheme>https</githubAPIScheme>
+                    <githubAPIPort>443</githubAPIPort>
+                </configuration>
                 <reportSets>
                     <reportSet>
                         <reports>
