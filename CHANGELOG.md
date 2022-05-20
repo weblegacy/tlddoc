@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add checkstyle-plugin
 * Add spotbugs-plugin
 * Exclude generated classes form PMD-report
 * Move generated classes to own package
