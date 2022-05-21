@@ -1,5 +1,5 @@
-Welcome
--------
+![Icon](images/tlddoc-icon.jpg) Welcome
+---------------------------------------
 
 Tag Library Documentation Generator is a utility for automatically generating
 javadoc-style documentation for JavaServer Pages&trade; (JSP&trade;) Technology

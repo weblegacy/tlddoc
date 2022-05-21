@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Doc: Add logo to welcome-page
 * Doc: Rename Screenshot-image
 * Correct parameters for github-report
 * Ignore missing Javadoc comments or tags during javadoc-generation
