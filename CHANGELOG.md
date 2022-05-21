@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Doc: Use skin `maven-fluido-skin`
 * Doc: Add logo to welcome-page
 * Doc: Rename Screenshot-image
 * Correct parameters for github-report
