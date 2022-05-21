@@ -1,4 +1,4 @@
 Screenshot
 ----------
 
-![Screenshot](images/taglibrarydoc-screenshot.png)
+![Screenshot](images/tlddoc-screenshot.png)

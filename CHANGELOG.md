@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Doc: Rename Screenshot-image
 * Correct parameters for github-report
 * Ignore missing Javadoc comments or tags during javadoc-generation
 * Add dependency-plugin
