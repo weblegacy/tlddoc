@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add `changes.xml` checks
 * Doc: Use skin `maven-fluido-skin`
 * Doc: Add logo to welcome-page
 * Doc: Rename Screenshot-image
