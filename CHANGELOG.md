@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Correct some SpotBugs
 * Add `changes.xml` checks
 * Doc: Use skin `maven-fluido-skin`
 * Doc: Add logo to welcome-page

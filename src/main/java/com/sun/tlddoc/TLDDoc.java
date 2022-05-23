@@ -172,12 +172,16 @@ public class TLDDoc {
                                     }
                                     else {
                                         boolean foundWebInf = false;
-                                        for( File file : f.listFiles() ) {
-                                            if( file.getName().toUpperCase().
-                                                equals( "WEB-INF" ) &&
-                                                file.isDirectory() )
-                                            {
-                                                foundWebInf = true;
+                                        final File files[] = f.listFiles();
+                                        if (files != null) {
+                                            for( File file : files ) {
+                                                if( file.getName().toUpperCase().
+                                                    equals( "WEB-INF" ) &&
+                                                    file.isDirectory() )
+                                                {
+                                                    foundWebInf = true;
+                                                    break;
+                                                }
                                             }
                                         }
                                         if( foundWebInf ) {

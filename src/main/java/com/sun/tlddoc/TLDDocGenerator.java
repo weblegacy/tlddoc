@@ -44,6 +44,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -177,13 +179,15 @@ public class TLDDocGenerator {
      * @param path The path to search (recursively) for TLDs in.
      */
     private void addWebAppTLDsIn( File path ) {
-        File[] files = path.listFiles();
-        for ( File file : files ) {
-            if( file.isDirectory() ) {
-                addWebAppTLDsIn( file );
-            }
-            else if( file.getName().toLowerCase().endsWith( ".tld" ) ) {
-                addTLD(file);
+        final File[] files = path.listFiles();
+        if (files != null) {
+            for ( File file : files ) {
+                if( file.isDirectory() ) {
+                    addWebAppTLDsIn( file );
+                }
+                else if( file.getName().toLowerCase().endsWith( ".tld" ) ) {
+                    addTLD(file);
+                }
             }
         }
     }
@@ -218,12 +222,15 @@ public class TLDDocGenerator {
      * @param path The path to search (recursively) for JARs in.
      */
     private void addWebAppJARsIn( File path ) {
-        for ( File file : path.listFiles() ) {
-            if( file.isDirectory() ) {
-                addWebAppJARsIn( file );
-            }
-            else if( file.getName().toLowerCase().endsWith( ".jar" ) ) {
-                addJAR( file );
+        final File[] files = path.listFiles();
+        if (files != null) {
+            for ( File file : files ) {
+                if( file.isDirectory() ) {
+                    addWebAppJARsIn( file );
+                }
+                else if( file.getName().toLowerCase().endsWith( ".jar" ) ) {
+                    addJAR( file );
+                }
             }
         }
     }
@@ -434,7 +441,9 @@ public class TLDDocGenerator {
         throws GeneratorException
     {
         try {
-            this.outputDirectory.mkdirs();
+            if (!(outputDirectory.mkdirs() || outputDirectory.isDirectory())) {
+                throw new IOException("Couldn't create output-directory: " + outputDirectory);
+            }
             copyStaticFiles();
             createTLDSummaryDoc();
             generateOverview();
@@ -1034,7 +1043,9 @@ public class TLDDocGenerator {
             println( "Generating docs for " + name + "..." );
             shortNames.add( shortName );
             File outDir = new File( this.outputDirectory, shortName );
-            outDir.mkdir();
+            if (!(outDir.mkdir() || outDir.isDirectory())) {
+                throw new IOException("Couldn't create output-directory: " + outDir);
+            }
 
             // Generate information for each TLD:
             generateTLDDetail( outDir, shortName );
@@ -1166,9 +1177,8 @@ public class TLDDocGenerator {
             TransformerFactory.newInstance().newTransformer(
             new StreamSource( xsl ) );
         if( parameters != null ) {
-            for( String key : parameters.keySet() ) {
-                Object value = parameters.get( key );
-                transformer.setParameter( key, value );
+            for( Entry<String, String> entry : parameters.entrySet() ) {
+                transformer.setParameter( entry.getKey(), entry.getValue() );
             }
         }
         transformer.transform( new DOMSource( summaryTLD ),
