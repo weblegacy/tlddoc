@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add `maven-gpg-plugin` to sign artifacts
 * Change output-directory of assembly-plugin
 * Correct some SpotBugs
 * Add `changes.xml` checks
