@@ -527,6 +527,11 @@
     </reporting>
 
     <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Stefan Graff Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/ste-gr/tlddoc</url>
+        </repository>
         <site>
             <id>github</id>
             <url>scm:git:git@github.com:ste-gr/tlddoc.git</url>

@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Config pom to distribute artifacts to `GitHub packages`
 * Add `maven-gpg-plugin` to sign artifacts
 * Change output-directory of assembly-plugin
 * Correct some SpotBugs
