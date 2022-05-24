@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Change output-directory of assembly-plugin
 * Correct some SpotBugs
 * Add `changes.xml` checks
 * Doc: Use skin `maven-fluido-skin`

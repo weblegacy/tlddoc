@@ -114,6 +114,7 @@
                             <descriptor>src/assemblies/bin.xml</descriptor>
                             <descriptor>src/assemblies/src.xml</descriptor>
                         </descriptors>
+                        <outputDirectory>${project.build.directory}/assembly</outputDirectory>
                     </configuration>
                 </plugin>
                 <plugin>
