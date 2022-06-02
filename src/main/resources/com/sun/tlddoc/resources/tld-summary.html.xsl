@@ -165,9 +165,7 @@
             </xsl:if>
             <xsl:choose>
               <xsl:when test="javaee:description!=''">
-                <pre>
-                  <xsl:value-of select="javaee:description" disable-output-escaping="yes"/>
-                </pre>
+                <xsl:value-of select="javaee:description" disable-output-escaping="yes"/>
               </xsl:when>
               <xsl:otherwise>
                 No Description
