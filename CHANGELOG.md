@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Update `changes.xml`
 * No `pre`-tag for description
 * Define sort-rules for html-generation
 * Set new home-url (from `ste-gr` to `weblegacy`)
