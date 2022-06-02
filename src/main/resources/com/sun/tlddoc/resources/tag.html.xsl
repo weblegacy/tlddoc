@@ -83,7 +83,11 @@
         <html>
           <head>
             <title><xsl:value-of select="normalize-space($title)"/></title>
-            <meta name="keywords" content="$title"/>
+            <meta name="keywords">
+              <xsl:attribute name="content">
+                <xsl:value-of select="normalize-space($title)"/>
+              </xsl:attribute>
+            </meta>
             <link rel="stylesheet" type="text/css" href="../stylesheet.css"
                   title="Style"/>
           </head>

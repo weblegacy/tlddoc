@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Correct keyword-output at generated html-pages
 * No normalize-space at generated html (exception html-title)
 * Update `changes.xml`
 * No `pre`-tag for description
