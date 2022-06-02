@@ -29,7 +29,7 @@
   - NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   - SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   - </license>
-  -->
+-->
 
 <!--
     Document   : alltags-frame.html.xsl
@@ -91,7 +91,7 @@
     <!--
       - Same as above, but add the () to indicate it's a function
       - and change the HTML to .fn.html
-      -->
+    -->
     <xsl:template match="javaee:function">
       <xsl:element name="a">
         <xsl:attribute name="href"><xsl:value-of select="../javaee:short-name"/>/<xsl:value-of select="javaee:name"/>.fn.html</xsl:attribute>
@@ -100,4 +100,5 @@
       </xsl:element>
       <br/>
     </xsl:template>
+
 </xsl:stylesheet>

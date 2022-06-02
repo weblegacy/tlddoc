@@ -29,7 +29,7 @@
   - NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   - SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   - </license>
-  -->
+-->
 
 <!--
 
@@ -82,7 +82,8 @@
 
   <xsl:template match="/taglib">
     <xsl:element name="taglib" namespace="http://java.sun.com/xml/ns/j2ee">
-      <xsl:attribute name="xsi:schemaLocation" namespace="http://www.w3.org/2001/XMLSchema-instance">http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd</xsl:attribute>
+      <xsl:attribute name="xsi:schemaLocation"
+                     namespace="http://www.w3.org/2001/XMLSchema-instance">http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd</xsl:attribute>
       <xsl:attribute name="version">2.0</xsl:attribute>
       <xsl:apply-templates select="description"/>
       <xsl:apply-templates select="display-name"/>
@@ -201,7 +202,7 @@
           <!--
             - Explicitly Insert the default body-content since this is
             - now a required element
-            -->
+          -->
           <body-content xmlns="http://java.sun.com/xml/ns/j2ee">JSP</body-content>
         </xsl:otherwise>
       </xsl:choose>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-
 <!--
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
@@ -30,7 +29,7 @@
   - NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   - SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   - </license>
-  -->
+-->
 
 <!--
 
@@ -54,7 +53,8 @@
 
   <xsl:template match="/j2ee:taglib">
     <xsl:element name="taglib" namespace="http://java.sun.com/xml/ns/javaee">
-      <xsl:attribute name="xsi:schemaLocation" namespace="http://www.w3.org/2001/XMLSchema-instance">http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd</xsl:attribute>
+      <xsl:attribute name="xsi:schemaLocation"
+                     namespace="http://www.w3.org/2001/XMLSchema-instance">http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd</xsl:attribute>
       <xsl:attribute name="version">2.1</xsl:attribute>
       <xsl:apply-templates select="*"/>
     </xsl:element>
