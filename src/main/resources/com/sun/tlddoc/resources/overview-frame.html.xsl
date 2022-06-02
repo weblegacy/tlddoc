@@ -52,7 +52,7 @@
       <html>
         <head>
           <title>
-            Overview (<xsl:value-of select="/javaee:tlds/javaee:config/javaee:window-title"/>)
+            Overview (<xsl:value-of select="normalize-space(/javaee:tlds/javaee:config/javaee:window-title)"/>)
           </title>
           <link rel="stylesheet" type="text/css" href="stylesheet.css" title="Style"/>
         </head>

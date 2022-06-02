@@ -51,7 +51,7 @@
       <HTML>
         <HEAD>
           <TITLE>
-            API Help (<xsl:value-of select="/javaee:tlds/javaee:config/javaee:window-title"/>)
+            API Help (<xsl:value-of select="normalize-space(/javaee:tlds/javaee:config/javaee:window-title)"/>)
           </TITLE>
           <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style"/>
         </HEAD>

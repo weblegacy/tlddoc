@@ -51,7 +51,7 @@
       <html>
         <head>
           <title>
-            <xsl:value-of select="/javaee:tlds/javaee:config/javaee:window-title"/>
+            <xsl:value-of select="normalize-space(/javaee:tlds/javaee:config/javaee:window-title)"/>
           </title>
         </head>
         <frameset cols="20%,80%">

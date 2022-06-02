@@ -78,11 +78,11 @@
         </xsl:variable>
         <xsl:variable name="title">
           <xsl:value-of select="javaee:name"/>
-          (<xsl:value-of select="/javaee:tlds/javaee:config/javaee:window-title"/>)
+          (<xsl:value-of select="normalize-space(/javaee:tlds/javaee:config/javaee:window-title)"/>)
         </xsl:variable>
         <html>
           <head>
-            <title><xsl:value-of select="$title"/></title>
+            <title><xsl:value-of select="normalize-space($title)"/></title>
             <meta name="keywords" content="$title"/>
             <link rel="stylesheet" type="text/css" href="../stylesheet.css"
                   title="Style"/>

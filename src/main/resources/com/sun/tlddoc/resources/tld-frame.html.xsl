@@ -73,7 +73,7 @@
           <xsl:value-of select="$tldname"/>
           <xsl:choose>
             <xsl:when test="javaee:description!=''">
-              (<xsl:value-of select="javaee:description" disable-output-escaping="yes"/>)
+              (<xsl:value-of select="normalize-space(javaee:description)" disable-output-escaping="yes"/>)
             </xsl:when>
             <xsl:otherwise>
               No Description
@@ -83,7 +83,7 @@
         <html>
           <head>
             <title>
-              <xsl:value-of select="$tldfull"/>
+              <xsl:value-of select="normalize-space($tldfull)"/>
             </title>
             <meta name="keywords" content="$tldfull"/>
             <link rel="stylesheet" type="text/css" href="../stylesheet.css"
