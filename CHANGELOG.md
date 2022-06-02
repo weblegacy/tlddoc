@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Workaround MJAVADOC-700
 * Reformationg xsl-files
 * Correct keyword-output at generated html-pages
 * No normalize-space at generated html (exception html-title)
