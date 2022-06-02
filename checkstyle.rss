@@ -20,19 +20,19 @@ under the License.
 <rss version="0.91">
   <channel>
     <title>TLDDoc - Checkstyle report</title>
-    <link>https://ste-gr.github.io/tlddoc</link>
+    <link>https://weblegacy.github.io/tlddoc</link>
     <description>TLDDoc - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2003 - 2022 Sun Microsystems, Inc.</copyright>
     <item>
       <title>File: 13,
              Errors: 0,
-             Warnings: 2727,
+             Warnings: 2742,
              Infos: 0
       </title>
-            <link>https://ste-gr.github.io/tlddoc/checkstyle.html</link>
+            <link>https://weblegacy.github.io/tlddoc/checkstyle.html</link>
       <description>
-        <p>Click <a href="https://ste-gr.github.io/tlddoc/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="https://weblegacy.github.io/tlddoc/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,13 +46,13 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TLDDocGenerator.java">com/sun/tlddoc/TLDDocGenerator.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TLDDocGenerator.java">com/sun/tlddoc/TLDDocGenerator.java</a>
                 </td>
                 <td>
                   0
                 </td>
                 <td>
-                  1552
+                  1559
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.tagfileparser.Attribute.java">com/sun/tlddoc/tagfileparser/Attribute.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.tagfileparser.Attribute.java">com/sun/tlddoc/tagfileparser/Attribute.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.GeneratorException.java">com/sun/tlddoc/GeneratorException.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.GeneratorException.java">com/sun/tlddoc/GeneratorException.java</a>
                 </td>
                 <td>
                   0
@@ -88,13 +88,13 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TagLibrary.java">com/sun/tlddoc/TagLibrary.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TagLibrary.java">com/sun/tlddoc/TagLibrary.java</a>
                 </td>
                 <td>
                   0
                 </td>
                 <td>
-                  13
+                  16
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.WARTagDirImplicitTagLibrary.java">com/sun/tlddoc/WARTagDirImplicitTagLibrary.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.WARTagDirImplicitTagLibrary.java">com/sun/tlddoc/WARTagDirImplicitTagLibrary.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.tagfileparser.Directives.java">com/sun/tlddoc/tagfileparser/Directives.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.tagfileparser.Directives.java">com/sun/tlddoc/tagfileparser/Directives.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.Constants.java">com/sun/tlddoc/Constants.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.Constants.java">com/sun/tlddoc/Constants.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TagDirImplicitTagLibrary.java">com/sun/tlddoc/TagDirImplicitTagLibrary.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TagDirImplicitTagLibrary.java">com/sun/tlddoc/TagDirImplicitTagLibrary.java</a>
                 </td>
                 <td>
                   0
@@ -158,7 +158,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.JARTLDFileTagLibrary.java">com/sun/tlddoc/JARTLDFileTagLibrary.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.JARTLDFileTagLibrary.java">com/sun/tlddoc/JARTLDFileTagLibrary.java</a>
                 </td>
                 <td>
                   0
@@ -172,7 +172,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TLDFileTagLibrary.java">com/sun/tlddoc/TLDFileTagLibrary.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TLDFileTagLibrary.java">com/sun/tlddoc/TLDFileTagLibrary.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +186,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.WARJARTLDFileTagLibrary.java">com/sun/tlddoc/WARJARTLDFileTagLibrary.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.WARJARTLDFileTagLibrary.java">com/sun/tlddoc/WARJARTLDFileTagLibrary.java</a>
                 </td>
                 <td>
                   0
@@ -200,13 +200,13 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TLDDoc.java">com/sun/tlddoc/TLDDoc.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.TLDDoc.java">com/sun/tlddoc/TLDDoc.java</a>
                 </td>
                 <td>
                   0
                 </td>
                 <td>
-                  331
+                  336
                 </td>
                 <td>
                   0
@@ -214,7 +214,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://ste-gr.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.tagfileparser.Directive.java">com/sun/tlddoc/tagfileparser/Directive.java</a>
+                  <a href="https://weblegacy.github.io/tlddoc/checkstyle.html#com.sun.tlddoc.tagfileparser.Directive.java">com/sun/tlddoc/tagfileparser/Directive.java</a>
                 </td>
                 <td>
                   0
