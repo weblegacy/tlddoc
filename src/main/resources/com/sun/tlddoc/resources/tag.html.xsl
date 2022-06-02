@@ -238,7 +238,10 @@
                     <td><b>Type</b></td>
                     <td><b>Description</b></td>
                   </tr>
-                  <xsl:apply-templates select="javaee:attribute"/>
+                  <xsl:apply-templates
+                      select="javaee:attribute">
+                    <xsl:sort select="javaee:name"/>
+                  </xsl:apply-templates>
                 </xsl:when>
                 <xsl:otherwise>
                   <td colspan="5"><i>No Attributes Defined.</i></td>
@@ -266,7 +269,11 @@
                     <td><b>Scope</b></td>
                     <td><b>Description</b></td>
                   </tr>
-                  <xsl:apply-templates select="javaee:variable"/>
+                  <xsl:apply-templates
+                      select="javaee:variable">
+                    <xsl:sort select="javaee:name-given"/>
+                    <xsl:sort select="javaee:name-from-attribute"/>
+                  </xsl:apply-templates>
                 </xsl:when>
                 <xsl:otherwise>
                   <td colspan="2"><i>No Variables Defined.</i></td>

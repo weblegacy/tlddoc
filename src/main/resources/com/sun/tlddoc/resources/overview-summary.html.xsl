@@ -113,7 +113,11 @@
                 <b>Tag Libraries</b>
               </font></td>
             </tr>
-            <xsl:apply-templates select="/javaee:tlds/javaee:taglib"/>
+            <xsl:apply-templates
+                  select="/javaee:tlds/javaee:taglib">
+              <xsl:sort select="javaee:display-name"/>
+              <xsl:sort select="javaee:short-name"/>
+            </xsl:apply-templates>
           </table>
           <p/>
           <hr/>

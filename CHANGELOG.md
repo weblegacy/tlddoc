@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Define sort-rules for html-generation
 * Set new home-url (from `ste-gr` to `weblegacy`)
 * Config pom to distribute artifacts to `GitHub packages`
 * Add `maven-gpg-plugin` to sign artifacts

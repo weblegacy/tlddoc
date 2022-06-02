@@ -235,7 +235,10 @@
                     <font size="+2"><b>Tag Summary</b></font>
                   </td>
                 </tr>
-                <xsl:apply-templates select="javaee:tag|javaee:tag-file"/>
+                <xsl:apply-templates
+                    select="javaee:tag|javaee:tag-file">
+                  <xsl:sort select="javaee:name"/>
+                </xsl:apply-templates>
               </table>
               &#160;
               <p/>
@@ -248,7 +251,10 @@
                     <font size="+2"><b>Function Summary</b></font>
                   </td>
                 </tr>
-                <xsl:apply-templates select="javaee:function"/>
+                <xsl:apply-templates
+                    select="javaee:function">
+                  <xsl:sort select='substring-before(normalize-space(javaee:function-signature)," ")'/>
+                </xsl:apply-templates>
               </table>
               &#160;
               <p/>
@@ -261,7 +267,10 @@
                     <font size="+2"><b>Tag Library Validator</b></font>
                   </td>
                 </tr>
-                <xsl:apply-templates select="javaee:validator"/>
+                <xsl:apply-templates
+                    select="javaee:validator">
+                  <xsl:sort select="javaee:validator-class"/>
+                </xsl:apply-templates>
               </table>
               &#160;
               <p/>
@@ -274,7 +283,10 @@
                     <font size="+2"><b>Listeners</b></font>
                   </td>
                 </tr>
-                <xsl:apply-templates select="javaee:listener"/>
+                <xsl:apply-templates
+                    select="javaee:listener">
+                  <xsl:sort select="javaee:listener-class"/>
+                </xsl:apply-templates>
               </table>
               &#160;
               <p/>
@@ -409,7 +421,11 @@
                   <td><b>Value</b></td>
                   <td><b>Description</b></td>
                 </tr>
-                <xsl:apply-templates select="javaee:init-param"/>
+                <xsl:apply-templates
+                    select="javaee:init-param">
+                  <xsl:sort select="javaee:param-name"/>
+                  <xsl:sort select="javaee:param-value"/>
+                </xsl:apply-templates>
               </table>
             </blockquote>
           </xsl:if>

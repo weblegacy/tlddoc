@@ -109,7 +109,11 @@
                       Tags
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="javaee:tag|javaee:tag-file"/>
+                      <xsl:apply-templates
+                          select="javaee:tag|javaee:tag-file">
+                        <xsl:sort select="../javaee:short-name"/>
+                        <xsl:sort select="javaee:name"/>
+                      </xsl:apply-templates>
                     </font>
                   </td>
                 </tr>
@@ -121,7 +125,11 @@
                       Functions
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="javaee:function"/>
+                      <xsl:apply-templates
+                          select="javaee:function">
+                        <xsl:sort select="../javaee:short-name"/>
+                        <xsl:sort select="javaee:name"/>
+                      </xsl:apply-templates>
                     </font>
                   </td>
                 </tr>
@@ -133,7 +141,10 @@
                       Validator
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="javaee:validator"/>
+                      <xsl:apply-templates
+                          select="javaee:validator">
+                        <xsl:sort select="javaee:validator-class"/>
+                      </xsl:apply-templates>
                     </font>
                   </td>
                 </tr>
@@ -145,7 +156,10 @@
                       Listeners
                     </font>&#160;
                     <font class="FrameItemFont">
-                      <xsl:apply-templates select="javaee:listener"/>
+                      <xsl:apply-templates
+                          select="javaee:listener">
+                        <xsl:sort select="javaee:listener-class"/>
+                      </xsl:apply-templates>
                     </font>
                   </td>
                 </tr>
