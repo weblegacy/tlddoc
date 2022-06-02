@@ -58,4 +58,4 @@ Using JDK 8 or greater:
 
 You can run the Tag Library Documentation Generator in maven as part of your
 build process using the maven-plugin `taglib-maven-plugin`, which you can find
-at [GitHub](https://github.com/ste-gr/taglib-maven-plugin).
+at [GitHub](https://github.com/weblegacy/taglib-maven-plugin).

@@ -17,7 +17,7 @@
             <skipGenerationDate>true</skipGenerationDate>
             <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
             <gitHub>
-                <projectId>ste-gr/tlddoc</projectId>
+                <projectId>weblegacy/tlddoc</projectId>
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>black</ribbonColor>
             </gitHub>

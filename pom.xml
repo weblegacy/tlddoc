@@ -19,7 +19,7 @@
         Included in the output is a full description of each defined tag library, the tags
         contained within those tag libraries, and how to use those tags.
     </description>
-    <url>https://ste-gr.github.io/tlddoc</url>
+    <url>https://weblegacy.github.io/tlddoc</url>
     <inceptionYear>2003</inceptionYear>
 
     <licenses>
@@ -36,9 +36,9 @@
     </organization>
 
     <scm>
-        <connection>scm:git:https://github.com/ste-gr/tlddoc.git</connection>
-        <developerConnection>scm:git:git@github.com:ste-gr/tlddoc.git</developerConnection>
-        <url>https://github.com/ste-gr/tlddoc</url>
+        <connection>scm:git:https://github.com/weblegacy/tlddoc.git</connection>
+        <developerConnection>scm:git:git@github.com:weblegacy/tlddoc.git</developerConnection>
+        <url>https://github.com/weblegacy/tlddoc</url>
     </scm>
 
     <developers>
@@ -79,7 +79,7 @@
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/ste-gr/tlddoc/issues/</url>
+        <url>https://github.com/weblegacy/tlddoc/issues/</url>
     </issueManagement>
 
     <properties>
@@ -529,12 +529,12 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>GitHub Stefan Graff Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/ste-gr/tlddoc</url>
+            <name>GitHub Web-Legacy Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/weblegacy/tlddoc</url>
         </repository>
         <site>
             <id>github</id>
-            <url>scm:git:git@github.com:ste-gr/tlddoc.git</url>
+            <url>scm:git:git@github.com:weblegacy/tlddoc.git</url>
         </site>
     </distributionManagement>
 </project>
