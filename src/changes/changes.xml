@@ -9,6 +9,7 @@
   </properties>
   <body>
     <release version="1.4-SNAPSHOT" date="YYYY-MM-DD" description="">
+      <action type="update" dev="ste-gr">Update organization in POM</action>
       <action type="fix" dev="ste-gr">Workaround MJAVADOC-700</action>
       <action type="fix" dev="ste-gr">Correct keyword-output at generated html-pages</action>
       <action type="fix" dev="ste-gr">No normalize-space at generated html (exception html-title)</action>
