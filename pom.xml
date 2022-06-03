@@ -194,6 +194,7 @@
                         <quiet>true</quiet>
                         <failOnError>false</failOnError>
                         <doclint>all,-missing</doclint>
+                        <notimestamp>true</notimestamp>
                     </configuration>
                 </plugin>
                 <plugin>
