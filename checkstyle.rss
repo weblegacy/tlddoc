@@ -23,11 +23,11 @@ under the License.
     <link>https://weblegacy.github.io/tlddoc</link>
     <description>TLDDoc - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2003 - 2022 Sun Microsystems, Inc.</copyright>
+    <copyright>&#169;2003 - 2022 Web-Legacy</copyright>
     <item>
       <title>File: 13,
              Errors: 0,
-             Warnings: 2742,
+             Warnings: 2739,
              Infos: 0
       </title>
             <link>https://weblegacy.github.io/tlddoc/checkstyle.html</link>
@@ -94,7 +94,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  16
+                  13
                 </td>
                 <td>
                   0
