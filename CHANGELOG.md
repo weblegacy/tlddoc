@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Correction workaround MJAVADOC-700
 * Update organization in POM
 * Workaround MJAVADOC-700
 * Reformationg xsl-files

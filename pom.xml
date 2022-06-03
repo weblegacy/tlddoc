@@ -327,9 +327,9 @@
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <!-- Add config sourcepath because https://issues.apache.org/jira/browse/MJAVADOC-700 -->
                 <configuration>
-                    <sourcepath>${basedir}/src/main/java</sourcepath>
+                    <!-- Add config sourcepath because https://issues.apache.org/jira/browse/MJAVADOC-700 -->
+                    <sourcepath>${basedir}/src/main/java:${outputDirectoryJavacc}</sourcepath>
                 </configuration>
                 <executions>
                     <execution>
@@ -509,7 +509,7 @@
                         </reports>
                         <configuration>
                             <!-- Add config sourcepath because https://issues.apache.org/jira/browse/MJAVADOC-700 -->
-                            <sourcepath>${basedir}/src/main/java</sourcepath>
+                            <sourcepath>${basedir}/src/main/java:${outputDirectoryJavacc}</sourcepath>
                         </configuration>
                     </reportSet>
                     <reportSet>
@@ -519,7 +519,7 @@
                         </reports>
                         <configuration>
                             <!-- Add config sourcepath because https://issues.apache.org/jira/browse/MJAVADOC-700 -->
-                            <sourcepath>${basedir}/src/test/java</sourcepath>
+                            <sourcepath>${basedir}/src/main/java;${outputDirectoryJavacc}</sourcepath>
                         </configuration>
                     </reportSet>
                 </reportSets>
@@ -554,5 +554,6 @@
             <id>github</id>
             <url>scm:git:git@github.com:weblegacy/tlddoc.git</url>
         </site>
+        <downloadUrl>https://github.com/weblegacy/tlddoc/releases</downloadUrl>
     </distributionManagement>
 </project>
