@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Update copyright
 * Add `license-maven-plugin` to update copyright
 * Add encoding-property
 * Add new profile `assembly` to generate assemblies
