@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add lifecyclemapping for eclipse
 * Update copyright
 * Add `license-maven-plugin` to update copyright
 * Add encoding-property
