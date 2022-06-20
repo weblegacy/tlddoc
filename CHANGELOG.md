@@ -1,7 +1,8 @@
 # 1.4 / YYYY-MM-DD
 
+* Correct property-name in `license-maven-plugin`
 * Add locale-property to get current year
-* Add lifecyclemapping for eclipse
+* Add lifecycle-mapping for eclipse
 * Update copyright
 * Add `license-maven-plugin` to update copyright
 * Add encoding-property

@@ -532,9 +532,9 @@
                         <css>SLASHSTAR_STYLE</css>
                         <jjt>SLASHSTAR_STYLE</jjt>
                     </mapping>
-                    <headerDefinitions>
-                        <headerDefinition>src/license/headerStyles.xml</headerDefinition>
-                    </headerDefinitions>
+                    <defaultHeaderDefinitions>
+                        <defaultHeaderDefinition>src/license/headerStyles.xml</defaultHeaderDefinition>
+                    </defaultHeaderDefinitions>
                     <properties>
                         <currentYear>${currentYear}</currentYear>
                     </properties>
