@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add new profile `assembly` to generate assemblies
 * Change group-id from `taglibrarydoc` to `io.github.weblegacy`
 * Suppress timestamp at javadoc-files
 * Correction workaround MJAVADOC-700

@@ -23,9 +23,11 @@ For documentation see [https://weblegacy.github.io/tlddoc](https://weblegacy.git
     `mvn site`
 4. Publish site-documentation  
     `mvn site-deploy`
-5. Generate source-, javadoc-artifacts and assemblies  
+5. Generate source-, javadoc-artifacts  
     `mvn package`
-6. Deploy all artifacts to `GitHub Packages`  
+6. Generate assemblies  
+    `mvn -Passembly package`
+7. Deploy all artifacts to `GitHub Packages`  
     `mvn deploy`
 
 ## Support runs
@@ -34,4 +36,4 @@ For documentation see [https://weblegacy.github.io/tlddoc](https://weblegacy.git
     `mvn versions:set -DnewVersion=...`
 
 * Dependency Report  
-    `mvn versions:display-dependency-updates versions:display-plugin-updates versions:display-property-updates`
+    `mvn -Passembly versions:display-dependency-updates versions:display-plugin-updates versions:display-property-updates`
