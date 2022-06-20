@@ -85,6 +85,7 @@
     <properties>
         <encoding>UTF-8</encoding>
         <propertiesEncoding>ISO-8859-1</propertiesEncoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <mavenVersion>[3.5.4,4)</mavenVersion>
         <javaVersion>8</javaVersion>
         <mainClass>com.sun.tlddoc.TLDDoc</mainClass>
