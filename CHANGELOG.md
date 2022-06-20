@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add locale-property to get current year
 * Add lifecyclemapping for eclipse
 * Update copyright
 * Add `license-maven-plugin` to update copyright

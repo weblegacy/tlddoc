@@ -498,6 +498,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <name>currentYear</name>
+                            <locale>en,US</locale>
                             <pattern>yyyy</pattern>
                         </configuration>
                     </execution>
