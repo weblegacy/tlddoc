@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<licensePluginReport goal="FORMAT" timestamp="1655748140861">
+    <module artifactId="tlddoc" groupId="io.github.weblegacy" version="1.4-SNAPSHOT"/>
+    <files>
+        <file path="src/main/java/com/sun/tlddoc/Constants.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/GeneratorException.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/JARTLDFileTagLibrary.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/TLDDoc.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/TLDDocGenerator.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/TLDFileTagLibrary.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/TagDirImplicitTagLibrary.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/TagLibrary.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/WARJARTLDFileTagLibrary.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/WARTagDirImplicitTagLibrary.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/tagfileparser/Attribute.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/tagfileparser/Directive.java" result="NOOP"/>
+        <file path="src/main/java/com/sun/tlddoc/tagfileparser/Directives.java" result="NOOP"/>
+        <file path="src/main/jjtree/com/sun/tlddoc/tagfileparser/javacc/tag-file.jjt" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/alltags-frame.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/alltags-noframe.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/function.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/help-doc.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/index.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/overview-frame.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/overview-summary.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/stylesheet.css" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/tag.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/tld-frame.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/tld-summary.html.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/tld1_1-tld1_2.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/tld1_2-tld2_0.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/tld2_0-tld2_1.xsl" result="NOOP"/>
+        <file path="src/main/resources/com/sun/tlddoc/resources/tld2_1-tld2_1.xsl" result="NOOP"/>
+    </files>
+</licensePluginReport>
