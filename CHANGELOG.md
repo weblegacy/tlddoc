@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add `license-maven-plugin` to update copyright
 * Add encoding-property
 * Add new profile `assembly` to generate assemblies
 * Change group-id from `taglibrarydoc` to `io.github.weblegacy`

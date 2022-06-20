@@ -284,6 +284,11 @@
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>4.2.rc3</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -442,6 +447,17 @@
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>get-current-year-property</id>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <name>currentYear</name>
+                            <pattern>yyyy</pattern>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>add-source</id>
                         <phase>generate-sources</phase>
                         <goals>
@@ -452,6 +468,39 @@
                                 <source>${outputDirectoryJavacc}</source>
                             </sources>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>src/license/BSD-3-Sun.txt</header>
+                            <includes>
+                                <include>src/main/**</include>
+                            </includes>
+                        </licenseSet>
+                    </licenseSets>
+                    <mapping>
+                        <css>SLASHSTAR_STYLE</css>
+                        <jjt>SLASHSTAR_STYLE</jjt>
+                    </mapping>
+                    <headerDefinitions>
+                        <headerDefinition>src/license/headerStyles.xml</headerDefinition>
+                    </headerDefinitions>
+                    <properties>
+                        <currentYear>${currentYear}</currentYear>
+                    </properties>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>update-license</id>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                        <phase>process-sources</phase>
                     </execution>
                 </executions>
             </plugin>
