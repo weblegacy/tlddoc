@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Restore old API of tag-file
 * Exclude `lifecycle-mapping` from plugin-management-report
 * Add `maven-release-plugin` to easily perform a deployment
 * Reformat POM

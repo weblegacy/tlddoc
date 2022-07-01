@@ -38,6 +38,8 @@ PARSER_BEGIN(TagFile)
 package com.sun.tlddoc.tagfileparser.javacc;
 
 import java.io.InputStream;
+import java.util.List;
+
 import com.sun.tlddoc.tagfileparser.Attribute;
 import com.sun.tlddoc.tagfileparser.Directive;
 import com.sun.tlddoc.tagfileparser.Directives;
@@ -69,8 +71,8 @@ public class TagFile {
      *
      * @return the list of directives in this tag file
      */
-    public Directives getDirectives() {
-        return this.directives;
+    public List<Directive> getDirectives() {
+        return this.directives.getDirectives();
     }
 
 }

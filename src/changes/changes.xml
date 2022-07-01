@@ -9,6 +9,7 @@
   </properties>
   <body>
     <release version="1.4-SNAPSHOT" date="YYYY-MM-DD" description="">
+      <action type="fix" dev="ste-gr">Restore old API of tag-file</action>
       <action type="fix" dev="ste-gr">Exclude &quot;lifecycle-mapping&quot; from plugin-management-report</action>
       <action type="add" dev="ste-gr">Add &quot;maven-release-plugin&quot; to easily perform a deployment</action>
       <action type="update" dev="ste-gr">Change distribution to central-repo</action>
