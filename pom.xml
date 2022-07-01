@@ -596,6 +596,11 @@
     <plugins>
       <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
+        <configuration>
+          <pluginManagementExcludes>
+            <pluginManagementExclude>org.eclipse.m2e:lifecycle-mapping</pluginManagementExclude>
+          </pluginManagementExcludes>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-jxr-plugin</artifactId>
