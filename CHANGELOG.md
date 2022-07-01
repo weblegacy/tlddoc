@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add `maven-release-plugin` to easily perform a deployment
 * Reformat POM
 * Change distribution to central-repo
 * Add new profile `release` to deploy to central-repo
