@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Move `maven-gpg-plugin`-plugin-management to release-profile
 * Restore old API of tag-file
 * Exclude `lifecycle-mapping` from plugin-management-report
 * Add `maven-release-plugin` to easily perform a deployment
