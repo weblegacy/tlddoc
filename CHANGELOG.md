@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Change distribution to central-repo
 * Add new profile `release` to deploy to central-repo
 * Correct property-name in `license-maven-plugin`
 * Add locale-property to get current year

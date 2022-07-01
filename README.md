@@ -25,24 +25,25 @@ For documentation see [https://weblegacy.github.io/tlddoc](https://weblegacy.git
 ## Building-Steps
 
 1. Clean full project  
-    `mvn clean`
+   `mvn clean`
 2. Build and test project  
-    `mvn verify`
+   `mvn verify`
 3. Generate site-documentation  
-    `mvn site`
+   `mvn site`
 4. Publish site-documentation  
-    `mvn site-deploy`
+   `mvn site-deploy`
 5. Generate source-, javadoc-artifacts  
-    `mvn package`
+   `mvn package`
 6. Generate assemblies  
-    `mvn -Passembly package`
-7. Deploy all artifacts to `GitHub Packages`  
-    `mvn -Prelease deploy`
+   `mvn -Passembly package`
+7. Deploy all artifacts to `Central-Repo`  
+   * `mvn clean deploy` for SNAPSHOTs
+   * `mvn -Prelease clean deploy` for releases
 
 ## Support runs
 
 * Set version number  
-    `mvn versions:set -DnewVersion=...`
+  `mvn versions:set -DnewVersion=...`
 
 * Dependency Report  
-    `mvn -Passembly,release versions:display-dependency-updates versions:display-plugin-updates versions:display-property-updates`
+  `mvn -Passembly,release versions:display-dependency-updates versions:display-plugin-updates versions:display-property-updates`
