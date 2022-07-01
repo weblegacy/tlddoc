@@ -13,6 +13,15 @@ For documentation see [https://weblegacy.github.io/tlddoc](https://weblegacy.git
 * Apache Maven 3.5.4\+
 * JDK 8\+
 
+## MAVEN-Profiles
+
+* *assembly*
+  * Create assemblies for distribution
+* *release*
+  * Signs all of the project's attached artifacts with GnuPG
+  * Add JavaDoc-artifact for deployment to central-repo
+  * Add Source-artifact for deployment to central-repo
+
 ## Building-Steps
 
 1. Clean full project  
@@ -28,7 +37,7 @@ For documentation see [https://weblegacy.github.io/tlddoc](https://weblegacy.git
 6. Generate assemblies  
     `mvn -Passembly package`
 7. Deploy all artifacts to `GitHub Packages`  
-    `mvn deploy`
+    `mvn -Prelease deploy`
 
 ## Support runs
 
@@ -36,4 +45,4 @@ For documentation see [https://weblegacy.github.io/tlddoc](https://weblegacy.git
     `mvn versions:set -DnewVersion=...`
 
 * Dependency Report  
-    `mvn -Passembly versions:display-dependency-updates versions:display-plugin-updates versions:display-property-updates`
+    `mvn -Passembly,release versions:display-dependency-updates versions:display-plugin-updates versions:display-property-updates`
