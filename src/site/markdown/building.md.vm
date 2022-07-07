@@ -3,7 +3,7 @@ Build Instructions
 
 To build Tag Library Documentation Generator, follow these steps:
 
-1. Download and install `maven` 3.2.5 or greater from
+1. Download and install `maven` 3.5.4 or greater from
    <a href="https://maven.apache.org" target="_blank">https\://maven.apache.org/</a>.
 2. Check out the `taglibrarydoc` source code from github.com. You can do so here:
    <a href="https://github.com/weblegacy/tlddoc" target="_blank">https\://github.com/weblegacy/tlddoc</a>

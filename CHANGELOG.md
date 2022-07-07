@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Correct maven-min-version in building-documentation
 * Upgrade JavaCC generation to modern-style
 * Bump `javacc` from 7.0.11 to 7.0.12
 * Add source-version and detect-links to javadoc-plugin
