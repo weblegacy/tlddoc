@@ -63,12 +63,12 @@ public class Directives {
     }
 
     /**
-     * Returns an iterator through the set of directives.
+     * Returns the unmodifiable list of directives.
      *
-     * @return an iterator through the set of directives
+     * @return the list of directives
      */
     public List<Directive> getDirectives() {
-        return Collections.unmodifiableList(directives);
+        return Collections.unmodifiableList( directives );
     }
 
     /**

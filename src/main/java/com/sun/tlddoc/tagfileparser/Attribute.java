@@ -61,6 +61,7 @@ public class Attribute {
 
     /**
      * Getter for property name.
+     *
      * @return Value of property name.
      */
     public String getName() {
@@ -69,6 +70,7 @@ public class Attribute {
 
     /**
      * Setter for property name.
+     *
      * @param name New value of property name.
      */
     public void setName(String name) {
@@ -77,6 +79,7 @@ public class Attribute {
 
     /**
      * Getter for property value.
+     *
      * @return Value of property value.
      */
     public String getValue() {
@@ -85,6 +88,7 @@ public class Attribute {
 
     /**
      * Setter for property value.
+     *
      * @param value New value of property value.
      */
     public void setValue(String value) {

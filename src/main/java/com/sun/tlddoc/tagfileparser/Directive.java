@@ -60,6 +60,7 @@ public class Directive {
 
     /**
      * Getter for property directiveName.
+     *
      * @return Value of property directiveName.
      */
     public String getDirectiveName() {
@@ -68,6 +69,7 @@ public class Directive {
 
     /**
      * Setter for property directiveName.
+     *
      * @param directiveName New value of property directiveName.
      */
     public void setDirectiveName(String directiveName) {
