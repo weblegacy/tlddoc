@@ -31,12 +31,14 @@
 
 options {
     STATIC=false;
+    JAVA_TEMPLATE_TYPE="modern";
 }
 
 PARSER_BEGIN(TagFile)
 
 package com.sun.tlddoc.tagfileparser.javacc;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -55,15 +57,16 @@ public class TagFile {
     /** The set of directives in this tag file */
     public Directives directives = new Directives();
 
-    public static TagFile parse( InputStream in ) throws ParseException {
-        TagFile parser = new TagFile( in );
+    public static TagFile parse( InputStream in ) throws ParseException, IOException {
+        TagFile parser = new TagFile( new StreamProvider( in ));
         parser.Input();
         return parser;
     }
 
-    public static void main(String args[]) throws ParseException {
-        TagFile parser = new TagFile(System.in);
-        parser.Input().dump(">");
+    public static void main(String args[]) throws ParseException, IOException {
+        TagFile parser = new TagFile(new StreamProvider(System.in));
+        parser.Input();
+        ((SimpleNode)parser.jjtree.rootNode()).dump(">");
     }
 
     /**
@@ -224,11 +227,10 @@ TOKEN :
 }
 
 
-SimpleNode Input() :
+void Input() :
 {}
 {
   JSPTagDef() <EOF>
-  { return jjtThis; }
 }
 
 void JSPTagDef() :

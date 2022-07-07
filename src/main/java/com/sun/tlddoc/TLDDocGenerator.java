@@ -66,7 +66,6 @@ import org.xml.sax.SAXException;
 
 import com.sun.tlddoc.tagfileparser.javacc.ParseException;
 import com.sun.tlddoc.tagfileparser.javacc.TagFile;
-import com.sun.tlddoc.tagfileparser.javacc.TokenMgrError;
 import java.io.FileNotFoundException;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
@@ -705,7 +704,7 @@ public class TLDDocGenerator {
                         ".  Data will be incomplete for this tag." +
                         "  Reason: " + e.getMessage() );
                 }
-                catch( ParseException | TokenMgrError e ) {
+                catch( ParseException e ) {
                     println( "WARNING: Could not parse tag file '" +
                         path + "' for tag library " +
                         tagLibrary.getPathDescription() +
