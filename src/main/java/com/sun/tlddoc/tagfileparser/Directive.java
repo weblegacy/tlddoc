@@ -32,7 +32,8 @@
 package com.sun.tlddoc.tagfileparser;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Encapsulates a directive in a tag file.
@@ -83,12 +84,13 @@ public class Directive {
     }
 
     /**
-     * Returns an iterator through the set of attributes in this directive.
+     * Returns the unmodifiable list of attributes in this directive.
      *
-     * @return an iterator through the set of attributes in this directive
+     * @return the list of attributes in this directive
      */
-    public Iterator<Attribute> getAttributes() {
-        return this.attributes.iterator();
+    
+    public List<Attribute> getAttributes() {
+        return Collections.unmodifiableList( attributes );
     }
 
     /**

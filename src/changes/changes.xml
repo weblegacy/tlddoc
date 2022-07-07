@@ -9,6 +9,7 @@
   </properties>
   <body>
     <release version="1.4-SNAPSHOT" date="YYYY-MM-DD" description="">
+      <action type="update" dev="ste-gr">Return &quot;List&quot; instead of &quot;Iterator&quot; in &quot;Directive.getAttributes&quot;</action>
       <action type="update" dev="ste-gr">Simplify &quot;toString&quot; in &quot;Directives&quot; and &quot;Directive&quot;</action>
       <action type="update" dev="ste-gr">Upgrade JavaCC generation to modern-style</action>
       <action type="fix" dev="ste-gr">Restore old API of tag-file</action>

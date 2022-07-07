@@ -31,20 +31,22 @@
 
 package com.sun.tlddoc;
 
-import com.sun.tlddoc.tagfileparser.Attribute;
-import com.sun.tlddoc.tagfileparser.Directive;
 import java.io.CharArrayReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.jar.JarInputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -57,6 +59,7 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -64,13 +67,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.sun.tlddoc.tagfileparser.Attribute;
+import com.sun.tlddoc.tagfileparser.Directive;
 import com.sun.tlddoc.tagfileparser.javacc.ParseException;
 import com.sun.tlddoc.tagfileparser.javacc.TagFile;
-import java.io.FileNotFoundException;
-import java.util.Enumeration;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-import java.util.jar.JarInputStream;
 
 /**
  * TLDDoc Generator.  Takes a set of TLD files and generates a set of
@@ -726,9 +726,7 @@ public class TLDDocGenerator {
     private void populateTagFileDetailsTagDirective(
         Element tagFileNode, Document doc, Directive directive )
     {
-        Iterator<Attribute> attributes = directive.getAttributes();
-        while( attributes.hasNext() ) {
-            Attribute attribute = attributes.next();
+        for( Attribute attribute : directive.getAttributes() ) {
             String name = attribute.getName();
             String value = attribute.getValue();
             Element element;
@@ -812,14 +810,12 @@ public class TLDDocGenerator {
     private void populateTagFileDetailsAttributeDirective(
         Element tagFileNode, Document doc, Directive directive )
     {
-        Iterator<Attribute> attributes = directive.getAttributes();
         Element attributeNode = doc.createElementNS( Constants.NS_JAVAEE,
             "attribute" );
         tagFileNode.appendChild( attributeNode );
         String deferredValueType = null;
         String deferredMethodSignature = null;
-        while( attributes.hasNext() ) {
-            Attribute attribute = attributes.next();
+        for( Attribute attribute : directive.getAttributes() ) {
             String name = attribute.getName();
             String value = attribute.getValue();
             Element element;
@@ -899,12 +895,10 @@ public class TLDDocGenerator {
     private void populateTagFileDetailsVariableDirective(
         Element tagFileNode, Document doc, Directive directive )
     {
-        Iterator<Attribute> attributes = directive.getAttributes();
         Element variableNode = doc.createElementNS( Constants.NS_JAVAEE,
             "variable" );
         tagFileNode.appendChild( variableNode );
-        while( attributes.hasNext() ) {
-            Attribute attribute = attributes.next();
+        for( Attribute attribute : directive.getAttributes() ) {
             String name = attribute.getName();
             String value = attribute.getValue();
             Element element;

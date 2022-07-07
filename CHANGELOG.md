@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Return `List` instead of `Iterator` in `Directive.getAttributes`
 * Simplify `toString` in `Directives` and `Directive`
 * Corr: remove detect-links at javadoc-plugin
 * Correct maven-min-version in building-documentation
