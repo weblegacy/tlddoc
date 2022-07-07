@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Add source-version and detect-links to javadoc-plugin
 * Move `maven-gpg-plugin`-plugin-management to release-profile
 * Restore old API of tag-file
 * Exclude `lifecycle-mapping` from plugin-management-report

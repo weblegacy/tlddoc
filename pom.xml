@@ -282,6 +282,8 @@
             <failOnError>false</failOnError>
             <doclint>all,-missing</doclint>
             <notimestamp>true</notimestamp>
+            <source>${javaVersion}</source>
+            <detectLinks>true</detectLinks>
           </configuration>
         </plugin>
         <plugin>
