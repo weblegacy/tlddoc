@@ -78,6 +78,10 @@ public class Directives {
      */
     @Override
     public String toString() {
-        return directives.toString();
+        StringBuilder result = new StringBuilder();
+        result.append( "[Directives;directives=" );
+        result.append( directives.toString() );
+        result.append( ']' );
+        return result.toString();
     }
 }

@@ -101,15 +101,9 @@ public class Directive {
         StringBuilder result = new StringBuilder();
         result.append( "[Directive;name=" );
         result.append( directiveName );
-        result.append( ",attributes={" );
-        for( int i = 0; i < attributes.size(); i++ ) {
-            Attribute attr = attributes.get( i );
-            result.append( attr.toString() );
-            if( i < (attributes.size()-1) ) {
-                result.append( ", " );
-            }
-        }
-        result.append( "}]" );
+        result.append( ", attributes=" );
+        result.append( attributes );
+        result.append( ']' );
         return result.toString();
     }
 }

@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Simplify `toString` in `Directives` and `Directive`
 * Corr: remove detect-links at javadoc-plugin
 * Correct maven-min-version in building-documentation
 * Upgrade JavaCC generation to modern-style
