@@ -62,7 +62,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Adds an directive to the list of directives.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#addEscapes(java.lang.String)" class="member-name-link">addEscapes(String)</a> - Static method in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#addEscapes(java.lang.String)" class="member-name-link">addEscapes(String)</a> - Static method in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">Replaces unprintable characters by their escaped (or unicode escaped)
  equivalents in the given string</div>
@@ -151,6 +151,15 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/sun/tlddoc/JARTLDFileTagLibrary.html#close()" class="member-name-link">close()</a> - Method in class com.sun.tlddoc.<a href="com/sun/tlddoc/JARTLDFileTagLibrary.html" title="class in com.sun.tlddoc">JARTLDFileTagLibrary</a></dt>
 <dt><a href="com/sun/tlddoc/TagDirImplicitTagLibrary.html#close()" class="member-name-link">close()</a> - Method in class com.sun.tlddoc.<a href="com/sun/tlddoc/TagDirImplicitTagLibrary.html" title="class in com.sun.tlddoc">TagDirImplicitTagLibrary</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/Provider.html#close()" class="member-name-link">close()</a> - Method in interface com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/Provider.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a></dt>
+<dd>
+<div class="block">Closes the stream and releases any system resources associated with
+ it.</div>
+</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html#close()" class="member-name-link">close()</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html" title="class in com.sun.tlddoc.tagfileparser.javacc">StreamProvider</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StringProvider.html#close()" class="member-name-link">close()</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StringProvider.html" title="class in com.sun.tlddoc.tagfileparser.javacc">StringProvider</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/sun/tlddoc/TagLibrary.html#close()" class="member-name-link">close()</a> - Method in class com.sun.tlddoc.<a href="com/sun/tlddoc/TagLibrary.html" title="class in com.sun.tlddoc">TagLibrary</a></dt>
 <dt><a href="com/sun/tlddoc/TLDFileTagLibrary.html#close()" class="member-name-link">close()</a> - Method in class com.sun.tlddoc.<a href="com/sun/tlddoc/TLDFileTagLibrary.html" title="class in com.sun.tlddoc">TLDFileTagLibrary</a></dt>
 <dt><a href="com/sun/tlddoc/WARJARTLDFileTagLibrary.html#close()" class="member-name-link">close()</a> - Method in class com.sun.tlddoc.<a href="com/sun/tlddoc/WARJARTLDFileTagLibrary.html" title="class in com.sun.tlddoc">WARJARTLDFileTagLibrary</a></dt>
@@ -269,7 +278,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/ParseException.html#EOL" class="member-name-link">EOL</a> - Static variable in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></dt>
 <dd>
-<div class="block">The end of line string for this machine.</div>
+<div class="block">The end of line string (we do not use System.getProperty("") so that we are compatible with Android/GWT);</div>
 </dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFileConstants.html#EQ" class="member-name-link">EQ</a> - Static variable in interface com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFileConstants.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">TagFileConstants</a></dt>
 <dd>
@@ -363,7 +372,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>&nbsp;</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#getMessage()" class="member-name-link">getMessage()</a> - Method in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#getMessage()" class="member-name-link">getMessage()</a> - Method in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">You can also modify the body of this method to customize your error messages.</div>
 </dd>
@@ -504,7 +513,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#inputStream" class="member-name-link">inputStream</a> - Variable in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#INVALID_LEXICAL_STATE" class="member-name-link">INVALID_LEXICAL_STATE</a> - Static variable in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#INVALID_LEXICAL_STATE" class="member-name-link">INVALID_LEXICAL_STATE</a> - Static variable in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">Tried to change to an invalid lexical state.</div>
 </dd>
@@ -673,11 +682,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#LEXICAL_ERROR" class="member-name-link">LEXICAL_ERROR</a> - Static variable in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#LEXICAL_ERROR" class="member-name-link">LEXICAL_ERROR</a> - Static variable in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">Lexical error occurred.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#LexicalErr(boolean,int,int,int,java.lang.String,int)" class="member-name-link">LexicalErr(boolean, int, int, int, String, int)</a> - Static method in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#LexicalErr(boolean,int,int,int,java.lang.String,int)" class="member-name-link">LexicalErr(boolean, int, int, int, String, int)</a> - Static method in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">Returns a detailed message for the Error when it is thrown by the
  token manager to indicate a lexical error.</div>
@@ -688,7 +697,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#line" class="member-name-link">line</a> - Variable in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#LOOP_DETECTED" class="member-name-link">LOOP_DETECTED</a> - Static variable in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#LOOP_DETECTED" class="member-name-link">LOOP_DETECTED</a> - Static variable in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">Detected (and bailed out of) an infinite loop in the token manager.</div>
 </dd>
@@ -757,6 +766,8 @@ loadScripts(document, 'script');</script>
  purpose you can think of.</div>
 </dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/ParseException.html#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.Token,int%5B%5D%5B%5D,java.lang.String%5B%5D)" class="member-name-link">ParseException(Token, int[][], String[])</a> - Constructor for exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/ParseException.html#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.Token,int%5B%5D%5B%5D,java.lang.String%5B%5D,java.lang.String)" class="member-name-link">ParseException(Token, int[][], String[], String)</a> - Constructor for exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></dt>
 <dd>
 <div class="block">This constructor is used by the method "generateParseException"
  in the generated parser.</div>
@@ -775,14 +786,40 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#prevCharIsLF" class="member-name-link">prevCharIsLF</a> - Variable in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/Provider.html" class="type-name-link" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a> - Interface in <a href="com/sun/tlddoc/tagfileparser/javacc/package-summary.html">com.sun.tlddoc.tagfileparser.javacc</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/JJTTagFileState.html#pushNode(com.sun.tlddoc.tagfileparser.javacc.Node)" class="member-name-link">pushNode(Node)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/JJTTagFileState.html" title="class in com.sun.tlddoc.tagfileparser.javacc">JJTTagFileState</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/Provider.html#read(char%5B%5D,int,int)" class="member-name-link">read(char[], int, int)</a> - Method in interface com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/Provider.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a></dt>
+<dd>
+<div class="block">Reads characters into an array</div>
+</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html#read(char%5B%5D,int,int)" class="member-name-link">read(char[], int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html" title="class in com.sun.tlddoc.tagfileparser.javacc">StreamProvider</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StringProvider.html#read(char%5B%5D,int,int)" class="member-name-link">read(char[], int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StringProvider.html" title="class in com.sun.tlddoc.tagfileparser.javacc">StringProvider</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#readChar()" class="member-name-link">readChar()</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
 <dd>
 <div class="block">Read a character.</div>
+</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(com.sun.tlddoc.tagfileparser.javacc.Provider)" class="member-name-link">ReInit(Provider)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
+<dd>
+<div class="block">Reinitialise.</div>
+</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#ReInit(com.sun.tlddoc.tagfileparser.javacc.Provider)" class="member-name-link">ReInit(Provider)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
+<dd>
+<div class="block">Reinitialise.</div>
+</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(com.sun.tlddoc.tagfileparser.javacc.Provider,int,int)" class="member-name-link">ReInit(Provider, int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
+<dd>
+<div class="block">Reinitialise.</div>
+</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(com.sun.tlddoc.tagfileparser.javacc.Provider,int,int,int)" class="member-name-link">ReInit(Provider, int, int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
+<dd>
+<div class="block">Reinitialise.</div>
 </dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFileTokenManager.html#ReInit(com.sun.tlddoc.tagfileparser.javacc.SimpleCharStream)" class="member-name-link">ReInit(SimpleCharStream)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFileTokenManager.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFileTokenManager</a></dt>
 <dd>
@@ -796,54 +833,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Reinitialise.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(java.io.InputStream)" class="member-name-link">ReInit(InputStream)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#ReInit(java.io.InputStream)" class="member-name-link">ReInit(InputStream)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(java.io.InputStream,int,int)" class="member-name-link">ReInit(InputStream, int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(java.io.InputStream,int,int,int)" class="member-name-link">ReInit(InputStream, int, int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(java.io.InputStream,java.lang.String)" class="member-name-link">ReInit(InputStream, String)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#ReInit(java.io.InputStream,java.lang.String)" class="member-name-link">ReInit(InputStream, String)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(java.io.InputStream,java.lang.String,int,int)" class="member-name-link">ReInit(InputStream, String, int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(java.io.InputStream,java.lang.String,int,int,int)" class="member-name-link">ReInit(InputStream, String, int, int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(java.io.Reader)" class="member-name-link">ReInit(Reader)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#ReInit(java.io.Reader)" class="member-name-link">ReInit(Reader)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(java.io.Reader,int,int)" class="member-name-link">ReInit(Reader, int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#ReInit(java.io.Reader,int,int,int)" class="member-name-link">ReInit(Reader, int, int, int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Reinitialise.</div>
-</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#ReInit(java.lang.String)" class="member-name-link">ReInit(String)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/JJTTagFileState.html#reset()" class="member-name-link">reset()</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/JJTTagFileState.html" title="class in com.sun.tlddoc.tagfileparser.javacc">JJTTagFileState</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/JJTTagFileState.html#rootNode()" class="member-name-link">rootNode()</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/JJTTagFileState.html" title="class in com.sun.tlddoc.tagfileparser.javacc">JJTTagFileState</a></dt>
@@ -894,39 +885,15 @@ loadScripts(document, 'script');</script>
 <div class="block">An implementation of interface CharStream, where the stream is assumed to
  contain only ASCII characters (without unicode processing).</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(java.io.InputStream)" class="member-name-link">SimpleCharStream(InputStream)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.Provider)" class="member-name-link">SimpleCharStream(Provider)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
 <dd>
 <div class="block">Constructor.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(java.io.InputStream,int,int)" class="member-name-link">SimpleCharStream(InputStream, int, int)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.Provider,int,int)" class="member-name-link">SimpleCharStream(Provider, int, int)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
 <dd>
 <div class="block">Constructor.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(java.io.InputStream,int,int,int)" class="member-name-link">SimpleCharStream(InputStream, int, int, int)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Constructor.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(java.io.InputStream,java.lang.String)" class="member-name-link">SimpleCharStream(InputStream, String)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Constructor.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(java.io.InputStream,java.lang.String,int,int)" class="member-name-link">SimpleCharStream(InputStream, String, int, int)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Constructor.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(java.io.InputStream,java.lang.String,int,int,int)" class="member-name-link">SimpleCharStream(InputStream, String, int, int, int)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Constructor.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(java.io.Reader)" class="member-name-link">SimpleCharStream(Reader)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Constructor.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(java.io.Reader,int,int)" class="member-name-link">SimpleCharStream(Reader, int, int)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
-<dd>
-<div class="block">Constructor.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(java.io.Reader,int,int,int)" class="member-name-link">SimpleCharStream(Reader, int, int, int)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.Provider,int,int,int)" class="member-name-link">SimpleCharStream(Provider, int, int, int)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></dt>
 <dd>
 <div class="block">Constructor.</div>
 </dd>
@@ -941,7 +908,7 @@ loadScripts(document, 'script');</script>
 <div class="block">This field is used to access special tokens that occur prior to this
  token, but after the immediately preceding regular (non-special) token.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#STATIC_LEXER_ERROR" class="member-name-link">STATIC_LEXER_ERROR</a> - Static variable in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#STATIC_LEXER_ERROR" class="member-name-link">STATIC_LEXER_ERROR</a> - Static variable in exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">An attempt was made to create a second instance of a static token manager.</div>
 </dd>
@@ -949,6 +916,20 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Whether parser is static.</div>
 </dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">StreamProvider</a> - Class in <a href="com/sun/tlddoc/tagfileparser/javacc/package-summary.html">com.sun.tlddoc.tagfileparser.javacc</a></dt>
+<dd>
+<div class="block">NOTE : This generated class can be safely deleted if installing in a GWT installation (use StringProvider instead)</div>
+</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html#%3Cinit%3E(java.io.InputStream)" class="member-name-link">StreamProvider(InputStream)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html" title="class in com.sun.tlddoc.tagfileparser.javacc">StreamProvider</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html#%3Cinit%3E(java.io.InputStream,java.lang.String)" class="member-name-link">StreamProvider(InputStream, String)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html" title="class in com.sun.tlddoc.tagfileparser.javacc">StreamProvider</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html#%3Cinit%3E(java.io.Reader)" class="member-name-link">StreamProvider(Reader)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html" title="class in com.sun.tlddoc.tagfileparser.javacc">StreamProvider</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StringProvider.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">StringProvider</a> - Class in <a href="com/sun/tlddoc/tagfileparser/javacc/package-summary.html">com.sun.tlddoc.tagfileparser.javacc</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/StringProvider.html#%3Cinit%3E(java.lang.String)" class="member-name-link">StringProvider(String)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StringProvider.html" title="class in com.sun.tlddoc.tagfileparser.javacc">StringProvider</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFileTokenManager.html#SwitchTo(int)" class="member-name-link">SwitchTo(int)</a> - Method in class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFileTokenManager.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFileTokenManager</a></dt>
 <dd>
 <div class="block">Switch to specified lex state.</div>
@@ -970,19 +951,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Simple parser for tag files that only actually parses the directives.</div>
 </dd>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.Provider)" class="member-name-link">TagFile(Provider)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
+<dd>
+<div class="block">Constructor.</div>
+</dd>
 <dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.TagFileTokenManager)" class="member-name-link">TagFile(TagFileTokenManager)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
 <dd>
 <div class="block">Constructor with generated Token Manager.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#%3Cinit%3E(java.io.InputStream)" class="member-name-link">TagFile(InputStream)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
-<dd>
-<div class="block">Constructor with InputStream.</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#%3Cinit%3E(java.io.InputStream,java.lang.String)" class="member-name-link">TagFile(InputStream, String)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
-<dd>
-<div class="block">Constructor with InputStream and supplied encoding</div>
-</dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#%3Cinit%3E(java.io.Reader)" class="member-name-link">TagFile(Reader)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html#%3Cinit%3E(java.lang.String)" class="member-name-link">TagFile(String)</a> - Constructor for class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></dt>
 <dd>
 <div class="block">Constructor.</div>
 </dd>
@@ -1065,19 +1042,19 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Literal token values.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a> - Exception Class in <a href="com/sun/tlddoc/tagfileparser/javacc/package-summary.html">com.sun.tlddoc.tagfileparser.javacc</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a> - Exception Class in <a href="com/sun/tlddoc/tagfileparser/javacc/package-summary.html">com.sun.tlddoc.tagfileparser.javacc</a></dt>
 <dd>
 <div class="block">Token Manager Error.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#%3Cinit%3E()" class="member-name-link">TokenMgrError()</a> - Constructor for exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#%3Cinit%3E()" class="member-name-link">TokenMgrException()</a> - Constructor for exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">No arg constructor.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#%3Cinit%3E(boolean,int,int,int,java.lang.String,int,int)" class="member-name-link">TokenMgrError(boolean, int, int, int, String, int, int)</a> - Constructor for exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#%3Cinit%3E(boolean,int,int,int,java.lang.String,int,int)" class="member-name-link">TokenMgrException(boolean, int, int, int, String, int, int)</a> - Constructor for exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">Full Constructor.</div>
 </dd>
-<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html#%3Cinit%3E(java.lang.String,int)" class="member-name-link">TokenMgrError(String, int)</a> - Constructor for exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></dt>
+<dt><a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html#%3Cinit%3E(java.lang.String,int)" class="member-name-link">TokenMgrException(String, int)</a> - Constructor for exception class com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></dt>
 <dd>
 <div class="block">Constructor with message and reason.</div>
 </dd>

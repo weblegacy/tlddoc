@@ -69,6 +69,8 @@ loadScripts(document, 'script');</script>
 <li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/JJTTagFileState.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">JJTTagFileState</a></li>
 <li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleCharStream.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleCharStream</a></li>
 <li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/SimpleNode.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleNode</a> (implements com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/Node.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">Node</a>)</li>
+<li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StreamProvider.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">StreamProvider</a> (implements com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/Provider.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a>)</li>
+<li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/StringProvider.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">StringProvider</a> (implements com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/Provider.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a>)</li>
 <li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFile.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a> (implements com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFileConstants.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">TagFileConstants</a>, com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFileTreeConstants.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">TagFileTreeConstants</a>)</li>
 <li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFileTokenManager.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFileTokenManager</a> (implements com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFileConstants.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">TagFileConstants</a>)</li>
 <li class="circle">com.sun.tlddoc.<a href="com/sun/tlddoc/TagLibrary.html" class="type-name-link" title="class in com.sun.tlddoc">TagLibrary</a> (implements java.lang.<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html" title="class or interface in java.lang" class="external-link">AutoCloseable</a>)
@@ -82,15 +84,15 @@ loadScripts(document, 'script');</script>
 </li>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html" class="type-name-link external-link" title="class or interface in java.lang">Throwable</a> (implements java.io.<a href="https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
 <ul>
-<li class="circle">java.lang.<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Error.html" class="type-name-link external-link" title="class or interface in java.lang">Error</a>
-<ul>
-<li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrError.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrError</a></li>
-</ul>
-</li>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html" class="type-name-link external-link" title="class or interface in java.lang">Exception</a>
 <ul>
 <li class="circle">com.sun.tlddoc.<a href="com/sun/tlddoc/GeneratorException.html" class="type-name-link" title="class in com.sun.tlddoc">GeneratorException</a></li>
 <li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/ParseException.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></li>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/RuntimeException.html" class="type-name-link external-link" title="class or interface in java.lang">RuntimeException</a>
+<ul>
+<li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TokenMgrException.html" class="type-name-link" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -106,6 +108,7 @@ loadScripts(document, 'script');</script>
 <h2 title="Interface Hierarchy">Interface Hierarchy</h2>
 <ul>
 <li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/Node.html" class="type-name-link" title="interface in com.sun.tlddoc.tagfileparser.javacc">Node</a></li>
+<li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/Provider.html" class="type-name-link" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a></li>
 <li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFileConstants.html" class="type-name-link" title="interface in com.sun.tlddoc.tagfileparser.javacc">TagFileConstants</a></li>
 <li class="circle">com.sun.tlddoc.tagfileparser.javacc.<a href="com/sun/tlddoc/tagfileparser/javacc/TagFileTreeConstants.html" class="type-name-link" title="interface in com.sun.tlddoc.tagfileparser.javacc">TagFileTreeConstants</a></li>
 </ul>

@@ -161,21 +161,16 @@ implements <a href="TagFileTreeConstants.html" title="interface in com.sun.tlddo
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.TagFileTokenManager)" class="member-name-link">TagFile</a><wbr>(<a href="TagFileTokenManager.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFileTokenManager</a>&nbsp;tm)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.Provider)" class="member-name-link">TagFile</a><wbr>(<a href="Provider.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a>&nbsp;stream)</code></div>
 <div class="col-last even-row-color">
+<div class="block">Constructor.</div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.TagFileTokenManager)" class="member-name-link">TagFile</a><wbr>(<a href="TagFileTokenManager.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFileTokenManager</a>&nbsp;tm)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Constructor with generated Token Manager.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.io.InputStream)" class="member-name-link">TagFile</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream)</code></div>
-<div class="col-last odd-row-color">
-<div class="block">Constructor with InputStream.</div>
-</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.io.InputStream,java.lang.String)" class="member-name-link">TagFile</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream,
- <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;encoding)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">TagFile</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dsl)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Constructor with InputStream and supplied encoding</div>
-</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.io.Reader)" class="member-name-link">TagFile</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/Reader.html" title="class or interface in java.io" class="external-link">Reader</a>&nbsp;stream)</code></div>
-<div class="col-last odd-row-color">
 <div class="block">Constructor.</div>
 </div>
 </div>
@@ -210,7 +205,7 @@ implements <a href="TagFileTreeConstants.html" title="interface in com.sun.tlddo
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Generate ParseException.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../Directives.html" title="class in com.sun.tlddoc.tagfileparser">Directives</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../Directive.html" title="class in com.sun.tlddoc.tagfileparser">Directive</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDirectives()" class="member-name-link">getDirectives</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the list of directives in this tag file.</div>
@@ -225,7 +220,7 @@ implements <a href="TagFileTreeConstants.html" title="interface in com.sun.tlddo
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get the specific Token.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="SimpleNode.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleNode</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#Input()" class="member-name-link">Input</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
@@ -253,43 +248,35 @@ implements <a href="TagFileTreeConstants.html" title="interface in com.sun.tlddo
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parse(java.io.InputStream)" class="member-name-link">parse</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;in)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#ReInit(com.sun.tlddoc.tagfileparser.javacc.TagFileTokenManager)" class="member-name-link">ReInit</a><wbr>(<a href="TagFileTokenManager.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFileTokenManager</a>&nbsp;tm)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#ReInit(com.sun.tlddoc.tagfileparser.javacc.Provider)" class="member-name-link">ReInit</a><wbr>(<a href="Provider.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a>&nbsp;stream)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Reinitialise.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#ReInit(java.io.InputStream)" class="member-name-link">ReInit</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#ReInit(com.sun.tlddoc.tagfileparser.javacc.TagFileTokenManager)" class="member-name-link">ReInit</a><wbr>(<a href="TagFileTokenManager.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFileTokenManager</a>&nbsp;tm)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Reinitialise.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#ReInit(java.io.InputStream,java.lang.String)" class="member-name-link">ReInit</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream,
- <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;encoding)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Reinitialise.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#ReInit(java.io.Reader)" class="member-name-link">ReInit</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/Reader.html" title="class or interface in java.io" class="external-link">Reader</a>&nbsp;stream)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#ReInit(java.lang.String)" class="member-name-link">ReInit</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#trace_enabled()" class="member-name-link">trace_enabled</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Reinitialise.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#trace_enabled()" class="member-name-link">trace_enabled</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Trace enabled.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#XMLAttributeName()" class="member-name-link">XMLAttributeName</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#XMLAttributeName()" class="member-name-link">XMLAttributeName</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#XMLAttributeValue()" class="member-name-link">XMLAttributeValue</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#XMLAttributeValue()" class="member-name-link">XMLAttributeValue</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#XMLDirective()" class="member-name-link">XMLDirective</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#XMLDirective()" class="member-name-link">XMLDirective</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#XMLDirectiveName()" class="member-name-link">XMLDirectiveName</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#XMLDirectiveName()" class="member-name-link">XMLDirectiveName</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -350,25 +337,24 @@ implements <a href="TagFileTreeConstants.html" title="interface in com.sun.tlddo
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.io.InputStream)">
+<section class="detail" id="&lt;init&gt;(com.sun.tlddoc.tagfileparser.javacc.Provider)">
 <h3>TagFile</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TagFile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream)</span></div>
-<div class="block">Constructor with InputStream.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(java.io.InputStream,java.lang.String)">
-<h3>TagFile</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TagFile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream,
- <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;encoding)</span></div>
-<div class="block">Constructor with InputStream and supplied encoding</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(java.io.Reader)">
-<h3>TagFile</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TagFile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/Reader.html" title="class or interface in java.io" class="external-link">Reader</a>&nbsp;stream)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TagFile</span><wbr><span class="parameters">(<a href="Provider.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a>&nbsp;stream)</span></div>
 <div class="block">Constructor.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(java.lang.String)">
+<h3>TagFile</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">TagFile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;dsl)</span>
+        throws <span class="exceptions"><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a>,
+<a href="TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></span></div>
+<div class="block">Constructor.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></code></dd>
+<dd><code><a href="TokenMgrException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TokenMgrException</a></code></dd>
+</dl>
 </section>
 </li>
 <li>
@@ -390,10 +376,12 @@ implements <a href="TagFileTreeConstants.html" title="interface in com.sun.tlddo
 <section class="detail" id="parse(java.io.InputStream)">
 <h3>parse</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="TagFile.html" title="class in com.sun.tlddoc.tagfileparser.javacc">TagFile</a></span>&nbsp;<span class="element-name">parse</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;in)</span>
-                     throws <span class="exceptions"><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></span></div>
+                     throws <span class="exceptions"><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a>,
+<a href="https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
 </dl>
 </section>
 </li>
@@ -401,17 +389,19 @@ implements <a href="TagFileTreeConstants.html" title="interface in com.sun.tlddo
 <section class="detail" id="main(java.lang.String[])">
 <h3>main</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">main</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</span>
-                 throws <span class="exceptions"><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></span></div>
+                 throws <span class="exceptions"><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a>,
+<a href="https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getDirectives()">
 <h3>getDirectives</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../Directives.html" title="class in com.sun.tlddoc.tagfileparser">Directives</a></span>&nbsp;<span class="element-name">getDirectives</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../Directive.html" title="class in com.sun.tlddoc.tagfileparser">Directive</a>&gt;</span>&nbsp;<span class="element-name">getDirectives</span>()</div>
 <div class="block">Returns the list of directives in this tag file.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -422,8 +412,8 @@ implements <a href="TagFileTreeConstants.html" title="interface in com.sun.tlddo
 <li>
 <section class="detail" id="Input()">
 <h3>Input</h3>
-<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="SimpleNode.html" title="class in com.sun.tlddoc.tagfileparser.javacc">SimpleNode</a></span>&nbsp;<span class="element-name">Input</span>()
-                       throws <span class="exceptions"><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></span></div>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">Input</span>()
+                 throws <span class="exceptions"><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></span></div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="ParseException.html" title="class in com.sun.tlddoc.tagfileparser.javacc">ParseException</a></code></dd>
@@ -552,24 +542,15 @@ implements <a href="TagFileTreeConstants.html" title="interface in com.sun.tlddo
 </section>
 </li>
 <li>
-<section class="detail" id="ReInit(java.io.InputStream)">
+<section class="detail" id="ReInit(java.lang.String)">
 <h3>ReInit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">ReInit</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream)</span></div>
-<div class="block">Reinitialise.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">ReInit</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="ReInit(java.io.InputStream,java.lang.String)">
+<section class="detail" id="ReInit(com.sun.tlddoc.tagfileparser.javacc.Provider)">
 <h3>ReInit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">ReInit</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream,
- <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;encoding)</span></div>
-<div class="block">Reinitialise.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="ReInit(java.io.Reader)">
-<h3>ReInit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">ReInit</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/Reader.html" title="class or interface in java.io" class="external-link">Reader</a>&nbsp;stream)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">ReInit</span><wbr><span class="parameters">(<a href="Provider.html" title="interface in com.sun.tlddoc.tagfileparser.javacc">Provider</a>&nbsp;stream)</span></div>
 <div class="block">Reinitialise.</div>
 </section>
 </li>

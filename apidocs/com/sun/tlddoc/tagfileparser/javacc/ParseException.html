@@ -137,7 +137,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code>protected static <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#EOL" class="member-name-link">EOL</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">The end of line string for this machine.</div>
+<div class="block">The end of line string (we do not use System.getProperty("") so that we are compatible with Android/GWT);</div>
 </div>
 <div class="col-first even-row-color"><code>int[][]</code></div>
 <div class="col-second even-row-color"><code><a href="#expectedTokenSequences" class="member-name-link">expectedTokenSequences</a></code></div>
@@ -169,12 +169,17 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.Token,int%5B%5D%5B%5D,java.lang.String%5B%5D)" class="member-name-link">ParseException</a><wbr>(<a href="Token.html" title="class in com.sun.tlddoc.tagfileparser.javacc">Token</a>&nbsp;currentTokenVal,
  int[][]&nbsp;expectedTokenSequencesVal,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokenImageVal)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.sun.tlddoc.tagfileparser.javacc.Token,int%5B%5D%5B%5D,java.lang.String%5B%5D,java.lang.String)" class="member-name-link">ParseException</a><wbr>(<a href="Token.html" title="class in com.sun.tlddoc.tagfileparser.javacc">Token</a>&nbsp;currentTokenVal,
+ int[][]&nbsp;expectedTokenSequencesVal,
+ <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokenImageVal,
+ <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;lexicalStateName)</code></div>
+<div class="col-last even-row-color">
 <div class="block">This constructor is used by the method "generateParseException"
  in the generated parser.</div>
 </div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">ParseException</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
-<div class="col-last even-row-color">
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">ParseException</a><wbr>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Constructor with message.</div>
 </div>
 </div>
@@ -205,7 +210,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="EOL">
 <h3>EOL</h3>
 <div class="member-signature"><span class="modifiers">protected static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">EOL</span></div>
-<div class="block">The end of line string for this machine.</div>
+<div class="block">The end of line string (we do not use System.getProperty("") so that we are compatible with Android/GWT);</div>
 </section>
 </li>
 <li>
@@ -249,6 +254,15 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ParseException</span><wbr><span class="parameters">(<a href="Token.html" title="class in com.sun.tlddoc.tagfileparser.javacc">Token</a>&nbsp;currentTokenVal,
  int[][]&nbsp;expectedTokenSequencesVal,
  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokenImageVal)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(com.sun.tlddoc.tagfileparser.javacc.Token,int[][],java.lang.String[],java.lang.String)">
+<h3>ParseException</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ParseException</span><wbr><span class="parameters">(<a href="Token.html" title="class in com.sun.tlddoc.tagfileparser.javacc">Token</a>&nbsp;currentTokenVal,
+ int[][]&nbsp;expectedTokenSequencesVal,
+ <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokenImageVal,
+ <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;lexicalStateName)</span></div>
 <div class="block">This constructor is used by the method "generateParseException"
  in the generated parser.  Calling this constructor generates
  a new object of this type with the fields "currentToken",
