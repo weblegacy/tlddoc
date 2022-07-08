@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Normalize all the line endings
 * Correct `sourcepath` of `maven-javadoc-plugin`
 * Correct some JavaDoc's
 * Return `List` instead of `Iterator` in `Directive.getAttributes`
