@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Bump `maven-enforcer-plugin` from 3.0.0 to 3.1.0
 * Bump `maven-assembly-plugin` from 3.3.0 to 3.4.1
 * Make `JavaCC` dependency optional
 * Normalize all the line endings

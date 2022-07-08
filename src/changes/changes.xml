@@ -9,6 +9,7 @@
   </properties>
   <body>
     <release version="1.4-SNAPSHOT" date="YYYY-MM-DD" description="">
+      <action type="update" dev="ste-gr">Bump &quot;maven-enforcer-plugin&quot; from 3.0.0 to 3.1.0</action>
       <action type="update" dev="ste-gr">Bump &quot;maven-assembly-plugin&quot; from 3.3.0 to 3.4.1</action>
       <action type="update" dev="ste-gr">Return &quot;List&quot; instead of &quot;Iterator&quot; in &quot;Directive.getAttributes&quot;</action>
       <action type="update" dev="ste-gr">Simplify &quot;toString&quot; in &quot;Directives&quot; and &quot;Directive&quot;</action>
