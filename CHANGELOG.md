@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Bump `maven-surefire-plugin` from 3.0.0-M6 to 3.0.0-M7
 * Bump `maven-release-plugin` from 3.0.0-M5 to 3.0.0-M6
 * Bump `maven-pmd-plugin` from 3.16.0 to 3.17.0
 * Bump `maven-enforcer-plugin` from 3.0.0 to 3.1.0
