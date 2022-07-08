@@ -171,10 +171,6 @@
           </plugin>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-              <!-- Add config sourcepath because https://issues.apache.org/jira/browse/MJAVADOC-700 -->
-              <sourcepath>${basedir}/src/main/java:${outputDirectoryJavacc}</sourcepath>
-            </configuration>
             <executions>
               <execution>
                 <id>attach-javadoc</id>
@@ -283,6 +279,8 @@
             <doclint>all,-missing</doclint>
             <notimestamp>true</notimestamp>
             <source>${javaVersion}</source>
+            <!-- Add config sourcepath because https://issues.apache.org/jira/browse/MJAVADOC-700 -->
+            <sourcepath>${basedir}/src/main/java:${outputDirectoryJavacc}</sourcepath>
           </configuration>
         </plugin>
         <plugin>
@@ -653,10 +651,6 @@
             <reports>
               <report>javadoc-no-fork</report>
             </reports>
-            <configuration>
-              <!-- Add config sourcepath because https://issues.apache.org/jira/browse/MJAVADOC-700 -->
-              <sourcepath>${basedir}/src/main/java:${outputDirectoryJavacc}</sourcepath>
-            </configuration>
           </reportSet>
           <reportSet>
             <id>generate-javadoc-test-source</id>
@@ -665,7 +659,7 @@
             </reports>
             <configuration>
               <!-- Add config sourcepath because https://issues.apache.org/jira/browse/MJAVADOC-700 -->
-              <sourcepath>${basedir}/src/main/java;${outputDirectoryJavacc}</sourcepath>
+              <sourcepath>${basedir}/src/test/java</sourcepath>
             </configuration>
           </reportSet>
         </reportSets>
