@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Bump `maven-assembly-plugin` from 3.3.0 to 3.4.1
 * Make `JavaCC` dependency optional
 * Normalize all the line endings
 * Correct `sourcepath` of `maven-javadoc-plugin`
