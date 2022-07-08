@@ -1,5 +1,6 @@
 # 1.4 / YYYY-MM-DD
 
+* Make `JavaCC` dependency optional
 * Normalize all the line endings
 * Correct `sourcepath` of `maven-javadoc-plugin`
 * Correct some JavaDoc's
