@@ -1,5 +1,8 @@
-# 1.4 / YYYY-MM-DD
+# Change-Log
 
+## 1.4 / YYYY-MM-DD
+
+* Lint markdown-files
 * Bump `spotbugs-maven-plugin` from 4.7.0.0 to 4.7.1.0
 * Bump `maven-surefire-plugin` from 3.0.0-M6 to 3.0.0-M7
 * Bump `maven-release-plugin` from 3.0.0-M5 to 3.0.0-M6
@@ -88,19 +91,19 @@
 * Add new maintainer
 * Set Version to 1.4-SNAPSHOT
 
-# 1.3 / 2022-04-07
+## 1.3 / 2022-04-07
 
 * Add CHANGELOG to assemblies
 * Update site-documentation
 * Source from TLDDoc 1.3 without tests
 
-# 1.2 / 2022-04-07
+## 1.2 / 2022-04-07
 
 * Add site-documentation (reconstructed)
 * Add developer and contributor to POM
 * Reconstructed Source from TLDDoc 1.2 without tests
 
-# 1.1 / 2022-04-07
+## 1.1 / 2022-04-07
 
 * Full updated POM
 * Reconstructed Source from TLDDoc 1.1 without tests

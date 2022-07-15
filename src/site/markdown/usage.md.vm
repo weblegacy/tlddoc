@@ -13,7 +13,7 @@ generate documentation for a single TLD file, a set of TLD files, a JAR file, a
 WAR file, a directory of tag files, or all the tag libraries in a web
 application. Then, simply invoke as follows:
 
-~~~~~~~~~~~
+~~~~~~~~~~~bash
 java -jar tlddoc-${project.version}.jar -d <outdir> <tlds>
 ~~~~~~~~~~~
 
@@ -44,7 +44,7 @@ build process using the `<java>` task. Just add the following code to your
 
 Using JDK 8 or greater:
 
-~~~~~~~~~~~
+~~~~~~~~~~~xml
 <java fork="true" jar="${tlddoc.path}/tlddoc-${project.version}.jar"
       failonerror="true">
   <arg line="-d ${build}/taglibs/doc"/>
