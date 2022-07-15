@@ -34,7 +34,7 @@
 
         <div id="breadcrumbs">
           <ul class="breadcrumb">
-        <li id="publishDate">Last Published: 2022-07-07<span class="divider">|</span>
+        <li id="publishDate">Last Published: 2022-07-15<span class="divider">|</span>
 </li>
           <li id="projectVersion">Version: 1.4-SNAPSHOT</li>
           </ul>
@@ -84,7 +84,7 @@ generate documentation for a single TLD file, a set of TLD files, a JAR file, a
 WAR file, a directory of tag files, or all the tag libraries in a web
 application. Then, simply invoke as follows:</p>
 
-<div class="source"><pre class="prettyprint linenums"><code>java -jar tlddoc-1.4-SNAPSHOT.jar -d &lt;outdir&gt; &lt;tlds&gt;
+<div class="source"><pre class="prettyprint linenums"><code class="language-bash">java -jar tlddoc-1.4-SNAPSHOT.jar -d &lt;outdir&gt; &lt;tlds&gt;
 </code></pre></div>
 <p>Where &lt;outdir&gt; is the directory in which to produce the output and &lt;tlds&gt; is
 the list of files or directories to examine. The -doctitle and -windowtitle
@@ -107,7 +107,7 @@ build process using the <code>&lt;java&gt;</code> task. Just add the following c
 <code>build.xml</code>.</p>
 <p>Using JDK 8 or greater:</p>
 
-<div class="source"><pre class="prettyprint linenums"><code>&lt;java fork=&quot;true&quot; jar=&quot;${tlddoc.path}/tlddoc-1.4-SNAPSHOT.jar&quot;
+<div class="source"><pre class="prettyprint linenums"><code class="language-xml">&lt;java fork=&quot;true&quot; jar=&quot;${tlddoc.path}/tlddoc-1.4-SNAPSHOT.jar&quot;
       failonerror=&quot;true&quot;&gt;
   &lt;arg line=&quot;-d ${build}/taglibs/doc&quot;/&gt;
   &lt;arg value=&quot;${src}/taglibs/tld/my1.tld&quot;/&gt;

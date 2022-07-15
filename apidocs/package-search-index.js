@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.sun.tlddoc"},{"l":"com.sun.tlddoc.tagfileparser"},{"l":"com.sun.tlddoc.tagfileparser.javacc"}];updateSearchResults();
