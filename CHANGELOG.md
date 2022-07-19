@@ -1,7 +1,8 @@
 # Change-Log
 
-## 1.4 / YYYY-MM-DD
+## 1.4 / 2022-07-19
 
+* Set Version to 1.4
 * Downgrade `maven-site-plugin` from 4.0.0-M1 to 3.12.0 because MPLUGIN-403
 * Lint markdown-files
 * Bump `spotbugs-maven-plugin` from 4.7.0.0 to 4.7.1.0
