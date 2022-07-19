@@ -2,6 +2,7 @@
 
 ## 1.4 / YYYY-MM-DD
 
+* Downgrade `maven-site-plugin` from 4.0.0-M1 to 3.12.0 because MPLUGIN-403
 * Lint markdown-files
 * Bump `spotbugs-maven-plugin` from 4.7.0.0 to 4.7.1.0
 * Bump `maven-surefire-plugin` from 3.0.0-M6 to 3.0.0-M7
