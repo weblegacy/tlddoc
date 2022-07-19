@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="FORMAT" timestamp="1657860195717">
-    <module artifactId="tlddoc" groupId="io.github.weblegacy" version="1.4-SNAPSHOT"/>
+<licensePluginReport goal="FORMAT" timestamp="1658241525553">
+    <module artifactId="tlddoc" groupId="io.github.weblegacy" version="1.4"/>
     <files>
         <file path="src/main/java/com/sun/tlddoc/Constants.java" result="NOOP"/>
         <file path="src/main/java/com/sun/tlddoc/GeneratorException.java" result="NOOP"/>
