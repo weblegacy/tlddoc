@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
-  - Copyright (c) 2022-2022, Web-Legacy
+  - Copyright (c) 2022-2023, Web-Legacy
   - All rights reserved.
   -
   - Redistribution and use in source and binary forms, with or without

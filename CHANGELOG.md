@@ -1,5 +1,9 @@
 # Change-Log
 
+## 1.5 / YYYY-MM-DD
+
+* Update year in copyright
+
 ## 1.4 / 2022-07-19
 
 * Set Version to 1.4
