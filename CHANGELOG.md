@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-gpg-plugin` from 3.0.1 to 3.1.0
 * Bump `maven-assembly-plugin` from 3.4.1 to 3.6.0
 * SpellFix in README
 * Update year in copyright
