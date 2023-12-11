@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-clean-plugin` from 3.2.0 to 3.3.2
 * Bump `checkstyle` from 9.3 to 10.12.6
 * Bump `maven-checkstyle-plugin` from 3.1.2 to 3.3.1
 * Bump `maven-gpg-plugin` from 3.0.1 to 3.1.0
