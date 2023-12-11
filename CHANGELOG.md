@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* SpellFix in README
 * Update year in copyright
 
 ## 1.4 / 2022-07-19

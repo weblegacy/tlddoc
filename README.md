@@ -8,7 +8,7 @@ For documentation see [https://weblegacy.github.io/tlddoc](https://weblegacy.git
 
 ## Building TLDDoc
 
-### Prerequesits
+### Prerequisites
 
 * Apache Maven 3.5.4\+
 * JDK 8\+
