@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Remove now unnecessary `lifecycle-mapping`
 * Use `javacc-maven-plugin` instead of `javacc` with `exec-maven-plugin`
 * Embellish the FAQ-text
 * Set minimum MAVEN-Version from 3.5.4 to 3.6.3
