@@ -374,8 +374,15 @@
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
-          <artifactId>exec-maven-plugin</artifactId>
-          <version>3.1.1</version>
+          <artifactId>javacc-maven-plugin</artifactId>
+          <version>3.0.1</version>
+          <dependencies>
+              <dependency>
+                <groupId>net.java.dev.javacc</groupId>
+                <artifactId>javacc</artifactId>
+                <version>7.0.13</version>
+              </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>com.mycila</groupId>
@@ -492,52 +499,6 @@
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>JJTree tag-file</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <arguments>
-                <argument>-cp</argument>
-                <classpath>
-                  <dependency>net.java.dev.javacc:javacc</dependency>
-                </classpath>
-                <argument>jjtree</argument>
-                <argument>-OUTPUT_DIRECTORY=${outputDirectoryJavacc}/com/sun/tlddoc/tagfileparser/javacc</argument>
-                <argument>${project.basedir}/src/main/jjtree/com/sun/tlddoc/tagfileparser/javacc/tag-file.jjt</argument>
-              </arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>JavaCC tag-file</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <arguments>
-                <argument>-cp</argument>
-                <classpath>
-                  <dependency>net.java.dev.javacc:javacc</dependency>
-                </classpath>
-                <argument>javacc</argument>
-                <argument>-OUTPUT_DIRECTORY=${outputDirectoryJavacc}/com/sun/tlddoc/tagfileparser/javacc</argument>
-                <argument>${outputDirectoryJavacc}/com/sun/tlddoc/tagfileparser/javacc/tag-file.jj</argument>
-              </arguments>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <executable>java</executable>
-          <addOutputToClasspath>false</addOutputToClasspath>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
         <executions>
           <execution>
@@ -563,6 +524,18 @@
                 <source>${outputDirectoryJavacc}</source>
               </sources>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>javacc-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>javacc</id>
+            <goals>
+              <goal>jjtree-javacc</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
@@ -610,22 +583,6 @@
       </plugin>
     </plugins>
   </build>
-
-  <dependencies>
-    <dependency>
-      <groupId>net.java.dev.javacc</groupId>
-      <artifactId>javacc</artifactId>
-      <version>7.0.13</version>
-      <scope>runtime</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>junit</artifactId>
-          <groupId>junit</groupId>
-        </exclusion>
-      </exclusions>
-      <optional>true</optional>
-    </dependency>
-  </dependencies>
 
   <reporting>
     <excludeDefaults>true</excludeDefaults>
