@@ -156,8 +156,8 @@
             </question>
             <answer>
                 <p>This error will happen if you are using a JSP 2.0 TLD, make sure you have
-                    xmlns="http://java.sun.com/xml/ns/j2ee" in your &lt;taglib&gt;
-                    element.</p>
+                    <code>xmlns="http://java.sun.com/xml/ns/j2ee"</code> in your
+                    <code>&lt;taglib&gt;</code> element.</p>
             </answer>
         </faq>
 
