@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `license-maven-plugin` from 4.2.rc3 to 4.3
 * Bump `exec-maven-plugin` from 3.0.0 to 3.1.1
 * Bump `build-helper-maven-plugin` from 3.3.0 to 3.5.0
 * Bump `spotbugs-maven-plugin` from 4.7.1.0 to 4.8.2.0
