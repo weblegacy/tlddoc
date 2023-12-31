@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-jxr-plugin` from 3.3.1 to 3.3.2
 * Bump `checkstyle` from 10.12.6 to 10.12.7
 * Bump `maven-jxr-plugin` from 3.2.0 to 3.3.1
 * Bump `maven-javadoc-plugin` from 3.4.0 to 3.6.3
