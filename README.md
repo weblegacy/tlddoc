@@ -10,7 +10,7 @@ For documentation see [https://weblegacy.github.io/tlddoc](https://weblegacy.git
 
 ### Prerequisites
 
-* Apache Maven 3.5.4\+
+* Apache Maven 3.6.3\+
 * JDK 8\+
 
 ### MAVEN-Profiles

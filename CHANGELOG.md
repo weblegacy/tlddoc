@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Set minimum MAVEN-Version from 3.5.4 to 3.6.3
 * Bump `maven-fluido-skin` from 1.11.0 to 1.12.0
 * Bump `javacc` from 7.0.12 to 7.0.13
 * Bump `license-maven-plugin` from 4.2.rc3 to 4.3
