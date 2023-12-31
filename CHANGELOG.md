@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `build-helper-maven-plugin` from 3.3.0 to 3.5.0
 * Bump `spotbugs-maven-plugin` from 4.7.1.0 to 4.8.2.0
 * Bump `maven-surefire-plugin` from 3.0.0-M7 to 3.2.3
 * Bump `maven-source-plugin` from 3.2.1 to 3.3.0
