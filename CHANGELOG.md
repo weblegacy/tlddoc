@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Adapt javadoc-configs after correction of open maven-javadoc-issues
 * Rename property `encoding` to `sourceEncoding`
 * Remove now unnecessary `lifecycle-mapping`
 * Use `javacc-maven-plugin` instead of `javacc` with `exec-maven-plugin`
