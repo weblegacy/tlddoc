@@ -114,9 +114,9 @@
   </issueManagement>
 
   <properties>
-    <encoding>UTF-8</encoding>
+    <sourceEncoding>UTF-8</sourceEncoding>
     <propertiesEncoding>ISO-8859-1</propertiesEncoding>
-    <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+    <project.build.sourceEncoding>${sourceEncoding}</project.build.sourceEncoding>
     <mavenVersion>3.6.3</mavenVersion>
     <javaVersion>8</javaVersion>
     <mainClass>com.sun.tlddoc.TLDDoc</mainClass>
@@ -335,7 +335,7 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.3.1</version>
           <configuration>
-            <encoding>${encoding}</encoding>
+            <encoding>${sourceEncoding}</encoding>
             <propertiesEncoding>${propertiesEncoding}</propertiesEncoding>
           </configuration>
         </plugin>
