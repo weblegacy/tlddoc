@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Update year 2024 in copyright
 * Adapt configuration from `maven-project-info-reports-plugin`
 * Remove unused property `outputDirectoryJavacc`
 * Adapt javadoc-configs after correction of open maven-javadoc-issues
@@ -41,7 +42,7 @@
 * Bump `maven-gpg-plugin` from 3.0.1 to 3.1.0
 * Bump `maven-assembly-plugin` from 3.4.1 to 3.6.0
 * SpellFix in README
-* Update year in copyright
+* Update year 2023 in copyright
 
 ## 1.4 / 2022-07-19
 

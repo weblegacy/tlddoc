@@ -3,7 +3,7 @@
 <!--
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
-  - Copyright (c) 2022-2023, Web-Legacy
+  - Copyright (c) 2022-2024, Web-Legacy
   - All rights reserved.
   -
   - Redistribution and use in source and binary forms, with or without
@@ -77,7 +77,7 @@
       <action type="update" dev="ste-gr">Bump &quot;maven-gpg-plugin&quot; from 3.0.1 to 3.1.0</action>
       <action type="update" dev="ste-gr">Bump &quot;maven-assembly-plugin&quot; from 3.4.1 to 3.6.0</action>
       <action type="fix" dev="ste-gr">SpellFix in README</action>
-      <action type="update" dev="ste-gr">Update year in copyright</action>
+      <action type="update" dev="ste-gr">Update year 2024 in copyright</action>
     </release>
     <release version="1.4" date="2022-07-19" description="Modernized release">
       <action type="fix" dev="ste-gr">Lint markdown-files</action>
