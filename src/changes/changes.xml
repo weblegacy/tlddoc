@@ -41,6 +41,7 @@
   </properties>
   <body>
     <release version="1.5" date="YYYY-MM-DD" description="Jakarta EE 9+">
+      <action type="fix" dev="ste-gr">Remove unused property &quot;outputDirectoryJavacc&quot;</action>
       <action type="fix" dev="ste-gr">Adapt javadoc-configs after correction of open maven-javadoc-issues</action>
       <action type="fix" dev="ste-gr">Rename property &quot;encoding&quot; to &quot;sourceEncoding&quot;</action>
       <action type="fix" dev="ste-gr">Remove now unnecessary &quot;lifecycle-mapping&quot;</action>

@@ -120,7 +120,6 @@
     <mavenVersion>3.6.3</mavenVersion>
     <javaVersion>8</javaVersion>
     <mainClass>com.sun.tlddoc.TLDDoc</mainClass>
-    <outputDirectoryJavacc>${project.build.directory}/generated-sources/javacc</outputDirectoryJavacc>
   </properties>
 
   <profiles>
@@ -531,11 +530,6 @@
     <plugins>
       <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <configuration>
-          <pluginManagementExcludes>
-            <pluginManagementExclude>org.eclipse.m2e:lifecycle-mapping</pluginManagementExclude>
-          </pluginManagementExcludes>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-jxr-plugin</artifactId>
