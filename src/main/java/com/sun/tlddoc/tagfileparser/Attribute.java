@@ -34,27 +34,27 @@ package com.sun.tlddoc.tagfileparser;
 /**
  * An attribute for this directive.
  *
- * @author  mroth
+ * @author mroth
  */
 public class Attribute {
 
     /**
-     * The name of this attribute
+     * The name of this attribute.
      */
     private String name;
 
     /**
-     * The value of this attribute
+     * The value of this attribute.
      */
     private String value;
 
     /**
-     * Creates a new instance of Attribute
+     * Creates a new instance of Attribute.
      *
-     * @param name of this attribute
+     * @param name  of this attribute
      * @param value of this attribute
      */
-    public Attribute( String name, String value ) {
+    public Attribute(String name, String value) {
         this.name = name;
         this.value = value;
     }

@@ -1,4 +1,4 @@
-# TLDDoc
+# TldDoc
 
 Clone of `Tag Library Documentation Generator`
 
@@ -6,7 +6,7 @@ Full [CHANGELOG](CHANGELOG.md)
 
 For documentation see [https://weblegacy.github.io/tlddoc](https://weblegacy.github.io/tlddoc)
 
-## Building TLDDoc
+## Building TldDoc
 
 ### Prerequisites
 

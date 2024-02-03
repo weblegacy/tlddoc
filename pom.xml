@@ -39,7 +39,7 @@
   <version>1.4</version>
   <packaging>jar</packaging>
 
-  <name>TLDDoc</name>
+  <name>TldDoc</name>
   <description>
     Tag Library Documentation Generator is a utility for automatically generating
     javadoc-style documentation for JavaServer Pages (JSP) Technology Tag Libraries.
@@ -119,7 +119,7 @@
     <project.build.sourceEncoding>${sourceEncoding}</project.build.sourceEncoding>
     <mavenVersion>3.6.3</mavenVersion>
     <javaVersion>8</javaVersion>
-    <mainClass>com.sun.tlddoc.TLDDoc</mainClass>
+    <mainClass>com.sun.tlddoc.TldDoc</mainClass>
   </properties>
 
   <profiles>

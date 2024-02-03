@@ -43,43 +43,41 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
- * Tag library that gets its information from a TLD file in a JAR that's
- * packaged inside a WAR.
+ * Tag library that gets its information from a TLD file in a JAR that's packaged inside a WAR.
  *
- * @author  mroth
+ * @author mroth
  */
-public class WARJARTLDFileTagLibrary extends TagLibrary {
+public class WarJarTldFileTagLibrary extends TagLibrary {
 
     /**
-     * The WAR containing the JAR
+     * The WAR containing the JAR.
      */
-    final private File war;
+    private final File war;
 
     /**
-     * The WAR-file itself
+     * The WAR-file itself.
      */
     private JarFile warFile = null;
 
     /**
-     * The JAR containing the TLD file
+     * The JAR containing the TLD file.
      */
-    final private String warEntryName;
+    private final String warEntryName;
 
     /**
-     * The name of the JarEntry containing the TLD file
+     * The name of the JarEntry containing the TLD file.
      */
-    final private String tldPath;
+    private final String tldPath;
 
     /**
-     * Creates a new instance of {@link WARJARTLDFileTagLibrary}
+     * Creates a new instance of {@link WarJarTldFileTagLibrary}.
      *
-     * @param war WAR containing the JAR
+     * @param war          WAR containing the JAR
      * @param warEntryName JAR containing the TLD file
-     * @param tldPath name of the {@code JarEntry} containing the TLD file
+     * @param tldPath      name of the {@code JarEntry} containing the TLD file
      */
-    public WARJARTLDFileTagLibrary(File war, String warEntryName,
-        String tldPath)
-    {
+    public WarJarTldFileTagLibrary(File war, String warEntryName,
+            String tldPath) {
         this.war = war;
         this.warEntryName = warEntryName;
         this.tldPath = tldPath;
@@ -98,23 +96,23 @@ public class WARJARTLDFileTagLibrary extends TagLibrary {
      */
     @Override
     public InputStream getResource(String path)
-        throws IOException
-    {
-        if( path.startsWith( "/" ) ) path = path.substring( 1 );
+            throws IOException {
+        if (path.startsWith("/")) {
+            path = path.substring(1);
+        }
 
-        return getInputStream( path );
+        return getInputStream(path);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Document getTLDDocument(DocumentBuilder documentBuilder)
-        throws IOException, SAXException, TransformerException
-    {
-        try( InputStream in = getInputStream( this.tldPath ) ) {
-            if( in != null ) {
-                return documentBuilder.parse( in );
+    public Document getTldDocument(DocumentBuilder documentBuilder)
+            throws IOException, SAXException, TransformerException {
+        try (InputStream in = getInputStream(this.tldPath)) {
+            if (in != null) {
+                return documentBuilder.parse(in);
             }
         }
 
@@ -122,36 +120,32 @@ public class WARJARTLDFileTagLibrary extends TagLibrary {
     }
 
     /**
-     * Returns an input stream for reading the contents of the specified
-     * JAR-file entry from the JAR-file in the WAR-file.
+     * Returns an input stream for reading the contents of the specified JAR-file entry from the
+     * JAR-file in the WAR-file.
      *
      * @param path the path to the resource
      *
-     * @return an input stream for reading the contents of the specified
-     *         JAR-file entry
+     * @return an input stream for reading the contents of the specified JAR-file entry
      *
      * @throws IOException if an I/O error has occurred
      */
-    private InputStream getInputStream( String path )
-        throws IOException
-    {
-        if( warFile == null ) {
-            warFile = new JarFile( war );
+    private InputStream getInputStream(String path) throws IOException {
+        if (warFile == null) {
+            warFile = new JarFile(war);
         }
 
-        final JarEntry warEntry = warFile.getJarEntry( warEntryName );
-        if( warEntry == null ) {
+        final JarEntry warEntry = warFile.getJarEntry(warEntryName);
+        if (warEntry == null) {
             return null;
         }
 
         final JarInputStream in = new JarInputStream(
-            warFile.getInputStream( warEntry ) );
-        
-        // in is now the input stream to the JAR in the WAR.
+                warFile.getInputStream(warEntry));
 
+        // in is now the input stream to the JAR in the WAR.
         JarEntry jarEntry;
-        while( (jarEntry = in.getNextJarEntry()) != null ) {
-            if( jarEntry.getName().equals( path ) ) {
+        while ((jarEntry = in.getNextJarEntry()) != null) {
+            if (jarEntry.getName().equals(path)) {
                 return in;
             }
         }
@@ -164,16 +158,14 @@ public class WARJARTLDFileTagLibrary extends TagLibrary {
      */
     @Override
     public void close() throws IOException {
-        if( warFile == null ) {
+        if (warFile == null) {
             return;
         }
 
         try {
             warFile.close();
-        }
-        finally {
+        } finally {
             warFile = null;
         }
     }
-
 }

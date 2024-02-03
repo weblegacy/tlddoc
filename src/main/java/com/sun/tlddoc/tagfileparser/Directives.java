@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * Encapsulates all directives in a tag file.
  *
- * @author  ste-gr
+ * @author ste-gr
  */
 public class Directives {
 
@@ -48,7 +48,7 @@ public class Directives {
     private final ArrayList<Directive> directives = new ArrayList<>();
 
     /**
-     * Creates a new instance of Directives
+     * Creates a new instance of Directives.
      */
     public Directives() {
     }
@@ -58,8 +58,8 @@ public class Directives {
      *
      * @param directive to add to the list of directives
      */
-    public void addDirective( Directive directive ) {
-        this.directives.add( directive );
+    public void addDirective(Directive directive) {
+        this.directives.add(directive);
     }
 
     /**
@@ -68,20 +68,20 @@ public class Directives {
      * @return the list of directives
      */
     public List<Directive> getDirectives() {
-        return Collections.unmodifiableList( directives );
+        return Collections.unmodifiableList(directives);
     }
 
     /**
-     * Returns a string representation of this directives
+     * Returns a string representation of this directives.
      *
      * @return a string representation of this directives
      */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append( "[Directives;directives=" );
-        result.append( directives.toString() );
-        result.append( ']' );
+        result.append("[Directives;directives=");
+        result.append(directives.toString());
+        result.append(']');
         return result.toString();
     }
 }

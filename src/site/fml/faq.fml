@@ -58,15 +58,15 @@
 
         <faq id="tlddoc">
             <question>
-                What happened to TLDDoc?
+                What happened to TldDoc?
             </question>
             <answer>
-                <p>Tag Library Documentation Generator was first released as TLDDoc
+                <p>Tag Library Documentation Generator was first released as TldDoc
                     1.0 as part of Sun's
                     <a href="https://web.archive.org/web/20030803035309/http://developers.sun.com/dev/coolstuff/tlddoc">CoolStuff</a>
                     program. It has since been open-sourced on java.net and is now
                     referred to as "Tag Library Documentation Generator". Many people
-                    still call it "TLDDoc" for short.</p>
+                    still call it "TldDoc" for short.</p>
             </answer>
         </faq>
 

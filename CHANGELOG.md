@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Resolve all checkstyle-messages
 * Use own `checkstyle.xml`
 * Add missing plugin (antrun)
 * Move profile pluginManagement to main-pluginManagement

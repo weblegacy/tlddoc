@@ -57,7 +57,7 @@
     </custom>
 
     <body>
-        <menu name="TLDDoc">
+        <menu name="TldDoc">
             <item name="Welcome" href="index.html" />
             <item name="Tag Library Repository" href="repository.html" />
             <item name="Screenshot" href="screenshot.html" />

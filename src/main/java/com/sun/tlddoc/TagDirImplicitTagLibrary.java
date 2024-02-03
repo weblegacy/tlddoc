@@ -51,22 +51,21 @@ import org.xml.sax.SAXException;
 /**
  * Implicit Tag Library for a directory of tag files.
  *
- * @author  mroth
+ * @author mroth
  */
-public class TagDirImplicitTagLibrary
-    extends TagLibrary
-{
-    /**
-     * The directory containing the tag files
-     */
-    final private File dir;
+public class TagDirImplicitTagLibrary extends TagLibrary {
 
     /**
-     * Creates a new instance of {@link TagDirImplicitTagLibrary}
+     * The directory containing the tag files.
+     */
+    private final File dir;
+
+    /**
+     * Creates a new instance of {@link TagDirImplicitTagLibrary}.
      *
      * @param dir directory containing the tag files
      */
-    public TagDirImplicitTagLibrary( File dir ) {
+    public TagDirImplicitTagLibrary(File dir) {
         this.dir = dir;
     }
 
@@ -83,8 +82,7 @@ public class TagDirImplicitTagLibrary
      */
     @Override
     public InputStream getResource(String path)
-        throws IOException
-    {
+            throws IOException {
         InputStream result = null;
 
         // Start from the tag directory and backtrack,
@@ -92,19 +90,18 @@ public class TagDirImplicitTagLibrary
         //   For example:
         //      TLD:  /home/mroth/test/sample/WEB-INF/tags/mytags
         //      path: /WEB-INF/tags/mytags/tag1.tag
-
-        File dir_ = this.dir;
-        if( path.startsWith( "/" ) ) {
-            path = path.substring( 1 );
+        File d = this.dir;
+        if (path.startsWith("/")) {
+            path = path.substring(1);
         }
         File look = null;
-        while( dir_ != null && !(look = new File( dir_, path )).exists() ) {
-            dir_ = dir_.getParentFile();
+        while (d != null && !(look = new File(d, path)).exists()) {
+            d = d.getParentFile();
         }
 
-        if( look != null && look.exists() ) {
+        if (look != null && look.exists()) {
             // Found it:
-            result = new FileInputStream( look );
+            result = new FileInputStream(look);
         }
 
         return result;
@@ -114,25 +111,25 @@ public class TagDirImplicitTagLibrary
      * {@inheritDoc}
      */
     @Override
-    public Document getTLDDocument(DocumentBuilder documentBuilder)
-        throws IOException, SAXException, TransformerException
-    {
+    public Document getTldDocument(DocumentBuilder documentBuilder)
+            throws IOException, SAXException, TransformerException {
         Document result = documentBuilder.newDocument();
 
         // Determine path from root of web application (this is somewhat of
         // a guess):
-        String path = dir.getAbsolutePath().replace( File.separatorChar, '/' );
-        int index = path.indexOf( "/WEB-INF/" );
-        if( index != -1 ) {
-            path = path.substring( index );
-        }
-        else {
+        String path = dir.getAbsolutePath().replace(File.separatorChar, '/');
+        int index = path.indexOf("/WEB-INF/");
+        if (index != -1) {
+            path = path.substring(index);
+        } else {
             path = "unknown";
         }
-        if( !path.endsWith( "/" ) ) path += "/";
+        if (!path.endsWith("/")) {
+            path += "/";
+        }
 
         // Create root taglib node:
-        Element taglibElement = createRootTaglibNode( result, path );
+        Element taglibElement = createRootTaglibNode(result, path);
 
         // According to the JSP 2.0 specification:
         // A <tag-file> element is considered to exist for each tag file in
@@ -142,80 +139,77 @@ public class TagDirImplicitTagLibrary
         //    - The <path> for each is the path of the tag file, relative
         //      to the root of the web application.
         File[] files = this.dir.listFiles();
-        if( files != null ) {
-            for( File file : files ) {
+        if (files != null) {
+            for (File file : files) {
                 final String fileName = file.getName();
                 final String fileNameLower = fileName.toLowerCase();
-                if( !file.isDirectory() &&
-                    ( fileNameLower.endsWith( ".tag" ) ||
-                      fileNameLower.endsWith( ".tagx" ) ) )
-                {
-                    String tagName = fileName.substring( 0,
-                        fileName.lastIndexOf( '.' ) );
+                if (!file.isDirectory()
+                        && (fileNameLower.endsWith(".tag")
+                        || fileNameLower.endsWith(".tagx"))) {
+                    String tagName = fileName.substring(0,
+                            fileName.lastIndexOf('.'));
                     String tagPath = path + fileName;
 
-                    Element tagFileElement = result.createElement( "tag-file" );
-                    Element nameElement = result.createElement( "name" );
-                    nameElement.appendChild( result.createTextNode( tagName ) );
-                    tagFileElement.appendChild( nameElement );
-                    Element pathElement = result.createElement( "path" );
-                    pathElement.appendChild( result.createTextNode( tagPath ) );
-                    tagFileElement.appendChild( pathElement );
-                    taglibElement.appendChild( tagFileElement );
+                    Element tagFileElement = result.createElement("tag-file");
+                    Element nameElement = result.createElement("name");
+                    nameElement.appendChild(result.createTextNode(tagName));
+                    tagFileElement.appendChild(nameElement);
+                    Element pathElement = result.createElement("path");
+                    pathElement.appendChild(result.createTextNode(tagPath));
+                    tagFileElement.appendChild(pathElement);
+                    taglibElement.appendChild(tagFileElement);
                 }
             }
         }
 
         // Output implicit tag library, as a test.
         StringWriter buffer = new StringWriter();
-        Transformer transformer =
-            TransformerFactory.newInstance().newTransformer();
-        transformer.transform( new DOMSource( result ),
-            new StreamResult( buffer ) );
-        result = documentBuilder.parse( new InputSource( new StringReader(
-            buffer.toString() ) ) );
+        Transformer transformer
+                = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(new DOMSource(result),
+                new StreamResult(buffer));
+        result = documentBuilder.parse(new InputSource(new StringReader(
+                buffer.toString())));
 
         return result;
-
     }
 
     /**
-     * Creates an implicit tag library root node, with default values.
-     * Shared by WARTagDirImplicitTagLibrary.
+     * Creates an implicit tag library root node, with default values. Shared by
+     * WARTagDirImplicitTagLibrary.
      *
      * @param result XML-document to add new tag-element
-     * @param path path to the TLD Files
+     * @param path   path to the TLD Files
      *
      * @return new created tag library root node
      */
-    protected static Element createRootTaglibNode( Document result,
-        String path )
-    {
+    protected static Element createRootTaglibNode(Document result,
+            String path) {
         Element taglibElement = result.createElementNS(
-            Constants.NS_JAVAEE, "taglib" );
+                Constants.NS_JAVAEE, "taglib");
         // JDK 1.4 does not add xmlns for some reason - add it manually:
-        taglibElement.setAttributeNS( "http://www.w3.org/2000/xmlns/",
-            "xmlns", Constants.NS_JAVAEE );
-        taglibElement.setAttributeNS( "http://www.w3.org/2000/xmlns/",
-            "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance" );
+        taglibElement.setAttributeNS("http://www.w3.org/2000/xmlns/",
+                "xmlns", Constants.NS_JAVAEE);
+        taglibElement.setAttributeNS("http://www.w3.org/2000/xmlns/",
+                "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
         taglibElement.setAttributeNS(
-            "http://www.w3.org/2001/XMLSchema-instance",
-            "xsi:schemaLocation",
-            Constants.NS_JAVAEE +
-            " http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" );
-        taglibElement.setAttribute( "version", "2.1" );
-        result.appendChild( taglibElement );
+                "http://www.w3.org/2001/XMLSchema-instance",
+                "xsi:schemaLocation",
+                Constants.NS_JAVAEE
+                + " http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd");
+        taglibElement.setAttribute("version", "2.1");
+        result.appendChild(taglibElement);
 
         // Add <description>
-        Element descriptionElement = result.createElement( "description" );
-        descriptionElement.appendChild( result.createTextNode(
-            "Implicit tag library for tag file directory " + path ) );
-        taglibElement.appendChild( descriptionElement );
+        Element descriptionElement = result.createElement("description");
+        descriptionElement.appendChild(result.createTextNode(
+                "Implicit tag library for tag file directory " + path));
+        taglibElement.appendChild(descriptionElement);
 
         // Add <tlib-version> of 1.0
-        Element tlibVersionElement = result.createElement( "tlib-version" );
-        tlibVersionElement.appendChild( result.createTextNode( "1.0" ) );
-        taglibElement.appendChild( tlibVersionElement );
+        Element tlibVersionElement = result.createElement("tlib-version");
+        tlibVersionElement.appendChild(result.createTextNode("1.0"));
+        taglibElement.appendChild(tlibVersionElement);
 
         // According to the JSP 2.0 specification, <short-name> is derived
         // from the directory name.  If the directory is /WEB-INF/tags/, the
@@ -235,26 +229,26 @@ public class TagDirImplicitTagLibrary
                 break;
             default:
                 shortName = path;
-                if( shortName.startsWith( "/WEB-INF/tags" ) ) {
-                    shortName = shortName.substring( "/WEB-INF/tags".length() );
+                if (shortName.startsWith("/WEB-INF/tags")) {
+                    shortName = shortName.substring("/WEB-INF/tags".length());
                 }
-                if( shortName.startsWith( "/" ) ) {
-                    shortName = shortName.substring( 1 );
+                if (shortName.startsWith("/")) {
+                    shortName = shortName.substring(1);
                 }
-                if( shortName.endsWith( "/" ) ) {
-                    shortName = shortName.substring( 0, shortName.length() - 1 );
+                if (shortName.endsWith("/")) {
+                    shortName = shortName.substring(0, shortName.length() - 1);
                 }
-                shortName = shortName.replace( File.separatorChar, '/' );
-                shortName = shortName.replace( '/', '-' );
+                shortName = shortName.replace(File.separatorChar, '/');
+                shortName = shortName.replace('/', '-');
                 break;
         }
-        Element shortNameElement = result.createElement( "short-name" );
-        shortNameElement.appendChild( result.createTextNode( shortName ) );
-        taglibElement.appendChild( shortNameElement );
+        Element shortNameElement = result.createElement("short-name");
+        shortNameElement.appendChild(result.createTextNode(shortName));
+        taglibElement.appendChild(shortNameElement);
 
-        Element uriElement = result.createElement( "uri" );
-        uriElement.appendChild( result.createTextNode( path ) );
-        taglibElement.appendChild( uriElement );
+        Element uriElement = result.createElement("uri");
+        uriElement.appendChild(result.createTextNode(path));
+        taglibElement.appendChild(uriElement);
 
         return taglibElement;
     }
@@ -266,5 +260,4 @@ public class TagDirImplicitTagLibrary
     public void close() throws IOException {
         // Nothing to do
     }
-
 }

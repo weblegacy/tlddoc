@@ -39,38 +39,38 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
- * Base class for a tag library source.  Different tag libraries will
- * locate resources, such as tag files, in different ways.
+ * Base class for a tag library source. Different tag libraries will locate
+ * resources, such as tag files, in different ways.
  *
- * @author  mroth
+ * @author mroth
  */
 public abstract class TagLibrary implements AutoCloseable {
 
     /**
-     * Returns a String that the user would recognize as a location for this
-     * tag library.
+     * Returns a String that the user would recognize as a location for this tag
+     * library.
      *
-     * @return a String that the user would recognize as a location for this
-     * tag library
+     * @return a String that the user would recognize as a location for this tag
+     *         library
      */
     public abstract String getPathDescription();
 
     /**
-     * Returns a Document of the effective tag library descriptor for this
-     * tag library.  This might come from a file or be implicitly generated.
+     * Returns a Document of the effective tag library descriptor for this tag
+     * library. This might come from a file or be implicitly generated.
      *
      * @param documentBuilder {@code DocumentBuilder} to obtain DOM Document for
-     * creating an XML-document.
+     *                        creating an XML-document.
      *
      * @return created XML-Document
      *
-     * @throws IOException if an I/O error has occurred
-     * @throws SAXException If any parse errors occur
-     * @throws TransformerException If an unrecoverable error occurs
-     *   during the course of the transformation
+     * @throws IOException          if an I/O error has occurred
+     * @throws SAXException         If any parse errors occur
+     * @throws TransformerException If an unrecoverable error occurs during the
+     *                              course of the transformation
      */
-    public abstract Document getTLDDocument( DocumentBuilder documentBuilder )
-        throws IOException, SAXException, TransformerException;
+    public abstract Document getTldDocument(DocumentBuilder documentBuilder)
+            throws IOException, SAXException, TransformerException;
 
     /**
      * Returns an input stream for the given resource, or {@code null} if the
@@ -79,12 +79,12 @@ public abstract class TagLibrary implements AutoCloseable {
      * @param path the path to the resource
      *
      * @return the input stream for the given resource or {@code null} if the
-     * resource could not be found
+     *         resource could not be found
      *
      * @throws IOException if an I/O error has occurred
      */
-    public abstract InputStream getResource( String path )
-        throws IOException;
+    public abstract InputStream getResource(String path)
+            throws IOException;
 
     /**
      * {@inheritDoc}

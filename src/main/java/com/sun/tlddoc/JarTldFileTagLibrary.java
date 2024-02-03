@@ -44,32 +44,32 @@ import org.xml.sax.SAXException;
 /**
  * Tag library that gets its information from a TLD file in a JAR.
  *
- * @author  mroth
+ * @author mroth
  */
-public class JARTLDFileTagLibrary extends TagLibrary {
+public class JarTldFileTagLibrary extends TagLibrary {
 
     /**
-     * The JAR containing the TLD file
+     * The JAR containing the TLD file.
      */
-    final private File jar;
+    private final File jar;
 
     /**
-     * The JAR-file itself
+     * The JAR-file itself.
      */
     private JarFile jarFile = null;
 
     /**
-     * The name of the JarEntry containing the TLD file
+     * The name of the JarEntry containing the TLD file.
      */
-    final private String tldPath;
+    private final String tldPath;
 
     /**
-     * Creates a new instance of {@link JARTLDFileTagLibrary}
+     * Creates a new instance of {@link JarTldFileTagLibrary}.
      *
-     * @param jar JAR containing the TLD file
+     * @param jar     JAR containing the TLD file
      * @param tldPath name of the {@code JarEntry} containing the TLD file
      */
-    public JARTLDFileTagLibrary( File jar, String tldPath ) {
+    public JarTldFileTagLibrary(File jar, String tldPath) {
         this.jar = jar;
         this.tldPath = tldPath;
     }
@@ -87,23 +87,23 @@ public class JARTLDFileTagLibrary extends TagLibrary {
      */
     @Override
     public InputStream getResource(String path)
-        throws IOException
-    {
-        if( path.startsWith( "/" ) ) path = path.substring( 1 );
+            throws IOException {
+        if (path.startsWith("/")) {
+            path = path.substring(1);
+        }
 
-        return getInputStream( path );
+        return getInputStream(path);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Document getTLDDocument(DocumentBuilder documentBuilder)
-        throws IOException, SAXException, TransformerException
-    {
-        try( InputStream in = getInputStream( this.tldPath ) ) {
-            if( in != null ) {
-                return documentBuilder.parse( in );
+    public Document getTldDocument(DocumentBuilder documentBuilder)
+            throws IOException, SAXException, TransformerException {
+        try (InputStream in = getInputStream(this.tldPath)) {
+            if (in != null) {
+                return documentBuilder.parse(in);
             }
         }
 
@@ -111,25 +111,22 @@ public class JARTLDFileTagLibrary extends TagLibrary {
     }
 
     /**
-     * Returns an input stream for reading the contents of the specified
-     * JAR-file entry.
+     * Returns an input stream for reading the contents of the specified JAR-file entry.
      *
      * @param path the path to the resource
      *
-     * @return an input stream for reading the contents of the specified
-     *         JAR-file entry
+     * @return an input stream for reading the contents of the specified JAR-file entry
      *
      * @throws IOException if an I/O error has occurred
      */
-    private InputStream getInputStream( String path )
-        throws IOException
-    {
-        if( jarFile == null ) {
-            jarFile = new JarFile( jar );
+    private InputStream getInputStream(String path)
+            throws IOException {
+        if (jarFile == null) {
+            jarFile = new JarFile(jar);
         }
 
-        final JarEntry jarEntry = jarFile.getJarEntry( path );
-        return jarEntry == null ? null : jarFile.getInputStream( jarEntry );
+        final JarEntry jarEntry = jarFile.getJarEntry(path);
+        return jarEntry == null ? null : jarFile.getInputStream(jarEntry);
     }
 
     /**
@@ -137,16 +134,14 @@ public class JARTLDFileTagLibrary extends TagLibrary {
      */
     @Override
     public void close() throws IOException {
-        if( jarFile == null ) {
+        if (jarFile == null) {
             return;
         }
 
         try {
             jarFile.close();
-        }
-        finally {
+        } finally {
             jarFile = null;
         }
     }
-
 }

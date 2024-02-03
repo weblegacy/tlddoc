@@ -34,20 +34,22 @@ package com.sun.tlddoc;
 /**
  * Exception for generations-errors.
  *
- * @author  mroth
+ * @author mroth
  */
 public class GeneratorException extends Exception {
 
     private static final long serialVersionUID = -1641581412327369981L;
 
     /**
-     * Creates a new instance of <code>GeneratorException</code> without detail message.
+     * Creates a new instance of {@code GeneratorException} without detail
+     * message.
      */
     public GeneratorException() {
     }
 
     /**
-     * Constructs an instance of <code>GeneratorException</code> with the specified detail message.
+     * Constructs an instance of {@code GeneratorException} with the specified
+     * detail message.
      *
      * @param msg the detail message.
      */
@@ -56,16 +58,17 @@ public class GeneratorException extends Exception {
     }
 
     /**
-     * Constructs an instance of <code>GeneratorException</code> with the specified cause and a detail
-     * message of {@code (cause==null ? null : cause.toString())} (which
-     * typically contains the class and detail message of {@code cause}).
+     * Constructs an instance of {@code GeneratorException} with the specified
+     * cause and a detail message of
+     * {@code (cause==null ? null : cause.toString())} (which typically contains
+     * the class and detail message of {@code cause}).
      *
-     * @param  cause the cause (which is saved for later retrieval by the
-     *         {@link #getCause()} method).  (A {@code null} value is
-     *         permitted, and indicates that the cause is nonexistent or
-     *         unknown.)
+     * @param cause the cause (which is saved for later retrieval by the
+     *              {@link #getCause()} method). (A {@code null} value is
+     *              permitted, and indicates that the cause is nonexistent or
+     *              unknown.)
      */
-    public GeneratorException( Throwable cause ) {
-        super( cause );
+    public GeneratorException(Throwable cause) {
+        super(cause);
     }
 }

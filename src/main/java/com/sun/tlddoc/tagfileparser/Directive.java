@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * Encapsulates a directive in a tag file.
  *
- * @author  mroth
+ * @author mroth
  */
 public class Directive {
 
@@ -50,10 +50,10 @@ public class Directive {
     /**
      * The attributes for this directive.
      */
-    final private ArrayList<Attribute> attributes = new ArrayList<>();
+    private final ArrayList<Attribute> attributes = new ArrayList<>();
 
     /**
-     * Creates a new instance of Directive
+     * Creates a new instance of Directive.
      */
     public Directive() {
     }
@@ -81,8 +81,8 @@ public class Directive {
      *
      * @param attribute to add to the list of attributes for this directive
      */
-    public void addAttribute( Attribute attribute ) {
-        this.attributes.add( attribute );
+    public void addAttribute(Attribute attribute) {
+        this.attributes.add(attribute);
     }
 
     /**
@@ -90,24 +90,23 @@ public class Directive {
      *
      * @return the list of attributes in this directive
      */
-    
     public List<Attribute> getAttributes() {
-        return Collections.unmodifiableList( attributes );
+        return Collections.unmodifiableList(attributes);
     }
 
     /**
-     * Returns a string representation of this directive
+     * Returns a string representation of this directive.
      *
      * @return a string representation of this directive
      */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append( "[Directive;name=" );
-        result.append( directiveName );
-        result.append( ", attributes=" );
-        result.append( attributes );
-        result.append( ']' );
+        result.append("[Directive;name=");
+        result.append(directiveName);
+        result.append(", attributes=");
+        result.append(attributes);
+        result.append(']');
         return result.toString();
     }
 }
