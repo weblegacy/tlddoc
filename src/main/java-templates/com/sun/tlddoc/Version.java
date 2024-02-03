@@ -34,40 +34,18 @@ package com.sun.tlddoc;
 /**
  * Various constants used by TldDoc.
  *
- * @author mroth
+ * @author Stefan Graff
  */
-public final class Constants {
+public final class Version {
+
+    /**
+     * The Program-Version.
+     */
+    public static final String VERSION = "${project.version}";
 
     /**
      * Private constructor as this is a utility class.
      */
-    private Constants() {
+    private Version() {
     }
-
-    /**
-     * Default Window-title.
-     */
-    public static final String DEFAULT_WINDOW_TITLE
-            = "Tag Library Documentation Generator - Generated Documentation";
-
-    /**
-     * Default Document-title.
-     */
-    public static final String DEFAULT_DOC_TITLE
-            = "Tag Library Documentation Generator - Generated Documentation";
-
-    /**
-     * Namespace for Java EE.
-     */
-    public static final String NS_JAVAEE = "http://java.sun.com/xml/ns/javaee";
-
-    /**
-     * Namespace for J2EE.
-     */
-    public static final String NS_J2EE = "http://java.sun.com/xml/ns/j2ee";
-
-    /**
-     * If {@code true}, outputs the input to the transform before generation.
-     */
-    public static final boolean DEBUG_INPUT_DOCUMENT = false;
 }

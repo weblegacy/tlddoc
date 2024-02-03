@@ -47,7 +47,7 @@ public class TldDoc {
      * Defines the Help-text for TldDoc.
      */
     private static final String USAGE
-            = "Tag Library Documentation Generator " + Constants.VERSION
+            = "Tag Library Documentation Generator " + Version.VERSION
             + " by Mark Roth, Sun Microsystems, Inc.\n"
             + "Usage: tlddoc [options] taglib1 [taglib2 [taglib3 ...]]\n"
             + "Options:\n"

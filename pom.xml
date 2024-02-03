@@ -120,6 +120,7 @@
         <sourceEncoding>UTF-8</sourceEncoding>
         <propertiesEncoding>ISO-8859-1</propertiesEncoding>
         <project.build.sourceEncoding>${sourceEncoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
         <mavenVersion>3.6.3</mavenVersion>
         <javaVersion>8</javaVersion>
         <mainClass>com.sun.tlddoc.TldDoc</mainClass>
@@ -389,6 +390,11 @@
                     <version>2.16.2</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>templating-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <version>4.3</version>
@@ -483,6 +489,17 @@
                         <id>javacc</id>
                         <goals>
                             <goal>jjtree-javacc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>templating-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>filter-sources</goal>
                         </goals>
                     </execution>
                 </executions>
