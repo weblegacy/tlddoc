@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-surefire-plugin` from 3.2.3 to 3.2.5
 * Bump `checkstyle` from 10.12.7 to 10.13.0
 * Add Version-Updates Report
 * Update year 2024 in copyright
