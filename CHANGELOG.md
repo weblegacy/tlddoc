@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Add Version-Updates Report
 * Update year 2024 in copyright
 * Adapt configuration from `maven-project-info-reports-plugin`
 * Remove unused property `outputDirectoryJavacc`
