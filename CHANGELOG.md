@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Move profile pluginManagement to main-pluginManagement
 * Bump `spotbugs-maven-plugin` from 4.8.2.0 to 4.8.3.0
 * Bump `maven-surefire-plugin` from 3.2.3 to 3.2.5
 * Bump `checkstyle` from 10.12.7 to 10.13.0
