@@ -235,6 +235,9 @@
             <githubAPIPort>443</githubAPIPort>
             <teamlist>team.html</teamlist>
             <onlyMilestoneIssues>false</onlyMilestoneIssues>
+            <issueLinkTemplatePerSystem>
+              <old>changes-report.html</old>
+          </issueLinkTemplatePerSystem>
           </configuration>
         </plugin>
         <plugin>

@@ -41,6 +41,7 @@
   </properties>
   <body>
     <release version="1.5" date="YYYY-MM-DD" description="Jakarta EE 9+">
+      <action type="fix" dev="ste-gr">Change link to old issues to &quot;changes-report.html&quot; (old issues no longer available)</action>
       <action type="update" dev="ste-gr">Resolve all checkstyle-messages</action>
       <action type="update" dev="ste-gr">Use own &quot;checkstyle.xml&quot;</action>
       <action type="fix" dev="ste-gr">Add missing plugin (antrun)</action>
@@ -121,11 +122,11 @@
       <action type="update" dev="ste-gr">Move to new home: "https://github.com/weblegacy/tlddoc"</action>
     </release>
     <release version="1.3" date="2005-12-04" description="">
-      <action type="add" dev="markroth8" issue="Issue 12">Support for JSP 2.1 TLD schema. Support for new JSP 2.1 TLD elements, including: deferred value attributes and associated type, deferred method attributes, and associated signature</action>
+      <action type="add" dev="markroth8" system="old" issue="Issue 12">Support for JSP 2.1 TLD schema. Support for new JSP 2.1 TLD elements, including: deferred value attributes and associated type, deferred method attributes, and associated signature</action>
     </release>
     <release version="1.2" date="2004-11-10" description="">
-      <action type="add" dev="markroth8" issue="Issue 2">Now supports CDATA-escaped HTML tags in any JSP 1.1 info or JSP 1.2 / JSP 2.0 description tag. Note: If you have any customized stylesheets you will have to regenerate them for this release. For the most part, you just have to add the j2ee: prefix when referring to the input source. See the default stylesheets for details.</action>
-      <action type="fix" dev="markroth8" issue="Issue 4">Fixed a bug that prevented taglibrarydoc from working with JDK 5.0.</action>
+      <action type="add" dev="markroth8" system="old" issue="Issue 2">Now supports CDATA-escaped HTML tags in any JSP 1.1 info or JSP 1.2 / JSP 2.0 description tag. Note: If you have any customized stylesheets you will have to regenerate them for this release. For the most part, you just have to add the j2ee: prefix when referring to the input source. See the default stylesheets for details.</action>
+      <action type="fix" dev="markroth8" system="old" issue="Issue 4">Fixed a bug that prevented taglibrarydoc from working with JDK 5.0.</action>
     </release>
     <release version="1.1" date="2003-02-16" description="First pulbic release">
       <action type="add" dev="markroth8">Open source release to java.net.</action>

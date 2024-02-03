@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Change link to old issues to `changes-report.html` (old issues no longer available)
 * Resolve all checkstyle-messages
 * Use own `checkstyle.xml`
 * Add missing plugin (antrun)
