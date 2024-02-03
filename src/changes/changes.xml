@@ -73,7 +73,7 @@
       <action type="update" dev="ste-gr">Bump &quot;maven-dependency-plugin&quot; from 3.3.0 to 3.6.1</action>
       <action type="update" dev="ste-gr">Bump &quot;maven-compiler-plugin&quot; from 3.10.1 to 3.12.1</action>
       <action type="update" dev="ste-gr">Bump &quot;maven-clean-plugin&quot; from 3.2.0 to 3.3.2</action>
-      <action type="update" dev="ste-gr">Bump &quot;checkstyle&quot; from 9.3 to 10.12.7</action>
+      <action type="update" dev="ste-gr">Bump &quot;checkstyle&quot; from 9.3 to 10.13.0</action>
       <action type="update" dev="ste-gr">Bump &quot;maven-checkstyle-plugin&quot; from 3.1.2 to 3.3.1</action>
       <action type="update" dev="ste-gr">Bump &quot;maven-gpg-plugin&quot; from 3.0.1 to 3.1.0</action>
       <action type="update" dev="ste-gr">Bump &quot;maven-assembly-plugin&quot; from 3.4.1 to 3.6.0</action>
