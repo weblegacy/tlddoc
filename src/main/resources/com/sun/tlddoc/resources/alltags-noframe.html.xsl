@@ -40,52 +40,53 @@
         and functions included in all tag libraries for this generation.
 -->
 
-<xsl:stylesheet version="1.0"
-    xmlns:javaee="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<xsl:stylesheet version="1.0" xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
-    <xsl:output method="html" indent="yes"/>
+    <xsl:output method="html" indent="yes" />
 
     <!-- template rule matching source root element -->
     <xsl:template match="/">
-      <html>
-        <head>
-          <title>All Tags / Functions</title>
-          <link rel="stylesheet" type="text/css" href="stylesheet.css" title="Style"/>
-        </head>
-        <script>
-          function asd()
-          {
-            parent.document.title="All Tags / Functions";
-          }
-        </script>
-        <body bgcolor="white" onload="asd();">
-          <font size="+1" class="FrameHeadingFont">
-          <b>All Tags / Functions</b></font>
-          <br/>
-          <table border="0" width="100%">
-            <tr>
-              <td nowrap="true"><font class="FrameItemFont">
-                <xsl:apply-templates
-                    select="javaee:tlds/javaee:taglib/javaee:tag|javaee:tlds/javaee:taglib/javaee:tag-file|javaee:tlds/javaee:taglib/javaee:function">
-                  <xsl:sort select="../javaee:short-name"/>
-                  <xsl:sort select="javaee:name"/>
-                </xsl:apply-templates>
-              </font></td>
-            </tr>
-          </table>
-        </body>
-      </html>
+        <html>
+            <head>
+                <title>All Tags / Functions</title>
+                <link rel="stylesheet" type="text/css" href="stylesheet.css" title="Style" />
+            </head>
+            <script>
+                function asd()
+                {
+                parent.document.title="All Tags / Functions";
+                }
+            </script>
+            <body bgcolor="white" onload="asd();">
+                <font size="+1" class="FrameHeadingFont">
+                    <b>All Tags / Functions</b>
+                </font>
+                <br />
+                <table border="0" width="100%">
+                    <tr>
+                        <td nowrap="true">
+                            <font class="FrameItemFont">
+                                <xsl:apply-templates
+                                    select="javaee:tlds/javaee:taglib/javaee:tag|javaee:tlds/javaee:taglib/javaee:tag-file|javaee:tlds/javaee:taglib/javaee:function">
+                                    <xsl:sort select="../javaee:short-name" />
+                                    <xsl:sort select="javaee:name" />
+                                </xsl:apply-templates>
+                            </font>
+                        </td>
+                    </tr>
+                </table>
+            </body>
+        </html>
     </xsl:template>
 
     <xsl:template match="javaee:tag|javaee:tag-file">
-      <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:value-of select="../javaee:short-name"/>/<xsl:value-of select="javaee:name"/>.html</xsl:attribute>
-        <xsl:attribute name="target"></xsl:attribute>
-        <xsl:value-of select="../javaee:short-name"/>:<xsl:value-of select="javaee:name"/>
-      </xsl:element>
-      <br/>
+        <xsl:element name="a">
+            <xsl:attribute name="href"><xsl:value-of select="../javaee:short-name"/>/<xsl:value-of select="javaee:name"/>.html</xsl:attribute>
+            <xsl:attribute name="target"></xsl:attribute>
+            <xsl:value-of select="../javaee:short-name"/>:<xsl:value-of select="javaee:name"/>
+        </xsl:element>
+        <br />
     </xsl:template>
 
     <!--
@@ -93,12 +94,12 @@
       - and change the HTML to .fn.html
     -->
     <xsl:template match="javaee:function">
-      <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:value-of select="../javaee:short-name"/>/<xsl:value-of select="javaee:name"/>.fn.html</xsl:attribute>
-        <xsl:attribute name="target">tagFrame</xsl:attribute>
-        <i><xsl:value-of select="../javaee:short-name"/>:<xsl:value-of select="javaee:name"/>()</i>
-      </xsl:element>
-      <br/>
+        <xsl:element name="a">
+            <xsl:attribute name="href"><xsl:value-of select="../javaee:short-name" />/<xsl:value-of select="javaee:name" />.fn.html</xsl:attribute>
+            <xsl:attribute name="target">tagFrame</xsl:attribute>
+            <i><xsl:value-of select="../javaee:short-name" />:<xsl:value-of select="javaee:name" />()</i>
+        </xsl:element>
+        <br />
     </xsl:template>
 
 </xsl:stylesheet>

@@ -44,15 +44,13 @@
                 What is Tag Library Documentation Generator?
             </question>
             <answer>
-                <p>Tag Library Documentation Generator is a utility for automatically
-                    generating javadoc-style documentation for JavaServer Pages&#8482;
-                    (JSP&#8482;) Technology Tag Libraries. It
-                    accepts a set of tag libraries as input, and generates a set of
-                    HTML files as output. It can also be used to generate tag library
+                <p>Tag Library Documentation Generator is a utility for automatically generating
+                    javadoc-style documentation for JavaServer Pages&#8482; (JSP&#8482;) Technology
+                    Tag Libraries. It accepts a set of tag libraries as input, and generates a set
+                    of HTML files as output. It can also be used to generate tag library
                     documentation for JavaServer Faces UI components.</p>
-                <p>Included in the output is a full description of each defined tag
-                    library, the tags contained within those tag libraries, and how to
-                    use those tags.</p>
+                <p>Included in the output is a full description of each defined tag library, the
+                    tags contained within those tag libraries, and how to use those tags.</p>
             </answer>
         </faq>
 
@@ -61,24 +59,22 @@
                 What happened to TldDoc?
             </question>
             <answer>
-                <p>Tag Library Documentation Generator was first released as TldDoc
-                    1.0 as part of Sun's
+                <p>Tag Library Documentation Generator was first released as TldDoc 1.0 as part of
+                    Sun's
                     <a href="https://web.archive.org/web/20030803035309/http://developers.sun.com/dev/coolstuff/tlddoc">CoolStuff</a>
-                    program. It has since been open-sourced on java.net and is now
-                    referred to as "Tag Library Documentation Generator". Many people
-                    still call it "TldDoc" for short.</p>
+                    program. It has since been open-sourced on java.net and is now referred to as
+                    "Tag Library Documentation Generator". Many people still call it "TldDoc" for
+                    short.</p>
             </answer>
         </faq>
 
         <faq id="existing">
             <question>
-                Where can I get documentation on existing tag libraries
-                like JSTL?
+                Where can I get documentation on existing tag libraries like JSTL?
             </question>
             <answer>
                 <p>See the
-                    <a href="https://projects.eclipse.org/projects/ee4j.jstl">
-                        Jakarta Standard Tag Library&#8482;</a>.</p>
+                    <a href="https://projects.eclipse.org/projects/ee4j.jstl">Jakarta Standard Tag Library&#8482;</a>.</p>
             </answer>
         </faq>
 
@@ -87,11 +83,10 @@
                 Can I use HTML tags in my TLDs?
             </question>
             <answer>
-                <p>Tag Library Documentation Generator version 1.2 supports using
-                    CDATA-escaped HTML tags in your JSP 1.1 info or JSP 1.2/2.0
-                    description tags.</p>
-                <p>You must escape these tags (or the entire description) with
-                    &lt;![CDATA[]]&gt; elements. For example:</p>
+                <p>Tag Library Documentation Generator version 1.2 supports using CDATA-escaped HTML
+                    tags in your JSP 1.1 info or JSP 1.2/2.0 description tags.</p>
+                <p>You must escape these tags (or the entire description) with &lt;![CDATA[]]&gt;
+                    elements. For example:</p>
                 <p><strong>INCORRECT:</strong></p>
                 <source>&lt;description&gt;A &lt;b&gt;very&lt;/b&gt; cool tag library&lt;/description&gt;</source>
                 <p><strong>CORRECT:</strong></p>
@@ -100,9 +95,8 @@
                 <source>&lt;description&gt;A &lt;![CDATA[&lt;b&gt;very&lt;/b&gt;]]&gt; cool tag library&lt;/description&gt;</source>
                 <p><strong>CORRECT:</strong></p>
                 <source>&lt;description&gt;&lt;![CDATA[A &lt;b&gt;very&lt;/b&gt; cool tag library]]&gt;&lt;/description&gt;</source>
-                <p>Any HTML tags used in fields other than &lt;info&gt; or
-                    &lt;description&gt; will be escaped and displayed using
-                    angle-brackets in the resulting documentation.</p>
+                <p>Any HTML tags used in fields other than &lt;info&gt; or &lt;description&gt; will
+                    be escaped and displayed using angle-brackets in the resulting documentation.</p>
             </answer>
         </faq>
 
@@ -113,8 +107,7 @@
             <answer>
                 <p>See the
                     <a href="usage.html#Running_With_Ant">Usage</a>
-                    section on the main project page for information about how to run
-                    with ant.</p>
+                    section on the main project page for information about how to run with ant.</p>
             </answer>
         </faq>
 
@@ -125,8 +118,7 @@
             <answer>
                 <p>See the
                     <a href="usage.html#Running_With_Maven">Usage</a>
-                    section on the main project page for information about how to run
-                    with maven.</p>
+                    section on the main project page for information about how to run with maven.</p>
             </answer>
         </faq>
 
@@ -135,8 +127,8 @@
                 Are there any IDE plugins available?
             </question>
             <answer>
-                <p>Not yet. We're looking for volunteers to help write such plugins.
-                    If you'd like to help, please post a issue to 
+                <p>Not yet. We're looking for volunteers to help write such plugins. If you'd like
+                    to help, please post a issue to
                     <a href="https://github.com/weblegacy/tlddoc/issues">GitHub</a>.</p>
             </answer>
         </faq>
@@ -156,15 +148,16 @@
             </question>
             <answer>
                 <p>This error will happen if you are using a JSP 2.0 TLD, make sure you have
-                    <code>xmlns="http://java.sun.com/xml/ns/j2ee"</code> in your
-                    <code>&lt;taglib&gt;</code> element.</p>
+                    <code>xmlns="http://java.sun.com/xml/ns/j2ee"</code>
+                    in your
+                    <code>&lt;taglib&gt;</code>
+                    element.</p>
             </answer>
         </faq>
 
         <faq id="help">
             <question>
-                I don't see the answer to my question here. Where can I get
-                help?
+                I don't see the answer to my question here. Where can I get help?
             </question>
             <answer>
                 <p>Post your question as a issue to

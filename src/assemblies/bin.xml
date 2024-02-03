@@ -21,34 +21,34 @@
 
 <!-- START SNIPPET: bin -->
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
-  <id>bin</id>
-  <formats>
-    <format>zip</format>
-  </formats>
-  <fileSets>
-    <fileSet>
-      <directory>${project.basedir}</directory>
-      <outputDirectory></outputDirectory>
-      <includes>
-        <include>README*</include>
-        <include>CHANGELOG*</include>
-        <include>LICENSE*</include>
-        <include>NOTICE*</include>
-      </includes>
-    </fileSet>
-    <fileSet>
-      <directory>${project.build.directory}</directory>
-      <outputDirectory></outputDirectory>
-      <includes>
-        <include>*.jar</include>
-      </includes>
-    </fileSet>
-    <fileSet>
-      <directory>${project.build.directory}/site</directory>
-      <outputDirectory>docs</outputDirectory>
-    </fileSet>
-  </fileSets>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+    <id>bin</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}</directory>
+            <outputDirectory />
+            <includes>
+                <include>README*</include>
+                <include>CHANGELOG*</include>
+                <include>LICENSE*</include>
+                <include>NOTICE*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory />
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/site</directory>
+            <outputDirectory>docs</outputDirectory>
+        </fileSet>
+    </fileSets>
 </assembly>
 <!-- END SNIPPET: bin -->

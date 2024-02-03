@@ -32,113 +32,161 @@
 -->
 
 <document xmlns="http://maven.apache.org/changes/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
 
-  <properties>
-    <title>Changes</title>
-    <author email="stefan.graff@gmx.at">Stefan Graff</author>
-  </properties>
-  <body>
-    <release version="1.5" date="YYYY-MM-DD" description="Jakarta EE 9+">
-      <action type="fix" dev="ste-gr">Change link to old issues to &quot;changes-report.html&quot; (old issues no longer available)</action>
-      <action type="update" dev="ste-gr">Resolve all checkstyle-messages</action>
-      <action type="update" dev="ste-gr">Use own &quot;checkstyle.xml&quot;</action>
-      <action type="fix" dev="ste-gr">Add missing plugin (antrun)</action>
-      <action type="fix" dev="ste-gr">Move profile pluginManagement to main-pluginManagement</action>
-      <action type="add" dev="ste-gr">Add Version-Updates Report</action>
-      <action type="fix" dev="ste-gr">Adapt configuration from &quot;maven-project-info-reports-plugin&quot;</action>
-      <action type="fix" dev="ste-gr">Remove unused property &quot;outputDirectoryJavacc&quot;</action>
-      <action type="fix" dev="ste-gr">Adapt javadoc-configs after correction of open maven-javadoc-issues</action>
-      <action type="fix" dev="ste-gr">Rename property &quot;encoding&quot; to &quot;sourceEncoding&quot;</action>
-      <action type="fix" dev="ste-gr">Remove now unnecessary &quot;lifecycle-mapping&quot;</action>
-      <action type="update" dev="ste-gr">Use &quot;javacc-maven-plugin&quot; instead of &quot;javacc&quot; with &quot;exec-maven-plugin&quot;</action>
-      <action type="fix" dev="ste-gr">Embellish the FAQ-text</action>
-      <action type="update" dev="ste-gr">Set minimum MAVEN-Version from 3.5.4 to 3.6.3</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-fluido-skin&quot; from 1.11.0 to 1.12.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;javacc&quot; from 7.0.12 to 7.0.13</action>
-      <action type="update" dev="ste-gr">Bump &quot;license-maven-plugin&quot; from 4.2.rc3 to 4.3</action>
-      <action type="update" dev="ste-gr">Bump &quot;exec-maven-plugin&quot; from 3.0.0 to 3.1.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;build-helper-maven-plugin&quot; from 3.3.0 to 3.5.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;spotbugs-maven-plugin&quot; from 4.7.1.0 to 4.8.3.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-surefire-plugin&quot; from 3.0.0-M7 to 3.2.5</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-source-plugin&quot; from 3.2.1 to 3.3.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-site-plugin&quot; from 3.12.0 to 3.12.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-scm-publish-plugin&quot; from 3.1.0 to 3.2.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-resources-plugin&quot; from 3.2.0 to 3.3.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-release-plugin&quot; from 3.0.0-M6 to 3.0.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-project-info-reports-plugin&quot; from 3.3.0 to 3.5.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-pmd-plugin&quot; from 3.17.0 to 3.21.2</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-jxr-plugin&quot; from 3.2.0 to 3.3.2</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-javadoc-plugin&quot; from 3.4.0 to 3.6.3</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-jar-plugin&quot; from 3.2.2 to 3.3.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-install-plugin&quot; from 3.0.0-M1 to 3.1.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-enforcer-plugin&quot; from 3.1.0 to 3.4.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-deploy-plugin&quot; from 3.0.0-M2 to 3.1.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-dependency-plugin&quot; from 3.3.0 to 3.6.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-compiler-plugin&quot; from 3.10.1 to 3.12.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-clean-plugin&quot; from 3.2.0 to 3.3.2</action>
-      <action type="update" dev="ste-gr">Bump &quot;checkstyle&quot; from 9.3 to 10.13.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-checkstyle-plugin&quot; from 3.1.2 to 3.3.1</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-gpg-plugin&quot; from 3.0.1 to 3.1.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-assembly-plugin&quot; from 3.4.1 to 3.6.0</action>
-      <action type="fix" dev="ste-gr">SpellFix in README</action>
-      <action type="update" dev="ste-gr">Update year 2024 in copyright</action>
-    </release>
-    <release version="1.4" date="2022-07-19" description="Modernized release">
-      <action type="fix" dev="ste-gr">Lint markdown-files</action>
-      <action type="update" dev="ste-gr">Bump &quot;spotbugs-maven-plugin&quot; from 4.7.0.0 to 4.7.1.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-surefire-plugin&quot; from 3.0.0-M6 to 3.0.0-M7</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-release-plugin&quot; from 3.0.0-M5 to 3.0.0-M6</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-pmd-plugin&quot; from 3.16.0 to 3.17.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-enforcer-plugin&quot; from 3.0.0 to 3.1.0</action>
-      <action type="update" dev="ste-gr">Bump &quot;maven-assembly-plugin&quot; from 3.3.0 to 3.4.1</action>
-      <action type="update" dev="ste-gr">Return &quot;List&quot; instead of &quot;Iterator&quot; in &quot;Directive.getAttributes&quot;</action>
-      <action type="update" dev="ste-gr">Simplify &quot;toString&quot; in &quot;Directives&quot; and &quot;Directive&quot;</action>
-      <action type="update" dev="ste-gr">Upgrade JavaCC generation to modern-style</action>
-      <action type="fix" dev="ste-gr">Restore old API of tag-file</action>
-      <action type="fix" dev="ste-gr">Exclude &quot;lifecycle-mapping&quot; from plugin-management-report</action>
-      <action type="add" dev="ste-gr">Add &quot;maven-release-plugin&quot; to easily perform a deployment</action>
-      <action type="update" dev="ste-gr">Change distribution to central-repo</action>
-      <action type="add" dev="ste-gr">Add new profile &quot;release&quot; to deploy to central-repo</action>
-      <action type="update" dev="ste-gr">Update copyright</action>
-      <action type="add" dev="ste-gr">Add &quot;license-maven-plugin&quot; to update copyright</action>
-      <action type="add" dev="ste-gr">Add new profile &quot;assembly&quot; to generate assemblies</action>
-      <action type="update" dev="ste-gr">Change group-id from taglibrarydoc to io.github.weblegacy</action>
-      <action type="update" dev="ste-gr">Update organization in POM</action>
-      <action type="fix" dev="ste-gr">Workaround MJAVADOC-700</action>
-      <action type="fix" dev="ste-gr">Correct keyword-output at generated html-pages</action>
-      <action type="fix" dev="ste-gr">No normalize-space at generated html (exception html-title)</action>
-      <action type="fix" dev="ste-gr">No pre-Tag for description</action>
-      <action type="fix" dev="ste-gr">Define sort-rules for html-generation</action>
-      <action type="fix" dev="ste-gr">Correct some SpotBugs</action>
-      <action type="add" dev="ste-gr">Add more project-reports: Checkstyle, CPD, PMD, SpotBugs</action>
-      <action type="fix" dev="ste-gr">Correction mem-leak in TagLibrary-implementation-classes</action>
-      <action type="update" dev="ste-gr">Improvements at JavaDoc</action>
-      <action type="update" dev="ste-gr">Use JJTree/JavaCC instead of fixed compiled sources</action>
-      <action type="update" dev="ste-gr">Upgrade to JDK 8</action>
-      <action type="update" dev="ste-gr">Building with MAVEN</action>
-      <action type="fix" dev="ste-gr">Correction memory-leak</action>
-      <action type="update" dev="ste-gr">Move to new home: "https://github.com/weblegacy/tlddoc"</action>
-    </release>
-    <release version="1.3" date="2005-12-04" description="">
-      <action type="add" dev="markroth8" system="old" issue="Issue 12">Support for JSP 2.1 TLD schema. Support for new JSP 2.1 TLD elements, including: deferred value attributes and associated type, deferred method attributes, and associated signature</action>
-    </release>
-    <release version="1.2" date="2004-11-10" description="">
-      <action type="add" dev="markroth8" system="old" issue="Issue 2">Now supports CDATA-escaped HTML tags in any JSP 1.1 info or JSP 1.2 / JSP 2.0 description tag. Note: If you have any customized stylesheets you will have to regenerate them for this release. For the most part, you just have to add the j2ee: prefix when referring to the input source. See the default stylesheets for details.</action>
-      <action type="fix" dev="markroth8" system="old" issue="Issue 4">Fixed a bug that prevented taglibrarydoc from working with JDK 5.0.</action>
-    </release>
-    <release version="1.1" date="2003-02-16" description="First pulbic release">
-      <action type="add" dev="markroth8">Open source release to java.net.</action>
-      <action type="update" dev="markroth8">Updated JSP 1.2 to JSP 2.0 TLD conversion logic to always supply body-content element, which is now mandatory.</action>
-      <action type="add" dev="markroth8">Now omits empty tag libraries.</action>
-      <action type="fix" dev="markroth8">Default attribute type in tags and tag files now takes fragment attribute into account.</action>
-    </release>
-    <release version="1.0" date="2003-03-27" description="Initial release">
-      <action type="add" dev="markroth8">Initial release to Cool Stuff with full support for JSP 2.0 Technology.</action>
-    </release>
-    <release version="0.1" date="2002-12-19" description="Internal release">
-      <action type="add" dev="markroth8">Internal release.</action>
-    </release>
-  </body>
+    <properties>
+        <title>Changes</title>
+        <author email="stefan.graff@gmx.at">Stefan Graff</author>
+    </properties>
+    <body>
+        <release version="1.5" date="YYYY-MM-DD" description="Jakarta EE 9+">
+            <action type="fix" dev="ste-gr">Reformat xml- and jjt-files</action>
+            <action type="fix" dev="ste-gr">Change link to old issues to
+                &quot;changes-report.html&quot; (old issues no longer available)</action>
+            <action type="update" dev="ste-gr">Resolve all checkstyle-messages</action>
+            <action type="update" dev="ste-gr">Use own &quot;checkstyle.xml&quot;</action>
+            <action type="fix" dev="ste-gr">Add missing plugin (antrun)</action>
+            <action type="fix" dev="ste-gr">Move profile pluginManagement to main-pluginManagement</action>
+            <action type="add" dev="ste-gr">Add Version-Updates Report</action>
+            <action type="fix" dev="ste-gr">Adapt configuration from
+                &quot;maven-project-info-reports-plugin&quot;</action>
+            <action type="fix" dev="ste-gr">Remove unused property &quot;outputDirectoryJavacc&quot;</action>
+            <action type="fix" dev="ste-gr">Adapt javadoc-configs after correction of open
+                maven-javadoc-issues</action>
+            <action type="fix" dev="ste-gr">Rename property &quot;encoding&quot; to
+                &quot;sourceEncoding&quot;</action>
+            <action type="fix" dev="ste-gr">Remove now unnecessary &quot;lifecycle-mapping&quot;</action>
+            <action type="update" dev="ste-gr">Use &quot;javacc-maven-plugin&quot; instead of
+                &quot;javacc&quot; with &quot;exec-maven-plugin&quot;</action>
+            <action type="fix" dev="ste-gr">Embellish the FAQ-text</action>
+            <action type="update" dev="ste-gr">Set minimum MAVEN-Version from 3.5.4 to 3.6.3</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-fluido-skin&quot; from 1.11.0 to
+                1.12.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;javacc&quot; from 7.0.12 to 7.0.13</action>
+            <action type="update" dev="ste-gr">Bump &quot;license-maven-plugin&quot; from 4.2.rc3 to
+                4.3</action>
+            <action type="update" dev="ste-gr">Bump &quot;exec-maven-plugin&quot; from 3.0.0 to 3.1.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;build-helper-maven-plugin&quot; from 3.3.0
+                to 3.5.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;spotbugs-maven-plugin&quot; from 4.7.1.0 to
+                4.8.3.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-surefire-plugin&quot; from 3.0.0-M7 to
+                3.2.5</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-source-plugin&quot; from 3.2.1 to
+                3.3.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-site-plugin&quot; from 3.12.0 to
+                3.12.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-scm-publish-plugin&quot; from 3.1.0 to
+                3.2.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-resources-plugin&quot; from 3.2.0 to
+                3.3.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-release-plugin&quot; from 3.0.0-M6 to
+                3.0.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-project-info-reports-plugin&quot; from
+                3.3.0 to 3.5.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-pmd-plugin&quot; from 3.17.0 to 3.21.2</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-jxr-plugin&quot; from 3.2.0 to 3.3.2</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-javadoc-plugin&quot; from 3.4.0 to
+                3.6.3</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-jar-plugin&quot; from 3.2.2 to 3.3.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-install-plugin&quot; from 3.0.0-M1 to
+                3.1.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-enforcer-plugin&quot; from 3.1.0 to
+                3.4.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-deploy-plugin&quot; from 3.0.0-M2 to
+                3.1.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-dependency-plugin&quot; from 3.3.0 to
+                3.6.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-compiler-plugin&quot; from 3.10.1 to
+                3.12.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-clean-plugin&quot; from 3.2.0 to 3.3.2</action>
+            <action type="update" dev="ste-gr">Bump &quot;checkstyle&quot; from 9.3 to 10.13.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-checkstyle-plugin&quot; from 3.1.2 to
+                3.3.1</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-gpg-plugin&quot; from 3.0.1 to 3.1.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-assembly-plugin&quot; from 3.4.1 to
+                3.6.0</action>
+            <action type="fix" dev="ste-gr">SpellFix in README</action>
+            <action type="update" dev="ste-gr">Update year 2024 in copyright</action>
+        </release>
+        <release version="1.4" date="2022-07-19" description="Modernized release">
+            <action type="fix" dev="ste-gr">Lint markdown-files</action>
+            <action type="update" dev="ste-gr">Bump &quot;spotbugs-maven-plugin&quot; from 4.7.0.0 to
+                4.7.1.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-surefire-plugin&quot; from 3.0.0-M6 to
+                3.0.0-M7</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-release-plugin&quot; from 3.0.0-M5 to
+                3.0.0-M6</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-pmd-plugin&quot; from 3.16.0 to 3.17.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-enforcer-plugin&quot; from 3.0.0 to
+                3.1.0</action>
+            <action type="update" dev="ste-gr">Bump &quot;maven-assembly-plugin&quot; from 3.3.0 to
+                3.4.1</action>
+            <action type="update" dev="ste-gr">Return &quot;List&quot; instead of &quot;Iterator&quot;
+                in &quot;Directive.getAttributes&quot;</action>
+            <action type="update" dev="ste-gr">Simplify &quot;toString&quot; in &quot;Directives&quot;
+                and &quot;Directive&quot;</action>
+            <action type="update" dev="ste-gr">Upgrade JavaCC generation to modern-style</action>
+            <action type="fix" dev="ste-gr">Restore old API of tag-file</action>
+            <action type="fix" dev="ste-gr">Exclude &quot;lifecycle-mapping&quot; from
+                plugin-management-report</action>
+            <action type="add" dev="ste-gr">Add &quot;maven-release-plugin&quot; to easily perform a
+                deployment</action>
+            <action type="update" dev="ste-gr">Change distribution to central-repo</action>
+            <action type="add" dev="ste-gr">Add new profile &quot;release&quot; to deploy to
+                central-repo</action>
+            <action type="update" dev="ste-gr">Update copyright</action>
+            <action type="add" dev="ste-gr">Add &quot;license-maven-plugin&quot; to update copyright</action>
+            <action type="add" dev="ste-gr">Add new profile &quot;assembly&quot; to generate
+                assemblies</action>
+            <action type="update" dev="ste-gr">Change group-id from taglibrarydoc to
+                io.github.weblegacy</action>
+            <action type="update" dev="ste-gr">Update organization in POM</action>
+            <action type="fix" dev="ste-gr">Workaround MJAVADOC-700</action>
+            <action type="fix" dev="ste-gr">Correct keyword-output at generated html-pages</action>
+            <action type="fix" dev="ste-gr">No normalize-space at generated html (exception
+                html-title)</action>
+            <action type="fix" dev="ste-gr">No pre-Tag for description</action>
+            <action type="fix" dev="ste-gr">Define sort-rules for html-generation</action>
+            <action type="fix" dev="ste-gr">Correct some SpotBugs</action>
+            <action type="add" dev="ste-gr">Add more project-reports: Checkstyle, CPD, PMD, SpotBugs</action>
+            <action type="fix" dev="ste-gr">Correction mem-leak in TagLibrary-implementation-classes</action>
+            <action type="update" dev="ste-gr">Improvements at JavaDoc</action>
+            <action type="update" dev="ste-gr">Use JJTree/JavaCC instead of fixed compiled sources</action>
+            <action type="update" dev="ste-gr">Upgrade to JDK 8</action>
+            <action type="update" dev="ste-gr">Building with MAVEN</action>
+            <action type="fix" dev="ste-gr">Correction memory-leak</action>
+            <action type="update" dev="ste-gr">Move to new home: "https://github.com/weblegacy/tlddoc"</action>
+        </release>
+        <release version="1.3" date="2005-12-04" description="">
+            <action type="add" dev="markroth8" system="old" issue="Issue 12">Support for JSP 2.1 TLD
+                schema. Support for new JSP 2.1 TLD elements, including: deferred value attributes
+                and associated type, deferred method attributes, and associated signature</action>
+        </release>
+        <release version="1.2" date="2004-11-10" description="">
+            <action type="add" dev="markroth8" system="old" issue="Issue 2">Now supports CDATA-escaped
+                HTML tags in any JSP 1.1 info or JSP 1.2 / JSP 2.0 description tag. Note: If you
+                have any customized stylesheets you will have to regenerate them for this release.
+                For the most part, you just have to add the j2ee: prefix when referring to the input
+                source. See the default stylesheets for details.</action>
+            <action type="fix" dev="markroth8" system="old" issue="Issue 4">Fixed a bug that prevented
+                taglibrarydoc from working with JDK 5.0.</action>
+        </release>
+        <release version="1.1" date="2003-02-16" description="First pulbic release">
+            <action type="add" dev="markroth8">Open source release to java.net.</action>
+            <action type="update" dev="markroth8">Updated JSP 1.2 to JSP 2.0 TLD conversion logic to
+                always supply body-content element, which is now mandatory.</action>
+            <action type="add" dev="markroth8">Now omits empty tag libraries.</action>
+            <action type="fix" dev="markroth8">Default attribute type in tags and tag files now takes
+                fragment attribute into account.</action>
+        </release>
+        <release version="1.0" date="2003-03-27" description="Initial release">
+            <action type="add" dev="markroth8">Initial release to Cool Stuff with full support for JSP
+                2.0 Technology.</action>
+        </release>
+        <release version="0.1" date="2002-12-19" description="Internal release">
+            <action type="add" dev="markroth8">Internal release.</action>
+        </release>
+    </body>
 </document>

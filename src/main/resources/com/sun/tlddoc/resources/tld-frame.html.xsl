@@ -40,167 +40,165 @@
         and functions that are in this particular tag library.
 -->
 
-<xsl:stylesheet version="1.0"
-    xmlns:javaee="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<xsl:stylesheet version="1.0" xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
-    <xsl:output method="html" indent="yes"/>
+    <xsl:output method="html" indent="yes" />
 
     <xsl:param name="tlddoc-shortName">default</xsl:param>
 
     <!-- template rule matching source root element -->
     <xsl:template match="/">
-      <xsl:apply-templates select="javaee:tlds/javaee:taglib"/>
+        <xsl:apply-templates select="javaee:tlds/javaee:taglib" />
     </xsl:template>
 
     <xsl:template match="javaee:taglib">
-      <xsl:if test="javaee:short-name=$tlddoc-shortName">
-        <xsl:variable name="tldname">
-          <xsl:choose>
-            <xsl:when test="javaee:display-name!=''">
-              <xsl:value-of select="javaee:display-name"/>
-            </xsl:when>
-            <xsl:when test="javaee:short-name!=''">
-              <xsl:value-of select="javaee:short-name"/>
-            </xsl:when>
-            <xsl:otherwise>
-              Unnamed TLD
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="tldfull">
-          <xsl:value-of select="$tldname"/>
-          <xsl:choose>
-            <xsl:when test="javaee:description!=''">
-              (<xsl:value-of select="normalize-space(javaee:description)" disable-output-escaping="yes"/>)
-            </xsl:when>
-            <xsl:otherwise>
-              No Description
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
-        <html>
-          <head>
-            <title>
-              <xsl:value-of select="normalize-space($tldfull)"/>
-            </title>
-            <meta name="keywords">
-              <xsl:attribute name="content">
-                <xsl:value-of select="normalize-space($tldfull)"/>
+        <xsl:if test="javaee:short-name=$tlddoc-shortName">
+            <xsl:variable name="tldname">
+                <xsl:choose>
+                    <xsl:when test="javaee:display-name!=''">
+                        <xsl:value-of select="javaee:display-name" />
+                    </xsl:when>
+                    <xsl:when test="javaee:short-name!=''">
+                        <xsl:value-of select="javaee:short-name" />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        Unnamed TLD
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:variable name="tldfull">
+                <xsl:value-of select="$tldname" />
+                <xsl:choose>
+                    <xsl:when test="javaee:description!=''">
+                        (<xsl:value-of select="normalize-space(javaee:description)" disable-output-escaping="yes" />)
+                    </xsl:when>
+                    <xsl:otherwise>
+                        No Description
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <html>
+                <head>
+                    <title>
+                        <xsl:value-of select="normalize-space($tldfull)" />
+                    </title>
+                    <meta name="keywords">
+                        <xsl:attribute name="content">
+                <xsl:value-of select="normalize-space($tldfull)" />
               </xsl:attribute>
-            </meta>
-            <link rel="stylesheet" type="text/css" href="../stylesheet.css"
-                  title="Style"/>
-            <script>
-              function asd()
-              {
-              parent.document.title="<xsl:value-of select="normalize-space($tldfull)"/>";
-              }
-            </script>
-          </head>
-          <body bgcolor="white" onload="asd();">
-            <font size="+1" class="FrameTitleFont">
-              <a href="tld-summary.html" target="tagFrame">
-                <xsl:value-of select="$tldname"/>
-              </a>
-            </font>
-            <table border="0" width="100%">
-              <xsl:if test="(count(javaee:tag)+count(javaee:tag-file))>0">
-                <tr>
-                  <td nowrap="true">
-                    <font size="+1" class="FrameHeadingFont">
-                      Tags
-                    </font>&#160;
-                    <font class="FrameItemFont">
-                      <xsl:apply-templates
-                          select="javaee:tag|javaee:tag-file">
-                        <xsl:sort select="../javaee:short-name"/>
-                        <xsl:sort select="javaee:name"/>
-                      </xsl:apply-templates>
+                    </meta>
+                    <link rel="stylesheet" type="text/css" href="../stylesheet.css"
+                        title="Style" />
+                    <script>
+                        function asd()
+                        {
+                        parent.document.title="<xsl:value-of select="normalize-space($tldfull)" />";
+                        }
+                    </script>
+                </head>
+                <body bgcolor="white" onload="asd();">
+                    <font size="+1" class="FrameTitleFont">
+                        <a href="tld-summary.html" target="tagFrame">
+                            <xsl:value-of select="$tldname" />
+                        </a>
                     </font>
-                  </td>
-                </tr>
-              </xsl:if>
-              <xsl:if test="count(javaee:function)>0">
-                <tr>
-                  <td nowrap="true">
-                    <font size="+1" class="FrameHeadingFont">
-                      Functions
-                    </font>&#160;
-                    <font class="FrameItemFont">
-                      <xsl:apply-templates
-                          select="javaee:function">
-                        <xsl:sort select="../javaee:short-name"/>
-                        <xsl:sort select="javaee:name"/>
-                      </xsl:apply-templates>
-                    </font>
-                  </td>
-                </tr>
-              </xsl:if>
-              <xsl:if test="count(javaee:validator)>0">
-                <tr>
-                  <td nowrap="true">
-                    <font size="+1" class="FrameHeadingFont">
-                      Validator
-                    </font>&#160;
-                    <font class="FrameItemFont">
-                      <xsl:apply-templates
-                          select="javaee:validator">
-                        <xsl:sort select="javaee:validator-class"/>
-                      </xsl:apply-templates>
-                    </font>
-                  </td>
-                </tr>
-              </xsl:if>
-              <xsl:if test="count(javaee:listener)>0">
-                <tr>
-                  <td nowrap="true">
-                    <font size="+1" class="FrameHeadingFont">
-                      Listeners
-                    </font>&#160;
-                    <font class="FrameItemFont">
-                      <xsl:apply-templates
-                          select="javaee:listener">
-                        <xsl:sort select="javaee:listener-class"/>
-                      </xsl:apply-templates>
-                    </font>
-                  </td>
-                </tr>
-              </xsl:if>
-            </table>
-            <!-- <table ... -->
-          </body>
-        </html>
-      </xsl:if>
+                    <table border="0" width="100%">
+                        <xsl:if test="(count(javaee:tag)+count(javaee:tag-file))&gt;0">
+                            <tr>
+                                <td nowrap="true">
+                                    <font size="+1" class="FrameHeadingFont">
+                                        Tags
+                                    </font>&#160;
+                                    <font class="FrameItemFont">
+                                        <xsl:apply-templates
+                                            select="javaee:tag|javaee:tag-file">
+                                            <xsl:sort select="../javaee:short-name" />
+                                            <xsl:sort select="javaee:name" />
+                                        </xsl:apply-templates>
+                                    </font>
+                                </td>
+                            </tr>
+                        </xsl:if>
+                        <xsl:if test="count(javaee:function)&gt;0">
+                            <tr>
+                                <td nowrap="true">
+                                    <font size="+1" class="FrameHeadingFont">
+                                        Functions
+                                    </font>&#160;
+                                    <font class="FrameItemFont">
+                                        <xsl:apply-templates
+                                            select="javaee:function">
+                                            <xsl:sort select="../javaee:short-name" />
+                                            <xsl:sort select="javaee:name" />
+                                        </xsl:apply-templates>
+                                    </font>
+                                </td>
+                            </tr>
+                        </xsl:if>
+                        <xsl:if test="count(javaee:validator)&gt;0">
+                            <tr>
+                                <td nowrap="true">
+                                    <font size="+1" class="FrameHeadingFont">
+                                        Validator
+                                    </font>&#160;
+                                    <font class="FrameItemFont">
+                                        <xsl:apply-templates
+                                            select="javaee:validator">
+                                            <xsl:sort select="javaee:validator-class" />
+                                        </xsl:apply-templates>
+                                    </font>
+                                </td>
+                            </tr>
+                        </xsl:if>
+                        <xsl:if test="count(javaee:listener)&gt;0">
+                            <tr>
+                                <td nowrap="true">
+                                    <font size="+1" class="FrameHeadingFont">
+                                        Listeners
+                                    </font>&#160;
+                                    <font class="FrameItemFont">
+                                        <xsl:apply-templates
+                                            select="javaee:listener">
+                                            <xsl:sort select="javaee:listener-class" />
+                                        </xsl:apply-templates>
+                                    </font>
+                                </td>
+                            </tr>
+                        </xsl:if>
+                    </table>
+                    <!-- <table ... -->
+                </body>
+            </html>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="javaee:tag|javaee:tag-file">
-      <br/>
-      <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:value-of select="javaee:name"/>.html</xsl:attribute>
-        <xsl:attribute name="target">tagFrame</xsl:attribute>
-        <xsl:value-of select="../javaee:short-name"/>:<xsl:value-of select="javaee:name"/>
-      </xsl:element>
+        <br />
+        <xsl:element name="a">
+            <xsl:attribute name="href"><xsl:value-of select="javaee:name" />.html</xsl:attribute>
+            <xsl:attribute name="target">tagFrame</xsl:attribute>
+            <xsl:value-of select="../javaee:short-name" />:<xsl:value-of select="javaee:name" />
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="javaee:function">
-      <br/>
-      <xsl:element name="a">
-        <xsl:attribute name="href"><xsl:value-of select="javaee:name"/>.fn.html</xsl:attribute>
-        <xsl:attribute name="target">tagFrame</xsl:attribute>
-        <i><xsl:value-of select="../javaee:short-name"/>:<xsl:value-of select="javaee:name"/>()</i>
-      </xsl:element>
+        <br />
+        <xsl:element name="a">
+            <xsl:attribute name="href"><xsl:value-of select="javaee:name" />.fn.html</xsl:attribute>
+            <xsl:attribute name="target">tagFrame</xsl:attribute>
+            <i><xsl:value-of select="../javaee:short-name" />:<xsl:value-of select="javaee:name" />()</i>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="javaee:validator">
-      <br/>
-      <xsl:value-of select="javaee:validator-class"/>
+        <br />
+        <xsl:value-of select="javaee:validator-class" />
     </xsl:template>
 
     <xsl:template match="javaee:listener">
-      <br/>
-      <xsl:value-of select="javaee:listener-class"/>
+        <br />
+        <xsl:value-of select="javaee:listener-class" />
     </xsl:template>
 
 </xsl:stylesheet>

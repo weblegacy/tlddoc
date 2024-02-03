@@ -57,8 +57,8 @@ public class TagFile {
     /** The set of directives in this tag file */
     public Directives directives = new Directives();
 
-    public static TagFile parse( InputStream in ) throws ParseException, IOException {
-        TagFile parser = new TagFile( new StreamProvider( in ));
+    public static TagFile parse(InputStream in) throws ParseException, IOException {
+        TagFile parser = new TagFile(new StreamProvider(in));
         parser.Input();
         return parser;
     }
@@ -261,7 +261,7 @@ void JSPDirective() :
   <JSP_DIRECTIVE>
   directiveName = JSPDirectiveName()
   {
-    result.setDirectiveName( directiveName );
+    result.setDirectiveName(directiveName);
   }
   (
     attributeName = JSPAttributeName()
@@ -276,12 +276,12 @@ void JSPDirective() :
         )
     )
     {
-      result.addAttribute( new Attribute( attributeName, attributeValue ) );
+      result.addAttribute(new Attribute(attributeName, attributeValue));
     }
   )*
   <END_DIRECTIVE>
   {
-    directives.addDirective( result );
+    directives.addDirective(result);
   }
 }
 
@@ -333,7 +333,7 @@ void XMLDirective() :
   <XML_DIRECTIVE>
   directiveName = XMLDirectiveName()
   {
-    result.setDirectiveName( directiveName );
+    result.setDirectiveName(directiveName);
   }
   (
     attributeName = XMLAttributeName()
@@ -348,12 +348,12 @@ void XMLDirective() :
         )
     )
     {
-      result.addAttribute( new Attribute( attributeName, attributeValue ) );
+      result.addAttribute(new Attribute(attributeName, attributeValue));
     }
   )*
   <X_END_DIRECTIVE>
   {
-    directives.addDirective( result );
+    directives.addDirective(result);
   }
 }
 
@@ -392,8 +392,6 @@ String XMLAttributeValue() :
     return result.toString();
   }
 }
-
-
 
 void OtherContent() :
 {}
