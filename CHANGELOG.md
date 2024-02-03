@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Update help-message and add organization
 * Get MAVEN-Version thru java-template-file
 * Reformat xml- and jjt-files
 * Change link to old issues to `changes-report.html` (old issues no longer available)

@@ -47,8 +47,10 @@ public class TldDoc {
      * Defines the Help-text for TldDoc.
      */
     private static final String USAGE
-            = "Tag Library Documentation Generator " + Version.VERSION
-            + " by Mark Roth, Sun Microsystems, Inc.\n"
+            = "Tag Library Documentation Generator " + Version.VERSION + " by\n"
+            + " * Mark Roth, Sun Microsystems, Inc. and\n"
+            + " * Stefan Graff, Web-Legacy\n"
+            + "\n"
             + "Usage: tlddoc [options] taglib1 [taglib2 [taglib3 ...]]\n"
             + "Options:\n"
             + "  -help                  Displays this help message\n"
@@ -56,10 +58,10 @@ public class TldDoc {
             + "                         instead of the defaults.\n"
             + "  -d <directory>         Destination directory for output files\n"
             + "                         (defaults to new dir called 'out')\n"
-            + "  -doctitle <html-code>  Include title for the TLD index (first) "
-            + "page\n"
+            + "  -doctitle <html-code>  Include title for the TLD index (first) page\n"
             + "  -windowtitle <text>    Browser window title\n"
             + "  -q                     Quiet Mode\n"
+            + "\n"
             + "taglib{1,2,3,...}:\n"
             + "  * If the path is a file that ends in .tld, process an\n"
             + "    individual TLD file.\n"
