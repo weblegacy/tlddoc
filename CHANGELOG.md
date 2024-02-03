@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Use own `checkstyle.xml`
 * Add missing plugin (antrun)
 * Move profile pluginManagement to main-pluginManagement
 * Bump `spotbugs-maven-plugin` from 4.8.2.0 to 4.8.3.0
