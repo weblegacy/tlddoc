@@ -40,7 +40,7 @@
         and functions that are in this particular tag library.
 -->
 
-<xsl:stylesheet version="1.0" xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+<xsl:stylesheet version="1.0" xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
     <xsl:output method="html" indent="yes" />
@@ -49,18 +49,18 @@
 
     <!-- template rule matching source root element -->
     <xsl:template match="/">
-        <xsl:apply-templates select="javaee:tlds/javaee:taglib" />
+        <xsl:apply-templates select="jakartaee:tlds/jakartaee:taglib" />
     </xsl:template>
 
-    <xsl:template match="javaee:taglib">
-        <xsl:if test="javaee:short-name=$tlddoc-shortName">
+    <xsl:template match="jakartaee:taglib">
+        <xsl:if test="jakartaee:short-name=$tlddoc-shortName">
             <xsl:variable name="tldname">
                 <xsl:choose>
-                    <xsl:when test="javaee:display-name!=''">
-                        <xsl:value-of select="javaee:display-name" />
+                    <xsl:when test="jakartaee:display-name!=''">
+                        <xsl:value-of select="jakartaee:display-name" />
                     </xsl:when>
-                    <xsl:when test="javaee:short-name!=''">
-                        <xsl:value-of select="javaee:short-name" />
+                    <xsl:when test="jakartaee:short-name!=''">
+                        <xsl:value-of select="jakartaee:short-name" />
                     </xsl:when>
                     <xsl:otherwise>
                         Unnamed TLD
@@ -70,8 +70,8 @@
             <xsl:variable name="tldfull">
                 <xsl:value-of select="$tldname" />
                 <xsl:choose>
-                    <xsl:when test="javaee:description!=''">
-                        (<xsl:value-of select="normalize-space(javaee:description)" disable-output-escaping="yes" />)
+                    <xsl:when test="jakartaee:description!=''">
+                        (<xsl:value-of select="normalize-space(jakartaee:description)" disable-output-escaping="yes" />)
                     </xsl:when>
                     <xsl:otherwise>
                         No Description
@@ -104,7 +104,7 @@
                         </a>
                     </font>
                     <table border="0" width="100%">
-                        <xsl:if test="(count(javaee:tag)+count(javaee:tag-file))&gt;0">
+                        <xsl:if test="(count(jakartaee:tag)+count(jakartaee:tag-file))&gt;0">
                             <tr>
                                 <td nowrap="true">
                                     <font size="+1" class="FrameHeadingFont">
@@ -112,15 +112,15 @@
                                     </font>&#160;
                                     <font class="FrameItemFont">
                                         <xsl:apply-templates
-                                            select="javaee:tag|javaee:tag-file">
-                                            <xsl:sort select="../javaee:short-name" />
-                                            <xsl:sort select="javaee:name" />
+                                            select="jakartaee:tag|jakartaee:tag-file">
+                                            <xsl:sort select="../jakartaee:short-name" />
+                                            <xsl:sort select="jakartaee:name" />
                                         </xsl:apply-templates>
                                     </font>
                                 </td>
                             </tr>
                         </xsl:if>
-                        <xsl:if test="count(javaee:function)&gt;0">
+                        <xsl:if test="count(jakartaee:function)&gt;0">
                             <tr>
                                 <td nowrap="true">
                                     <font size="+1" class="FrameHeadingFont">
@@ -128,15 +128,15 @@
                                     </font>&#160;
                                     <font class="FrameItemFont">
                                         <xsl:apply-templates
-                                            select="javaee:function">
-                                            <xsl:sort select="../javaee:short-name" />
-                                            <xsl:sort select="javaee:name" />
+                                            select="jakartaee:function">
+                                            <xsl:sort select="../jakartaee:short-name" />
+                                            <xsl:sort select="jakartaee:name" />
                                         </xsl:apply-templates>
                                     </font>
                                 </td>
                             </tr>
                         </xsl:if>
-                        <xsl:if test="count(javaee:validator)&gt;0">
+                        <xsl:if test="count(jakartaee:validator)&gt;0">
                             <tr>
                                 <td nowrap="true">
                                     <font size="+1" class="FrameHeadingFont">
@@ -144,14 +144,14 @@
                                     </font>&#160;
                                     <font class="FrameItemFont">
                                         <xsl:apply-templates
-                                            select="javaee:validator">
-                                            <xsl:sort select="javaee:validator-class" />
+                                            select="jakartaee:validator">
+                                            <xsl:sort select="jakartaee:validator-class" />
                                         </xsl:apply-templates>
                                     </font>
                                 </td>
                             </tr>
                         </xsl:if>
-                        <xsl:if test="count(javaee:listener)&gt;0">
+                        <xsl:if test="count(jakartaee:listener)&gt;0">
                             <tr>
                                 <td nowrap="true">
                                     <font size="+1" class="FrameHeadingFont">
@@ -159,8 +159,8 @@
                                     </font>&#160;
                                     <font class="FrameItemFont">
                                         <xsl:apply-templates
-                                            select="javaee:listener">
-                                            <xsl:sort select="javaee:listener-class" />
+                                            select="jakartaee:listener">
+                                            <xsl:sort select="jakartaee:listener-class" />
                                         </xsl:apply-templates>
                                     </font>
                                 </td>
@@ -173,32 +173,32 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="javaee:tag|javaee:tag-file">
+    <xsl:template match="jakartaee:tag|jakartaee:tag-file">
         <br />
         <xsl:element name="a">
-            <xsl:attribute name="href"><xsl:value-of select="javaee:name" />.html</xsl:attribute>
+            <xsl:attribute name="href"><xsl:value-of select="jakartaee:name" />.html</xsl:attribute>
             <xsl:attribute name="target">tagFrame</xsl:attribute>
-            <xsl:value-of select="../javaee:short-name" />:<xsl:value-of select="javaee:name" />
+            <xsl:value-of select="../jakartaee:short-name" />:<xsl:value-of select="jakartaee:name" />
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="javaee:function">
+    <xsl:template match="jakartaee:function">
         <br />
         <xsl:element name="a">
-            <xsl:attribute name="href"><xsl:value-of select="javaee:name" />.fn.html</xsl:attribute>
+            <xsl:attribute name="href"><xsl:value-of select="jakartaee:name" />.fn.html</xsl:attribute>
             <xsl:attribute name="target">tagFrame</xsl:attribute>
-            <i><xsl:value-of select="../javaee:short-name" />:<xsl:value-of select="javaee:name" />()</i>
+            <i><xsl:value-of select="../jakartaee:short-name" />:<xsl:value-of select="jakartaee:name" />()</i>
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="javaee:validator">
+    <xsl:template match="jakartaee:validator">
         <br />
-        <xsl:value-of select="javaee:validator-class" />
+        <xsl:value-of select="jakartaee:validator-class" />
     </xsl:template>
 
-    <xsl:template match="javaee:listener">
+    <xsl:template match="jakartaee:listener">
         <br />
-        <xsl:value-of select="javaee:listener-class" />
+        <xsl:value-of select="jakartaee:listener-class" />
     </xsl:template>
 
 </xsl:stylesheet>

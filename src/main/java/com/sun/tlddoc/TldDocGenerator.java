@@ -491,20 +491,20 @@ public class TldDocGenerator {
         summaryTld = documentBuilder.newDocument();
 
         // Create root <tlds> element:
-        Element rootElement = summaryTld.createElementNS(Constants.NS_JAVAEE, "tlds");
+        Element rootElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, "tlds");
         summaryTld.appendChild(rootElement);
         // JDK 1.4 does not add xmlns for some reason - add it manually:
-        rootElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", Constants.NS_JAVAEE);
+        rootElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", Constants.NS_JAKARTAEE);
 
         // Create configuration element:
-        Element configElement = summaryTld.createElementNS(Constants.NS_JAVAEE, "config");
+        Element configElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, "config");
         rootElement.appendChild(configElement);
 
-        Element windowTitle = summaryTld.createElementNS(Constants.NS_JAVAEE, "window-title");
+        Element windowTitle = summaryTld.createElementNS(Constants.NS_JAKARTAEE, "window-title");
         windowTitle.appendChild(summaryTld.createTextNode(this.windowTitle));
         configElement.appendChild(windowTitle);
 
-        Element docTitle = summaryTld.createElementNS(Constants.NS_JAVAEE, "doc-title");
+        Element docTitle = summaryTld.createElementNS(Constants.NS_JAKARTAEE, "doc-title");
         docTitle.appendChild(summaryTld.createTextNode(this.docTitle));
         configElement.appendChild(docTitle);
 
@@ -518,30 +518,29 @@ public class TldDocGenerator {
             try (TagLibrary tagLibrary = tagLibrary_) {
                 Document doc = tagLibrary.getTldDocument(documentBuilder);
 
-                // Convert document to JSP 2.1 TLD
+                // Convert document to JSP 3.0 TLD
                 doc = upgradeTld(doc);
 
                 // If this tag library has no tags, no validators,
                 // and no functions, omit it
-                int numTags
-                        = doc.getDocumentElement().getElementsByTagNameNS("*", "tag").getLength()
-                        + doc.getDocumentElement().getElementsByTagNameNS("*",
-                                "tag-file").getLength()
-                        + doc.getDocumentElement().getElementsByTagNameNS("*",
-                                "validator").getLength()
-                        + doc.getDocumentElement().getElementsByTagNameNS("*",
-                                "function").getLength();
+                final Element element = doc.getDocumentElement();
+                int numTags = element == null ? 0 :
+                          element.getElementsByTagNameNS("*", "tag").getLength()
+                        + element.getElementsByTagNameNS("*", "tag-file").getLength()
+                        + element.getElementsByTagNameNS("*", "validator").getLength()
+                        + element.getElementsByTagNameNS("*", "function").getLength();
                 if (numTags > 0) {
                     // Populate the root element with extra information
                     populateTld(tagLibrary, doc);
 
                     Element taglibNode = (Element) summaryTld.importNode(
                             doc.getDocumentElement(), true);
-                    if (!taglibNode.getNamespaceURI().equals(Constants.NS_JAVAEE)
-                            && !taglibNode.getNamespaceURI().equals(Constants.NS_J2EE)) {
+                    if (!(taglibNode.getNamespaceURI().equals(Constants.NS_JAKARTAEE)
+                            || taglibNode.getNamespaceURI().equals(Constants.NS_JAVAEE)
+                            || taglibNode.getNamespaceURI().equals(Constants.NS_J2EE))) {
                         throw new GeneratorException("Error: "
                                 + tagLibrary.getPathDescription()
-                                + " does not have xmlns=\"" + Constants.NS_JAVAEE + "\"");
+                                + " does not have xmlns=\"" + Constants.NS_JAKARTAEE + "\"");
                     }
                     if (!taglibNode.getLocalName().equals("taglib")) {
                         throw new GeneratorException("Error: "
@@ -563,11 +562,11 @@ public class TldDocGenerator {
     }
 
     /**
-     * Converts the given TLD to a JSP 2.1 TLD.
+     * Converts the given TLD to a JSP 3.0 TLD.
      *
      * @param doc the given TLD
      *
-     * @return the converted to JSP 2.1 TLD
+     * @return the converted to JSP 3.0 TLD
      *
      * @throws TransformerFactoryConfigurationError Thrown in case of {@linkplain
      * java.util.ServiceConfigurationError service configuration error} or if the implementation is
@@ -606,15 +605,20 @@ public class TldDocGenerator {
         }
 
         if ("2.0".equals(root.getAttribute("version"))) {
-
+            // JSP 2.0 TLD - convert to JSP 2.1 TLD first
             doc = convertTld(doc, RESOURCE_PATH + "/tld2_0-tld2_1.xsl");
+            root = doc.getDocumentElement();
+        }
 
+        if ("2.1".equals(root.getAttribute("version"))) {
+            // JSP 2.1 TLD - convert to JSP 3.0 TLD first
+            doc = convertTld(doc, RESOURCE_PATH + "/tld2_1-tld3_0.xsl");
         }
 
         // Final conversion to remove unwanted elements
-        doc = convertTld(doc, RESOURCE_PATH + "/tld2_1-tld2_1.xsl");
+        doc = convertTld(doc, RESOURCE_PATH + "/tld3_0-tld3_0.xsl");
 
-        // We should now have a JSP 2.1 TLD in doc.
+        // We should now have a JSP 3.0 TLD in doc.
         return doc;
     }
 
@@ -753,7 +757,7 @@ public class TldDocGenerator {
                     || name.equals("dynamic-attributes")
                     || name.equals("description")
                     || name.equals("example")) {
-                element = doc.createElementNS(Constants.NS_JAVAEE, name);
+                element = doc.createElementNS(Constants.NS_JAKARTAEE, name);
                 element.appendChild(doc.createTextNode(value));
                 tagFileNode.appendChild(element);
             } else if (name.equals("small-icon")
@@ -761,12 +765,12 @@ public class TldDocGenerator {
                 NodeList icons = tagFileNode.getElementsByTagNameNS("*", "icon");
                 Element icon;
                 if (icons.getLength() == 0) {
-                    icon = doc.createElementNS(Constants.NS_JAVAEE, "icon");
+                    icon = doc.createElementNS(Constants.NS_JAKARTAEE, "icon");
                     tagFileNode.appendChild(icon);
                 } else {
                     icon = (Element) icons.item(0);
                 }
-                element = doc.createElementNS(Constants.NS_JAVAEE, name);
+                element = doc.createElementNS(Constants.NS_JAKARTAEE, name);
                 element.appendChild(doc.createTextNode(value));
                 icon.appendChild(element);
             }
@@ -803,7 +807,7 @@ public class TldDocGenerator {
     private void populateDefault(Document doc, Element parent, String tagName,
             String defaultValue) {
         if (findElementValue(parent, tagName) == null) {
-            Element element = doc.createElementNS(Constants.NS_JAVAEE, tagName);
+            Element element = doc.createElementNS(Constants.NS_JAKARTAEE, tagName);
             element.appendChild(doc.createTextNode(defaultValue));
             parent.appendChild(element);
         }
@@ -818,7 +822,7 @@ public class TldDocGenerator {
      */
     private void populateTagFileDetailsAttributeDirective(
             Element tagFileNode, Document doc, Directive directive) {
-        Element attributeNode = doc.createElementNS(Constants.NS_JAVAEE,
+        Element attributeNode = doc.createElementNS(Constants.NS_JAKARTAEE,
                 "attribute");
         tagFileNode.appendChild(attributeNode);
         String deferredValueType = null;
@@ -834,7 +838,7 @@ public class TldDocGenerator {
                 case "rtexprvalue":
                 case "type":
                 case "description":
-                    element = doc.createElementNS(Constants.NS_JAVAEE, name);
+                    element = doc.createElementNS(Constants.NS_JAKARTAEE, name);
                     element.appendChild(doc.createTextNode(value));
                     attributeNode.appendChild(element);
                     break;
@@ -860,19 +864,19 @@ public class TldDocGenerator {
         }
         if (deferredValueType != null) {
             Element deferredValueElement
-                    = doc.createElementNS(Constants.NS_JAVAEE, "deferred-value");
+                    = doc.createElementNS(Constants.NS_JAKARTAEE, "deferred-value");
             attributeNode.appendChild(deferredValueElement);
             Element typeElement
-                    = doc.createElementNS(Constants.NS_JAVAEE, "type");
+                    = doc.createElementNS(Constants.NS_JAKARTAEE, "type");
             typeElement.appendChild(doc.createTextNode(deferredValueType));
             deferredValueElement.appendChild(typeElement);
         }
         if (deferredMethodSignature != null) {
             Element deferredMethodElement
-                    = doc.createElementNS(Constants.NS_JAVAEE, "deferred-method");
+                    = doc.createElementNS(Constants.NS_JAKARTAEE, "deferred-method");
             attributeNode.appendChild(deferredMethodElement);
             Element methodSignatureElement
-                    = doc.createElementNS(Constants.NS_JAVAEE, "method-signature");
+                    = doc.createElementNS(Constants.NS_JAKARTAEE, "method-signature");
             methodSignatureElement.appendChild(
                     doc.createTextNode(deferredMethodSignature));
             deferredMethodElement.appendChild(methodSignatureElement);
@@ -901,7 +905,7 @@ public class TldDocGenerator {
      */
     private void populateTagFileDetailsVariableDirective(
             Element tagFileNode, Document doc, Directive directive) {
-        Element variableNode = doc.createElementNS(Constants.NS_JAVAEE,
+        Element variableNode = doc.createElementNS(Constants.NS_JAKARTAEE,
                 "variable");
         tagFileNode.appendChild(variableNode);
         for (Attribute attribute : directive.getAttributes()) {
@@ -914,7 +918,7 @@ public class TldDocGenerator {
                     || name.equals("declare")
                     || name.equals("scope")
                     || name.equals("description")) {
-                element = doc.createElementNS(Constants.NS_JAVAEE, name);
+                element = doc.createElementNS(Constants.NS_JAKARTAEE, name);
                 element.appendChild(doc.createTextNode(value));
                 variableNode.appendChild(element);
             }
@@ -938,7 +942,7 @@ public class TldDocGenerator {
         if (root.getElementsByTagNameNS("*", "short-name").getLength() == 0) {
             String prefix = "prefix" + substitutePrefix;
             substitutePrefix++;
-            Element shortName = doc.createElementNS(Constants.NS_JAVAEE,
+            Element shortName = doc.createElementNS(Constants.NS_JAKARTAEE,
                     "short-name");
             shortName.appendChild(doc.createTextNode(prefix));
             root.appendChild(shortName);
@@ -981,7 +985,7 @@ public class TldDocGenerator {
 
                     // Create <type> element and append to attribute
                     Element typeElement = doc.createElementNS(
-                            Constants.NS_JAVAEE, "type");
+                            Constants.NS_JAKARTAEE, "type");
                     typeElement.appendChild(
                             doc.createTextNode(defaultType));
                     attributeElement.appendChild(typeElement);

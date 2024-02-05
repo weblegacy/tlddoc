@@ -81,8 +81,7 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
      * {@inheritDoc}
      */
     @Override
-    public InputStream getResource(String path)
-            throws IOException {
+    public InputStream getResource(String path) throws IOException {
         InputStream result = null;
 
         // Start from the tag directory and backtrack,
@@ -113,6 +112,7 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
     @Override
     public Document getTldDocument(DocumentBuilder documentBuilder)
             throws IOException, SAXException, TransformerException {
+
         Document result = documentBuilder.newDocument();
 
         // Determine path from root of web application (this is somewhat of
@@ -164,19 +164,16 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
 
         // Output implicit tag library, as a test.
         StringWriter buffer = new StringWriter();
-        Transformer transformer
-                = TransformerFactory.newInstance().newTransformer();
-        transformer.transform(new DOMSource(result),
-                new StreamResult(buffer));
-        result = documentBuilder.parse(new InputSource(new StringReader(
-                buffer.toString())));
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(new DOMSource(result), new StreamResult(buffer));
+        result = documentBuilder.parse(new InputSource(new StringReader(buffer.toString())));
 
         return result;
     }
 
     /**
      * Creates an implicit tag library root node, with default values. Shared by
-     * WARTagDirImplicitTagLibrary.
+     * WarTagDirImplicitTagLibrary.
      *
      * @param result XML-document to add new tag-element
      * @param path   path to the TLD Files
@@ -186,18 +183,18 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
     protected static Element createRootTaglibNode(Document result,
             String path) {
         Element taglibElement = result.createElementNS(
-                Constants.NS_JAVAEE, "taglib");
+                Constants.NS_JAKARTAEE, "taglib");
         // JDK 1.4 does not add xmlns for some reason - add it manually:
         taglibElement.setAttributeNS("http://www.w3.org/2000/xmlns/",
-                "xmlns", Constants.NS_JAVAEE);
+                "xmlns", Constants.NS_JAKARTAEE);
         taglibElement.setAttributeNS("http://www.w3.org/2000/xmlns/",
                 "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
         taglibElement.setAttributeNS(
                 "http://www.w3.org/2001/XMLSchema-instance",
                 "xsi:schemaLocation",
-                Constants.NS_JAVAEE
-                + " http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd");
-        taglibElement.setAttribute("version", "2.1");
+                Constants.NS_JAKARTAEE
+                + " https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_0.xsd");
+        taglibElement.setAttribute("version", "3.0");
         result.appendChild(taglibElement);
 
         // Add <description>
@@ -212,8 +209,8 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
         taglibElement.appendChild(tlibVersionElement);
 
         // According to the JSP 2.0 specification, <short-name> is derived
-        // from the directory name.  If the directory is /WEB-INF/tags/, the
-        // short name is simply tags.  Otherwise, the full directory path
+        // from the directory name. If the directory is /WEB-INF/tags/, the
+        // short name is simply tags. Otherwise, the full directory path
         // (relative to the web application) is taken, minus the
         // /WEB-INF/tags/ prefix. Then, all / characters are replaced
         // with -, which yields the short name. Note that short names are

@@ -39,10 +39,8 @@
         Creates the help-doc page for Tag Library Documentation Generator
 -->
 
-<xsl:stylesheet version="1.0"
-    xmlns:javaee="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<xsl:stylesheet version="1.0" xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
     <xsl:output method="html" indent="yes"/>
 
@@ -51,13 +49,13 @@
       <HTML>
         <HEAD>
           <TITLE>
-            API Help (<xsl:value-of select="normalize-space(/javaee:tlds/javaee:config/javaee:window-title)"/>)
+            API Help (<xsl:value-of select="normalize-space(/jakartaee:tlds/jakartaee:config/jakartaee:window-title)"/>)
           </TITLE>
           <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style"/>
         </HEAD>
         <SCRIPT>
           function asd() {
-            parent.document.title="API Help (<xsl:value-of select="normalize-space(/javaee:tlds/javaee:config/javaee:window-title)"/>)";
+            parent.document.title="API Help (<xsl:value-of select="normalize-space(/jakartaee:tlds/jakartaee:config/jakartaee:window-title)"/>)";
           }
         </SCRIPT>
         <BODY BGCOLOR="white" onload="asd();">

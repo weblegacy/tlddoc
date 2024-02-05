@@ -43,23 +43,23 @@
 -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:javaee="http://java.sun.com/xml/ns/javaee">
+    xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee">
     <xsl:output method="xml" indent="yes" />
 
-    <xsl:template match="/javaee:taglib">
-        <xsl:element name="taglib" namespace="http://java.sun.com/xml/ns/javaee">
+    <xsl:template match="/jakartaee:taglib">
+        <xsl:element name="taglib" namespace="https://jakarta.ee/xml/ns/jakartaee">
             <xsl:attribute name="xsi:schemaLocation"
-                namespace="http://www.w3.org/2001/XMLSchema-instance">http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd</xsl:attribute>
-            <xsl:attribute name="version">2.1</xsl:attribute>
+                namespace="http://www.w3.org/2001/XMLSchema-instance">https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_0.xsd</xsl:attribute>
+            <xsl:attribute name="version">3.0</xsl:attribute>
             <xsl:apply-templates select="*" />
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="javaee:tag-extension" />
+    <xsl:template match="jakartaee:tag-extension" />
 
-    <xsl:template match="javaee:function-extension" />
+    <xsl:template match="jakartaee:function-extension" />
 
-    <xsl:template match="javaee:taglib-extension" />
+    <xsl:template match="jakartaee:taglib-extension" />
 
     <xsl:template match="@*|node()">
         <xsl:copy>

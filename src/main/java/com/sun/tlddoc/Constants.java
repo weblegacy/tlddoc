@@ -57,6 +57,11 @@ public final class Constants {
             = "Tag Library Documentation Generator - Generated Documentation";
 
     /**
+     * Namespace for Jakarta EE.
+     */
+    public static final String NS_JAKARTAEE = "https://jakarta.ee/xml/ns/jakartaee";
+
+    /**
      * Namespace for Java EE.
      */
     public static final String NS_JAVAEE = "http://java.sun.com/xml/ns/javaee";

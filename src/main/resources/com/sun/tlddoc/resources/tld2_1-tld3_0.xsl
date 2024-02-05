@@ -32,43 +32,38 @@
 -->
 
 <!--
-    Document   : index.html.xsl
-    Created on : October 1, 2002, 5:37 PM
-    Author     : mroth
-    Description:
-        Creates the index page for Tag Library Documentation Generator
+
+  Identity transformation (changing from the J2EE namespace
+  to the Java EE namespace), added for flexibility.
+
+  1. Change the <taglib> element to read as follows:
+     <taglib xmlns="https://jakarta.ee/xml/ns/jakartaee""
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_0.xsd">
+
+  Author: Mark Roth
+
 -->
 
-<xsl:stylesheet version="1.0" xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:javaee="http://java.sun.com/xml/ns/javaee">
+    <xsl:output method="xml" indent="yes" />
 
-    <xsl:output method="html" indent="yes" />
+    <xsl:template match="/javaee:taglib">
+        <xsl:element name="taglib" namespace="https://jakarta.ee/xml/ns/jakartaee">
+            <xsl:attribute name="xsi:schemaLocation"
+                namespace="http://www.w3.org/2001/XMLSchema-instance">https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_0.xsd</xsl:attribute>
+            <xsl:attribute name="version">3.0</xsl:attribute>
+            <xsl:apply-templates select="*" />
+        </xsl:element>
+    </xsl:template>
 
-    <!-- template rule matching source root element -->
-    <xsl:template match="/">
-        <html>
-            <head>
-                <title>
-                    <xsl:value-of select="normalize-space(/jakartaee:tlds/jakartaee:config/jakartaee:window-title)" />
-                </title>
-            </head>
-            <frameset cols="20%,80%">
-                <frameset rows="30%,70%">
-                    <frame src="overview-frame.html" name="tldListFrame" />
-                    <frame src="alltags-frame.html" name="tldFrame" />
-                </frameset>
-                <frame src="overview-summary.html" name="tagFrame" />
-            </frameset>
-            <noframes>
-                <h2>Frame Alert</h2>
-                <p />
-                This document is designed to be viewed using the frames feature.
-                If you see this message, you are using a non-frame-capable web
-                client.
-                <br />
-                Link to <a href="overview-summary.html">Non-frame version.</a>
-            </noframes>
-        </html>
+    <xsl:template match="javaee:*">
+        <xsl:element name="{local-name()}" namespace="https://jakarta.ee/xml/ns/jakartaee">
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:element>
     </xsl:template>
 
 </xsl:stylesheet>

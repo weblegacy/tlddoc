@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Adapt to JakartaEE 9+ (JSP 3.0)
 * Update help-message and add organization
 * Get MAVEN-Version thru java-template-file
 * Reformat xml- and jjt-files
