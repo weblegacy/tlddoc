@@ -169,6 +169,10 @@ public class TldDoc {
                                         generator.addTagDir(f);
                                         foundWebInf = true;
                                     } else {
+                                        if (f.endsWith("WEB-INF")) {
+                                            f = f.getParent();
+                                        }
+
                                         try (DirectoryStream<Path> files
                                                 = Files.newDirectoryStream(f, Utils::isWebInf)) {
 

@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Corr: Input directory ends with WEB-INF
 * Use NIO2
 * Adapt to JakartaEE 9+ (JSP 3.0)
 * Update help-message and add organization
