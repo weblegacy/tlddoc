@@ -125,7 +125,7 @@
         <project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
         <mavenVersion>3.6.3</mavenVersion>
         <javaVersion>11</javaVersion>
-        <mainClass>io.github.weblegacy.tlddoc.TldDoc</mainClass>
+        <mainClass>io.github.weblegacy.tlddoc.main.TldDoc</mainClass>
     </properties>
 
     <profiles>
@@ -597,7 +597,6 @@
                     <reportSet>
                         <reports>
                             <report>javadoc-no-fork</report>
-                            <report>test-javadoc-no-fork</report>
                         </reports>
                     </reportSet>
                 </reportSets>
