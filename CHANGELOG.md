@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Resolve all SpotBugs warnings
 * Change author to short-name
 * Corr: TLD 1.x with namespace in root element
 * Corr: Input directory ends with WEB-INF

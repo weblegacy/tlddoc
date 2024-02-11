@@ -142,7 +142,12 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
         final String p = path;
         try (DirectoryStream<Path> files = Files.newDirectoryStream(dir, Utils::isTag)) {
             for (Path file : files) {
-                final String fileName = file.getFileName().toString();
+                final Path fn = file.getFileName();
+                if (fn == null) {
+                    continue;
+                }
+
+                final String fileName = fn.toString();
                 final String tagName = fileName.substring(0, fileName.lastIndexOf('.'));
                 final String tagPath = p + fileName;
 

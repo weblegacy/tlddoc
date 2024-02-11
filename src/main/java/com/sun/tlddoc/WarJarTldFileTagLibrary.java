@@ -108,8 +108,9 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
     @Override
     public Document getTldDocument(DocumentBuilder documentBuilder)
             throws IOException, SAXException, TransformerException {
+
         try (InputStream in = getInputStream(this.tldPath)) {
-            if (in != null) {
+            if (documentBuilder != null && in != null) {
                 return documentBuilder.parse(in);
             }
         }

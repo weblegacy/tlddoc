@@ -173,11 +173,14 @@ public class TldDoc {
                                             f = f.getParent();
                                         }
 
-                                        try (DirectoryStream<Path> files
-                                                = Files.newDirectoryStream(f, Utils::isWebInf)) {
+                                        if (f != null) {
+                                            try (DirectoryStream<Path> files
+                                                    = Files.newDirectoryStream(f, Utils::isWebInf)) {
 
-                                            foundWebInf = files.iterator().hasNext();
+                                                foundWebInf = files.iterator().hasNext();
+                                            }
                                         }
+
                                         if (foundWebInf) {
                                             generator.addWebApp(f);
                                         }

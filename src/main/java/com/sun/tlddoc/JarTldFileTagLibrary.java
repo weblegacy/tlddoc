@@ -102,7 +102,7 @@ public class JarTldFileTagLibrary extends TagLibrary {
             throws IOException, SAXException, TransformerException {
 
         try (InputStream in = getInputStream(this.tldPath)) {
-            if (in != null) {
+            if (documentBuilder != null && in != null) {
                 return documentBuilder.parse(in);
             }
         }
