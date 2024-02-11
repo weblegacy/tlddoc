@@ -42,8 +42,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
@@ -54,7 +56,7 @@ import org.xml.sax.SAXException;
  *
  * @author mroth
  */
-public class TagDirImplicitTagLibrary extends TagLibrary {
+public class TagDirImplicitTagLibrary implements TagLibrary {
 
     /**
      * The directory containing the tag files.
@@ -83,36 +85,15 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
      */
     @Override
     public InputStream getResource(String path) throws IOException {
-        InputStream result = null;
-
-        // Start from the tag directory and backtrack,
-        // using the path as a relative path.
-        //   For example:
-        //      TLD:  /home/mroth/test/sample/WEB-INF/tags/mytags
-        //      path: /WEB-INF/tags/mytags/tag1.tag
-        Path d = this.dir;
-        if (path.startsWith("/")) {
-            path = path.substring(1);
-        }
-        Path look = null;
-        while (d != null && !Files.exists(look = d.resolve(path))) {
-            d = d.getParent();
-        }
-
-        if (look != null && Files.exists(look)) {
-            // Found it:
-            result = Files.newInputStream(look);
-        }
-
-        return result;
+        return Utils.backtrackPath(dir, path);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Document getTldDocument(DocumentBuilder documentBuilder)
-            throws IOException, SAXException, TransformerException {
+    public Document getTldDocument(DocumentBuilder documentBuilder) throws IOException,
+            SAXException, TransformerFactoryConfigurationError, TransformerException {
 
         Document result = documentBuilder.newDocument();
 
@@ -151,23 +132,11 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
                 final String tagName = fileName.substring(0, fileName.lastIndexOf('.'));
                 final String tagPath = p + fileName;
 
-                Element tagFileElement = result.createElement("tag-file");
-                Element nameElement = result.createElement("name");
-                nameElement.appendChild(result.createTextNode(tagName));
-                tagFileElement.appendChild(nameElement);
-
-                Element pathElement = result.createElement("path");
-                pathElement.appendChild(result.createTextNode(tagPath));
-                tagFileElement.appendChild(pathElement);
-                taglibElement.appendChild(tagFileElement);
+                createTagEntry(result, tagName, tagPath, taglibElement);
             }
         }
 
-        // Output implicit tag library, as a test.
-        StringWriter buffer = new StringWriter();
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.transform(new DOMSource(result), new StreamResult(buffer));
-        return documentBuilder.parse(new InputSource(new StringReader(buffer.toString())));
+        return recreateDocument(documentBuilder, result);
     }
 
     /**
@@ -179,7 +148,7 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
      *
      * @return new created tag library root node
      */
-    protected static Element createRootTaglibNode(Document result, String path) {
+    static Element createRootTaglibNode(Document result, String path) {
         Element taglibElement = result.createElementNS(Constants.NS_JAKARTAEE, "taglib");
         // JDK 1.4 does not add xmlns for some reason - add it manually:
         taglibElement.setAttributeNS("http://www.w3.org/2000/xmlns/",
@@ -244,6 +213,60 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
         taglibElement.appendChild(uriElement);
 
         return taglibElement;
+    }
+
+    /**
+     * Creates an tag-entry into tag library root node. Shared by WarTagDirImplicitTagLibrary.
+     *
+     * @param result        XML-document to add new tag-element
+     * @param tagName       name of the tag-entry
+     * @param tagPath       path of the tag-entry
+     * @param taglibElement tag library root node
+     *
+     * @throws DOMException if an XML error has occurred
+     */
+    static void createTagEntry(final Document result, final String tagName, final String tagPath,
+            Element taglibElement) throws DOMException {
+
+        final Element tagFileElement = result.createElement("tag-file");
+        final Element nameElement = result.createElement("name");
+        nameElement.appendChild(result.createTextNode(tagName));
+        tagFileElement.appendChild(nameElement);
+
+        final Element pathElement = result.createElement("path");
+        pathElement.appendChild(result.createTextNode(tagPath));
+        tagFileElement.appendChild(pathElement);
+        taglibElement.appendChild(tagFileElement);
+    }
+
+    /**
+     * Recreates the XML document. JDK 1.4 does not correctly import the node into the tree, so
+     * simulate reading this entry from a file. There might be a better / more efficient way to do
+     * this, but this works.
+     *
+     * @param documentBuilder {@code DocumentBuilder} to obtain DOM Document for creating an
+     *                        XML-document.
+     * @param result          XML-document to recreate
+     *
+     * @return the recreated XML-document
+     *
+     * @throws IOException                          if an I/O error has occurred
+     * @throws SAXException                         If any parse errors occur.
+     * @throws TransformerFactoryConfigurationError Thrown in case of {@linkplain
+     * java.util.ServiceConfigurationError service configuration error} or if the implementation is
+     *                                              not available or cannot be instantiated.
+     * @throws TransformerException                 If an unrecoverable error occurs during the
+     *                                              course of the transformation.
+     */
+    static Document recreateDocument(final DocumentBuilder documentBuilder, final Document result)
+            throws IOException, TransformerFactoryConfigurationError, TransformerException,
+            SAXException {
+
+        final StringWriter buffer = new StringWriter();
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(new DOMSource(result), new StreamResult(buffer));
+
+        return documentBuilder.parse(new InputSource(new StringReader(buffer.toString())));
     }
 
     /**

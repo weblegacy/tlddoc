@@ -31,37 +31,14 @@
 
 package com.sun.tlddoc;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Path;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.transform.TransformerException;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 /**
  * Tag library that gets its information from a TLD file in a JAR.
  *
  * @author mroth
  */
-public class JarTldFileTagLibrary extends TagLibrary {
-
-    /**
-     * The JAR containing the TLD file.
-     */
-    private final Path jar;
-
-    /**
-     * The JAR-file itself.
-     */
-    private JarFile jarFile = null;
-
-    /**
-     * The name of the JarEntry containing the TLD file.
-     */
-    private final String tldPath;
+public class JarTldFileTagLibrary extends WarJarTagLibrary {
 
     /**
      * Creates a new instance of {@link JarTldFileTagLibrary}.
@@ -69,78 +46,7 @@ public class JarTldFileTagLibrary extends TagLibrary {
      * @param jar     JAR containing the TLD file
      * @param tldPath name of the {@code JarEntry} containing the TLD file
      */
-    public JarTldFileTagLibrary(Path jar, String tldPath) {
-        this.jar = jar;
-        this.tldPath = tldPath;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getPathDescription() {
-        return jar.toAbsolutePath().toString() + "!" + tldPath;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public InputStream getResource(String path) throws IOException {
-        if (path.startsWith("/")) {
-            path = path.substring(1);
-        }
-
-        return getInputStream(path);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Document getTldDocument(DocumentBuilder documentBuilder)
-            throws IOException, SAXException, TransformerException {
-
-        try (InputStream in = getInputStream(this.tldPath)) {
-            if (documentBuilder != null && in != null) {
-                return documentBuilder.parse(in);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Returns an input stream for reading the contents of the specified JAR-file entry.
-     *
-     * @param path the path to the resource
-     *
-     * @return an input stream for reading the contents of the specified JAR-file entry
-     *
-     * @throws IOException if an I/O error has occurred
-     */
-    private InputStream getInputStream(String path) throws IOException {
-        if (jarFile == null) {
-            jarFile = new JarFile(jar.toFile());
-        }
-
-        final JarEntry jarEntry = jarFile.getJarEntry(path);
-        return jarEntry == null ? null : jarFile.getInputStream(jarEntry);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void close() throws IOException {
-        if (jarFile == null) {
-            return;
-        }
-
-        try {
-            jarFile.close();
-        } finally {
-            jarFile = null;
-        }
+    public JarTldFileTagLibrary(final Path jar, final String tldPath) {
+        super(jar, tldPath);
     }
 }

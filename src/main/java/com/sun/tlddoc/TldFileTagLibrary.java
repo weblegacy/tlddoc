@@ -37,6 +37,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -46,7 +47,7 @@ import org.xml.sax.SAXException;
  *
  * @author mroth
  */
-public class TldFileTagLibrary extends TagLibrary {
+public class TldFileTagLibrary implements TagLibrary {
 
     /**
      * The location of the TLD file for this tag library.
@@ -74,8 +75,8 @@ public class TldFileTagLibrary extends TagLibrary {
      * {@inheritDoc}
      */
     @Override
-    public Document getTldDocument(DocumentBuilder documentBuilder) throws
-            IOException, SAXException, TransformerException {
+    public Document getTldDocument(DocumentBuilder documentBuilder) throws IOException,
+            SAXException, TransformerFactoryConfigurationError, TransformerException {
 
         try (InputStream in = Files.newInputStream(tldFile)) {
             InputSource source = new InputSource(in);
@@ -88,29 +89,7 @@ public class TldFileTagLibrary extends TagLibrary {
      */
     @Override
     public InputStream getResource(String path) throws IOException {
-        InputStream result = null;
-
-        // This is a bit of a guess, since we don't know where the TLD is.
-        // Start from the directory containing the TLD, and backtrack,
-        // using the path as a relative path.
-        //   For example:
-        //      TLD:  /home/mroth/test/sample/WEB-INF/tld/test.tld
-        //      path: /WEB-INF/tags/tag1.tag
-        Path dir = tldFile.getParent();
-        if (path.startsWith("/")) {
-            path = path.substring(1);
-        }
-        Path look = null;
-        while (dir != null && !Files.exists(look = dir.resolve(path))) {
-            dir = dir.getParent();
-        }
-
-        if (look != null && Files.exists(look)) {
-            // Found it (or something pretty close to it anyway)
-            result = Files.newInputStream(look);
-        }
-
-        return result;
+        return Utils.backtrackPath(tldFile.getParent(), path);
     }
 
     /**

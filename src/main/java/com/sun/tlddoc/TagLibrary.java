@@ -31,10 +31,12 @@
 
 package com.sun.tlddoc;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -44,14 +46,14 @@ import org.xml.sax.SAXException;
  *
  * @author mroth
  */
-public abstract class TagLibrary implements AutoCloseable {
+public interface TagLibrary extends Closeable {
 
     /**
      * Returns a String that the user would recognize as a location for this tag library.
      *
      * @return a String that the user would recognize as a location for this tag library
      */
-    public abstract String getPathDescription();
+    String getPathDescription();
 
     /**
      * Returns a Document of the effective tag library descriptor for this tag library. This might
@@ -62,13 +64,16 @@ public abstract class TagLibrary implements AutoCloseable {
      *
      * @return created XML-Document
      *
-     * @throws IOException          if an I/O error has occurred
-     * @throws SAXException         If any parse errors occur
-     * @throws TransformerException If an unrecoverable error occurs during the course of the
-     *                              transformation
+     * @throws IOException                          if an I/O error has occurred
+     * @throws SAXException                         If any parse errors occur.
+     * @throws TransformerFactoryConfigurationError Thrown in case of {@linkplain
+     * java.util.ServiceConfigurationError service configuration error} or if the implementation is
+     *                                              not available or cannot be instantiated.
+     * @throws TransformerException                 If an unrecoverable error occurs during the
+     *                                              course of the transformation.
      */
-    public abstract Document getTldDocument(DocumentBuilder documentBuilder)
-            throws IOException, SAXException, TransformerException;
+    Document getTldDocument(DocumentBuilder documentBuilder) throws IOException,
+            SAXException, TransformerFactoryConfigurationError, TransformerException;
 
     /**
      * Returns an input stream for the given resource, or {@code null} if the resource could not be
@@ -81,12 +86,5 @@ public abstract class TagLibrary implements AutoCloseable {
      *
      * @throws IOException if an I/O error has occurred
      */
-    public abstract InputStream getResource(String path)
-            throws IOException;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public abstract void close() throws IOException;
+    InputStream getResource(String path) throws IOException;
 }

@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Reorganize code to reduce duplicate code
 * Use `Files.copy`
 * Corr: Input directory ends with WEB-INF (possible NPE)
 * Resolve all SpotBugs warnings

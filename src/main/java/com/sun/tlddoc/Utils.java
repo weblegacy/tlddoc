@@ -32,6 +32,7 @@
 package com.sun.tlddoc;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -259,5 +260,35 @@ public final class Utils {
                 processDirs0(file, process);
             }
         }
+    }
+
+    /**
+     * Start from the dir and backtrack, using the path as a relative path.
+     * <p>
+     * For example:</p>
+     * <ul>
+     * <li>dir: /home/mroth/test/sample/WEB-INF/tags/mytags</li>
+     * <li>path: /WEB-INF/tags/mytags/tag1.tag</li>
+     * <li>returns: /home/mroth/test/sample/WEB-INF/tags/mytags/tag1.tag</li>
+     * </ul>
+     *
+     * @param dir  the start-directory
+     * @param path the path to backtrack
+     *
+     * @return resolved path as {@link InputStream} or {@code null} when not found
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    public static InputStream backtrackPath(Path dir, String path) throws IOException {
+        if (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+
+        Path look = null;
+        while (dir != null && !Files.exists(look = dir.resolve(path))) {
+            dir = dir.getParent();
+        }
+
+        return look != null && Files.exists(look) ? Files.newInputStream(look) : null;
     }
 }

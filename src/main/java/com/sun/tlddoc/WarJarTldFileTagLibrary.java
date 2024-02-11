@@ -35,39 +35,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.transform.TransformerException;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 /**
  * Tag library that gets its information from a TLD file in a JAR that's packaged inside a WAR.
  *
  * @author mroth
  */
-public class WarJarTldFileTagLibrary extends TagLibrary {
-
-    /**
-     * The WAR containing the JAR.
-     */
-    private final Path war;
-
-    /**
-     * The WAR-file itself.
-     */
-    private JarFile warFile = null;
+public class WarJarTldFileTagLibrary extends WarJarTagLibrary {
 
     /**
      * The JAR containing the TLD file.
      */
     private final String warEntryName;
-
-    /**
-     * The name of the JarEntry containing the TLD file.
-     */
-    private final String tldPath;
 
     /**
      * Creates a new instance of {@link WarJarTldFileTagLibrary}.
@@ -77,9 +57,8 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
      * @param tldPath      name of the {@code JarEntry} containing the TLD file
      */
     public WarJarTldFileTagLibrary(Path war, String warEntryName, String tldPath) {
-        this.war = war;
+        super(war, tldPath);
         this.warEntryName = warEntryName;
-        this.tldPath = tldPath;
     }
 
     /**
@@ -87,35 +66,7 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
      */
     @Override
     public String getPathDescription() {
-        return war.toAbsolutePath() + "!" + warEntryName + "!" + tldPath;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public InputStream getResource(String path) throws IOException {
-        if (path.startsWith("/")) {
-            path = path.substring(1);
-        }
-
-        return getInputStream(path);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Document getTldDocument(DocumentBuilder documentBuilder)
-            throws IOException, SAXException, TransformerException {
-
-        try (InputStream in = getInputStream(this.tldPath)) {
-            if (documentBuilder != null && in != null) {
-                return documentBuilder.parse(in);
-            }
-        }
-
-        return null;
+        return getWarJar().toAbsolutePath().toString() + "!" + warEntryName + "!" + getEntry();
     }
 
     /**
@@ -128,17 +79,9 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
      *
      * @throws IOException if an I/O error has occurred
      */
-    private InputStream getInputStream(String path) throws IOException {
-        if (warFile == null) {
-            warFile = new JarFile(war.toFile());
-        }
-
-        final JarEntry warEntry = warFile.getJarEntry(warEntryName);
-        if (warEntry == null) {
-            return null;
-        }
-
-        final JarInputStream in = new JarInputStream(warFile.getInputStream(warEntry));
+    @Override
+    protected InputStream getInputStream(String path) throws IOException {
+        final JarInputStream in = new JarInputStream(super.getInputStream(warEntryName));
 
         // in is now the input stream to the JAR in the WAR.
         JarEntry jarEntry;
@@ -149,21 +92,5 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
         }
 
         return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void close() throws IOException {
-        if (warFile == null) {
-            return;
-        }
-
-        try {
-            warFile.close();
-        } finally {
-            warFile = null;
-        }
     }
 }
