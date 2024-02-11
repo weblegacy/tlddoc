@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* JDK11 and JPMS
 * Bump `spotbugs-maven-plugin` from 4.8.3.0 to 4.8.3.1
 * Reorganize code to reduce duplicate code
 * Use `Files.copy`

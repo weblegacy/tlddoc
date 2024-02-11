@@ -124,20 +124,11 @@
         <project.build.sourceEncoding>${sourceEncoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
         <mavenVersion>3.6.3</mavenVersion>
-        <javaVersion>8</javaVersion>
-        <mainClass>com.sun.tlddoc.TldDoc</mainClass>
+        <javaVersion>11</javaVersion>
+        <mainClass>io.github.weblegacy.tlddoc.TldDoc</mainClass>
     </properties>
 
     <profiles>
-        <profile>
-            <id>java-8-api</id>
-            <activation>
-                <jdk>[9,)</jdk>
-            </activation>
-            <properties>
-                <maven.compiler.release>${javaVersion}</maven.compiler.release>
-            </properties>
-        </profile>
         <profile>
             <id>assembly</id>
             <activation>
@@ -265,8 +256,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.12.1</version>
                     <configuration>
-                        <source>${javaVersion}</source>
-                        <target>${javaVersion}</target>
+                        <release>${javaVersion}</release>
                         <compilerArgs>
                             <arg>-Xlint:all</arg>
                         </compilerArgs>
@@ -310,11 +300,12 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.6.3</version>
                     <configuration>
-                        <quiet>true</quiet>
+                        <quiet>false</quiet>
                         <failOnError>false</failOnError>
-                        <doclint>all,-missing</doclint>
+                        <doclint>all</doclint>
                         <notimestamp>true</notimestamp>
-                        <source>${javaVersion}</source>
+                        <release>${javaVersion}</release>
+                        <sourcepath>${project.build.sourceDirectory}:${project.build.directory}/generated-sources</sourcepath>
                     </configuration>
                 </plugin>
                 <plugin>

@@ -31,10 +31,10 @@ XSLT stylesheets to produce the final output. You can edit or replace the XSLT
 stylesheets to change how the output looks or the way it is structured.
 
 To do this, first extract the contents of tlddoc-${project.version}.jar to an
-empty directory. Then, edit the files in com/sun/tlddoc/resources/* to change
-the output. Finally, run with the -xslt option, pointing to the directory with
-the modified files. For any file that does not appear in the directory pointed
-to by -xslt, the default file will be used instead.
+empty directory. Then, edit the files in io/github/weblegacy/tlddoc/resources/*
+to change the output. Finally, run with the -xslt option, pointing to the
+directory with the modified files. For any file that does not appear in the
+directory pointed to by -xslt, the default file will be used instead.
 
 #[[###]]# Running With Ant
 
