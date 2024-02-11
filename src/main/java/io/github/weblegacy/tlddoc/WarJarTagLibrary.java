@@ -48,7 +48,7 @@ import org.xml.sax.SAXException;
  *
  * @author ste-gr
  */
-class WarJarTagLibrary implements TagLibrary {
+public class WarJarTagLibrary implements TagLibrary {
 
     /**
      * The WAR/JAR container-file.
@@ -66,7 +66,7 @@ class WarJarTagLibrary implements TagLibrary {
     private final String entry;
 
     /**
-     * Creates a new instance of {@link WarJarContainer}.
+     * Creates a new instance of {@link WarJarTagLibrary}.
      *
      * @param warJar WAR/JAR container-file
      * @param entry  name of the {@code JarEntry}
