@@ -34,7 +34,7 @@ package com.sun.tlddoc;
 /**
  * Various constants used by TldDoc.
  *
- * @author Stefan Graff
+ * @author ste-gr
  */
 public final class Version {
 

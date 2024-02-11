@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Change author to short-name
 * Corr: TLD 1.x with namespace in root element
 * Corr: Input directory ends with WEB-INF
 * Use NIO2
