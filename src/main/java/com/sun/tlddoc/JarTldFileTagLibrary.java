@@ -31,9 +31,9 @@
 
 package com.sun.tlddoc;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import javax.xml.parsers.DocumentBuilder;
@@ -51,7 +51,7 @@ public class JarTldFileTagLibrary extends TagLibrary {
     /**
      * The JAR containing the TLD file.
      */
-    private final File jar;
+    private final Path jar;
 
     /**
      * The JAR-file itself.
@@ -69,7 +69,7 @@ public class JarTldFileTagLibrary extends TagLibrary {
      * @param jar     JAR containing the TLD file
      * @param tldPath name of the {@code JarEntry} containing the TLD file
      */
-    public JarTldFileTagLibrary(File jar, String tldPath) {
+    public JarTldFileTagLibrary(Path jar, String tldPath) {
         this.jar = jar;
         this.tldPath = tldPath;
     }
@@ -79,15 +79,14 @@ public class JarTldFileTagLibrary extends TagLibrary {
      */
     @Override
     public String getPathDescription() {
-        return jar.getAbsolutePath() + "!" + tldPath;
+        return jar.toAbsolutePath().toString() + "!" + tldPath;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public InputStream getResource(String path)
-            throws IOException {
+    public InputStream getResource(String path) throws IOException {
         if (path.startsWith("/")) {
             path = path.substring(1);
         }
@@ -101,6 +100,7 @@ public class JarTldFileTagLibrary extends TagLibrary {
     @Override
     public Document getTldDocument(DocumentBuilder documentBuilder)
             throws IOException, SAXException, TransformerException {
+
         try (InputStream in = getInputStream(this.tldPath)) {
             if (in != null) {
                 return documentBuilder.parse(in);
@@ -119,10 +119,9 @@ public class JarTldFileTagLibrary extends TagLibrary {
      *
      * @throws IOException if an I/O error has occurred
      */
-    private InputStream getInputStream(String path)
-            throws IOException {
+    private InputStream getInputStream(String path) throws IOException {
         if (jarFile == null) {
-            jarFile = new JarFile(jar);
+            jarFile = new JarFile(jar.toFile());
         }
 
         final JarEntry jarEntry = jarFile.getJarEntry(path);

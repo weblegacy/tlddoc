@@ -36,13 +36,12 @@ import com.sun.tlddoc.tagfileparser.Directive;
 import com.sun.tlddoc.tagfileparser.javacc.ParseException;
 import com.sun.tlddoc.tagfileparser.javacc.TagFile;
 import java.io.CharArrayReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -87,12 +86,12 @@ public class TldDocGenerator {
     /**
      * The directory containing the stylesheets, or null if the default stylesheets are to be used.
      */
-    private File xsltDirectory = null;
+    private Path xsltDirectory = null;
 
     /**
      * The output directory for generated files.
      */
-    private File outputDirectory = new File("out");
+    private Path outputDirectory = Paths.get("out");
 
     /**
      * The browser window title for the documentation.
@@ -144,7 +143,7 @@ public class TldDocGenerator {
      *
      * @param tld The TLD file to add
      */
-    public void addTld(File tld) {
+    public void addTld(Path tld) {
         addTagLibrary(new TldFileTagLibrary(tld));
     }
 
@@ -153,36 +152,35 @@ public class TldDocGenerator {
      *
      * @param path The path to the root of the web application.
      */
-    public void addWebApp(File path) {
-        File webinf = new File(path, "WEB-INF");
+    public void addWebApp(Path path) {
+        try {
+            Path webinf = path.resolve("WEB-INF");
 
-        // Scan all subdirectories of /WEB-INF/ for .tld files
-        addWebAppTldsIn(webinf);
+            // Scan all subdirectories of /WEB-INF/ for .tld files
+            addWebAppTldsIn(webinf);
 
-        // Add all JAR files in /WEB-INF/lib that might potentially
-        // contain TLDs.
-        addWebAppJarsIn(new File(webinf, "lib"));
+            // Add all JAR files in /WEB-INF/lib that might potentially
+            // contain TLDs.
+            addWebAppJarsIn(webinf.resolve("lib"));
 
-        // Add all implicit tag libraries in /WEB-INF/tags
-        addWebAppTagDirsIn(new File(webinf, "tags"));
+            // Add all implicit tag libraries in /WEB-INF/tags
+            addWebAppTagDirsIn(webinf.resolve("tags"));
+
+        } catch (IOException e) {
+            println("WARNING: Could not access one or more entries in " + path.toAbsolutePath()
+                    + ".  Skipping Web-App.  Reason: " + e.getMessage());
+        }
     }
 
     /**
      * Adds all TLD files under the given directory, recursively.
      *
      * @param path The path to search (recursively) for TLDs in.
+     *
+     * @throws IOException if an I/O error has occurred
      */
-    private void addWebAppTldsIn(File path) {
-        final File[] files = path.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    addWebAppTldsIn(file);
-                } else if (file.getName().toLowerCase().endsWith(".tld")) {
-                    addTld(file);
-                }
-            }
-        }
+    private void addWebAppTldsIn(Path path) throws IOException {
+        Utils.processFiles(path, Utils::isTld, this::addTld);
     }
 
     /**
@@ -193,16 +191,14 @@ public class TldDocGenerator {
      *
      * @throws IOException if an I/O error has occurred
      */
-    private void addWarTldsIn(File war, String path) throws IOException {
-        try (JarFile warFile = new JarFile(war)) {
-            Enumeration<JarEntry> entries = warFile.entries();
+    private void addWarTldsIn(Path war, String path) throws IOException {
+        try (JarFile warFile = new JarFile(war.toFile())) {
+            final Enumeration<JarEntry> entries = warFile.entries();
             while (entries.hasMoreElements()) {
-                JarEntry jarEntry = entries.nextElement();
-                String entryName = jarEntry.getName();
-                if (entryName.startsWith(path)
-                        && entryName.toLowerCase().endsWith(".tld")) {
-                    addTagLibrary(new JarTldFileTagLibrary(war,
-                            jarEntry.getName()));
+                final JarEntry jarEntry = entries.nextElement();
+                final String entryName = jarEntry.getName();
+                if (entryName.startsWith(path) && Utils.isTld(entryName)) {
+                    addTagLibrary(new JarTldFileTagLibrary(war, jarEntry.getName()));
                 }
             }
         }
@@ -212,18 +208,11 @@ public class TldDocGenerator {
      * Adds all JAR files under the given directory, recursively.
      *
      * @param path The path to search (recursively) for JARs in.
+     *
+     * @throws IOException if an I/O error has occurred
      */
-    private void addWebAppJarsIn(File path) {
-        final File[] files = path.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    addWebAppJarsIn(file);
-                } else if (file.getName().toLowerCase().endsWith(".jar")) {
-                    addJar(file);
-                }
-            }
-        }
+    private void addWebAppJarsIn(Path path) throws IOException {
+        Utils.processFiles(path, Utils::isJar, this::addJar);
     }
 
     /**
@@ -234,32 +223,28 @@ public class TldDocGenerator {
      *
      * @throws IOException if an I/O error has occurred
      */
-    private void addWarJarsIn(File war, String path) throws IOException {
-        try (JarFile warFile = new JarFile(war)) {
+    private void addWarJarsIn(Path war, String path) throws IOException {
+        try (JarFile warFile = new JarFile(war.toFile())) {
             Enumeration<JarEntry> entries = warFile.entries();
             while (entries.hasMoreElements()) {
                 JarEntry warEntry = entries.nextElement();
                 String entryName = warEntry.getName();
-                if (entryName.startsWith(path)
-                        && entryName.toLowerCase().endsWith(".jar")) {
+                if (entryName.startsWith(path) && Utils.isJar(entryName)) {
                     // Add all tag libraries found in the given JAR file that is
                     // inside this WAR file:
-                    try (JarInputStream in = new JarInputStream(
-                            warFile.getInputStream(warEntry))) {
+                    try (JarInputStream in = new JarInputStream(warFile.getInputStream(warEntry))) {
                         // Search for all TLD files in the JAR file
 
                         JarEntry jarEntry;
                         while ((jarEntry = in.getNextJarEntry()) != null) {
-                            if (jarEntry.getName().toLowerCase().endsWith(
-                                    ".tld")) {
+                            if (Utils.isTld(jarEntry.getName())) {
                                 addTagLibrary(new WarJarTldFileTagLibrary(war,
                                         entryName, jarEntry.getName()));
                             }
                         }
                     } catch (IOException e) {
-                        println("WARNING: Could not access one or more "
-                                + "entries in " + war.getAbsolutePath()
-                                + " entry " + entryName
+                        println("WARNING: Could not access one or more entries in "
+                                + war.toAbsolutePath() + " entry " + entryName
                                 + ".  Skipping JAR.  Reason: " + e.getMessage());
                     }
                 }
@@ -271,20 +256,11 @@ public class TldDocGenerator {
      * Adds all implicit tag libraries under the given directory, recursively.
      *
      * @param path The path to search (recursively) for tag file directories in
+     *
+     * @throws IOException if an I/O error has occurred
      */
-    private void addWebAppTagDirsIn(File path) {
-        if (path.exists() && path.isDirectory()) {
-            addTagDir(path);
-
-            File[] files = path.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    if (file.isDirectory()) {
-                        addWebAppTagDirsIn(file);
-                    }
-                }
-            }
-        }
+    private void addWebAppTagDirsIn(Path path) throws IOException {
+        Utils.processDirs(path, this::addTagDir);
     }
 
     /**
@@ -295,15 +271,13 @@ public class TldDocGenerator {
      *
      * @throws IOException if an I/O error has occurred
      */
-    private void addWarTagDirsIn(File war, String path) throws IOException {
-        try (JarFile warFile = new JarFile(war)) {
+    private void addWarTagDirsIn(Path war, String path) throws IOException {
+        try (JarFile warFile = new JarFile(war.toFile())) {
             Enumeration<JarEntry> entries = warFile.entries();
             while (entries.hasMoreElements()) {
                 JarEntry entry = entries.nextElement();
-                if (entry.getName().startsWith(path)
-                        && entry.isDirectory()) {
-                    addTagLibrary(new WarTagDirImplicitTagLibrary(war,
-                            entry.getName()));
+                if (entry.getName().startsWith(path) && entry.isDirectory()) {
+                    addTagLibrary(new WarTagDirImplicitTagLibrary(war, entry.getName()));
                 }
             }
         }
@@ -314,20 +288,18 @@ public class TldDocGenerator {
      *
      * @param jar The JAR file to add.
      */
-    public void addJar(File jar) {
-        try (JarFile jarFile = new JarFile(jar)) {
+    public void addJar(Path jar) {
+        try (JarFile jarFile = new JarFile(jar.toFile())) {
             // Search for all TLD files in the JAR file
             Enumeration<JarEntry> entries = jarFile.entries();
             while (entries.hasMoreElements()) {
                 JarEntry jarEntry = entries.nextElement();
-                if (jarEntry.getName().toLowerCase().endsWith(".tld")) {
-                    addTagLibrary(new JarTldFileTagLibrary(jar,
-                            jarEntry.getName()));
+                if (Utils.isTld(jarEntry.getName())) {
+                    addTagLibrary(new JarTldFileTagLibrary(jar, jarEntry.getName()));
                 }
             }
         } catch (IOException e) {
-            println("WARNING: Could not access one or more entries in "
-                    + jar.getAbsolutePath()
+            println("WARNING: Could not access one or more entries in " + jar.toAbsolutePath()
                     + ".  Skipping JAR.  Reason: " + e.getMessage());
         }
     }
@@ -337,7 +309,7 @@ public class TldDocGenerator {
      *
      * @param path The war containing the web application
      */
-    public void addWar(File path) {
+    public void addWar(Path path) {
         try {
             // Scan all subdirectories of /WEB-INF/ for .tld files
             addWarTldsIn(path, "WEB-INF/");
@@ -349,9 +321,8 @@ public class TldDocGenerator {
             // Add all implicit tag libraries in /WEB-INF/tags
             addWarTagDirsIn(path, "WEB-INF/tags/");
         } catch (IOException e) {
-            println("WARNING: Could not access one or more entries in "
-                    + path.getAbsolutePath() + ".  Skipping WAR.  Reason: "
-                    + e.getMessage());
+            println("WARNING: Could not access one or more entries in " + path.toAbsolutePath()
+                    + ".  Skipping WAR.  Reason: " + e.getMessage());
         }
     }
 
@@ -360,7 +331,7 @@ public class TldDocGenerator {
      *
      * @param tagdir The tag directory to add
      */
-    public void addTagDir(File tagdir) {
+    public void addTagDir(Path tagdir) {
         addTagLibrary(new TagDirImplicitTagLibrary(tagdir));
     }
 
@@ -371,7 +342,7 @@ public class TldDocGenerator {
      *
      * @param dir The base directory for the stylesheets
      */
-    public void setXsltDirectory(File dir) {
+    public void setXsltDirectory(Path dir) {
         this.xsltDirectory = dir;
     }
 
@@ -380,7 +351,7 @@ public class TldDocGenerator {
      *
      * @param dir The base directory for generated files.
      */
-    public void setOutputDirectory(File dir) {
+    public void setOutputDirectory(Path dir) {
         this.outputDirectory = dir;
     }
 
@@ -427,9 +398,8 @@ public class TldDocGenerator {
      */
     public void generate() throws GeneratorException {
         try {
-            if (!(outputDirectory.mkdirs() || outputDirectory.isDirectory())) {
-                throw new IOException("Couldn't create output-directory: " + outputDirectory);
-            }
+            Files.createDirectories(outputDirectory);
+
             copyStaticFiles();
             createTldSummaryDoc();
             generateOverview();
@@ -449,7 +419,7 @@ public class TldDocGenerator {
      * @throws IOException if an I/O error has occurred
      */
     private void copyStaticFiles() throws IOException {
-        copyResourceToFile(new File(this.outputDirectory, "stylesheet.css"),
+        copyResourceToFile(outputDirectory.resolve("stylesheet.css"),
                 RESOURCE_PATH + "/stylesheet.css");
     }
 
@@ -494,19 +464,21 @@ public class TldDocGenerator {
         Element rootElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, "tlds");
         summaryTld.appendChild(rootElement);
         // JDK 1.4 does not add xmlns for some reason - add it manually:
-        rootElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns", Constants.NS_JAKARTAEE);
+        rootElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns",
+                Constants.NS_JAKARTAEE);
 
         // Create configuration element:
         Element configElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, "config");
         rootElement.appendChild(configElement);
 
-        Element windowTitle = summaryTld.createElementNS(Constants.NS_JAKARTAEE, "window-title");
-        windowTitle.appendChild(summaryTld.createTextNode(this.windowTitle));
-        configElement.appendChild(windowTitle);
+        Element windowTitleElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE,
+                "window-title");
+        windowTitleElement.appendChild(summaryTld.createTextNode(this.windowTitle));
+        configElement.appendChild(windowTitleElement);
 
-        Element docTitle = summaryTld.createElementNS(Constants.NS_JAKARTAEE, "doc-title");
-        docTitle.appendChild(summaryTld.createTextNode(this.docTitle));
-        configElement.appendChild(docTitle);
+        Element docTitleElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, "doc-title");
+        docTitleElement.appendChild(summaryTld.createTextNode(this.docTitle));
+        configElement.appendChild(docTitleElement);
 
         // Append each <taglib> element from each TLD:
         println("Loading and translating " + tagLibraries.size()
@@ -524,8 +496,8 @@ public class TldDocGenerator {
                 // If this tag library has no tags, no validators,
                 // and no functions, omit it
                 final Element element = doc.getDocumentElement();
-                int numTags = element == null ? 0 :
-                          element.getElementsByTagNameNS("*", "tag").getLength()
+                int numTags = element == null ? 0
+                        : element.getElementsByTagNameNS("*", "tag").getLength()
                         + element.getElementsByTagNameNS("*", "tag-file").getLength()
                         + element.getElementsByTagNameNS("*", "validator").getLength()
                         + element.getElementsByTagNameNS("*", "function").getLength();
@@ -1009,17 +981,16 @@ public class TldDocGenerator {
     private void generateOverview() throws TransformerFactoryConfigurationError,
             TransformerConfigurationException, TransformerException {
 
-        generatePage(new File(this.outputDirectory, "index.html"),
-                RESOURCE_PATH + "/index.html.xsl");
-        generatePage(new File(this.outputDirectory, "help-doc.html"),
+        generatePage(outputDirectory.resolve("index.html"), RESOURCE_PATH + "/index.html.xsl");
+        generatePage(outputDirectory.resolve("help-doc.html"),
                 RESOURCE_PATH + "/help-doc.html.xsl");
-        generatePage(new File(this.outputDirectory, "overview-frame.html"),
+        generatePage(outputDirectory.resolve("overview-frame.html"),
                 RESOURCE_PATH + "/overview-frame.html.xsl");
-        generatePage(new File(this.outputDirectory, "alltags-frame.html"),
+        generatePage(outputDirectory.resolve("alltags-frame.html"),
                 RESOURCE_PATH + "/alltags-frame.html.xsl");
-        generatePage(new File(this.outputDirectory, "alltags-noframe.html"),
+        generatePage(outputDirectory.resolve("alltags-noframe.html"),
                 RESOURCE_PATH + "/alltags-noframe.html.xsl");
-        generatePage(new File(this.outputDirectory, "overview-summary.html"),
+        generatePage(outputDirectory.resolve("overview-summary.html"),
                 RESOURCE_PATH + "/overview-summary.html.xsl");
     }
 
@@ -1041,9 +1012,8 @@ public class TldDocGenerator {
             String shortName = findElementValue(taglib, "short-name");
             String displayName = findElementValue(taglib, "display-name");
             if (shortNames.contains(shortName)) {
-                throw new GeneratorException("Two tag libraries exist with "
-                        + "the same short-name '" + shortName
-                        + "'.  This is not yet supported.");
+                throw new GeneratorException("Two tag libraries exist with the same short-name '"
+                        + shortName + "'.  This is not yet supported.");
             }
             String name = displayName;
             if (name == null) {
@@ -1051,10 +1021,8 @@ public class TldDocGenerator {
             }
             println("Generating docs for " + name + "...");
             shortNames.add(shortName);
-            File outDir = new File(this.outputDirectory, shortName);
-            if (!(outDir.mkdir() || outDir.isDirectory())) {
-                throw new IOException("Couldn't create output-directory: " + outDir);
-            }
+            Path outDir = outputDirectory.resolve(shortName);
+            Files.createDirectories(outDir);
 
             // Generate information for each TLD:
             generateTldDetail(outDir, shortName);
@@ -1099,15 +1067,15 @@ public class TldDocGenerator {
      * @throws TransformerException If an unrecoverable error occurs during the course of the
      *                              transformation.
      */
-    private void generateTldDetail(File outDir, String shortName) throws IOException,
+    private void generateTldDetail(Path outDir, String shortName) throws IOException,
             TransformerException {
 
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("tlddoc-shortName", shortName);
 
-        generatePage(new File(outDir, "tld-frame.html"),
+        generatePage(outDir.resolve("tld-frame.html"),
                 RESOURCE_PATH + "/tld-frame.html.xsl", parameters);
-        generatePage(new File(outDir, "tld-summary.html"),
+        generatePage(outDir.resolve("tld-summary.html"),
                 RESOURCE_PATH + "/tld-summary.html.xsl", parameters);
     }
 
@@ -1123,14 +1091,14 @@ public class TldDocGenerator {
      * @throws TransformerException If an unrecoverable error occurs during the course of the
      *                              transformation.
      */
-    private void generateTagDetail(File outDir, String shortName, String tagName) throws
+    private void generateTagDetail(Path outDir, String shortName, String tagName) throws
             IOException, TransformerException {
 
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("tlddoc-shortName", shortName);
         parameters.put("tlddoc-tagName", tagName);
 
-        generatePage(new File(outDir, tagName + ".html"),
+        generatePage(outDir.resolve(tagName + ".html"),
                 RESOURCE_PATH + "/tag.html.xsl", parameters);
     }
 
@@ -1146,14 +1114,14 @@ public class TldDocGenerator {
      * @throws TransformerException If an unrecoverable error occurs during the course of the
      *                              transformation.
      */
-    private void generateFunctionDetail(File outDir, String shortName, String functionName) throws
+    private void generateFunctionDetail(Path outDir, String shortName, String functionName) throws
             IOException, TransformerException {
 
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("tlddoc-shortName", shortName);
         parameters.put("tlddoc-functionName", functionName);
 
-        generatePage(new File(outDir, functionName + ".fn.html"),
+        generatePage(outDir.resolve(functionName + ".fn.html"),
                 RESOURCE_PATH + "/function.html.xsl", parameters);
     }
 
@@ -1195,7 +1163,7 @@ public class TldDocGenerator {
      * @throws TransformerException                 If an unrecoverable error occurs during the
      *                                              course of the transformation.
      */
-    private void generatePage(File outFile, String inputXsl) throws
+    private void generatePage(Path outFile, String inputXsl) throws
             TransformerFactoryConfigurationError, TransformerConfigurationException,
             TransformerException {
 
@@ -1219,21 +1187,19 @@ public class TldDocGenerator {
      * @throws TransformerException                 If an unrecoverable error occurs during the
      *                                              course of the transformation.
      */
-    private void generatePage(File outFile, String inputXsl, Map<String, String> parameters) throws
+    private void generatePage(Path outFile, String inputXsl, Map<String, String> parameters) throws
             TransformerFactoryConfigurationError, TransformerConfigurationException,
             TransformerException {
 
         InputStream xsl = getResourceAsStream(inputXsl);
-        Transformer transformer
-                = TransformerFactory.newInstance().newTransformer(
-                        new StreamSource(xsl));
+        Transformer transformer = TransformerFactory.newInstance().newTransformer(
+                new StreamSource(xsl));
         if (parameters != null) {
             for (Entry<String, String> entry : parameters.entrySet()) {
                 transformer.setParameter(entry.getKey(), entry.getValue());
             }
         }
-        transformer.transform(new DOMSource(summaryTld),
-                new StreamResult(outFile));
+        transformer.transform(new DOMSource(summaryTld), new StreamResult(outFile.toFile()));
     }
 
     /**
@@ -1246,9 +1212,9 @@ public class TldDocGenerator {
      *
      * @throws IOException if an I/O error has occurred
      */
-    private void copyResourceToFile(File outputFile, String resource) throws IOException {
+    private void copyResourceToFile(Path outputFile, String resource) throws IOException {
         try (InputStream in = getResourceAsStream(resource); OutputStream out
-                = new FileOutputStream(outputFile)) {
+                = Files.newOutputStream(outputFile)) {
 
             byte[] buffer = new byte[1024];
             int len;
@@ -1283,11 +1249,11 @@ public class TldDocGenerator {
         InputStream result = null;
 
         if (xsltDirectory != null) {
-            File resourceFile = new File(xsltDirectory,
+            Path resourceFile = xsltDirectory.resolve(
                     resource.substring(RESOURCE_PATH.length() + 1));
             try {
-                result = new FileInputStream(resourceFile);
-            } catch (FileNotFoundException e) {
+                result = Files.newInputStream(resourceFile);
+            } catch (IOException e) {
                 // result will be null and we'll default to default stylesheet
                 println("XSLT-Directory not found, use default-stylesheet: " + e.getMessage());
             }

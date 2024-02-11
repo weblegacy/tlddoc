@@ -31,9 +31,9 @@
 
 package com.sun.tlddoc;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
@@ -52,7 +52,7 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
     /**
      * The WAR containing the JAR.
      */
-    private final File war;
+    private final Path war;
 
     /**
      * The WAR-file itself.
@@ -76,8 +76,7 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
      * @param warEntryName JAR containing the TLD file
      * @param tldPath      name of the {@code JarEntry} containing the TLD file
      */
-    public WarJarTldFileTagLibrary(File war, String warEntryName,
-            String tldPath) {
+    public WarJarTldFileTagLibrary(Path war, String warEntryName, String tldPath) {
         this.war = war;
         this.warEntryName = warEntryName;
         this.tldPath = tldPath;
@@ -88,15 +87,14 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
      */
     @Override
     public String getPathDescription() {
-        return war.getAbsolutePath() + "!" + warEntryName + "!" + tldPath;
+        return war.toAbsolutePath() + "!" + warEntryName + "!" + tldPath;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public InputStream getResource(String path)
-            throws IOException {
+    public InputStream getResource(String path) throws IOException {
         if (path.startsWith("/")) {
             path = path.substring(1);
         }
@@ -131,7 +129,7 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
      */
     private InputStream getInputStream(String path) throws IOException {
         if (warFile == null) {
-            warFile = new JarFile(war);
+            warFile = new JarFile(war.toFile());
         }
 
         final JarEntry warEntry = warFile.getJarEntry(warEntryName);
@@ -139,8 +137,7 @@ public class WarJarTldFileTagLibrary extends TagLibrary {
             return null;
         }
 
-        final JarInputStream in = new JarInputStream(
-                warFile.getInputStream(warEntry));
+        final JarInputStream in = new JarInputStream(warFile.getInputStream(warEntry));
 
         // in is now the input stream to the JAR in the WAR.
         JarEntry jarEntry;

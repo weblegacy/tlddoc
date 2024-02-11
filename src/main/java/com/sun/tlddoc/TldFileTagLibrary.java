@@ -31,10 +31,10 @@
 
 package com.sun.tlddoc;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
@@ -51,14 +51,14 @@ public class TldFileTagLibrary extends TagLibrary {
     /**
      * The location of the TLD file for this tag library.
      */
-    private final File tldFile;
+    private final Path tldFile;
 
     /**
      * Creates a new instance of {@link TldFileTagLibrary}.
      *
      * @param tldFile location of the TLD file for this tag library
      */
-    public TldFileTagLibrary(File tldFile) {
+    public TldFileTagLibrary(Path tldFile) {
         this.tldFile = tldFile;
     }
 
@@ -67,7 +67,7 @@ public class TldFileTagLibrary extends TagLibrary {
      */
     @Override
     public String getPathDescription() {
-        return this.tldFile.getAbsolutePath();
+        return tldFile.toAbsolutePath().toString();
     }
 
     /**
@@ -77,24 +77,17 @@ public class TldFileTagLibrary extends TagLibrary {
     public Document getTldDocument(DocumentBuilder documentBuilder) throws
             IOException, SAXException, TransformerException {
 
-        FileInputStream in = new FileInputStream(this.tldFile);
-        InputSource source;
-        Document result;
-        try {
-            source = new InputSource(in);
-            result = documentBuilder.parse(source);
-        } finally {
-            in.close();
+        try (InputStream in = Files.newInputStream(tldFile)) {
+            InputSource source = new InputSource(in);
+            return documentBuilder.parse(source);
         }
-        return result;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public InputStream getResource(String path)
-            throws IOException {
+    public InputStream getResource(String path) throws IOException {
         InputStream result = null;
 
         // This is a bit of a guess, since we don't know where the TLD is.
@@ -103,18 +96,18 @@ public class TldFileTagLibrary extends TagLibrary {
         //   For example:
         //      TLD:  /home/mroth/test/sample/WEB-INF/tld/test.tld
         //      path: /WEB-INF/tags/tag1.tag
-        File dir = tldFile.getParentFile();
+        Path dir = tldFile.getParent();
         if (path.startsWith("/")) {
             path = path.substring(1);
         }
-        File look = null;
-        while (dir != null && !(look = new File(dir, path)).exists()) {
-            dir = dir.getParentFile();
+        Path look = null;
+        while (dir != null && !Files.exists(look = dir.resolve(path))) {
+            dir = dir.getParent();
         }
 
-        if (look != null && look.exists()) {
+        if (look != null && Files.exists(look)) {
             // Found it (or something pretty close to it anyway)
-            result = new FileInputStream(look);
+            result = Files.newInputStream(look);
         }
 
         return result;

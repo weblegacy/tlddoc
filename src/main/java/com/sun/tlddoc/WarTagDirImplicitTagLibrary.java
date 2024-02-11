@@ -31,11 +31,11 @@
 
 package com.sun.tlddoc;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.file.Path;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -55,13 +55,12 @@ import org.xml.sax.SAXException;
  *
  * @author mroth
  */
-public class WarTagDirImplicitTagLibrary
-        extends TagLibrary {
+public class WarTagDirImplicitTagLibrary extends TagLibrary {
 
     /**
      * The WAR file that contains this tag library.
      */
-    private final File war;
+    private final Path war;
 
     /**
      * The WAR-file itself.
@@ -79,7 +78,7 @@ public class WarTagDirImplicitTagLibrary
      * @param war WAR file that contains this tag library
      * @param dir directory containing the tag files
      */
-    public WarTagDirImplicitTagLibrary(File war, String dir) {
+    public WarTagDirImplicitTagLibrary(Path war, String dir) {
         this.war = war;
         this.dir = dir;
     }
@@ -89,15 +88,14 @@ public class WarTagDirImplicitTagLibrary
      */
     @Override
     public String getPathDescription() {
-        return war.getAbsolutePath() + "!" + dir;
+        return war.toAbsolutePath().toString() + "!" + dir;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public InputStream getResource(String path)
-            throws IOException {
+    public InputStream getResource(String path) throws IOException {
         if (path.startsWith("/")) {
             path = path.substring(1);
         }
@@ -122,8 +120,8 @@ public class WarTagDirImplicitTagLibrary
             path += "/";
         }
 
-        Element taglibElement
-                = TagDirImplicitTagLibrary.createRootTaglibNode(result, "/" + path);
+        Element taglibElement = TagDirImplicitTagLibrary.createRootTaglibNode(result,
+                '/' + path);
 
         // According to the JSP 2.0 specification:
         // A <tag-file> element is considered to exist for each tag file in
@@ -137,28 +135,20 @@ public class WarTagDirImplicitTagLibrary
         while (entries.hasMoreElements()) {
             JarEntry warEntry = entries.nextElement();
             String entryName = warEntry.getName();
-            if (!warEntry.isDirectory()
-                    && entryName.startsWith(path)) {
-                String relativeName = entryName.replace(File.separatorChar,
-                        '/');
+            if (!warEntry.isDirectory() && entryName.startsWith(path)) {
+                String relativeName = entryName.replace(Utils.DEFAULT_SEPARATOR, "/");
                 relativeName = relativeName.substring(path.length());
-                if (relativeName.indexOf('/') == -1
-                        && (relativeName.toLowerCase().endsWith(".tag")
-                        || relativeName.toLowerCase().endsWith(".tagx"))) {
+                if (relativeName.indexOf('/') == -1 && Utils.isTag(relativeName)) {
                     // We're not in a subdirectory and file and ends with .tag or .tagx.
-                    String tagName = relativeName.substring(0,
-                            relativeName.lastIndexOf('.'));
+                    String tagName = relativeName.substring(0, relativeName.lastIndexOf('.'));
                     String tagPath = "/" + entryName;
 
-                    Element tagFileElement = result.createElement(
-                            "tag-file");
+                    Element tagFileElement = result.createElement("tag-file");
                     Element nameElement = result.createElement("name");
-                    nameElement.appendChild(result.createTextNode(
-                            tagName));
+                    nameElement.appendChild(result.createTextNode(tagName));
                     tagFileElement.appendChild(nameElement);
                     Element pathElement = result.createElement("path");
-                    pathElement.appendChild(result.createTextNode(
-                            tagPath));
+                    pathElement.appendChild(result.createTextNode(tagPath));
                     tagFileElement.appendChild(pathElement);
                     taglibElement.appendChild(tagFileElement);
                 }
@@ -169,15 +159,9 @@ public class WarTagDirImplicitTagLibrary
         // simulate reading this entry from a file.  There might be a
         // better / more efficient way to do this, but this works.
         StringWriter buffer = new StringWriter();
-        Transformer transformer
-                = TransformerFactory.newInstance().newTransformer();
-        transformer.transform(new DOMSource(result),
-                new StreamResult(buffer));
-        result = documentBuilder.parse(new InputSource(new StringReader(
-                buffer.toString())));
-
-        return result;
-
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(new DOMSource(result), new StreamResult(buffer));
+        return documentBuilder.parse(new InputSource(new StringReader(buffer.toString())));
     }
 
     /**
@@ -185,10 +169,9 @@ public class WarTagDirImplicitTagLibrary
      *
      * @throws IOException if an I/O error has occurred
      */
-    private void ensureOpen()
-            throws IOException {
+    private void ensureOpen() throws IOException {
         if (warFile == null) {
-            warFile = new JarFile(war);
+            warFile = new JarFile(war.toFile());
         }
     }
 

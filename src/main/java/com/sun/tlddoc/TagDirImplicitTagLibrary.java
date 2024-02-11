@@ -31,12 +31,13 @@
 
 package com.sun.tlddoc;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -58,14 +59,14 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
     /**
      * The directory containing the tag files.
      */
-    private final File dir;
+    private final Path dir;
 
     /**
      * Creates a new instance of {@link TagDirImplicitTagLibrary}.
      *
      * @param dir directory containing the tag files
      */
-    public TagDirImplicitTagLibrary(File dir) {
+    public TagDirImplicitTagLibrary(Path dir) {
         this.dir = dir;
     }
 
@@ -74,7 +75,7 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
      */
     @Override
     public String getPathDescription() {
-        return dir.getAbsolutePath();
+        return dir.toAbsolutePath().toString();
     }
 
     /**
@@ -89,18 +90,18 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
         //   For example:
         //      TLD:  /home/mroth/test/sample/WEB-INF/tags/mytags
         //      path: /WEB-INF/tags/mytags/tag1.tag
-        File d = this.dir;
+        Path d = this.dir;
         if (path.startsWith("/")) {
             path = path.substring(1);
         }
-        File look = null;
-        while (d != null && !(look = new File(d, path)).exists()) {
-            d = d.getParentFile();
+        Path look = null;
+        while (d != null && !Files.exists(look = d.resolve(path))) {
+            d = d.getParent();
         }
 
-        if (look != null && look.exists()) {
+        if (look != null && Files.exists(look)) {
             // Found it:
-            result = new FileInputStream(look);
+            result = Files.newInputStream(look);
         }
 
         return result;
@@ -117,7 +118,7 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
 
         // Determine path from root of web application (this is somewhat of
         // a guess):
-        String path = dir.getAbsolutePath().replace(File.separatorChar, '/');
+        String path = Utils.pathString(dir);
         int index = path.indexOf("/WEB-INF/");
         if (index != -1) {
             path = path.substring(index);
@@ -138,27 +139,22 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
         //      without the .tag extension.
         //    - The <path> for each is the path of the tag file, relative
         //      to the root of the web application.
-        File[] files = this.dir.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                final String fileName = file.getName();
-                final String fileNameLower = fileName.toLowerCase();
-                if (!file.isDirectory()
-                        && (fileNameLower.endsWith(".tag")
-                        || fileNameLower.endsWith(".tagx"))) {
-                    String tagName = fileName.substring(0,
-                            fileName.lastIndexOf('.'));
-                    String tagPath = path + fileName;
+        final String p = path;
+        try (DirectoryStream<Path> files = Files.newDirectoryStream(dir, Utils::isTag)) {
+            for (Path file : files) {
+                final String fileName = file.getFileName().toString();
+                final String tagName = fileName.substring(0, fileName.lastIndexOf('.'));
+                final String tagPath = p + fileName;
 
-                    Element tagFileElement = result.createElement("tag-file");
-                    Element nameElement = result.createElement("name");
-                    nameElement.appendChild(result.createTextNode(tagName));
-                    tagFileElement.appendChild(nameElement);
-                    Element pathElement = result.createElement("path");
-                    pathElement.appendChild(result.createTextNode(tagPath));
-                    tagFileElement.appendChild(pathElement);
-                    taglibElement.appendChild(tagFileElement);
-                }
+                Element tagFileElement = result.createElement("tag-file");
+                Element nameElement = result.createElement("name");
+                nameElement.appendChild(result.createTextNode(tagName));
+                tagFileElement.appendChild(nameElement);
+
+                Element pathElement = result.createElement("path");
+                pathElement.appendChild(result.createTextNode(tagPath));
+                tagFileElement.appendChild(pathElement);
+                taglibElement.appendChild(tagFileElement);
             }
         }
 
@@ -166,9 +162,7 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
         StringWriter buffer = new StringWriter();
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.transform(new DOMSource(result), new StreamResult(buffer));
-        result = documentBuilder.parse(new InputSource(new StringReader(buffer.toString())));
-
-        return result;
+        return documentBuilder.parse(new InputSource(new StringReader(buffer.toString())));
     }
 
     /**
@@ -180,10 +174,8 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
      *
      * @return new created tag library root node
      */
-    protected static Element createRootTaglibNode(Document result,
-            String path) {
-        Element taglibElement = result.createElementNS(
-                Constants.NS_JAKARTAEE, "taglib");
+    protected static Element createRootTaglibNode(Document result, String path) {
+        Element taglibElement = result.createElementNS(Constants.NS_JAKARTAEE, "taglib");
         // JDK 1.4 does not add xmlns for some reason - add it manually:
         taglibElement.setAttributeNS("http://www.w3.org/2000/xmlns/",
                 "xmlns", Constants.NS_JAKARTAEE);
@@ -235,7 +227,6 @@ public class TagDirImplicitTagLibrary extends TagLibrary {
                 if (shortName.endsWith("/")) {
                     shortName = shortName.substring(0, shortName.length() - 1);
                 }
-                shortName = shortName.replace(File.separatorChar, '/');
                 shortName = shortName.replace('/', '-');
                 break;
         }

@@ -31,10 +31,15 @@
 
 package com.sun.tlddoc;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
 /**
  * Main entry point for TldDoc. Allows commandline access.
@@ -84,6 +89,18 @@ public class TldDoc {
     public static void main(String[] args) {
         TldDocGenerator generator = new TldDocGenerator();
 
+        try {
+            initGenerator(args, generator);
+            generator.generate();
+        } catch (IOException | GeneratorException e) {
+            e.printStackTrace(System.err);
+            System.exit(1);
+        }
+    }
+
+    private static void initGenerator(final String[] args, final TldDocGenerator generator)
+            throws IOException {
+
         Iterator<String> iter = Arrays.asList(args).iterator();
         boolean atLeastOneTld = false;
 
@@ -94,11 +111,11 @@ public class TldDoc {
                 switch (arg) {
                     case "-xslt":
                         arg = iter.next();
-                        generator.setXsltDirectory(new File(arg));
+                        generator.setXsltDirectory(Paths.get(arg));
                         break;
                     case "-d":
                         arg = iter.next();
-                        generator.setOutputDirectory(new File(arg));
+                        generator.setOutputDirectory(Paths.get(arg));
                         break;
                     case "-help":
                         usage(null);
@@ -115,85 +132,59 @@ public class TldDoc {
                         generator.setWindowTitle(arg);
                         break;
                     case "-webapp":
-                        arg = iter.next();
-                        File dir = new File(arg);
-                        if (dir.exists()) {
-                            atLeastOneTld = true;
-                            generator.addWebApp(dir);
-                        } else {
-                            usage("Web app not found: " + arg);
-                        }
+                        atLeastOneTld |= addPath(iter, generator::addWebApp, "Web app");
                         break;
                     case "-jar":
-                        arg = iter.next();
-                        File jar = new File(arg);
-                        if (jar.exists()) {
-                            atLeastOneTld = true;
-                            generator.addJar(jar);
-                        } else {
-                            usage("JAR not found: " + arg);
-                        }
+                        atLeastOneTld |= addPath(iter, generator::addJar, "JAR");
                         break;
                     case "-tagdir":
-                        arg = iter.next();
-                        File tagdir = new File(arg);
-                        if (tagdir.exists()) {
-                            atLeastOneTld = true;
-                            generator.addTagDir(tagdir);
-                        } else {
-                            usage("Tag Directory not found: " + arg);
-                        }
+                        atLeastOneTld |= addPath(iter, generator::addTagDir, "Tag Directory");
                         break;
                     default:
-                        File f = new File(arg);
-                        if (f.exists()) {
-                            if (f.getName().toLowerCase().endsWith(".tld")) {
+                        Path f = Paths.get(arg);
+                        if (Files.exists(f)) {
+                            String fn = Utils.getLowerFileName(f);
+                            if (fn.endsWith(".tld")) {
                                 // If the path is a file that ends in .tld,
                                 // process an individual TLD file.
                                 generator.addTld(f);
                                 atLeastOneTld = true;
-                            } else if (f.getName().toLowerCase().endsWith(".jar")) {
+                            } else if (fn.endsWith(".jar")) {
                                 // If the path is a file that ends in .jar,
                                 // process a tag library JAR file.
                                 generator.addJar(f);
                                 atLeastOneTld = true;
-                            } else if (f.getName().toLowerCase().endsWith(".war")) {
+                            } else if (fn.endsWith(".war")) {
                                 // If the path is a file that ends in .war,
                                 // process all tag libraries in this web app.
                                 generator.addWar(f);
                                 atLeastOneTld = true;
-                            } else if (f.isDirectory()) {
-                                // If the path is a directory that includes
-                                // /WEB-INF/tags process the implicit tag library
-                                // for the given directory of tag files.
-                                if (f.getAbsolutePath().replace(
-                                        File.separatorChar, '/').contains(
-                                                "/WEB-INF/tags")) {
-                                    generator.addTagDir(f);
-                                    atLeastOneTld = true;
-                                } else {
-                                    boolean foundWebInf = false;
-                                    final File[] files = f.listFiles();
-                                    if (files != null) {
-                                        for (File file : files) {
-                                            if (file.getName().toUpperCase().equals("WEB-INF")
-                                                    && file.isDirectory()) {
-                                                foundWebInf = true;
-                                                break;
-                                            }
+                            } else {
+                                boolean foundWebInf = false;
+                                if (Files.isDirectory(f)) {
+                                    // If the path is a directory that includes
+                                    // /WEB-INF/tags process the implicit tag library
+                                    // for the given directory of tag files.
+                                    if (Utils.pathContains(f, "/WEB-INF/tags")) {
+                                        generator.addTagDir(f);
+                                        foundWebInf = true;
+                                    } else {
+                                        try (DirectoryStream<Path> files
+                                                = Files.newDirectoryStream(f, Utils::isWebInf)) {
+
+                                            foundWebInf = files.iterator().hasNext();
+                                        }
+                                        if (foundWebInf) {
+                                            generator.addWebApp(f);
                                         }
                                     }
-                                    if (foundWebInf) {
-                                        generator.addWebApp(f);
-                                        atLeastOneTld = true;
-                                    } else {
-                                        usage("Cannot determine tag library "
-                                                + "type for " + f.getAbsolutePath());
-                                    }
                                 }
-                            } else {
-                                usage("Cannot determine tag library "
-                                        + "type for " + f.getAbsolutePath());
+                                if (foundWebInf) {
+                                    atLeastOneTld = true;
+                                } else {
+                                    usage("Cannot determine tag library "
+                                            + "type for " + f.toAbsolutePath());
+                                }
                             }
                         } else {
                             usage("File/directory not found: " + arg);
@@ -207,13 +198,19 @@ public class TldDoc {
         } catch (NoSuchElementException e) {
             usage("Invalid Syntax.");
         }
+    }
 
-        try {
-            generator.generate();
-        } catch (GeneratorException e) {
-            e.printStackTrace(System.err);
-            System.exit(1);
+    private static boolean addPath(final Iterator<String> iter, final Consumer<Path> addDirFunction,
+            final String type) throws IOException {
+
+        final String arg = iter.next();
+        final Path dir = Paths.get(arg);
+        if (Files.exists(dir)) {
+            addDirFunction.accept(dir);
+            return true;
         }
+        usage(type + " not found: " + arg);
+        return false;
     }
 
     private static void usage(String message) {
