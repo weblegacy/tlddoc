@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `spotbugs-maven-plugin` from 4.8.3.0 to 4.8.3.1
 * Reorganize code to reduce duplicate code
 * Use `Files.copy`
 * Corr: Input directory ends with WEB-INF (possible NPE)
