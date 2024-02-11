@@ -154,7 +154,7 @@ public class TldDocGenerator {
      */
     public void addWebApp(Path path) {
         try {
-            Path webinf = path.resolve("WEB-INF");
+            Path webinf = path.endsWith("WEB-INF") ? path : path.resolve("WEB-INF");
 
             // Scan all subdirectories of /WEB-INF/ for .tld files
             addWebAppTldsIn(webinf);

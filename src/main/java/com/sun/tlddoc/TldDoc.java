@@ -170,12 +170,10 @@ public class TldDoc {
                                         foundWebInf = true;
                                     } else {
                                         if (f.endsWith("WEB-INF")) {
-                                            f = f.getParent();
-                                        }
-
-                                        if (f != null) {
-                                            try (DirectoryStream<Path> files
-                                                    = Files.newDirectoryStream(f, Utils::isWebInf)) {
+                                            foundWebInf = true;
+                                        } else {
+                                            try (DirectoryStream<Path> files = Files
+                                                    .newDirectoryStream(f, Utils::isWebInf)) {
 
                                                 foundWebInf = files.iterator().hasNext();
                                             }
