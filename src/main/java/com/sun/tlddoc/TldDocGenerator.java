@@ -563,6 +563,8 @@ public class TldDocGenerator {
         // We use getElementsByTagName instead of getElementsByTagNameNS
         // here since JSP 1.1 TLDs have no namespace.
         if (root.getElementsByTagName("jspversion").getLength() > 0) {
+            removeNameSpace(doc, root);
+
             // JSP 1.1 TLD - convert to JSP 1.2 TLD first.
             doc = convertTld(doc, RESOURCE_PATH + "/tld1_1-tld1_2.xsl");
             root = doc.getDocumentElement();
@@ -571,6 +573,8 @@ public class TldDocGenerator {
         // We use getElementsByTagName instead of getElementsByTagNameNS
         // here since JSP 1.2 TLDs have no namespace.
         if (root.getElementsByTagName("jsp-version").getLength() > 0) {
+            removeNameSpace(doc, root);
+
             // JSP 1.2 TLD - convert to JSP 2.0 TLD first
             doc = convertTld(doc, RESOURCE_PATH + "/tld1_2-tld2_0.xsl");
             root = doc.getDocumentElement();
@@ -592,6 +596,40 @@ public class TldDocGenerator {
 
         // We should now have a JSP 3.0 TLD in doc.
         return doc;
+    }
+
+    /**
+     * Deletes a possibly existing namespace from the root element.
+     *
+     * @param doc  the document
+     * @param root the root-element
+     */
+    private static void removeNameSpace(final Document doc, final Element root) {
+        final String ns = root.getNamespaceURI();
+        if (!(ns == null || ns.isEmpty())) {
+            removeNameSpace(doc, root, ns);
+        }
+    }
+
+    /**
+     * Deletes a specific namespace from all elements and attributes.
+     *
+     * @param doc  the document
+     * @param node the current element
+     * @param ns   the namespace to remove
+     */
+    private static void removeNameSpace(final Document doc, final Node node, final String ns) {
+        if ((node.getNodeType() == Node.ELEMENT_NODE || node.getNodeType() == Node.ATTRIBUTE_NODE)
+                && ns.equals(node.getNamespaceURI())) {
+            doc.renameNode(node, null, node.getLocalName());
+        }
+
+        final NodeList list = node.getChildNodes();
+        for (int i = 0;
+                i < list.getLength();
+                ++i) {
+            removeNameSpace(doc, list.item(i), ns);
+        }
     }
 
     /**
