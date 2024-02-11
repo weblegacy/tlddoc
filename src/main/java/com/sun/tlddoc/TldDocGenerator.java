@@ -38,10 +38,10 @@ import com.sun.tlddoc.tagfileparser.javacc.TagFile;
 import java.io.CharArrayReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -1251,14 +1251,8 @@ public class TldDocGenerator {
      * @throws IOException if an I/O error has occurred
      */
     private void copyResourceToFile(Path outputFile, String resource) throws IOException {
-        try (InputStream in = getResourceAsStream(resource); OutputStream out
-                = Files.newOutputStream(outputFile)) {
-
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = in.read(buffer)) != -1) {
-                out.write(buffer, 0, len);
-            }
+        try (InputStream in = getResourceAsStream(resource)) {
+            Files.copy(in, outputFile, StandardCopyOption.REPLACE_EXISTING);
         }
     }
 
