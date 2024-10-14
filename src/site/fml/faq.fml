@@ -84,7 +84,7 @@
             </question>
             <answer>
                 <p>Tag Library Documentation Generator version 1.2 supports using CDATA-escaped HTML
-                    tags in your JSP 1.1 info or JSP 1.2/2.0/2.1/3.0 description tags.</p>
+                    tags in your JSP 1.1 info or JSP 1.2/2.0/2.1/3.0/3.1/4.0 description tags.</p>
                 <p>You must escape these tags (or the entire description) with &lt;![CDATA[]]&gt;
                     elements. For example:</p>
                 <p><strong>INCORRECT:</strong></p>

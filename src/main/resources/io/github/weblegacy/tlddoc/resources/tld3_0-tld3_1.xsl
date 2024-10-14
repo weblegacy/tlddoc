@@ -33,12 +33,16 @@
 
 <!--
 
-  Identity transformation, added for flexibility.
+  Identity transformation (changing from the J2EE namespace
+  to the Java EE namespace), added for flexibility.
 
-  1. Remove any tag-extension, function-extension and taglib-extension
-     elements.
+  1. Change the <taglib> element to read as follows:
+     <taglib xmlns="https://jakarta.ee/xml/ns/jakartaee""
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_1.xsd">
 
-  Author: Mark Roth
+  Author: Stefan Graff
 
 -->
 
@@ -49,26 +53,17 @@
     <xsl:template match="/jakartaee:taglib">
         <xsl:element name="taglib" namespace="https://jakarta.ee/xml/ns/jakartaee">
             <xsl:attribute name="xsi:schemaLocation"
-                namespace="http://www.w3.org/2001/XMLSchema-instance">https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_0.xsd</xsl:attribute>
-            <xsl:attribute name="version">3.0</xsl:attribute>
+                namespace="http://www.w3.org/2001/XMLSchema-instance">https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_1.xsd</xsl:attribute>
+            <xsl:attribute name="version">3.1</xsl:attribute>
             <xsl:apply-templates select="*" />
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="jakartaee:tag-extension" />
-
-    <xsl:template match="jakartaee:function-extension" />
-
-    <xsl:template match="jakartaee:taglib-extension" />
-
-    <xsl:template match="@*|node()">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()" />
-        </xsl:copy>
-    </xsl:template>
-
-    <xsl:template match="text()">
-        <xsl:value-of select="." />
+    <xsl:template match="javaee:*">
+        <xsl:element name="{local-name()}" namespace="https://jakarta.ee/xml/ns/jakartaee">
+            <xsl:copy-of select="@*" />
+            <xsl:apply-templates />
+        </xsl:element>
     </xsl:template>
 
 </xsl:stylesheet>

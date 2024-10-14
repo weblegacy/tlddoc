@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Adapt to JakartaEE 11 (JSP 4.0)
 * Correct project-reports
 * Change WarJarTagLibrary to public
 * JDK11 and JPMS

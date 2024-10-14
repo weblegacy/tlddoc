@@ -497,7 +497,7 @@ public class TldDocGenerator {
             try (TagLibrary tagLibrary = tagLibrary_) {
                 Document doc = tagLibrary.getTldDocument(documentBuilder);
 
-                // Convert document to JSP 3.0 TLD
+                // Convert document to JSP 4.0 TLD
                 doc = upgradeTld(doc);
 
                 // If this tag library has no tags, no validators,
@@ -541,11 +541,11 @@ public class TldDocGenerator {
     }
 
     /**
-     * Converts the given TLD to a JSP 3.0 TLD.
+     * Converts the given TLD to a JSP 4.0 TLD.
      *
      * @param doc the given TLD
      *
-     * @return the converted to JSP 3.0 TLD
+     * @return the converted to JSP 4.0 TLD
      *
      * @throws TransformerFactoryConfigurationError Thrown in case of {@linkplain
      * java.util.ServiceConfigurationError service configuration error} or if the implementation is
@@ -598,10 +598,20 @@ public class TldDocGenerator {
             doc = convertTld(doc, RESOURCE_PATH + "/tld2_1-tld3_0.xsl");
         }
 
-        // Final conversion to remove unwanted elements
-        doc = convertTld(doc, RESOURCE_PATH + "/tld3_0-tld3_0.xsl");
+        if ("3.0".equals(root.getAttribute("version"))) {
+            // JSP 3.0 TLD - convert to JSP 3.1 TLD first
+            doc = convertTld(doc, RESOURCE_PATH + "/tld3_0-tld3_1.xsl");
+        }
 
-        // We should now have a JSP 3.0 TLD in doc.
+        if ("3.1".equals(root.getAttribute("version"))) {
+            // JSP 3.1 TLD - convert to JSP 4.0 TLD first
+            doc = convertTld(doc, RESOURCE_PATH + "/tld3_1-tld4_0.xsl");
+        }
+
+        // Final conversion to remove unwanted elements
+        doc = convertTld(doc, RESOURCE_PATH + "/tld4_0-tld4_0.xsl");
+
+        // We should now have a JSP 4.0 TLD in doc.
         return doc;
     }
 
