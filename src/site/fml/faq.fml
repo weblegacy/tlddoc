@@ -138,7 +138,7 @@
                 What version of Java do I need?
             </question>
             <answer>
-                <p>Tag Library Documentation Generator requires a minimum of JDK 8.</p>
+                <p>Tag Library Documentation Generator requires a minimum of JDK 11.</p>
             </answer>
         </faq>
 

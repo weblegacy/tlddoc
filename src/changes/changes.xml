@@ -41,6 +41,8 @@
     </properties>
     <body>
         <release version="1.5" date="YYYY-MM-DD" description="Jakarta EE 9+, JDK11, JPMS">
+            <action type="fix" dev="ste-gr">Document minimum JDK11</action>
+            <action type="update" dev="ste-gr">Adapt to JakartaEE 11 (JSP 4.0)</action>
             <action type="fix" dev="ste-gr">Correct project-reports</action>
             <action type="fix" dev="ste-gr">Change WarJarTagLibrary to public</action>
             <action type="update" dev="ste-gr">JDK11 and JPMS</action>

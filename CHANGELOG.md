@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Corr: Document minimum JDK11
 * Adapt to JakartaEE 11 (JSP 4.0)
 * Correct project-reports
 * Change WarJarTagLibrary to public

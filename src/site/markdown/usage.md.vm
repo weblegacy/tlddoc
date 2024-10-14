@@ -42,7 +42,7 @@ You can run the Tag Library Documentation Generator in ant as part of your
 build process using the `<java>` task. Just add the following code to your
 `build.xml`.
 
-Using JDK 8 or greater:
+Using JDK 11 or greater:
 
 ~~~~~~~~~~~xml
 <java fork="true" jar="${tlddoc.path}/tlddoc-${project.version}.jar"
