@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Workaround for MCHANGES-423
 * Bump `maven-fluido-skin` from 3.12.1 to 4.0.0-M16 and move version to POM
 * Bump `maven-site-plugin` from 3.12.1 to 4.0.0-M16
 * Bump `maven-pmd-plugin` from 3.21.2 to 3.25.0
