@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `spotbugs-maven-plugin` from 4.8.3.1 to 4.8.6.4
 * Bump `maven-surefire-plugin` from 3.2.5 to 3.5.1
 * Bump `maven-source-plugin` from 3.3.0 to 3.3.1
 * Bump `maven-scm-publish-plugin` from 3.2.1 to 3.3.0
