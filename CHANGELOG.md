@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-release-plugin` from 3.0.1 to 3.1.1
 * Bump `maven-project-info-reports-plugin` from 3.5.0 to 3.7.0
 * Workaround for MCHANGES-423
 * Bump `maven-fluido-skin` from 3.12.1 to 4.0.0-M16 and move version to POM
