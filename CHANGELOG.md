@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-surefire-plugin` from 3.2.5 to 3.5.1
 * Bump `maven-source-plugin` from 3.3.0 to 3.3.1
 * Bump `maven-scm-publish-plugin` from 3.2.1 to 3.3.0
 * Bump `maven-release-plugin` from 3.0.1 to 3.1.1
