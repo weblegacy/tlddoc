@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-assembly-plugin` from 3.6.0 to 3.7.1
 * Corr: Document minimum JDK11
 * Adapt to JakartaEE 11 (JSP 4.0)
 * Correct project-reports
