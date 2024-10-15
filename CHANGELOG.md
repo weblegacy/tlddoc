@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-javadoc-plugin` from 3.6.3 to 3.10.1
 * Bump `maven-jar-plugin` from 3.3.0 to 3.4.2
 * Bump `maven-install-plugin` from 3.1.1 to 3.1.3
 * Bump `maven-gpg-plugin` from 3.1.0 to 3.2.7
