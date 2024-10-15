@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-clean-plugin` from 3.3.2 to 3.4.0
 * Adapt `checkstyle.xml` to new version
 * Bump `checkstyle` from 10.13.0 to 10.18.2
 * Bump `maven-checkstyle-plugin` from 3.3.1 to 3.5.0
