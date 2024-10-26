@@ -152,8 +152,24 @@
     <!-- Preserve attribute -->
     <xsl:template match="attribute">
         <attribute>
-            <xsl:apply-templates />
+            <xsl:apply-templates select="name" />
+            <xsl:apply-templates select="required" />
+            <xsl:apply-templates select="rtexprvalue" />
         </attribute>
+    </xsl:template>
+
+    <!-- Preserve required -->
+    <xsl:template match="required">
+        <required>
+            <xsl:apply-templates />
+        </required>
+    </xsl:template>
+
+    <!-- Preserve rtexprvalue -->
+    <xsl:template match="rtexprvalue">
+        <rtexprvalue>
+            <xsl:apply-templates />
+        </rtexprvalue>
     </xsl:template>
 
     <xsl:template match="@*|node()">

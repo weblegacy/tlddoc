@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Correct TLD 1.1 to TLD 1.2 transformation
 * Bump `license-maven-plugin` from 4.3 to 4.6
 * Bump `versions-maven-plugin` from 2.16.2 to 2.17.1
 * Bump `javacc-maven-plugin` from 3.0.1 to 3.1.0
