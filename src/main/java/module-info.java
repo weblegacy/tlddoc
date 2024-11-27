@@ -30,10 +30,14 @@
  */
 
 /**
+ * Module-Info for TldDoc-Generator.
+ *
  * @author ste-gr
  */
 module io.github.weblegacy.tlddoc {
     requires transitive java.xml;
 
     exports io.github.weblegacy.tlddoc.main;
+    exports io.github.weblegacy.tlddoc.tagfileparser;
+    exports io.github.weblegacy.tlddoc.tagfileparser.javacc;
 }

@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Export the tag file parser that is used in maven-plugin
 * Add verbose-mode
 * Correction at upgrade TLD
 * Format `resources`
