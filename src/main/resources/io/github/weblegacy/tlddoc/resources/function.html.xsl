@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0" xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
     <xsl:output method="html" indent="yes" />
 
@@ -80,14 +80,16 @@
             </xsl:variable>
             <html>
                 <head>
-                    <title><xsl:value-of select="normalize-space($title)" /></title>
+                    <title>
+                        <xsl:value-of select="normalize-space($title)" />
+                    </title>
                     <meta name="keywords">
                         <xsl:attribute name="content">
-                <xsl:value-of select="normalize-space($title)" />
-              </xsl:attribute>
+                            <xsl:value-of select="normalize-space($title)" />
+                        </xsl:attribute>
                     </meta>
                     <link rel="stylesheet" type="text/css" href="../stylesheet.css"
-                        title="Style" />
+                          title="Style" />
                 </head>
                 <script>
                     function asd()
@@ -104,14 +106,35 @@
                                 <a NAME="navbar_top_firstrow"><!-- --></a>
                                 <table BORDER="0" CELLPADDING="0" CELLSPACING="3">
                                     <tr ALIGN="center" VALIGN="top">
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;<a href="../overview-summary.html"><font CLASS="NavBarFont1"><b>Overview</b></font></a>&#160;</td>
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;<a href="tld-summary.html"><font CLASS="NavBarFont1"><b>Library</b></font></a>&#160;</td>
-                                        <td BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &#160;<font CLASS="NavBarFont1Rev">&#160;Tag&#160;</font>&#160;</td>
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;<a HREF="../help-doc.html"><font CLASS="NavBarFont1"><b>Help</b></font></a>&#160;</td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;
+                                            <a href="../overview-summary.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Overview</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;
+                                            <a href="tld-summary.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Library</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
+                                        <td BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &#160;
+                                            <font CLASS="NavBarFont1Rev">&#160;Tag&#160;</font>&#160;
+                                        </td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;
+                                            <a HREF="../help-doc.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Help</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td ALIGN="right" VALIGN="top" ROWSPAN="3"><em>
+                            <td ALIGN="right" VALIGN="top" ROWSPAN="3">
+                                <em>
                                 </em>
                             </td>
                         </tr>
@@ -124,9 +147,14 @@
                             </td>
                             <td BGCOLOR="white" CLASS="NavBarCell2">
                                 <font SIZE="-2">
-                                    &#160;<a HREF="../index.html" TARGET="_top"><b>FRAMES</b></a>&#160;
-                                    &#160;<xsl:element name="a">
-                                        <xsl:attribute name="href"><xsl:value-of select="jakartaee:name" />.fn.html</xsl:attribute>
+                                    &#160;
+                                    <a HREF="../index.html" TARGET="_top">
+                                        <b>FRAMES</b>
+                                    </a>&#160;
+                                    &#160;
+                                    <xsl:element name="a">
+                                        <xsl:attribute name="href">
+                                            <xsl:value-of select="jakartaee:name" />.fn.html</xsl:attribute>
                                         <xsl:attribute name="target">_top</xsl:attribute>
                                         <b>NO FRAMES</b>
                                     </xsl:element>&#160;
@@ -138,7 +166,9 @@
                                         // -->
                                     </script>
                                     <noscript>
-                                        <a HREF="../alltags-noframe.html" TARGET=""><b>All Tags</b></a>
+                                        <a HREF="../alltags-noframe.html" TARGET="">
+                                            <b>All Tags</b>
+                                        </a>
                                     </noscript>
                                 </font>
                             </td>
@@ -147,19 +177,27 @@
                     <!-- =========== END OF NAVBAR =========== -->
 
                     <hr />
-                    <h2><font size="-1"><xsl:value-of select="$tldname" /></font><br />
+                    <h2>
+                        <font size="-1">
+                            <xsl:value-of select="$tldname" />
+                        </font>
+                        <br />
                         Function <xsl:value-of select="jakartaee:name" />
                     </h2>
                     <code>
                         <xsl:value-of select='substring-before(normalize-space(jakartaee:function-signature)," ")' />
-                        <b>&#160;<xsl:value-of select="jakartaee:name" /></b>(<xsl:value-of
-                        select='substring-after(normalize-space(jakartaee:function-signature),"(")' />
+                        <b>&#160;
+                            <xsl:value-of select="jakartaee:name" />
+                        </b>(<xsl:value-of
+                            select='substring-after(normalize-space(jakartaee:function-signature),"(")' />
                     </code>
                     <hr />
-                    <xsl:value-of select="jakartaee:description" disable-output-escaping="yes" /><br />
+                    <xsl:value-of select="jakartaee:description" disable-output-escaping="yes" />
+                    <br />
                     <p />
                     <xsl:if test="jakartaee:example!=''">
-                        <b>Example:</b><br />
+                        <b>Example:</b>
+                        <br />
                         <pre>
                             <xsl:value-of select="jakartaee:example" />
                         </pre>
@@ -227,14 +265,35 @@
                                 <a NAME="navbar_bottom_firstrow"><!-- --></a>
                                 <table BORDER="0" CELLPADDING="0" CELLSPACING="3">
                                     <tr ALIGN="center" VALIGN="top">
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;<a href="../overview-summary.html"><font CLASS="NavBarFont1"><b>Overview</b></font></a>&#160;</td>
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;<a href="tld-summary.html"><font CLASS="NavBarFont1"><b>Library</b></font></a>&#160;</td>
-                                        <td BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &#160;<font CLASS="NavBarFont1Rev">&#160;Tag&#160;</font>&#160;</td>
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;<a HREF="../help-doc.html"><font CLASS="NavBarFont1"><b>Help</b></font></a>&#160;</td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;
+                                            <a href="../overview-summary.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Overview</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;
+                                            <a href="tld-summary.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Library</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
+                                        <td BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &#160;
+                                            <font CLASS="NavBarFont1Rev">&#160;Tag&#160;</font>&#160;
+                                        </td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    &#160;
+                                            <a HREF="../help-doc.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Help</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td ALIGN="right" VALIGN="top" ROWSPAN="3"><em>
+                            <td ALIGN="right" VALIGN="top" ROWSPAN="3">
+                                <em>
                                 </em>
                             </td>
                         </tr>
@@ -247,9 +306,14 @@
                             </td>
                             <td BGCOLOR="white" CLASS="NavBarCell2">
                                 <font SIZE="-2">
-                                    &#160;<a HREF="../index.html" TARGET="_top"><b>FRAMES</b></a>&#160;
-                                    &#160;<xsl:element name="a">
-                                        <xsl:attribute name="href"><xsl:value-of select="jakartaee:name" />.fn.html</xsl:attribute>
+                                    &#160;
+                                    <a HREF="../index.html" TARGET="_top">
+                                        <b>FRAMES</b>
+                                    </a>&#160;
+                                    &#160;
+                                    <xsl:element name="a">
+                                        <xsl:attribute name="href">
+                                            <xsl:value-of select="jakartaee:name" />.fn.html</xsl:attribute>
                                         <xsl:attribute name="target">_top</xsl:attribute>
                                         <b>NO FRAMES</b>
                                     </xsl:element>&#160;
@@ -261,7 +325,9 @@
                                         // -->
                                     </script>
                                     <noscript>
-                                        <a HREF="../alltags-noframe.html" TARGET=""><b>All Tags</b></a>
+                                        <a HREF="../alltags-noframe.html" TARGET="">
+                                            <b>All Tags</b>
+                                        </a>
                                     </noscript>
                                 </font>
                             </td>

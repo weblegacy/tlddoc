@@ -47,15 +47,16 @@
 -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:j2ee="http://java.sun.com/xml/ns/j2ee"
-    xmlns="http://java.sun.com/xml/ns/javaee">
+                xmlns:j2ee="http://java.sun.com/xml/ns/j2ee"
+                xmlns="http://java.sun.com/xml/ns/javaee">
     <xsl:output method="xml" indent="yes" />
 
     <xsl:template match="/j2ee:taglib">
         <xsl:element name="taglib">
             <xsl:attribute name="xsi:schemaLocation"
-                namespace="http://www.w3.org/2001/XMLSchema-instance">http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd</xsl:attribute>
+                           namespace="http://www.w3.org/2001/XMLSchema-instance">http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd</xsl:attribute>
             <xsl:attribute name="version">2.1</xsl:attribute>
+
             <xsl:apply-templates select="*" />
         </xsl:element>
     </xsl:template>

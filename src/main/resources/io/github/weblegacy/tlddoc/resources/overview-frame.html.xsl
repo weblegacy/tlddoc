@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0" xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
     <xsl:output method="html" indent="yes" />
 
@@ -64,7 +64,9 @@
                     <tr>
                         <td nowrap="true">
                             <font size="+1" class="FrameTitleFont">
-                                <b><xsl:value-of select="/jakartaee:tlds/jakartaee:config/jakartaee:doc-title" /></b>
+                                <b>
+                                    <xsl:value-of select="/jakartaee:tlds/jakartaee:config/jakartaee:doc-title" />
+                                </b>
                             </font>
                         </td>
                     </tr>
@@ -73,7 +75,9 @@
                     <tr>
                         <td nowrap="true">
                             <font class="FrameItemFont">
-                                <a href="alltags-frame.html" target="tldFrame"><xsl:text>All Tags / Functions</xsl:text></a>
+                                <a href="alltags-frame.html" target="tldFrame">
+                                    <xsl:text>All Tags / Functions</xsl:text>
+                                </a>
                             </font>
                             <p />
                             <font size="+1" class="FrameHeadingFont">
@@ -96,7 +100,8 @@
     <xsl:template match="jakartaee:taglib">
         <font class="FrameItemFont">
             <xsl:element name="a">
-                <xsl:attribute name="href"><xsl:value-of select="jakartaee:short-name" />/tld-frame.html</xsl:attribute>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="jakartaee:short-name" />/tld-frame.html</xsl:attribute>
                 <xsl:attribute name="target">tldFrame</xsl:attribute>
                 <xsl:choose>
                     <xsl:when test="jakartaee:display-name!=''">

@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0" xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
     <xsl:output method="html" indent="yes" />
 
@@ -80,14 +80,16 @@
             </xsl:variable>
             <html>
                 <head>
-                    <title><xsl:value-of select="normalize-space($title)" /></title>
+                    <title>
+                        <xsl:value-of select="normalize-space($title)" />
+                    </title>
                     <meta name="keywords">
                         <xsl:attribute name="content">
-                <xsl:value-of select="normalize-space($title)" />
-              </xsl:attribute>
+                            <xsl:value-of select="normalize-space($title)" />
+                        </xsl:attribute>
                     </meta>
                     <link rel="stylesheet" type="text/css" href="../stylesheet.css"
-                        title="Style" />
+                          title="Style" />
                 </head>
                 <script>
                     function asd()
@@ -104,14 +106,35 @@
                                 <a NAME="navbar_top_firstrow"><!-- --></a>
                                 <table BORDER="0" CELLPADDING="0" CELLSPACING="3">
                                     <tr ALIGN="center" VALIGN="top">
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;<a href="../overview-summary.html"><font CLASS="NavBarFont1"><b>Overview</b></font></a>&#160;</td>
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;<a href="tld-summary.html"><font CLASS="NavBarFont1"><b>Library</b></font></a>&#160;</td>
-                                        <td BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev">&#160;<font CLASS="NavBarFont1Rev">&#160;Tag&#160;</font>&#160;</td>
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;<a HREF="../help-doc.html"><font CLASS="NavBarFont1"><b>Help</b></font></a>&#160;</td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;
+                                            <a href="../overview-summary.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Overview</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;
+                                            <a href="tld-summary.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Library</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
+                                        <td BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev">&#160;
+                                            <font CLASS="NavBarFont1Rev">&#160;Tag&#160;</font>&#160;
+                                        </td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;
+                                            <a HREF="../help-doc.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Help</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td ALIGN="right" VALIGN="top" ROWSPAN="3"><em>
+                            <td ALIGN="right" VALIGN="top" ROWSPAN="3">
+                                <em>
                                 </em>
                             </td>
                         </tr>
@@ -124,9 +147,14 @@
                             </td>
                             <td BGCOLOR="white" CLASS="NavBarCell2">
                                 <font SIZE="-2">
-                                    &#160;<a HREF="../index.html" TARGET="_top"><b>FRAMES</b></a>&#160;
-                                    &#160;<xsl:element name="a">
-                                        <xsl:attribute name="href"><xsl:value-of select="jakartaee:name" />.html</xsl:attribute>
+                                    &#160;
+                                    <a HREF="../index.html" TARGET="_top">
+                                        <b>FRAMES</b>
+                                    </a>&#160;
+                                    &#160;
+                                    <xsl:element name="a">
+                                        <xsl:attribute name="href">
+                                            <xsl:value-of select="jakartaee:name" />.html</xsl:attribute>
                                         <xsl:attribute name="target">_top</xsl:attribute>
                                         <b>NO FRAMES</b>
                                     </xsl:element>&#160;
@@ -138,7 +166,9 @@
                                         // -->
                                     </script>
                                     <noscript>
-                                        <a HREF="../alltags-noframe.html" TARGET=""><b>All Tags</b></a>
+                                        <a HREF="../alltags-noframe.html" TARGET="">
+                                            <b>All Tags</b>
+                                        </a>
                                     </noscript>
                                 </font>
                             </td>
@@ -147,9 +177,15 @@
                     <!-- =========== END OF NAVBAR =========== -->
 
                     <hr />
-                    <h2><font size="-1"><xsl:value-of select="$tldname" /></font><br />Tag <xsl:value-of select="jakartaee:name" /></h2>
+                    <h2>
+                        <font size="-1">
+                            <xsl:value-of select="$tldname" />
+                        </font>
+                        <br />Tag <xsl:value-of select="jakartaee:name" />
+                    </h2>
                     <hr />
-                    <xsl:value-of select="jakartaee:description" disable-output-escaping="yes" /><br />
+                    <xsl:value-of select="jakartaee:description" disable-output-escaping="yes" />
+                    <br />
                     <p />
                     <xsl:if test="jakartaee:example!=''">
                         <b>Example:</b>
@@ -238,18 +274,30 @@
                         <xsl:choose>
                             <xsl:when test="count(jakartaee:attribute)&gt;0">
                                 <tr>
-                                    <td><b>Name</b></td>
-                                    <td><b>Required</b></td>
-                                    <td><b>Request-time</b></td>
-                                    <td><b>Type</b></td>
-                                    <td><b>Description</b></td>
+                                    <td>
+                                        <b>Name</b>
+                                    </td>
+                                    <td>
+                                        <b>Required</b>
+                                    </td>
+                                    <td>
+                                        <b>Request-time</b>
+                                    </td>
+                                    <td>
+                                        <b>Type</b>
+                                    </td>
+                                    <td>
+                                        <b>Description</b>
+                                    </td>
                                 </tr>
                                 <xsl:apply-templates select="jakartaee:attribute">
                                     <xsl:sort select="jakartaee:name" />
                                 </xsl:apply-templates>
                             </xsl:when>
                             <xsl:otherwise>
-                                <td colspan="5"><i>No Attributes Defined.</i></td>
+                                <td colspan="5">
+                                    <i>No Attributes Defined.</i>
+                                </td>
                             </xsl:otherwise>
                         </xsl:choose>
                     </table>
@@ -268,11 +316,21 @@
                         <xsl:choose>
                             <xsl:when test="count(jakartaee:variable)&gt;0">
                                 <tr>
-                                    <td><b>Name</b></td>
-                                    <td><b>Type</b></td>
-                                    <td><b>Declare</b></td>
-                                    <td><b>Scope</b></td>
-                                    <td><b>Description</b></td>
+                                    <td>
+                                        <b>Name</b>
+                                    </td>
+                                    <td>
+                                        <b>Type</b>
+                                    </td>
+                                    <td>
+                                        <b>Declare</b>
+                                    </td>
+                                    <td>
+                                        <b>Scope</b>
+                                    </td>
+                                    <td>
+                                        <b>Description</b>
+                                    </td>
                                 </tr>
                                 <xsl:apply-templates select="jakartaee:variable">
                                     <xsl:sort select="jakartaee:name-given" />
@@ -280,7 +338,9 @@
                                 </xsl:apply-templates>
                             </xsl:when>
                             <xsl:otherwise>
-                                <td colspan="2"><i>No Variables Defined.</i></td>
+                                <td colspan="2">
+                                    <i>No Variables Defined.</i>
+                                </td>
                             </xsl:otherwise>
                         </xsl:choose>
                     </table>
@@ -295,14 +355,35 @@
                                 <a NAME="navbar_bottom_firstrow"><!-- --></a>
                                 <table BORDER="0" CELLPADDING="0" CELLSPACING="3">
                                     <tr ALIGN="center" VALIGN="top">
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;<a href="../overview-summary.html"><font CLASS="NavBarFont1"><b>Overview</b></font></a>&#160;</td>
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;<a href="tld-summary.html"><font CLASS="NavBarFont1"><b>Library</b></font></a>&#160;</td>
-                                        <td BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev">&#160;<font CLASS="NavBarFont1Rev">&#160;Tag&#160;</font>&#160;</td>
-                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;<a HREF="../help-doc.html"><font CLASS="NavBarFont1"><b>Help</b></font></a>&#160;</td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;
+                                            <a href="../overview-summary.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Overview</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;
+                                            <a href="tld-summary.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Library</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
+                                        <td BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev">&#160;
+                                            <font CLASS="NavBarFont1Rev">&#160;Tag&#160;</font>&#160;
+                                        </td>
+                                        <td BGCOLOR="#EEEEFF" CLASS="NavBarCell1">&#160;
+                                            <a HREF="../help-doc.html">
+                                                <font CLASS="NavBarFont1">
+                                                    <b>Help</b>
+                                                </font>
+                                            </a>&#160;
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
-                            <td ALIGN="right" VALIGN="top" ROWSPAN="3"><em>
+                            <td ALIGN="right" VALIGN="top" ROWSPAN="3">
+                                <em>
                                 </em>
                             </td>
                         </tr>
@@ -315,9 +396,14 @@
                             </td>
                             <td BGCOLOR="white" CLASS="NavBarCell2">
                                 <font SIZE="-2">
-                                    &#160;<a HREF="../index.html" TARGET="_top"><b>FRAMES</b></a>&#160;
-                                    &#160;<xsl:element name="a">
-                                        <xsl:attribute name="href"><xsl:value-of select="jakartaee:name" />.html</xsl:attribute>
+                                    &#160;
+                                    <a HREF="../index.html" TARGET="_top">
+                                        <b>FRAMES</b>
+                                    </a>&#160;
+                                    &#160;
+                                    <xsl:element name="a">
+                                        <xsl:attribute name="href">
+                                            <xsl:value-of select="jakartaee:name" />.html</xsl:attribute>
                                         <xsl:attribute name="target">_top</xsl:attribute>
                                         <b>NO FRAMES</b>
                                     </xsl:element>&#160;
@@ -329,7 +415,9 @@
                                         // -->
                                     </script>
                                     <noscript>
-                                        <a HREF="../alltags-noframe.html" TARGET=""><b>All Tags</b></a>
+                                        <a HREF="../alltags-noframe.html" TARGET="">
+                                            <b>All Tags</b>
+                                        </a>
                                     </noscript>
                                 </font>
                             </td>
@@ -356,7 +444,9 @@
 
     <xsl:template match="jakartaee:attribute">
         <tr valign="top">
-            <td><xsl:apply-templates select="jakartaee:name" /></td>
+            <td>
+                <xsl:apply-templates select="jakartaee:name" />
+            </td>
             <td>
                 <xsl:choose>
                     <xsl:when test="jakartaee:required!=''">
@@ -379,11 +469,15 @@
                         <xsl:choose>
                             <xsl:when test="jakartaee:deferred-value/jakartaee:type">
                                 <code>javax.el.ValueExpression</code>
-                                <br />(<i>must evaluate to </i><code><xsl:value-of select="jakartaee:deferred-value/jakartaee:type" /></code>)
+                                <br />(<i>must evaluate to </i>
+                                <code>
+                                    <xsl:value-of select="jakartaee:deferred-value/jakartaee:type" />
+                                </code>)
                             </xsl:when>
                             <xsl:otherwise>
                                 <code>javax.el.ValueExpression</code>
-                                <br />(<i>must evaluate to </i><code>java.lang.Object</code>)
+                                <br />(<i>must evaluate to </i>
+                                <code>java.lang.Object</code>)
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
@@ -391,16 +485,22 @@
                         <xsl:choose>
                             <xsl:when test="jakartaee:deferred-method/jakartaee:method-signature">
                                 <code>javax.el.MethodExpression</code>
-                                <br />(<i>signature must match </i><code><xsl:value-of select="jakartaee:deferred-method/jakartaee:method-signature" /></code>)
+                                <br />(<i>signature must match </i>
+                                <code>
+                                    <xsl:value-of select="jakartaee:deferred-method/jakartaee:method-signature" />
+                                </code>)
                             </xsl:when>
                             <xsl:otherwise>
                                 <code>javax.el.MethodExpression</code>
-                                <br />(<i>signature must match </i><code>void methodname()</code>)
+                                <br />(<i>signature must match </i>
+                                <code>void methodname()</code>)
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
                     <xsl:when test="jakartaee:type!=''">
-                        <code><xsl:value-of select="jakartaee:type" /></code>
+                        <code>
+                            <xsl:value-of select="jakartaee:type" />
+                        </code>
                     </xsl:when>
                     <xsl:otherwise>
                         <code>java.lang.String</code>
@@ -412,7 +512,9 @@
                     <xsl:when test="jakartaee:description!=''">
                         <xsl:value-of select="jakartaee:description" disable-output-escaping="yes" />
                     </xsl:when>
-                    <xsl:otherwise><i>No Description</i></xsl:otherwise>
+                    <xsl:otherwise>
+                        <i>No Description</i>
+                    </xsl:otherwise>
                 </xsl:choose>
             </td>
         </tr>
@@ -436,9 +538,13 @@
             <td>
                 <xsl:choose>
                     <xsl:when test="jakartaee:variable-class!=''">
-                        <code><xsl:value-of select="jakartaee:variable-class" /></code>
+                        <code>
+                            <xsl:value-of select="jakartaee:variable-class" />
+                        </code>
                     </xsl:when>
-                    <xsl:otherwise><code>java.lang.String</code></xsl:otherwise>
+                    <xsl:otherwise>
+                        <code>java.lang.String</code>
+                    </xsl:otherwise>
                 </xsl:choose>
             </td>
             <td>
@@ -462,7 +568,9 @@
                     <xsl:when test="jakartaee:description!=''">
                         <xsl:value-of select="jakartaee:description" disable-output-escaping="yes" />
                     </xsl:when>
-                    <xsl:otherwise><i>No Description</i></xsl:otherwise>
+                    <xsl:otherwise>
+                        <i>No Description</i>
+                    </xsl:otherwise>
                 </xsl:choose>
             </td>
         </tr>

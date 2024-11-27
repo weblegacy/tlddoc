@@ -41,7 +41,7 @@
 -->
 
 <xsl:stylesheet version="1.0" xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format">
 
     <xsl:output method="html" indent="yes" />
 
@@ -85,11 +85,11 @@
                     </title>
                     <meta name="keywords">
                         <xsl:attribute name="content">
-                <xsl:value-of select="normalize-space($tldfull)" />
-              </xsl:attribute>
+                            <xsl:value-of select="normalize-space($tldfull)" />
+                        </xsl:attribute>
                     </meta>
                     <link rel="stylesheet" type="text/css" href="../stylesheet.css"
-                        title="Style" />
+                          title="Style" />
                     <script>
                         function asd()
                         {
@@ -176,7 +176,8 @@
     <xsl:template match="jakartaee:tag|jakartaee:tag-file">
         <br />
         <xsl:element name="a">
-            <xsl:attribute name="href"><xsl:value-of select="jakartaee:name" />.html</xsl:attribute>
+            <xsl:attribute name="href">
+                <xsl:value-of select="jakartaee:name" />.html</xsl:attribute>
             <xsl:attribute name="target">tagFrame</xsl:attribute>
             <xsl:value-of select="../jakartaee:short-name" />:<xsl:value-of select="jakartaee:name" />
         </xsl:element>
@@ -185,9 +186,11 @@
     <xsl:template match="jakartaee:function">
         <br />
         <xsl:element name="a">
-            <xsl:attribute name="href"><xsl:value-of select="jakartaee:name" />.fn.html</xsl:attribute>
+            <xsl:attribute name="href">
+                <xsl:value-of select="jakartaee:name" />.fn.html</xsl:attribute>
             <xsl:attribute name="target">tagFrame</xsl:attribute>
-            <i><xsl:value-of select="../jakartaee:short-name" />:<xsl:value-of select="jakartaee:name" />()</i>
+            <i>
+                <xsl:value-of select="../jakartaee:short-name" />:<xsl:value-of select="jakartaee:name" />()</i>
         </xsl:element>
     </xsl:template>
 

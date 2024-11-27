@@ -43,15 +43,16 @@
 -->
 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns="https://jakarta.ee/xml/ns/jakartaee">
+                xmlns:jakartaee="https://jakarta.ee/xml/ns/jakartaee"
+                xmlns="https://jakarta.ee/xml/ns/jakartaee">
     <xsl:output method="xml" indent="yes" />
 
     <xsl:template match="/jakartaee:taglib">
         <xsl:element name="taglib">
             <xsl:attribute name="xsi:schemaLocation"
-                namespace="http://www.w3.org/2001/XMLSchema-instance">https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_4_0.xsd</xsl:attribute>
+                           namespace="http://www.w3.org/2001/XMLSchema-instance">https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_4_0.xsd</xsl:attribute>
             <xsl:attribute name="version">4.0</xsl:attribute>
+
             <xsl:apply-templates select="*" />
         </xsl:element>
     </xsl:template>
