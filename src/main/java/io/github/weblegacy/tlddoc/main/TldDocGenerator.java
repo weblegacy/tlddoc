@@ -419,7 +419,7 @@ public class TldDocGenerator {
         }
     }
 
-    /////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
     /**
      * Copies all static files to target directory.
      *
@@ -596,11 +596,13 @@ public class TldDocGenerator {
         if ("2.1".equals(root.getAttribute("version"))) {
             // JSP 2.1 TLD - convert to JSP 3.0 TLD first
             doc = convertTld(doc, RESOURCE_PATH + "/tld2_1-tld3_0.xsl");
+            root = doc.getDocumentElement();
         }
 
         if ("3.0".equals(root.getAttribute("version"))) {
             // JSP 3.0 TLD - convert to JSP 3.1 TLD first
             doc = convertTld(doc, RESOURCE_PATH + "/tld3_0-tld3_1.xsl");
+            root = doc.getDocumentElement();
         }
 
         if ("3.1".equals(root.getAttribute("version"))) {
