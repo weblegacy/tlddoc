@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib 
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+  "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib id="jsp12_test" xmlns="http://java.sun.com/JSP/TagLibraryDescriptor">
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <short-name>jsp12_test</short-name>
+    <uri>https://io.github.weblegacy/tlddoc/test/jsp12</uri>
+    <display-name>JSP 1.2 Test</display-name>
+    <small-icon>jsp12_test_small.jpg</small-icon>
+    <large-icon>jsp12_test_large.jpg</large-icon>
+    <description>Test TagLib Version for JSP 1.2</description>
+    
+    <validator>
+        <validator-class>io.github.weblegacy.tlddoc.test.validator</validator-class>
+        <init-param>
+            <param-name>initName1</param-name>
+            <param-value>initValue1</param-value>
+            <description>Init-Parameter 1</description>
+        </init-param>
+        <init-param>
+            <param-name>initName2</param-name>
+            <param-value>initValue2</param-value>
+            <description>Init-Parameter 2</description>
+        </init-param>
+        <description>JSP 1.2 Test - Validator</description>
+    </validator>
+    
+    <listener>
+        <listener-class>io.github.weblegacy.tlddoc.test.listenerA</listener-class>
+    </listener>
+    
+    <listener>
+        <listener-class>io.github.weblegacy.tlddoc.test.listenerB</listener-class>
+    </listener>
+
+    <tag id="tagA">
+        <name>tagA</name>
+        <tag-class>io.github.weblegacy.tlddoc.test.tagA</tag-class>
+        <tei-class>io.github.weblegacy.tlddoc.test.tagAtei</tei-class>
+        <body-content>tagdependent</body-content>
+        <display-name>Tag A</display-name>
+        <small-icon>jsp12_test_tagA_small.jpg</small-icon>
+        <large-icon>jsp12_test_tagA_large.jpg</large-icon>
+        <description>Description for tagA</description>
+        <variable>
+            <name-given>tagAvar1</name-given>
+            <variable-class>java.lang.String</variable-class>
+            <declare>tagAvar1Declare</declare>
+            <scope>AT_BEGIN</scope>
+            <description>Description for tagA Var1</description>
+        </variable>
+        <variable>
+            <name-from-attribute>tagAvar2</name-from-attribute>
+            <variable-class>java.lang.Integer</variable-class>
+            <declare>tagAvar2Declare</declare>
+            <scope>AT_END</scope>
+            <description>Description for tagA Var2</description>
+        </variable>
+        <attribute id="attA1">
+            <name>attA1</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+            <description>Description for tagA Attribute 1</description>
+        </attribute>
+        <attribute id="attA2">
+            <name>attA2</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <type>java.lang.Character</type>
+            <description>Description for tagA Attribute 2</description>
+        </attribute>
+        <example>Example for Tag A</example>
+    </tag>
+  
+    <tag id="tagB">
+        <name>tagB</name>
+        <tag-class>io.github.weblegacy.tlddoc.test.tagB</tag-class>
+        <tei-class>io.github.weblegacy.tlddoc.test.tagBtei</tei-class>
+        <body-content>JSP</body-content>
+        <display-name>Tag B</display-name>
+        <small-icon>jsp12_test_tagB_small.jpg</small-icon>
+        <large-icon>jsp12_test_tagB_large.jpg</large-icon>
+        <description>Description for tagB</description>
+        <variable>
+            <name-given>tagBvar1</name-given>
+            <variable-class>java.lang.Character</variable-class>
+            <declare>tagBvar1Declare</declare>
+            <scope>NESTED</scope>
+            <description>Description for tagB Var1</description>
+        </variable>
+        <variable>
+            <name-from-attribute>tagBvar2</name-from-attribute>
+            <variable-class>java.lang.Double</variable-class>
+            <declare>tagBvar2Declare</declare>
+            <scope>AT_END</scope>
+            <description>Description for tagB Var2</description>
+        </variable>
+        <attribute id="attB1">
+            <name>attB1</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <type>java.lang.Short</type>
+            <description>Description for tagB Attribute 1</description>
+        </attribute>
+        <attribute id="attB2">
+            <name>attB2</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Boolean</type>
+            <description>Description for tagB Attribute 2</description>
+        </attribute>
+        <example>Example for Tag B</example>
+    </tag>
+
+</taglib>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib 
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+  "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib id="jsp11_test" xmlns="http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+    <tlibversion>1.0</tlibversion>
+    <jspversion>1.1</jspversion>
+    <shortname>jsp11_test</shortname>
+    <uri>https://io.github.weblegacy/tlddoc/test/jsp11</uri>
+    <info>Test TagLib Version for JSP 1.1</info>
+
+    <tag id="tagA">
+        <name>tagA</name>
+        <tagclass>io.github.weblegacy.tlddoc.test.tagA</tagclass>
+        <teiclass>io.github.weblegacy.tlddoc.test.tagAtei</teiclass>
+        <bodycontent>tagdependent</bodycontent>
+        <info>Information for tagA</info>
+        <attribute id="attA1">
+            <name>attA1</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute id="attA2">
+            <name>attA2</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+    </tag>
+  
+    <tag id="tagB">
+        <name>tagB</name>
+        <tagclass>io.github.weblegacy.tlddoc.test.tagB</tagclass>
+        <teiclass>io.github.weblegacy.tlddoc.test.tagBtei</teiclass>
+        <bodycontent>JSP</bodycontent>
+        <info>Information for tagB</info>
+        <attribute id="attB1">
+            <name>attB1</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+        <attribute id="attB2">
+            <name>attB2</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>

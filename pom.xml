@@ -127,6 +127,8 @@
         <javaVersion>11</javaVersion>
         <mainClass>io.github.weblegacy.tlddoc.main.TldDoc</mainClass>
         <fluidoVersion>2.0.0-M11</fluidoVersion>
+        <surefireVersion>3.5.2</surefireVersion>
+        <junitVersion>5.11.3</junitVersion>
     </properties>
 
     <profiles>
@@ -351,10 +353,11 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.1</version>
-                    <configuration>
-                        <skipTests>true</skipTests>
-                    </configuration>
+                    <version>${surefireVersion}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-report-plugin</artifactId>
+                    <version>${surefireVersion}</version>
                 </plugin>
                 <plugin>
                     <groupId>com.github.spotbugs</groupId>
@@ -568,7 +571,20 @@
             </plugin>
         </plugins>
     </build>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junitVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junitVersion}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
@@ -635,6 +651,9 @@
                         <excludeRoot>target/generated-sources</excludeRoot>
                     </excludeRoots>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-report-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>com.github.spotbugs</groupId>

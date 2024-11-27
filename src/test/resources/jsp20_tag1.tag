@@ -1,0 +1,5 @@
+<%@ tag display-name="jsp20_tag1_1" body-content="scriptless" dynamic-attributes="dyn" small-icon="jsp20_tag1_1_small_icon" large-icon="jsp20_tag1_1_large_icon" description="Description of jsp20_tag1_1" example="Example of jsp20_tag1_1" language="en" import="io.github.weblegacy.*" pageEncoding="utf-8" isELIgnored="false" %>
+<%@ attribute name="jsp20_tag1_att1" required="true" fragment="true" rtexprvalue="false" type="javax.servlet.jsp.tagext.JspFragment" description="Description of jsp20_tag1_att1" %>
+<%@ attribute name="jsp20_tag1_att2" required="false" fragment="false" rtexprvalue="true" type="java.lang.Double" description="Description of jsp20_tag1_att2" %>
+<%@ variable name-given="jsp20_tag1_var1" variable-class="java.lang.Short" scope="AT_END" declare="true" description="Description of jsp20_tag1_var1" %>
+<%@ variable name-from-attribute="jsp20_tag1_var2" alias="jsp20_tag1_var2_alias" variable-class="java.lang.Integer" scope="AT_BEGIN" declare="false" description="Description of jsp20_tag1_var2" %>

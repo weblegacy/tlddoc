@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Add tests for TLD 1.1, 1.2 and 2.0
 * Export the tag file parser that is used in maven-plugin
 * Add verbose-mode
 * Correction at upgrade TLD

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xml="http://www.w3.org/XML/1998/namespace"
+        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <description xml:lang="en" id="desc_en">EN-Test TagLib Version for JSP 2.0</description>
+    <description xml:lang="de" id="desc_de">DE-Test TagLib Version for JSP 2.0</description>
+    <display-name xml:lang="en" id="disp_en">EN-JSP 2.0 Test</display-name>
+    <display-name xml:lang="de" id="disp_de">DE-JSP 2.0 Test</display-name>
+    <icon xml:lang="en" id="icon_en">
+        <small-icon id="icon_en_small">en_jsp20_test_small.jpg</small-icon>
+        <large-icon id="icon_en_large">en_jsp20_test_large.jpg</large-icon>
+    </icon>
+    <icon xml:lang="de" id="icon_de">
+        <small-icon id="icon_de_small">de_jsp20_test_small.jpg</small-icon>
+        <large-icon id="icon_de_large">de_jsp20_test_large.jpg</large-icon>
+    </icon>
+    <tlib-version>1.0</tlib-version>
+    <short-name id="short_name">jsp20_test</short-name>
+    <uri id="uri">https://io.github.weblegacy/tlddoc/test/jsp20</uri>
+    
+    <validator id="val">
+        <description xml:lang="en" id="val_desc_en">EN-JSP 2.0 Test - Validator</description>
+        <description xml:lang="de" id="val_desc_de">DE-JSP 2.0 Test - Validator</description>
+        <validator-class id="val_class">io.github.weblegacy.tlddoc.test.validator</validator-class>
+        <init-param id="val_param1">
+            <description xml:lang="en" id="val_param1_desc_en">EN-Init-Parameter 1</description>
+            <description xml:lang="de" id="val_param1_desc_de">DE-Init-Parameter 1</description>
+            <param-name id="val_param1_name">initName1</param-name>
+            <param-value id="val_param1_value">initValue1</param-value>
+        </init-param>
+        <init-param id="val_param2">
+            <description xml:lang="en" id="val_param2_desc_en">EN-Init-Parameter 2</description>
+            <description xml:lang="de" id="val_param2_desc_de">DE-Init-Parameter 2</description>
+            <param-name id="val_param2_name">initName2</param-name>
+            <param-value id="val_param2_value">initValue2</param-value>
+        </init-param>
+    </validator>
+    
+    <listener id="listener1">
+        <description xml:lang="en" id="listener1_desc_en">EN-Listener 1 Description</description>
+        <description xml:lang="de" id="listener1_desc_de">DE-Listener 1 Description</description>
+        <display-name xml:lang="en" id="listener1_disp_en">EN-Listener1</display-name>
+        <display-name xml:lang="de" id="listener1_disp_de">DE-Listener1</display-name>
+        <icon xml:lang="en" id="listener1_icon_en">
+            <small-icon id="listener1_icon_en_small">en_listener1_small.jpg</small-icon>
+            <large-icon id="listener1_icon_en_large">en_listener1_large.jpg</large-icon>
+        </icon>
+        <icon xml:lang="de" id="listener1_icon_de">
+            <small-icon id="listener1_icon_de_small">de_listener1_small.jpg</small-icon>
+            <large-icon id="listener1_icon_de_large">de_listener1_large.jpg</large-icon>
+        </icon>
+        <listener-class>io.github.weblegacy.tlddoc.test.listenerA</listener-class>
+    </listener>
+    
+    <listener id="listener2">
+        <description xml:lang="en" id="listener2_desc_en">EN-Listener 2 Description</description>
+        <description xml:lang="de" id="listener2_desc_de">DE-Listener 2 Description</description>
+        <display-name xml:lang="en" id="listener2_disp_en">EN-Listener2</display-name>
+        <display-name xml:lang="de" id="listener2_disp_de">DE-Listener2</display-name>
+        <icon xml:lang="en" id="listener2_icon_en">
+            <small-icon id="listener2_icon_en_small">en_listener2_small.jpg</small-icon>
+            <large-icon id="listener2_icon_en_large">en_listener2_large.jpg</large-icon>
+        </icon>
+        <icon xml:lang="de" id="listener2_icon_de">
+            <small-icon id="listener2_icon_de_small">de_listener2_small.jpg</small-icon>
+            <large-icon id="listener2_icon_de_large">de_listener2_large.jpg</large-icon>
+        </icon>
+        <listener-class>io.github.weblegacy.tlddoc.test.listenerB</listener-class>
+    </listener>
+
+    <tag id="tagA">
+        <description xml:lang="en" id="tagA_desc_en">EN-Description for tagA</description>
+        <description xml:lang="de" id="tagA_desc_de">DE-Description for tagA</description>
+        <display-name xml:lang="en" id="tagA_disp_en">EN-Tag A</display-name>
+        <display-name xml:lang="de" id="tagA_disp_de">DE-Tag A</display-name>
+        <icon xml:lang="en" id="tagA_icon_en">
+            <small-icon id="tagA_icon_en_small">en_taga_small.jpg</small-icon>
+            <large-icon id="tagA_icon_en_large">en_taga_large.jpg</large-icon>
+        </icon>
+        <icon xml:lang="de" id="tagA_icon_de">
+            <small-icon id="tagA_icon_de_small">de_taga_small.jpg</small-icon>
+            <large-icon id="tagA_icon_de_large">de_taga_large.jpg</large-icon>
+        </icon>
+        <name id="tagA_name">tagA</name>
+        <tag-class id="tagA_tagclass">io.github.weblegacy.tlddoc.test.tagA</tag-class>
+        <tei-class id="tagA_teiclass">io.github.weblegacy.tlddoc.test.tagAtei</tei-class>
+        <body-content id="tagA_body">tagdependent</body-content>
+        <variable id="tagA_var1">
+            <description xml:lang="en" id="tagA_var1_desc_en">EN-Description for tagA Var1</description>
+            <description xml:lang="de" id="tagA_var1_desc_de">DE-Description for tagA Var1</description>
+            <name-given id="tagA_var1_name">tagAvar1</name-given>
+            <variable-class id="tagA_var1_var">java.lang.String</variable-class>
+            <declare id="tagA_var1_declare">true</declare>
+            <scope id="tagA_var1_scope">AT_BEGIN</scope>
+        </variable>
+        <variable id="tagA_var2">
+            <description xml:lang="en" id="tagA_var2_desc_en">EN-Description for tagA Var2</description>
+            <description xml:lang="de" id="tagA_var2_desc_de">DE-Description for tagA Var2</description>
+            <name-from-attribute id="tagA_var2_name">tagAvar2</name-from-attribute>
+            <variable-class id="tagA_var2_var">java.lang.Integer</variable-class>
+            <declare id="tagA_var2_declare">false</declare>
+            <scope id="tagA_var2_scope">AT_END</scope>
+        </variable>
+        <attribute id="attA1">
+            <description xml:lang="en" id="attA1_desc_en">EN-Description for tagA Attribute 1</description>
+            <description xml:lang="de" id="attA1_desc_de">DE-Description for tagA Attribute 1</description>
+            <name id="attA1_name">attA1</name>
+            <required id="attA1_required">false</required>
+            <rtexprvalue id="attA1_rtexprvalue">true</rtexprvalue>
+            <type id="attA1_type">java.lang.String</type>
+        </attribute>
+        <attribute id="attA2">
+            <description xml:lang="en" id="attA2_desc_en">EN-Description for tagA Attribute 2</description>
+            <description xml:lang="de" id="attA2_desc_de">DE-Description for tagA Attribute 2</description>
+            <name id="attA2_name">attA2</name>
+            <required id="attA2_required">true</required>
+            <rtexprvalue id="attA2_rtexprvalue">false</rtexprvalue>
+            <type id="attA2_type">java.lang.Character</type>
+        </attribute>
+        <attribute id="attA3">
+            <description xml:lang="en" id="attA3_desc_en">EN-Description for tagA Attribute 3</description>
+            <description xml:lang="de" id="attA3_desc_de">DE-Description for tagA Attribute 3</description>
+            <name id="attA3_name">attA3</name>
+            <required id="attA3_required">true</required>
+            <fragment id="attA3_fragment">false</fragment>
+        </attribute>
+        <dynamic-attributes id="tagA_dyn">true</dynamic-attributes>
+        <example id="tagA_example">Example for Tag A</example>
+        <tag-extension namespace="http://www.w3.org/2000/svg" id="tagA_ext">
+            <extension-element xsi:type="xsl:template" id="tagA_ext_elem">
+                <xsl:template/>
+            </extension-element>
+        </tag-extension>
+    </tag>
+  
+    <tag id="tagB">
+        <description xml:lang="en" id="tagB_desc_en">EN-Description for tagB</description>
+        <description xml:lang="de" id="tagB_desc_de">DE-Description for tagB</description>
+        <display-name xml:lang="en" id="tagB_disp_en">EN-Tag B</display-name>
+        <display-name xml:lang="de" id="tagB_disp_de">DE-Tag B</display-name>
+        <icon xml:lang="en" id="tagB_icon_en">
+            <small-icon id="tagB_icon_en_small">en_tagb_small.jpg</small-icon>
+            <large-icon id="tagB_icon_en_large">en_tagab_large.jpg</large-icon>
+        </icon>
+        <icon xml:lang="de" id="tagB_icon_de">
+            <small-icon id="tagB_icon_de_small">de_tagb_small.jpg</small-icon>
+            <large-icon id="tagB_icon_de_large">de_tagb_large.jpg</large-icon>
+        </icon>
+        <name id="tagB_name">tagB</name>
+        <tag-class id="tagB_tagclass">io.github.weblegacy.tlddoc.test.tagB</tag-class>
+        <tei-class id="tagB_teiclass">io.github.weblegacy.tlddoc.test.tagBtei</tei-class>
+        <body-content id="tagB_body">JSP</body-content>
+        <variable id="tagB_var1">
+            <description xml:lang="en" id="tagB_var1_desc_en">EN-Description for tagB Var1</description>
+            <description xml:lang="de" id="tagB_var1_desc_de">DE-Description for tagB Var1</description>
+            <name-given id="tagB_var1_name">tagBvar1</name-given>
+            <variable-class id="tagB_var1_var">java.lang.Character</variable-class>
+            <declare id="tagB_var1_declare">false</declare>
+            <scope id="tagB_var1_scope">NESTED</scope>
+        </variable>
+        <variable id="tabB_var2">
+            <description xml:lang="en" id="tagB_var2_desc_en">EN-Description for tagB Var2</description>
+            <description xml:lang="de" id="tagB_var2_desc_de">DE-Description for tagB Var2</description>
+            <name-from-attribute id="tagB_var2_name">tagBvar2</name-from-attribute>
+            <variable-class id="tagB_var2_var">java.lang.Double</variable-class>
+            <declare id="tagB_var2_declare">true</declare>
+            <scope id="tagB_var2_scope">AT_END</scope>
+        </variable>
+        <attribute id="attB1">
+            <description xml:lang="en" id="attB1_desc_en">EN-Description for tagB Attribute 1</description>
+            <description xml:lang="de" id="attB1_desc_de">DE-Description for tagB Attribute 1</description>
+            <name id="attB1_name">attB1</name>
+            <required id="attB1_required">false</required>
+            <rtexprvalue id="attB1_rtexprvalue">false</rtexprvalue>
+            <type id="attB1_type">java.lang.Short</type>
+        </attribute>
+        <attribute id="attB2">
+            <description xml:lang="en" id="attB2_desc_en">EN-Description for tagB Attribute 2</description>
+            <description xml:lang="de" id="attB2_desc_de">DE-Description for tagB Attribute 2</description>
+            <name id="attB2_name">attB2</name>
+            <required id="attB2_required">true</required>
+            <rtexprvalue id="attB2_rtexprvalue">true</rtexprvalue>
+            <type id="attB2_type">java.lang.Boolean</type>
+        </attribute>
+        <attribute id="attB3">
+            <description xml:lang="en" id="attB3_desc_en">EN-Description for tagB Attribute 3</description>
+            <description xml:lang="de" id="attB3_desc_de">DE-Description for tagB Attribute 3</description>
+            <name id="attB3_name">attB3</name>
+            <required id="attB3_required">true</required>
+            <fragment id="attB3_fragment">true</fragment>
+        </attribute>
+        <dynamic-attributes id="tagB_dyn">false</dynamic-attributes>
+        <example id="tagB_example">Example for Tag B</example>
+    </tag>
+    
+    <tag-file id="tag_file1">
+        <description xml:lang="en" id="tag_file1_desc_en">EN-Description for tag file 1</description>
+        <description xml:lang="de" id="tag_file1_desc_de">DE-Description for tag file 1</description>
+        <display-name xml:lang="en" id="tag_file1_disp_en">EN-Tag File 1</display-name>
+        <display-name xml:lang="de" id="tag_file1_disp_de">DE-Tag File 1</display-name>
+        <icon xml:lang="en" id="tag_file1_icon_en">
+            <small-icon id="tag_file1_icon_en_small">en_tag_file1_small.jpg</small-icon>
+            <large-icon id="tag_file1_icon_en_large">en_tag_file1_large.jpg</large-icon>
+        </icon>
+        <icon xml:lang="de" id="tag_file1_icon_de">
+            <small-icon id="tag_file1_icon_de_small">de_tag_file1_small.jpg</small-icon>
+            <large-icon id="tag_file1_icon_de_large">de_tag_file1_large.jpg</large-icon>
+        </icon>
+        <name id="tag_file1_name">tag_file1</name>
+        <path id="tag_file1_path">/jsp20_tag1.tag</path>
+        <example id="tag_file1_example">Example for Tag File 1</example>
+        <tag-extension namespace="http://www.w3.org/2000/svg" id="tag_file1_ext">
+            <extension-element xsi:type="xsl:template" id="tag_file1_ext_elem">
+                <xsl:template/>
+            </extension-element>
+        </tag-extension>
+    </tag-file>
+    
+    <tag-file id="tag_file2">
+        <description xml:lang="en" id="tag_file2_desc_en">EN-Description for tag file 2</description>
+        <description xml:lang="de" id="tag_file2_desc_de">DE-Description for tag file 2</description>
+        <display-name xml:lang="en" id="tag_file2_disp_en">EN-Tag File 2</display-name>
+        <display-name xml:lang="de" id="tag_file2_disp_de">DE-Tag File 2</display-name>
+        <icon xml:lang="en" id="tag_file2_icon_en">
+            <small-icon id="tag_file2_icon_en_small">en_tag_file2_small.jpg</small-icon>
+            <large-icon id="tag_file2_icon_en_large">en_tag_file2_large.jpg</large-icon>
+        </icon>
+        <icon xml:lang="de" id="tag_file2_icon_de">
+            <small-icon id="tag_file2_icon_de_small">de_tag_file2_small.jpg</small-icon>
+            <large-icon id="tag_file2_icon_de_large">de_tag_file2_large.jpg</large-icon>
+        </icon>
+        <name id="tag_file2_name">tag_file2</name>
+        <path id="tag_file2_path">/jsp20_tag2.tag</path>
+        <example id="tag_file2_example">Example for Tag File 2</example>
+    </tag-file>
+    
+    <function id="tag_func1">
+        <description xml:lang="en" id="tag_func1_desc_en">EN-Description for tag function 1</description>
+        <description xml:lang="de" id="tag_func1_desc_de">DE-Description for tag function 1</description>
+        <display-name xml:lang="en" id="tag_func1_disp_en">EN-Tag Function 1</display-name>
+        <display-name xml:lang="de" id="tag_func1_disp_de">DE-Tag Function 1</display-name>
+        <icon xml:lang="en" id="tag_func1_icon_en">
+            <small-icon id="tag_func1_icon_en_small">en_tag_func1_small.jpg</small-icon>
+            <large-icon id="tag_func1_icon_en_large">en_tag_func1_large.jpg</large-icon>
+        </icon>
+        <icon xml:lang="de" id="tag_func1_icon_de">
+            <small-icon id="tag_func1_icon_de_small">de_tag_func1_small.jpg</small-icon>
+            <large-icon id="tag_func1_icon_de_large">de_tag_func1_large.jpg</large-icon>
+        </icon>
+        <name id="tag_func1_name">tag_func1</name>
+        <function-class id="tag_func1_class">class_tag_func1</function-class>
+        <function-signature id="tag_func1_sign">java.long.Short tag_function(java.lang.String, java.lang.Short, int)</function-signature>
+        <example id="tag_func1_example">Example for Tag Function 1</example>
+        <function-extension namespace="http://www.w3.org/2000/svg" id="tag_func1_ext">
+            <extension-element xsi:type="xsl:template" id="tag_func1_ext_elem">
+                <xsl:template/>
+            </extension-element>
+        </function-extension>
+    </function>
+
+    <taglib-extension namespace="http://acme.com/">
+        <extension-element xsi:type="xsl:stylesheet">
+            <xsl:stylesheet version="1.0"/>
+        </extension-element>
+    </taglib-extension>
+
+</taglib>
