@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Correct `stylesheet.css`
 * Correct TLD 1.2 to 2.0, 2.0 to 2.1, 2.1 to 3.0, 3.0 to 3.1, 3.1 to 4.0 and 4.0 to 4.0 transformations
 * Correct TLD 1.1 to TLD 1.2 transformation
 * Bump `license-maven-plugin` from 4.3 to 4.6
