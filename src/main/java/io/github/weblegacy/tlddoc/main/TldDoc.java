@@ -67,6 +67,7 @@ public class TldDoc {
             + "                         (defaults to new dir called 'out')\n"
             + "  -doctitle <html-code>  Include title for the TLD index (first) page\n"
             + "  -windowtitle <text>    Browser window title\n"
+            + "  -v                     Verbose Mode\n"
             + "  -q                     Quiet Mode\n"
             + "\n"
             + "taglib{1,2,3,...}:\n"
@@ -130,6 +131,9 @@ public class TldDoc {
                         break;
                     case "-q":
                         generator.setQuiet(true);
+                        break;
+                    case "-v":
+                        generator.setVerbose(true);
                         break;
                     case "-doctitle":
                         arg = iter.next();

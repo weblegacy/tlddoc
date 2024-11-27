@@ -45,6 +45,7 @@ import io.github.weblegacy.tlddoc.tagfileparser.javacc.TagFile;
 import java.io.CharArrayReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -114,6 +115,11 @@ public class TldDocGenerator {
      * {@code True} if no {@code stdout} is to be produced during generation.
      */
     private boolean quiet;
+
+    /**
+     * {@code True} if all tld-conversions output is to be produced during generation.
+     */
+    private boolean verbose;
 
     /**
      * The summary TLD document, used as input into XSLT.
@@ -390,12 +396,32 @@ public class TldDocGenerator {
     }
 
     /**
-     * Returns {@code true} if the generator is in quiet mode or false if not.
+     * Returns {@code true} if the generator is in quiet mode or {@code false} if not.
      *
      * @return {@code True} if no output is to be produced, {@code false} otherwise.
      */
     public boolean isQuiet() {
         return quiet;
+    }
+
+    /**
+     * Sets verbose mode (produce {@code stdout} with all tld-conversions during generation).
+     *
+     * @param verbose {@code true} if all tld-conversions output is to be produced, {@code false}
+     *                otherwise.
+     */
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+    }
+
+    /**
+     * Returns {@code true} if the generator is in verbose mode or {@code false} if not.
+     *
+     * @return {@code True} if all tld-conversions output is to be produced, {@code false}
+     *         otherwise.
+     */
+    public boolean isVerbose() {
+        return verbose;
     }
 
     /**
@@ -682,6 +708,16 @@ public class TldDocGenerator {
                 new StreamSource(xsl));
         Document result = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         transformer.transform(new DOMSource(doc), new DOMResult(result));
+
+        if (isVerbose()) {
+            StringWriter sw = new StringWriter();
+            sw
+                    .append(stylesheet).append(":\n")
+                    .append("-".repeat(stylesheet.length() + 1)).append('\n');
+            transformer.transform(new DOMSource(doc), new StreamResult(sw));
+            println(sw.toString());
+        }
+
         return result;
     }
 

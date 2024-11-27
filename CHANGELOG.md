@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Add verbose-mode
 * Correction at upgrade TLD
 * Format `resources`
 * Correct `stylesheet.css`
