@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-antrun-plugin` from 3.1.0 to 3.2.0
 * Update year 2025 in copyright
 * Add tests for TLD 1.1, 1.2 and 2.0
 * Export the tag file parser that is used in maven-plugin
