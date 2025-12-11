@@ -126,7 +126,7 @@
         <mavenVersion>3.6.3</mavenVersion>
         <javaVersion>11</javaVersion>
         <mainClass>io.github.weblegacy.tlddoc.main.TldDoc</mainClass>
-        <fluidoVersion>2.0.0-M11</fluidoVersion>
+        <fluidoVersion>2.1.0</fluidoVersion>
         <surefireVersion>3.5.4</surefireVersion>
         <junitVersion>5.11.3</junitVersion>
     </properties>

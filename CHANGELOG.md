@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-fluido-skin` from 2.0.0-M11 to 2.1.0
 * Bump `license-maven-plugin` from 4.6 to 5.0.0
 * Bump `versions-maven-plugin` from 2.17.1 to 2.20.1
 * Bump `javacc-maven-plugin` from 3.1.0 to 3.1.1
