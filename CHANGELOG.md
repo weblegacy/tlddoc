@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Downgrade `maven-site-plugin` from 4.0.0-M16 to 3.21.0
 * Bump `maven-resources-plugin` from 3.3.1 to 3.4.0
 * Bump `maven-release-plugin` from 3.1.1 to 3.3.0
 * Bump `maven-project-info-reports-plugin` from 3.7.0 to 3.9.0
