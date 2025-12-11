@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `versions-maven-plugin` from 2.17.1 to 2.20.1
 * Bump `javacc-maven-plugin` from 3.1.0 to 3.1.1
 * Bump `build-helper-maven-plugin` from 3.6.0 to 3.6.1
 * Bump `spotbugs-maven-plugin` from 4.8.6.4 to 4.9.8.2
