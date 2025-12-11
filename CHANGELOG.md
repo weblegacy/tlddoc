@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `checkstyle` from 10.18.2 to 12.2.0
 * Bump `maven-checkstyle-plugin` from 3.5.0 to 3.6.0
 * Bump `maven-assembly-plugin` from 3.7.1 to 3.8.0
 * Bump `maven-antrun-plugin` from 3.1.0 to 3.2.0
