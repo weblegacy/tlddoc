@@ -41,6 +41,7 @@
     </properties>
     <body>
         <release version="1.5" date="YYYY-MM-DD" description="Jakarta EE 9+, JDK11, JPMS">
+            <action type="update" dev="ste-gr">Bump &quot;maven-assembly-plugin&quot; from 3.7.1 to 3.8.0</action>
             <action type="update" dev="ste-gr">Bump &quot;maven-antrun-plugin&quot; from 3.1.0 to 3.2.0</action>
             <action type="update" dev="ste-gr">Update year 2025 in copyright</action>
             <action type="add" dev="ste-gr">Add tests for TLD 1.1, 1.2 and 2.0</action>
