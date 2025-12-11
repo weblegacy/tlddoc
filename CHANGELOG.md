@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-gpg-plugin` from 3.2.7 to 3.2.8
 * Bump `maven-enforcer-plugin` from 3.5.0 to 3.6.2
 * Bump `maven-deploy-plugin` from 3.1.3 to 3.1.4
 * Bump `maven-dependency-plugin` from 3.8.0 to 3.9.0
