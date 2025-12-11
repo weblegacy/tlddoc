@@ -3,7 +3,7 @@
 <!--
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
-  - Copyright (c) 2022-2024, Web-Legacy
+  - Copyright (c) 2022-2025, Web-Legacy
   - All rights reserved.
   -
   - Redistribution and use in source and binary forms, with or without
@@ -41,6 +41,7 @@
     </properties>
     <body>
         <release version="1.5" date="YYYY-MM-DD" description="Jakarta EE 9+, JDK11, JPMS">
+            <action type="update" dev="ste-gr">Update year 2025 in copyright</action>
             <action type="add" dev="ste-gr">Add tests for TLD 1.1, 1.2 and 2.0</action>
             <action type="fix" dev="ste-gr">Export the tag file parser that is used in maven-plugin</action>
             <action type="add" dev="ste-gr">Add verbose-mode</action>
