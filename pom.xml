@@ -128,7 +128,7 @@
         <mainClass>io.github.weblegacy.tlddoc.main.TldDoc</mainClass>
         <fluidoVersion>2.1.0</fluidoVersion>
         <surefireVersion>3.5.4</surefireVersion>
-        <junitVersion>5.11.3</junitVersion>
+        <junitVersion>5.14.1</junitVersion>
     </properties>
 
     <profiles>
