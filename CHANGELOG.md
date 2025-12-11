@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Add `jacoco-maven-plugin`
 * Optimize reporting-section
 * Bump `junit-jupiter*` from 5.11.3 to 5.14.1
 * Bump `maven-fluido-skin` from 2.0.0-M11 to 2.1.0
