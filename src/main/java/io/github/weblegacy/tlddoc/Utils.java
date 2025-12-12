@@ -264,8 +264,8 @@ public final class Utils {
 
     /**
      * Start from the dir and backtrack, using the path as a relative path.
-     * <p>
-     * For example:</p>
+     *
+     * <p>For example:</p>
      * <ul>
      * <li>dir: /home/mroth/test/sample/WEB-INF/tags/mytags</li>
      * <li>path: /WEB-INF/tags/mytags/tag1.tag</li>

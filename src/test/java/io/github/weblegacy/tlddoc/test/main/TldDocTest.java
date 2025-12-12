@@ -56,11 +56,13 @@ class TldDocTest {
     @DisplayName("Test TldDoc generation for ...")
     @ParameterizedTest(name = "JSP-Version {0}.")
     @ValueSource(strings = {"1.1", "1.2", "2.0"})
-    void TldDocJsp(String jspVersion) {
+    void tldDocJsp(String jspVersion) {
         final String pathVersion = jspVersion.replace(".", "");
-        TldDoc.main(new String[]{"-d", "target/o" + pathVersion, "target/test-classes/jsp" + pathVersion + ".tld"});
+        TldDoc.main(new String[]{"-d", "target/o" + pathVersion, "target/test-classes/jsp"
+                + pathVersion + ".tld"});
 
         Path index = Paths.get("target", "o" + pathVersion, "index.html").toAbsolutePath();
-        assertTrue(Files.isReadable(index), () -> "TldDoc for JSP-Version " + jspVersion + " not generated: " + index);
+        assertTrue(Files.isReadable(index), () -> "TldDoc for JSP-Version " + jspVersion
+                + " not generated: " + index);
     }
 }

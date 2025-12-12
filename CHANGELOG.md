@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Resolve checkstyle-warnings
 * New version of `checksytle.xml`
 * Bump `maven-changes-plugin` from 2.12.1 to 3.0.0-M3 with adaptations
 * Add `jacoco-maven-plugin`
