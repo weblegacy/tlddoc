@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `maven-changes-plugin` from 2.12.1 to 3.0.0-M3 with adaptations
 * Add `jacoco-maven-plugin`
 * Optimize reporting-section
 * Bump `junit-jupiter*` from 5.11.3 to 5.14.1
