@@ -3,7 +3,7 @@
 <!--
   - <license>
   - Copyright (c) 2003-2004, Sun Microsystems, Inc.
-  - Copyright (c) 2022-2025, Web-Legacy
+  - Copyright (c) 2022-2026, Web-Legacy
   - All rights reserved.
   -
   - Redistribution and use in source and binary forms, with or without
@@ -41,6 +41,7 @@
     </properties>
     <body>
         <release version="1.5" date="YYYY-MM-DD" description="Jakarta EE 9+, JDK11, JPMS">
+            <action type="update" dev="ste-gr">Update Copyright to 2026</action>
             <action type="add" dev="ste-gr">Add &quot;findsecbugs-plugin&quot;</action>
             <action type="fix" dev="ste-gr">Resolve checkstyle-warnings</action>
             <action type="update" dev="ste-gr">New version of &quot;checksytle.xml&quot;</action>

@@ -1,7 +1,7 @@
 /*
  * <license>
  * Copyright (c) 2003-2004, Sun Microsystems, Inc.
- * Copyright (c) 2022-2025, Web-Legacy
+ * Copyright (c) 2022-2026, Web-Legacy
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

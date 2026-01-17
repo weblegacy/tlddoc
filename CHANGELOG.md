@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Update Copyright to 2026
 * Add `findsecbugs-plugin`
 * Resolve checkstyle-warnings
 * New version of `checksytle.xml`
