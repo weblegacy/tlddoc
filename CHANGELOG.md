@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Move plugin-configs into pluginManagement
 * Adapting configurations from `maven-compiler-plugin`
 * Adapting configurations from `license-maven-plugin`
 * Bump `maven-release-plugin` from 3.3.0 to 3.3.1

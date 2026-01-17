@@ -325,6 +325,12 @@
                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>3.3.1</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <releaseProfiles>release</releaseProfiles>
+                        <goals>deploy</goals>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -337,6 +343,11 @@
                 <plugin>
                     <artifactId>maven-scm-publish-plugin</artifactId>
                     <version>3.3.0</version>
+                    <configuration>
+                        <scmBranch>gh-pages</scmBranch>
+                        <tryUpdate>true</tryUpdate>
+                        <content>${project.reporting.outputDirectory}</content>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
@@ -408,6 +419,30 @@
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <version>5.0.0</version>
+                    <configuration>
+                        <licenseSets>
+                            <licenseSet>
+                                <header>src/license/BSD-3-Sun.txt</header>
+                                <includes>
+                                    <include>src/main/**</include>
+                                    <inlcude>pom.xml</inlcude>
+                                </includes>
+                                <excludes>
+                                    <exclude>src/assemblies/**</exclude>
+                                </excludes>
+                            </licenseSet>
+                        </licenseSets>
+                        <mapping>
+                            <css>SLASHSTAR_STYLE</css>
+                            <jjt>SLASHSTAR_STYLE</jjt>
+                        </mapping>
+                        <defaultHeaderDefinitions>
+                            <defaultHeaderDefinition>src/license/headerStyles.xml</defaultHeaderDefinition>
+                        </defaultHeaderDefinitions>
+                        <properties>
+                            <currentYear>${currentYear}</currentYear>
+                        </properties>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -458,11 +493,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-scm-publish-plugin</artifactId>
-                <configuration>
-                    <scmBranch>gh-pages</scmBranch>
-                    <tryUpdate>true</tryUpdate>
-                    <content>${project.reporting.outputDirectory}</content>
-                </configuration>
                 <executions>
                     <execution>
                         <id>scm-publish</id>
@@ -536,30 +566,6 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <configuration>
-                    <licenseSets>
-                        <licenseSet>
-                            <header>src/license/BSD-3-Sun.txt</header>
-                            <includes>
-                                <include>src/main/**</include>
-                                <inlcude>pom.xml</inlcude>
-                            </includes>
-                            <excludes>
-                                <exclude>src/assemblies/**</exclude>
-                            </excludes>
-                        </licenseSet>
-                    </licenseSets>
-                    <mapping>
-                        <css>SLASHSTAR_STYLE</css>
-                        <jjt>SLASHSTAR_STYLE</jjt>
-                    </mapping>
-                    <defaultHeaderDefinitions>
-                        <defaultHeaderDefinition>src/license/headerStyles.xml</defaultHeaderDefinition>
-                    </defaultHeaderDefinitions>
-                    <properties>
-                        <currentYear>${currentYear}</currentYear>
-                    </properties>
-                </configuration>
                 <executions>
                     <execution>
                         <id>update-license</id>
@@ -569,15 +575,6 @@
                         <phase>process-sources</phase>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <useReleaseProfile>false</useReleaseProfile>
-                    <releaseProfiles>release</releaseProfiles>
-                    <goals>deploy</goals>
-                </configuration>
             </plugin>
         </plugins>
     </build>
