@@ -1,7 +1,8 @@
 # Change-Log
 
-## 1.5 / YYYY-MM-DD
+## 2.0.0 / YYYY-MM-DD
 
+* Set Version to 2.0.0-SNAPSHOT
 * Move plugin-configs into pluginManagement
 * Adapting configurations from `maven-compiler-plugin`
 * Adapting configurations from `license-maven-plugin`
