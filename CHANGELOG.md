@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `junit-jupiter*` from 5.14.1 to 6.0.2
 * Update Copyright to 2026
 * Add `findsecbugs-plugin`
 * Resolve checkstyle-warnings
