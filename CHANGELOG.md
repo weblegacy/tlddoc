@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Bump `checkstyle` from 12.2.0 to 13.0.0 and update `checkstyle.xml`
 * Bump `junit-jupiter*` from 5.14.1 to 6.0.2
 * Update Copyright to 2026
 * Add `findsecbugs-plugin`
