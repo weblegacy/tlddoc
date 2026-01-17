@@ -2,6 +2,7 @@
 
 ## 1.5 / YYYY-MM-DD
 
+* Adapting configurations from `maven-compiler-plugin`
 * Adapting configurations from `license-maven-plugin`
 * Bump `maven-release-plugin` from 3.3.0 to 3.3.1
 * Bump `checkstyle` from 12.2.0 to 13.0.0 and update `checkstyle.xml`
