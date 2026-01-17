@@ -541,7 +541,11 @@
                             <header>src/license/BSD-3-Sun.txt</header>
                             <includes>
                                 <include>src/main/**</include>
+                                <inlcude>pom.xml</inlcude>
                             </includes>
+                            <excludes>
+                                <exclude>src/assemblies/**</exclude>
+                            </excludes>
                         </licenseSet>
                     </licenseSets>
                     <mapping>
