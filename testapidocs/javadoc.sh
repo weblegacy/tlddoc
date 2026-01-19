@@ -1,1 +1,0 @@
-/usr/lib/jvm/java-25-openjdk/bin/javadoc -J-Duser.language= -J-Duser.country= @options @argfile
