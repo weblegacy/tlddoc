@@ -1,0 +1,35 @@
+--no-fonts
+--class-path
+'/home/stefan/.m2/repository/org/junit/jupiter/junit-jupiter-api/6.0.2/junit-jupiter-api-6.0.2.jar:/home/stefan/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/stefan/.m2/repository/org/junit/platform/junit-platform-commons/6.0.2/junit-platform-commons-6.0.2.jar:/home/stefan/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/stefan/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/stefan/.m2/repository/org/junit/jupiter/junit-jupiter-params/6.0.2/junit-jupiter-params-6.0.2.jar'
+--module-path
+'/home/stefan/eclipse-workspace/tlddoc/target/test-classes:/home/stefan/eclipse-workspace/tlddoc/target/classes'
+--patch-module
+io.github.weblegacy.tlddoc='/home/stefan/eclipse-workspace/tlddoc/src/main/java:/home/stefan/eclipse-workspace/tlddoc/target/generated-sources'
+-encoding
+'UTF-8'
+-protected
+--release
+11
+--module-source-path
+'/home/stefan/eclipse-workspace/tlddoc/target/site/testapidocs/src'
+-author
+-bottom
+'Copyright &#169; 2003&#x2013;2026 <a href="https://github.com/weblegacy">Web-Legacy</a>. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/stefan/eclipse-workspace/tlddoc/target/site/testapidocs'
+-docencoding
+'UTF-8'
+-Xdoclint:all
+-doctitle
+'TldDoc 2.0.0-SNAPSHOT Test API'
+-link
+'../apidocs'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' '/home/stefan/eclipse-workspace/tlddoc/target/javadoc-bundle-options'
+-notimestamp
+-use
+-version
+-windowtitle
+'TldDoc 2.0.0-SNAPSHOT Test API'
