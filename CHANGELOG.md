@@ -2,6 +2,7 @@
 
 ## 2.0.0 / YYYY-MM-DD
 
+* Bump `templating-maven-plugin` from 3.0.0 to 3.1.0
 * Bump `javacc-maven-plugin` from 3.1.1 to 3.2.0
 * Correct scm-url in POM
 * Set Version to 2.0.0-SNAPSHOT

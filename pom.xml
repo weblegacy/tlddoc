@@ -402,13 +402,13 @@
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>versions-maven-plugin</artifactId>
-                    <version>2.20.1</version>
+                    <artifactId>templating-maven-plugin</artifactId>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>templating-maven-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.20.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
