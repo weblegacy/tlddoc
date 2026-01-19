@@ -60,9 +60,9 @@ public class TldFileTagLibrary implements TagLibrary {
      *
      * @param tldFile location of the TLD file for this tag library
      */
-<span class="nc" id="L63">    public TldFileTagLibrary(Path tldFile) {</span>
-<span class="nc" id="L64">        this.tldFile = tldFile;</span>
-<span class="nc" id="L65">    }</span>
+<span class="fc" id="L63">    public TldFileTagLibrary(Path tldFile) {</span>
+<span class="fc" id="L64">        this.tldFile = tldFile;</span>
+<span class="fc" id="L65">    }</span>
 
     /**
      * {@inheritDoc}
@@ -79,9 +79,9 @@ public class TldFileTagLibrary implements TagLibrary {
     public Document getTldDocument(DocumentBuilder documentBuilder) throws IOException,
             SAXException, TransformerFactoryConfigurationError, TransformerException {
 
-<span class="nc" id="L82">        try (InputStream in = Files.newInputStream(tldFile)) {</span>
-<span class="nc" id="L83">            InputSource source = new InputSource(in);</span>
-<span class="nc" id="L84">            return documentBuilder.parse(source);</span>
+<span class="fc" id="L82">        try (InputStream in = Files.newInputStream(tldFile)) {</span>
+<span class="fc" id="L83">            InputSource source = new InputSource(in);</span>
+<span class="fc" id="L84">            return documentBuilder.parse(source);</span>
         }
     }
 
@@ -90,7 +90,7 @@ public class TldFileTagLibrary implements TagLibrary {
      */
     @Override
     public InputStream getResource(String path) throws IOException {
-<span class="nc" id="L93">        return Utils.backtrackPath(tldFile.getParent(), path);</span>
+<span class="fc" id="L93">        return Utils.backtrackPath(tldFile.getParent(), path);</span>
     }
 
     /**
@@ -99,6 +99,6 @@ public class TldFileTagLibrary implements TagLibrary {
     @Override
     public void close() throws IOException {
         // Nothing to do
-<span class="nc" id="L102">    }</span>
+<span class="fc" id="L102">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

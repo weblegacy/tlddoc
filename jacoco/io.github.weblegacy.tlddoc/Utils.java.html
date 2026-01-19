@@ -57,7 +57,7 @@ public final class Utils {
     /**
      * The name separator as a string from the default-file-system.
      */
-<span class="nc" id="L60">    public static final String DEFAULT_SEPARATOR = FileSystems.getDefault().getSeparator();</span>
+<span class="fc" id="L60">    public static final String DEFAULT_SEPARATOR = FileSystems.getDefault().getSeparator();</span>
 
     /**
      * Tests if the path is the WEB-INF directory.
@@ -110,8 +110,8 @@ public final class Utils {
      * @return file-name-part in lower-case
      */
     public static String getLowerFileName(final Path file) {
-<span class="nc" id="L113">        final Path fn = file.getFileName();</span>
-<span class="nc bnc" id="L114" title="All 2 branches missed.">        return fn == null ? &quot;&quot; : fn.toString().toLowerCase(Locale.ROOT);</span>
+<span class="fc" id="L113">        final Path fn = file.getFileName();</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        return fn == null ? &quot;&quot; : fn.toString().toLowerCase(Locale.ROOT);</span>
     }
 
     /**
@@ -222,7 +222,7 @@ public final class Utils {
 <span class="nc bnc" id="L222" title="All 2 branches missed.">                } else if (filter.test(file)) {</span>
 <span class="nc" id="L223">                    process.accept(file);</span>
                 }
-            }
+<span class="nc" id="L225">            }</span>
         }
 <span class="nc" id="L227">    }</span>
 
@@ -258,7 +258,7 @@ public final class Utils {
 <span class="nc" id="L258">        try (DirectoryStream&lt;Path&gt; files = Files.newDirectoryStream(path, Files::isDirectory)) {</span>
 <span class="nc bnc" id="L259" title="All 2 branches missed.">            for (Path file : files) {</span>
 <span class="nc" id="L260">                processDirs0(file, process);</span>
-            }
+<span class="nc" id="L261">            }</span>
         }
 <span class="nc" id="L263">    }</span>
 
@@ -280,16 +280,16 @@ public final class Utils {
      * @throws IOException if an I/O error has occurred
      */
     public static InputStream backtrackPath(Path dir, String path) throws IOException {
-<span class="nc bnc" id="L283" title="All 2 branches missed.">        if (path.startsWith(&quot;/&quot;)) {</span>
-<span class="nc" id="L284">            path = path.substring(1);</span>
+<span class="pc bpc" id="L283" title="1 of 2 branches missed.">        if (path.startsWith(&quot;/&quot;)) {</span>
+<span class="fc" id="L284">            path = path.substring(1);</span>
         }
 
-<span class="nc" id="L287">        Path look = null;</span>
-<span class="nc bnc" id="L288" title="All 4 branches missed.">        while (dir != null &amp;&amp; !Files.exists(look = dir.resolve(path))) {</span>
+<span class="fc" id="L287">        Path look = null;</span>
+<span class="pc bpc" id="L288" title="2 of 4 branches missed.">        while (dir != null &amp;&amp; !Files.exists(look = dir.resolve(path))) {</span>
 <span class="nc" id="L289">            dir = dir.getParent();</span>
         }
 
-<span class="nc bnc" id="L292" title="All 4 branches missed.">        return look != null &amp;&amp; Files.exists(look) ? Files.newInputStream(look) : null;</span>
+<span class="pc bpc" id="L292" title="2 of 4 branches missed.">        return look != null &amp;&amp; Files.exists(look) ? Files.newInputStream(look) : null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

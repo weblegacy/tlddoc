@@ -96,36 +96,36 @@ public class TldDoc {
      * @param args Arguments from command line
      */
     public static void main(String[] args) {
-<span class="nc" id="L99">        TldDocGenerator generator = new TldDocGenerator();</span>
+<span class="fc" id="L99">        TldDocGenerator generator = new TldDocGenerator();</span>
 
         try {
-<span class="nc" id="L102">            initGenerator(args, generator);</span>
-<span class="nc" id="L103">            generator.generate();</span>
+<span class="fc" id="L102">            initGenerator(args, generator);</span>
+<span class="fc" id="L103">            generator.generate();</span>
 <span class="nc" id="L104">        } catch (IOException | GeneratorException e) {</span>
 <span class="nc" id="L105">            e.printStackTrace(System.err);</span>
 <span class="nc" id="L106">            System.exit(1);</span>
-        }
-<span class="nc" id="L108">    }</span>
+<span class="fc" id="L107">        }</span>
+<span class="fc" id="L108">    }</span>
 
     private static void initGenerator(final String[] args, final TldDocGenerator generator)
             throws IOException {
 
-<span class="nc" id="L113">        Iterator&lt;String&gt; iter = Arrays.asList(args).iterator();</span>
-<span class="nc" id="L114">        boolean atLeastOneTld = false;</span>
+<span class="fc" id="L113">        Iterator&lt;String&gt; iter = Arrays.asList(args).iterator();</span>
+<span class="fc" id="L114">        boolean atLeastOneTld = false;</span>
 
         try {
-<span class="nc bnc" id="L117" title="All 2 branches missed.">            while (iter.hasNext()) {</span>
-<span class="nc" id="L118">                String arg = iter.next();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            while (iter.hasNext()) {</span>
+<span class="fc" id="L118">                String arg = iter.next();</span>
 
-<span class="nc bnc" id="L120" title="All 11 branches missed.">                switch (arg) {</span>
+<span class="pc bpc" id="L120" title="9 of 11 branches missed.">                switch (arg) {</span>
                     case &quot;-xslt&quot;:
 <span class="nc" id="L122">                        arg = iter.next();</span>
 <span class="nc" id="L123">                        generator.setXsltDirectory(Paths.get(arg));</span>
 <span class="nc" id="L124">                        break;</span>
                     case &quot;-d&quot;:
-<span class="nc" id="L126">                        arg = iter.next();</span>
-<span class="nc" id="L127">                        generator.setOutputDirectory(Paths.get(arg));</span>
-<span class="nc" id="L128">                        break;</span>
+<span class="fc" id="L126">                        arg = iter.next();</span>
+<span class="fc" id="L127">                        generator.setOutputDirectory(Paths.get(arg));</span>
+<span class="fc" id="L128">                        break;</span>
                     case &quot;-help&quot;:
 <span class="nc" id="L130">                        usage(null);</span>
 <span class="nc" id="L131">                        break;</span>
@@ -153,14 +153,14 @@ public class TldDoc {
 <span class="nc" id="L153">                        atLeastOneTld |= addPath(iter, generator::addTagDir, &quot;Tag Directory&quot;);</span>
 <span class="nc" id="L154">                        break;</span>
                     default:
-<span class="nc" id="L156">                        Path f = Paths.get(arg);</span>
-<span class="nc bnc" id="L157" title="All 2 branches missed.">                        if (Files.exists(f)) {</span>
-<span class="nc" id="L158">                            String fn = Utils.getLowerFileName(f);</span>
-<span class="nc bnc" id="L159" title="All 2 branches missed.">                            if (fn.endsWith(&quot;.tld&quot;)) {</span>
+<span class="fc" id="L156">                        Path f = Paths.get(arg);</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">                        if (Files.exists(f)) {</span>
+<span class="fc" id="L158">                            String fn = Utils.getLowerFileName(f);</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">                            if (fn.endsWith(&quot;.tld&quot;)) {</span>
                                 // If the path is a file that ends in .tld,
                                 // process an individual TLD file.
-<span class="nc" id="L162">                                generator.addTld(f);</span>
-<span class="nc" id="L163">                                atLeastOneTld = true;</span>
+<span class="fc" id="L162">                                generator.addTld(f);</span>
+<span class="fc" id="L163">                                atLeastOneTld = true;</span>
 <span class="nc bnc" id="L164" title="All 2 branches missed.">                            } else if (fn.endsWith(&quot;.jar&quot;)) {</span>
                                 // If the path is a file that ends in .jar,
                                 // process a tag library JAR file.
@@ -171,7 +171,7 @@ public class TldDoc {
                                 // process all tag libraries in this web app.
 <span class="nc" id="L172">                                generator.addWar(f);</span>
 <span class="nc" id="L173">                                atLeastOneTld = true;</span>
-<span class="nc" id="L174">                            } else {</span>
+                            } else {
 <span class="nc" id="L175">                                boolean foundWebInf = false;</span>
 <span class="nc bnc" id="L176" title="All 2 branches missed.">                                if (Files.isDirectory(f)) {</span>
                                     // If the path is a directory that includes
@@ -180,10 +180,10 @@ public class TldDoc {
 <span class="nc bnc" id="L180" title="All 2 branches missed.">                                    if (Utils.pathContains(f, &quot;/WEB-INF/tags&quot;)) {</span>
 <span class="nc" id="L181">                                        generator.addTagDir(f);</span>
 <span class="nc" id="L182">                                        foundWebInf = true;</span>
-<span class="nc" id="L183">                                    } else {</span>
+                                    } else {
 <span class="nc bnc" id="L184" title="All 2 branches missed.">                                        if (f.endsWith(&quot;WEB-INF&quot;)) {</span>
 <span class="nc" id="L185">                                            foundWebInf = true;</span>
-<span class="nc" id="L186">                                        } else {</span>
+                                        } else {
 <span class="nc" id="L187">                                            try (DirectoryStream&lt;Path&gt; files = Files</span>
 <span class="nc" id="L188">                                                    .newDirectoryStream(f, Utils::isWebInf)) {</span>
 
@@ -198,24 +198,24 @@ public class TldDoc {
                                 }
 <span class="nc bnc" id="L199" title="All 2 branches missed.">                                if (foundWebInf) {</span>
 <span class="nc" id="L200">                                    atLeastOneTld = true;</span>
-<span class="nc" id="L201">                                } else {</span>
+                                } else {
 <span class="nc" id="L202">                                    usage(&quot;Cannot determine tag library &quot;</span>
 <span class="nc" id="L203">                                            + &quot;type for &quot; + f.toAbsolutePath());</span>
                                 }
                             }
-<span class="nc" id="L206">                        } else {</span>
+<span class="fc" id="L206">                        } else {</span>
 <span class="nc" id="L207">                            usage(&quot;File/directory not found: &quot; + arg);</span>
                         }
                         break;
                 }
-            }
-<span class="nc bnc" id="L212" title="All 2 branches missed.">            if (!atLeastOneTld) {</span>
+<span class="fc" id="L211">            }</span>
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">            if (!atLeastOneTld) {</span>
 <span class="nc" id="L213">                usage(&quot;Please specify at least one TLD file.&quot;);</span>
             }
 <span class="nc" id="L215">        } catch (NoSuchElementException e) {</span>
 <span class="nc" id="L216">            usage(&quot;Invalid Syntax.&quot;);</span>
-        }
-<span class="nc" id="L218">    }</span>
+<span class="fc" id="L217">        }</span>
+<span class="fc" id="L218">    }</span>
 
     private static boolean addPath(final Iterator&lt;String&gt; iter, final Consumer&lt;Path&gt; addDirFunction,
             final String type) throws IOException {

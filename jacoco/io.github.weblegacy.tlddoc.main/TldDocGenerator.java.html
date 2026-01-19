@@ -89,27 +89,27 @@ public class TldDocGenerator {
     /**
      * The set of tag libraries we are parsing. Each element is a TagLibrary instance.
      */
-<span class="nc" id="L92">    private final ArrayList&lt;TagLibrary&gt; tagLibraries = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L92">    private final ArrayList&lt;TagLibrary&gt; tagLibraries = new ArrayList&lt;&gt;();</span>
 
     /**
      * The directory containing the stylesheets, or null if the default stylesheets are to be used.
      */
-<span class="nc" id="L97">    private Path xsltDirectory = null;</span>
+<span class="fc" id="L97">    private Path xsltDirectory = null;</span>
 
     /**
      * The output directory for generated files.
      */
-<span class="nc" id="L102">    private Path outputDirectory = Paths.get(&quot;out&quot;);</span>
+<span class="fc" id="L102">    private Path outputDirectory = Paths.get(&quot;out&quot;);</span>
 
     /**
      * The browser window title for the documentation.
      */
-<span class="nc" id="L107">    private String windowTitle = Constants.DEFAULT_WINDOW_TITLE;</span>
+<span class="fc" id="L107">    private String windowTitle = Constants.DEFAULT_WINDOW_TITLE;</span>
 
     /**
      * The title for the TLD index (first) page.
      */
-<span class="nc" id="L112">    private String docTitle = Constants.DEFAULT_DOC_TITLE;</span>
+<span class="fc" id="L112">    private String docTitle = Constants.DEFAULT_DOC_TITLE;</span>
 
     /**
      * {@code True} if no {@code stdout} is to be produced during generation.
@@ -134,13 +134,13 @@ public class TldDocGenerator {
     /**
      * Helps uniquely generate substitute prefixes in the case of missing or duplicate short-names.
      */
-<span class="nc" id="L137">    private int substitutePrefix = 1;</span>
+<span class="fc" id="L137">    private int substitutePrefix = 1;</span>
 
     /**
      * Creates a new TldDocGenerator.
      */
-<span class="nc" id="L142">    public TldDocGenerator() {</span>
-<span class="nc" id="L143">    }</span>
+<span class="fc" id="L142">    public TldDocGenerator() {</span>
+<span class="fc" id="L143">    }</span>
 
     /**
      * Adds the given Tag Library to the list of Tag Libraries to generate documentation for.
@@ -148,8 +148,8 @@ public class TldDocGenerator {
      * @param tagLibrary The tag library to add.
      */
     public void addTagLibrary(TagLibrary tagLibrary) {
-<span class="nc" id="L151">        tagLibraries.add(tagLibrary);</span>
-<span class="nc" id="L152">    }</span>
+<span class="fc" id="L151">        tagLibraries.add(tagLibrary);</span>
+<span class="fc" id="L152">    }</span>
 
     /**
      * Adds the given individual TLD file.
@@ -157,8 +157,8 @@ public class TldDocGenerator {
      * @param tld The TLD file to add
      */
     public void addTld(Path tld) {
-<span class="nc" id="L160">        addTagLibrary(new TldFileTagLibrary(tld));</span>
-<span class="nc" id="L161">    }</span>
+<span class="fc" id="L160">        addTagLibrary(new TldFileTagLibrary(tld));</span>
+<span class="fc" id="L161">    }</span>
 
     /**
      * Adds all the tag libraries found in the given web application.
@@ -182,7 +182,7 @@ public class TldDocGenerator {
 <span class="nc" id="L182">        } catch (IOException e) {</span>
 <span class="nc" id="L183">            println(&quot;WARNING: Could not access one or more entries in &quot; + path.toAbsolutePath()</span>
 <span class="nc" id="L184">                    + &quot;.  Skipping Web-App.  Reason: &quot; + e.getMessage());</span>
-        }
+<span class="nc" id="L185">        }</span>
 <span class="nc" id="L186">    }</span>
 
     /**
@@ -213,7 +213,7 @@ public class TldDocGenerator {
 <span class="nc bnc" id="L213" title="All 4 branches missed.">                if (entryName.startsWith(path) &amp;&amp; Utils.isTld(entryName)) {</span>
 <span class="nc" id="L214">                    addTagLibrary(new JarTldFileTagLibrary(war, jarEntry.getName()));</span>
                 }
-            }
+<span class="nc" id="L216">            }</span>
         }
 <span class="nc" id="L218">    }</span>
 
@@ -259,9 +259,9 @@ public class TldDocGenerator {
 <span class="nc" id="L259">                        println(&quot;WARNING: Could not access one or more entries in &quot;</span>
 <span class="nc" id="L260">                                + war.toAbsolutePath() + &quot; entry &quot; + entryName</span>
 <span class="nc" id="L261">                                + &quot;.  Skipping JAR.  Reason: &quot; + e.getMessage());</span>
-                    }
+<span class="nc" id="L262">                    }</span>
                 }
-            }
+<span class="nc" id="L264">            }</span>
         }
 <span class="nc" id="L266">    }</span>
 
@@ -292,7 +292,7 @@ public class TldDocGenerator {
 <span class="nc bnc" id="L292" title="All 4 branches missed.">                if (entry.getName().startsWith(path) &amp;&amp; entry.isDirectory()) {</span>
 <span class="nc" id="L293">                    addTagLibrary(new WarTagDirImplicitTagLibrary(war, entry.getName()));</span>
                 }
-            }
+<span class="nc" id="L295">            }</span>
         }
 <span class="nc" id="L297">    }</span>
 
@@ -310,11 +310,11 @@ public class TldDocGenerator {
 <span class="nc bnc" id="L310" title="All 2 branches missed.">                if (Utils.isTld(jarEntry.getName())) {</span>
 <span class="nc" id="L311">                    addTagLibrary(new JarTldFileTagLibrary(jar, jarEntry.getName()));</span>
                 }
-            }
+<span class="nc" id="L313">            }</span>
 <span class="nc" id="L314">        } catch (IOException e) {</span>
 <span class="nc" id="L315">            println(&quot;WARNING: Could not access one or more entries in &quot; + jar.toAbsolutePath()</span>
 <span class="nc" id="L316">                    + &quot;.  Skipping JAR.  Reason: &quot; + e.getMessage());</span>
-        }
+<span class="nc" id="L317">        }</span>
 <span class="nc" id="L318">    }</span>
 
     /**
@@ -336,7 +336,7 @@ public class TldDocGenerator {
 <span class="nc" id="L336">        } catch (IOException e) {</span>
 <span class="nc" id="L337">            println(&quot;WARNING: Could not access one or more entries in &quot; + path.toAbsolutePath()</span>
 <span class="nc" id="L338">                    + &quot;.  Skipping WAR.  Reason: &quot; + e.getMessage());</span>
-        }
+<span class="nc" id="L339">        }</span>
 <span class="nc" id="L340">    }</span>
 
     /**
@@ -365,8 +365,8 @@ public class TldDocGenerator {
      * @param dir The base directory for generated files.
      */
     public void setOutputDirectory(Path dir) {
-<span class="nc" id="L368">        this.outputDirectory = dir;</span>
-<span class="nc" id="L369">    }</span>
+<span class="fc" id="L368">        this.outputDirectory = dir;</span>
+<span class="fc" id="L369">    }</span>
 
     /**
      * Sets the browser window title for the documentation.
@@ -421,7 +421,7 @@ public class TldDocGenerator {
      *         otherwise.
      */
     public boolean isVerbose() {
-<span class="nc" id="L424">        return verbose;</span>
+<span class="fc" id="L424">        return verbose;</span>
     }
 
     /**
@@ -431,19 +431,19 @@ public class TldDocGenerator {
      */
     public void generate() throws GeneratorException {
         try {
-<span class="nc" id="L434">            Files.createDirectories(outputDirectory);</span>
+<span class="fc" id="L434">            Files.createDirectories(outputDirectory);</span>
 
-<span class="nc" id="L436">            copyStaticFiles();</span>
-<span class="nc" id="L437">            createTldSummaryDoc();</span>
-<span class="nc" id="L438">            generateOverview();</span>
-<span class="nc" id="L439">            generateTldDetail();</span>
-<span class="nc" id="L440">            outputSuccessMessage();</span>
+<span class="fc" id="L436">            copyStaticFiles();</span>
+<span class="fc" id="L437">            createTldSummaryDoc();</span>
+<span class="fc" id="L438">            generateOverview();</span>
+<span class="fc" id="L439">            generateTldDetail();</span>
+<span class="fc" id="L440">            outputSuccessMessage();</span>
 <span class="nc" id="L441">        } catch (IOException | SAXException | TransformerFactoryConfigurationError</span>
                 | FactoryConfigurationError | ParserConfigurationException
-<span class="nc" id="L443">                | TransformerException e) {</span>
+                | TransformerException e) {
 <span class="nc" id="L444">            throw new GeneratorException(e);</span>
-        }
-<span class="nc" id="L446">    }</span>
+<span class="fc" id="L445">        }</span>
+<span class="fc" id="L446">    }</span>
 
     // //////////////////////////////////////////////////////////////////
     /**
@@ -452,9 +452,9 @@ public class TldDocGenerator {
      * @throws IOException if an I/O error has occurred
      */
     private void copyStaticFiles() throws IOException {
-<span class="nc" id="L455">        copyResourceToFile(outputDirectory.resolve(&quot;stylesheet.css&quot;),</span>
-<span class="nc" id="L456">                RESOURCE_PATH + &quot;/stylesheet.css&quot;);</span>
-<span class="nc" id="L457">    }</span>
+<span class="fc" id="L455">        copyResourceToFile(outputDirectory.resolve(&quot;stylesheet.css&quot;),</span>
+                RESOURCE_PATH + &quot;/stylesheet.css&quot;);
+<span class="fc" id="L457">    }</span>
 
     /**
      * Creates a summary document, comprising all input TLDs. This document is later used as input
@@ -483,79 +483,79 @@ public class TldDocGenerator {
             FactoryConfigurationError, ParserConfigurationException, TransformerException,
             GeneratorException {
 
-<span class="nc" id="L486">        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span>
-<span class="nc" id="L487">        factory.setValidating(false);</span>
-<span class="nc" id="L488">        factory.setNamespaceAware(true);</span>
-<span class="nc" id="L489">        factory.setExpandEntityReferences(false);</span>
-<span class="nc" id="L490">        DocumentBuilder documentBuilder = factory.newDocumentBuilder();</span>
-<span class="nc" id="L491">        documentBuilder.setEntityResolver((publicId, systemId)</span>
-<span class="nc" id="L492">                -&gt; new InputSource(new CharArrayReader(new char[0]))</span>
+<span class="fc" id="L486">        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span>
+<span class="fc" id="L487">        factory.setValidating(false);</span>
+<span class="fc" id="L488">        factory.setNamespaceAware(true);</span>
+<span class="fc" id="L489">        factory.setExpandEntityReferences(false);</span>
+<span class="fc" id="L490">        DocumentBuilder documentBuilder = factory.newDocumentBuilder();</span>
+<span class="fc" id="L491">        documentBuilder.setEntityResolver((publicId, systemId)</span>
+<span class="fc" id="L492">                -&gt; new InputSource(new CharArrayReader(new char[0]))</span>
         );
-<span class="nc" id="L494">        summaryTld = documentBuilder.newDocument();</span>
+<span class="fc" id="L494">        summaryTld = documentBuilder.newDocument();</span>
 
         // Create root &lt;tlds&gt; element:
-<span class="nc" id="L497">        Element rootElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, &quot;tlds&quot;);</span>
-<span class="nc" id="L498">        summaryTld.appendChild(rootElement);</span>
+<span class="fc" id="L497">        Element rootElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, &quot;tlds&quot;);</span>
+<span class="fc" id="L498">        summaryTld.appendChild(rootElement);</span>
         // JDK 1.4 does not add xmlns for some reason - add it manually:
-<span class="nc" id="L500">        rootElement.setAttributeNS(&quot;http://www.w3.org/2000/xmlns/&quot;, &quot;xmlns&quot;,</span>
-<span class="nc" id="L501">                Constants.NS_JAKARTAEE);</span>
+<span class="fc" id="L500">        rootElement.setAttributeNS(&quot;http://www.w3.org/2000/xmlns/&quot;, &quot;xmlns&quot;,</span>
+                Constants.NS_JAKARTAEE);
 
         // Create configuration element:
-<span class="nc" id="L504">        Element configElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, &quot;config&quot;);</span>
-<span class="nc" id="L505">        rootElement.appendChild(configElement);</span>
+<span class="fc" id="L504">        Element configElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, &quot;config&quot;);</span>
+<span class="fc" id="L505">        rootElement.appendChild(configElement);</span>
 
-<span class="nc" id="L507">        Element windowTitleElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE,</span>
-<span class="nc" id="L508">                &quot;window-title&quot;);</span>
-<span class="nc" id="L509">        windowTitleElement.appendChild(summaryTld.createTextNode(this.windowTitle));</span>
-<span class="nc" id="L510">        configElement.appendChild(windowTitleElement);</span>
+<span class="fc" id="L507">        Element windowTitleElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE,</span>
+                &quot;window-title&quot;);
+<span class="fc" id="L509">        windowTitleElement.appendChild(summaryTld.createTextNode(this.windowTitle));</span>
+<span class="fc" id="L510">        configElement.appendChild(windowTitleElement);</span>
 
-<span class="nc" id="L512">        Element docTitleElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, &quot;doc-title&quot;);</span>
-<span class="nc" id="L513">        docTitleElement.appendChild(summaryTld.createTextNode(this.docTitle));</span>
-<span class="nc" id="L514">        configElement.appendChild(docTitleElement);</span>
+<span class="fc" id="L512">        Element docTitleElement = summaryTld.createElementNS(Constants.NS_JAKARTAEE, &quot;doc-title&quot;);</span>
+<span class="fc" id="L513">        docTitleElement.appendChild(summaryTld.createTextNode(this.docTitle));</span>
+<span class="fc" id="L514">        configElement.appendChild(docTitleElement);</span>
 
         // Append each &lt;taglib&gt; element from each TLD:
-<span class="nc" id="L517">        println(&quot;Loading and translating &quot; + tagLibraries.size()</span>
+<span class="fc" id="L517">        println(&quot;Loading and translating &quot; + tagLibraries.size()</span>
                 + &quot; Tag Librar&quot;
-<span class="nc bnc" id="L519" title="All 2 branches missed.">                + ((tagLibraries.size() == 1) ? &quot;y&quot; : &quot;ies&quot;)</span>
+<span class="pc bpc" id="L519" title="1 of 2 branches missed.">                + ((tagLibraries.size() == 1) ? &quot;y&quot; : &quot;ies&quot;)</span>
                 + &quot;...&quot;);
-<span class="nc bnc" id="L521" title="All 2 branches missed.">        for (final TagLibrary tagLibrary_ : tagLibraries) {</span>
+<span class="fc bfc" id="L521" title="All 2 branches covered.">        for (final TagLibrary tagLibrary_ : tagLibraries) {</span>
             // to AutoClose internal files at TagLibrary-Implementations
-<span class="nc" id="L523">            try (TagLibrary tagLibrary = tagLibrary_) {</span>
-<span class="nc" id="L524">                Document doc = tagLibrary.getTldDocument(documentBuilder);</span>
+<span class="fc" id="L523">            try (TagLibrary tagLibrary = tagLibrary_) {</span>
+<span class="fc" id="L524">                Document doc = tagLibrary.getTldDocument(documentBuilder);</span>
 
                 // Convert document to JSP 4.0 TLD
-<span class="nc" id="L527">                doc = upgradeTld(doc);</span>
+<span class="fc" id="L527">                doc = upgradeTld(doc);</span>
 
                 // If this tag library has no tags, no validators,
                 // and no functions, omit it
-<span class="nc" id="L531">                final Element element = doc.getDocumentElement();</span>
-<span class="nc bnc" id="L532" title="All 2 branches missed.">                int numTags = element == null ? 0</span>
-<span class="nc" id="L533">                        : element.getElementsByTagNameNS(&quot;*&quot;, &quot;tag&quot;).getLength()</span>
-<span class="nc" id="L534">                        + element.getElementsByTagNameNS(&quot;*&quot;, &quot;tag-file&quot;).getLength()</span>
-<span class="nc" id="L535">                        + element.getElementsByTagNameNS(&quot;*&quot;, &quot;validator&quot;).getLength()</span>
-<span class="nc" id="L536">                        + element.getElementsByTagNameNS(&quot;*&quot;, &quot;function&quot;).getLength();</span>
-<span class="nc bnc" id="L537" title="All 2 branches missed.">                if (numTags &gt; 0) {</span>
+<span class="fc" id="L531">                final Element element = doc.getDocumentElement();</span>
+<span class="pc bpc" id="L532" title="1 of 2 branches missed.">                int numTags = element == null ? 0</span>
+<span class="fc" id="L533">                        : element.getElementsByTagNameNS(&quot;*&quot;, &quot;tag&quot;).getLength()</span>
+<span class="fc" id="L534">                        + element.getElementsByTagNameNS(&quot;*&quot;, &quot;tag-file&quot;).getLength()</span>
+<span class="fc" id="L535">                        + element.getElementsByTagNameNS(&quot;*&quot;, &quot;validator&quot;).getLength()</span>
+<span class="fc" id="L536">                        + element.getElementsByTagNameNS(&quot;*&quot;, &quot;function&quot;).getLength();</span>
+<span class="pc bpc" id="L537" title="1 of 2 branches missed.">                if (numTags &gt; 0) {</span>
                     // Populate the root element with extra information
-<span class="nc" id="L539">                    populateTld(tagLibrary, doc);</span>
+<span class="fc" id="L539">                    populateTld(tagLibrary, doc);</span>
 
-<span class="nc" id="L541">                    Element taglibNode = (Element) summaryTld.importNode(</span>
-<span class="nc" id="L542">                            doc.getDocumentElement(), true);</span>
-<span class="nc bnc" id="L543" title="All 2 branches missed.">                    if (!(taglibNode.getNamespaceURI().equals(Constants.NS_JAKARTAEE)</span>
+<span class="fc" id="L541">                    Element taglibNode = (Element) summaryTld.importNode(</span>
+<span class="fc" id="L542">                            doc.getDocumentElement(), true);</span>
+<span class="pc bpc" id="L543" title="1 of 2 branches missed.">                    if (!(taglibNode.getNamespaceURI().equals(Constants.NS_JAKARTAEE)</span>
 <span class="nc bnc" id="L544" title="All 2 branches missed.">                            || taglibNode.getNamespaceURI().equals(Constants.NS_JAVAEE)</span>
 <span class="nc bnc" id="L545" title="All 2 branches missed.">                            || taglibNode.getNamespaceURI().equals(Constants.NS_J2EE))) {</span>
 <span class="nc" id="L546">                        throw new GeneratorException(&quot;Error: &quot;</span>
 <span class="nc" id="L547">                                + tagLibrary.getPathDescription()</span>
                                 + &quot; does not have xmlns=\&quot;&quot; + Constants.NS_JAKARTAEE + &quot;\&quot;&quot;);
                     }
-<span class="nc bnc" id="L550" title="All 2 branches missed.">                    if (!taglibNode.getLocalName().equals(&quot;taglib&quot;)) {</span>
+<span class="pc bpc" id="L550" title="1 of 2 branches missed.">                    if (!taglibNode.getLocalName().equals(&quot;taglib&quot;)) {</span>
 <span class="nc" id="L551">                        throw new GeneratorException(&quot;Error: &quot;</span>
 <span class="nc" id="L552">                                + tagLibrary.getPathDescription()</span>
                                 + &quot; does not have &lt;taglib&gt; as root.&quot;);
                     }
-<span class="nc" id="L555">                    rootElement.appendChild(taglibNode);</span>
+<span class="fc" id="L555">                    rootElement.appendChild(taglibNode);</span>
                 }
             }
-        }
+<span class="fc" id="L558">        }</span>
 
         // If debug enabled, output the resulting document, as a test:
         if (Constants.DEBUG_INPUT_DOCUMENT) {
@@ -564,7 +564,7 @@ public class TldDocGenerator {
             transformer.transform(new DOMSource(summaryTld),
                     new StreamResult(System.out));
         }
-<span class="nc" id="L567">    }</span>
+<span class="fc" id="L567">    }</span>
 
     /**
      * Converts the given TLD to a JSP 4.0 TLD.
@@ -591,56 +591,56 @@ public class TldDocGenerator {
             TransformerFactoryConfigurationError, TransformerConfigurationException,
             FactoryConfigurationError, ParserConfigurationException, TransformerException {
 
-<span class="nc" id="L594">        Element root = doc.getDocumentElement();</span>
+<span class="fc" id="L594">        Element root = doc.getDocumentElement();</span>
 
         // We use getElementsByTagName instead of getElementsByTagNameNS
         // here since JSP 1.1 TLDs have no namespace.
-<span class="nc bnc" id="L598" title="All 2 branches missed.">        if (root.getElementsByTagName(&quot;jspversion&quot;).getLength() &gt; 0) {</span>
-<span class="nc" id="L599">            removeNameSpace(doc, root);</span>
+<span class="fc bfc" id="L598" title="All 2 branches covered.">        if (root.getElementsByTagName(&quot;jspversion&quot;).getLength() &gt; 0) {</span>
+<span class="fc" id="L599">            removeNameSpace(doc, root);</span>
 
             // JSP 1.1 TLD - convert to JSP 1.2 TLD first.
-<span class="nc" id="L602">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld1_1-tld1_2.xsl&quot;);</span>
-<span class="nc" id="L603">            root = doc.getDocumentElement();</span>
+<span class="fc" id="L602">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld1_1-tld1_2.xsl&quot;);</span>
+<span class="fc" id="L603">            root = doc.getDocumentElement();</span>
         }
 
         // We use getElementsByTagName instead of getElementsByTagNameNS
         // here since JSP 1.2 TLDs have no namespace.
-<span class="nc bnc" id="L608" title="All 2 branches missed.">        if (root.getElementsByTagName(&quot;jsp-version&quot;).getLength() &gt; 0) {</span>
-<span class="nc" id="L609">            removeNameSpace(doc, root);</span>
+<span class="fc bfc" id="L608" title="All 2 branches covered.">        if (root.getElementsByTagName(&quot;jsp-version&quot;).getLength() &gt; 0) {</span>
+<span class="fc" id="L609">            removeNameSpace(doc, root);</span>
 
             // JSP 1.2 TLD - convert to JSP 2.0 TLD first
-<span class="nc" id="L612">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld1_2-tld2_0.xsl&quot;);</span>
-<span class="nc" id="L613">            root = doc.getDocumentElement();</span>
+<span class="fc" id="L612">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld1_2-tld2_0.xsl&quot;);</span>
+<span class="fc" id="L613">            root = doc.getDocumentElement();</span>
         }
 
-<span class="nc bnc" id="L616" title="All 2 branches missed.">        if (&quot;2.0&quot;.equals(root.getAttribute(&quot;version&quot;))) {</span>
+<span class="pc bpc" id="L616" title="1 of 2 branches missed.">        if (&quot;2.0&quot;.equals(root.getAttribute(&quot;version&quot;))) {</span>
             // JSP 2.0 TLD - convert to JSP 2.1 TLD first
-<span class="nc" id="L618">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld2_0-tld2_1.xsl&quot;);</span>
-<span class="nc" id="L619">            root = doc.getDocumentElement();</span>
+<span class="fc" id="L618">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld2_0-tld2_1.xsl&quot;);</span>
+<span class="fc" id="L619">            root = doc.getDocumentElement();</span>
         }
 
-<span class="nc bnc" id="L622" title="All 2 branches missed.">        if (&quot;2.1&quot;.equals(root.getAttribute(&quot;version&quot;))) {</span>
+<span class="pc bpc" id="L622" title="1 of 2 branches missed.">        if (&quot;2.1&quot;.equals(root.getAttribute(&quot;version&quot;))) {</span>
             // JSP 2.1 TLD - convert to JSP 3.0 TLD first
-<span class="nc" id="L624">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld2_1-tld3_0.xsl&quot;);</span>
-<span class="nc" id="L625">            root = doc.getDocumentElement();</span>
+<span class="fc" id="L624">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld2_1-tld3_0.xsl&quot;);</span>
+<span class="fc" id="L625">            root = doc.getDocumentElement();</span>
         }
 
-<span class="nc bnc" id="L628" title="All 2 branches missed.">        if (&quot;3.0&quot;.equals(root.getAttribute(&quot;version&quot;))) {</span>
+<span class="pc bpc" id="L628" title="1 of 2 branches missed.">        if (&quot;3.0&quot;.equals(root.getAttribute(&quot;version&quot;))) {</span>
             // JSP 3.0 TLD - convert to JSP 3.1 TLD first
-<span class="nc" id="L630">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld3_0-tld3_1.xsl&quot;);</span>
-<span class="nc" id="L631">            root = doc.getDocumentElement();</span>
+<span class="fc" id="L630">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld3_0-tld3_1.xsl&quot;);</span>
+<span class="fc" id="L631">            root = doc.getDocumentElement();</span>
         }
 
-<span class="nc bnc" id="L634" title="All 2 branches missed.">        if (&quot;3.1&quot;.equals(root.getAttribute(&quot;version&quot;))) {</span>
+<span class="pc bpc" id="L634" title="1 of 2 branches missed.">        if (&quot;3.1&quot;.equals(root.getAttribute(&quot;version&quot;))) {</span>
             // JSP 3.1 TLD - convert to JSP 4.0 TLD first
-<span class="nc" id="L636">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld3_1-tld4_0.xsl&quot;);</span>
+<span class="fc" id="L636">            doc = convertTld(doc, RESOURCE_PATH + &quot;/tld3_1-tld4_0.xsl&quot;);</span>
         }
 
         // Final conversion to remove unwanted elements
-<span class="nc" id="L640">        doc = convertTld(doc, RESOURCE_PATH + &quot;/tld4_0-tld4_0.xsl&quot;);</span>
+<span class="fc" id="L640">        doc = convertTld(doc, RESOURCE_PATH + &quot;/tld4_0-tld4_0.xsl&quot;);</span>
 
         // We should now have a JSP 4.0 TLD in doc.
-<span class="nc" id="L643">        return doc;</span>
+<span class="fc" id="L643">        return doc;</span>
     }
 
     /**
@@ -650,11 +650,11 @@ public class TldDocGenerator {
      * @param root the root-element
      */
     private static void removeNameSpace(final Document doc, final Element root) {
-<span class="nc" id="L653">        final String ns = root.getNamespaceURI();</span>
-<span class="nc bnc" id="L654" title="All 4 branches missed.">        if (!(ns == null || ns.isEmpty())) {</span>
-<span class="nc" id="L655">            removeNameSpace(doc, root, ns);</span>
+<span class="fc" id="L653">        final String ns = root.getNamespaceURI();</span>
+<span class="pc bpc" id="L654" title="1 of 4 branches missed.">        if (!(ns == null || ns.isEmpty())) {</span>
+<span class="fc" id="L655">            removeNameSpace(doc, root, ns);</span>
         }
-<span class="nc" id="L657">    }</span>
+<span class="fc" id="L657">    }</span>
 
     /**
      * Deletes a specific namespace from all elements and attributes.
@@ -664,18 +664,18 @@ public class TldDocGenerator {
      * @param ns   the namespace to remove
      */
     private static void removeNameSpace(final Document doc, final Node node, final String ns) {
-<span class="nc bnc" id="L667" title="All 4 branches missed.">        if ((node.getNodeType() == Node.ELEMENT_NODE || node.getNodeType() == Node.ATTRIBUTE_NODE)</span>
-<span class="nc bnc" id="L668" title="All 2 branches missed.">                &amp;&amp; ns.equals(node.getNamespaceURI())) {</span>
-<span class="nc" id="L669">            doc.renameNode(node, null, node.getLocalName());</span>
+<span class="pc bpc" id="L667" title="1 of 4 branches missed.">        if ((node.getNodeType() == Node.ELEMENT_NODE || node.getNodeType() == Node.ATTRIBUTE_NODE)</span>
+<span class="pc bpc" id="L668" title="1 of 2 branches missed.">                &amp;&amp; ns.equals(node.getNamespaceURI())) {</span>
+<span class="fc" id="L669">            doc.renameNode(node, null, node.getLocalName());</span>
         }
 
-<span class="nc" id="L672">        final NodeList list = node.getChildNodes();</span>
-<span class="nc bnc" id="L673" title="All 2 branches missed.">        for (int i = 0;</span>
-<span class="nc" id="L674">                i &lt; list.getLength();</span>
-<span class="nc" id="L675">                ++i) {</span>
-<span class="nc" id="L676">            removeNameSpace(doc, list.item(i), ns);</span>
+<span class="fc" id="L672">        final NodeList list = node.getChildNodes();</span>
+<span class="fc" id="L673">        for (int i = 0;</span>
+<span class="fc bfc" id="L674" title="All 2 branches covered.">                i &lt; list.getLength();</span>
+<span class="fc" id="L675">                ++i) {</span>
+<span class="fc" id="L676">            removeNameSpace(doc, list.item(i), ns);</span>
         }
-<span class="nc" id="L678">    }</span>
+<span class="fc" id="L678">    }</span>
 
     /**
      * Converts the given TLD using the given stylesheet.
@@ -703,13 +703,13 @@ public class TldDocGenerator {
             TransformerFactoryConfigurationError, TransformerConfigurationException,
             FactoryConfigurationError, ParserConfigurationException, TransformerException {
 
-<span class="nc" id="L706">        InputStream xsl = getResourceAsStream(stylesheet);</span>
-<span class="nc" id="L707">        Transformer transformer = TransformerFactory.newInstance().newTransformer(</span>
-<span class="nc" id="L708">                new StreamSource(xsl));</span>
-<span class="nc" id="L709">        Document result = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();</span>
-<span class="nc" id="L710">        transformer.transform(new DOMSource(doc), new DOMResult(result));</span>
+<span class="fc" id="L706">        InputStream xsl = getResourceAsStream(stylesheet);</span>
+<span class="fc" id="L707">        Transformer transformer = TransformerFactory.newInstance().newTransformer(</span>
+                new StreamSource(xsl));
+<span class="fc" id="L709">        Document result = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();</span>
+<span class="fc" id="L710">        transformer.transform(new DOMSource(doc), new DOMResult(result));</span>
 
-<span class="nc bnc" id="L712" title="All 2 branches missed.">        if (isVerbose()) {</span>
+<span class="pc bpc" id="L712" title="1 of 2 branches missed.">        if (isVerbose()) {</span>
 <span class="nc" id="L713">            StringWriter sw = new StringWriter();</span>
 <span class="nc" id="L714">            sw</span>
 <span class="nc" id="L715">                    .append(stylesheet).append(&quot;:\n&quot;)</span>
@@ -718,7 +718,7 @@ public class TldDocGenerator {
 <span class="nc" id="L718">            println(sw.toString());</span>
         }
 
-<span class="nc" id="L721">        return result;</span>
+<span class="fc" id="L721">        return result;</span>
     }
 
     /**
@@ -729,12 +729,12 @@ public class TldDocGenerator {
      * @param doc        The TLD DOM to populate.
      */
     private void populateTld(TagLibrary tagLibrary, Document doc) {
-<span class="nc" id="L732">        Element root = doc.getDocumentElement();</span>
+<span class="fc" id="L732">        Element root = doc.getDocumentElement();</span>
 
-<span class="nc" id="L734">        checkOrAddShortName(tagLibrary, doc, root);</span>
-<span class="nc" id="L735">        checkOrAddAttributeType(doc, root);</span>
-<span class="nc" id="L736">        populateTagFileDetails(tagLibrary, doc, root);</span>
-<span class="nc" id="L737">    }</span>
+<span class="fc" id="L734">        checkOrAddShortName(tagLibrary, doc, root);</span>
+<span class="fc" id="L735">        checkOrAddAttributeType(doc, root);</span>
+<span class="fc" id="L736">        populateTagFileDetails(tagLibrary, doc, root);</span>
+<span class="fc" id="L737">    }</span>
 
     /**
      * Find all tag-file elements and populate them with the actual parsed meta information, found
@@ -745,63 +745,63 @@ public class TldDocGenerator {
      * @param root       The root element of the TLD DOM being populated.
      */
     private void populateTagFileDetails(TagLibrary tagLibrary, Document doc, Element root) {
-<span class="nc" id="L748">        NodeList tagFileNodes = root.getElementsByTagNameNS(&quot;*&quot;, &quot;tag-file&quot;);</span>
-<span class="nc bnc" id="L749" title="All 2 branches missed.">        for (int i = 0; i &lt; tagFileNodes.getLength(); i++) {</span>
-<span class="nc" id="L750">            Element tagFileNode = (Element) tagFileNodes.item(i);</span>
-<span class="nc" id="L751">            String path = findElementValue(tagFileNode, &quot;path&quot;);</span>
-<span class="nc bnc" id="L752" title="All 2 branches missed.">            if (path == null) {</span>
+<span class="fc" id="L748">        NodeList tagFileNodes = root.getElementsByTagNameNS(&quot;*&quot;, &quot;tag-file&quot;);</span>
+<span class="fc bfc" id="L749" title="All 2 branches covered.">        for (int i = 0; i &lt; tagFileNodes.getLength(); i++) {</span>
+<span class="fc" id="L750">            Element tagFileNode = (Element) tagFileNodes.item(i);</span>
+<span class="fc" id="L751">            String path = findElementValue(tagFileNode, &quot;path&quot;);</span>
+<span class="pc bpc" id="L752" title="1 of 2 branches missed.">            if (path == null) {</span>
 <span class="nc" id="L753">                println(&quot;WARNING: &quot;</span>
 <span class="nc" id="L754">                        + tagLibrary.getPathDescription()</span>
                         + &quot; contains a tag-file element with no path.  Skipping.&quot;);
-<span class="nc" id="L756">            } else {</span>
-<span class="nc" id="L757">                try (InputStream tagFileIn = tagLibrary.getResource(path)) {</span>
-<span class="nc bnc" id="L758" title="All 2 branches missed.">                    if (tagFileIn == null) {</span>
+            } else {
+<span class="fc" id="L757">                try (InputStream tagFileIn = tagLibrary.getResource(path)) {</span>
+<span class="pc bpc" id="L758" title="1 of 2 branches missed.">                    if (tagFileIn == null) {</span>
 <span class="nc" id="L759">                        println(&quot;WARNING: Could not find tag file '&quot;</span>
-<span class="nc" id="L760">                                + path + &quot;' for tag library &quot;</span>
+                                + path + &quot;' for tag library &quot;
 <span class="nc" id="L761">                                + tagLibrary.getPathDescription()</span>
                                 + &quot;.  Data will be incomplete for this tag.&quot;);
-<span class="nc" id="L763">                    } else {</span>
-<span class="nc" id="L764">                        println(&quot;Parsing tag file: &quot; + path);</span>
-<span class="nc" id="L765">                        TagFile tagFile = TagFile.parse(tagFileIn);</span>
-<span class="nc bnc" id="L766" title="All 2 branches missed.">                        for (Directive directive : tagFile.getDirectives()) {</span>
-<span class="nc" id="L767">                            String name = directive.getDirectiveName();</span>
-<span class="nc bnc" id="L768" title="All 4 branches missed.">                            switch (name) {</span>
+                    } else {
+<span class="fc" id="L764">                        println(&quot;Parsing tag file: &quot; + path);</span>
+<span class="fc" id="L765">                        TagFile tagFile = TagFile.parse(tagFileIn);</span>
+<span class="fc bfc" id="L766" title="All 2 branches covered.">                        for (Directive directive : tagFile.getDirectives()) {</span>
+<span class="fc" id="L767">                            String name = directive.getDirectiveName();</span>
+<span class="pc bpc" id="L768" title="1 of 4 branches missed.">                            switch (name) {</span>
                                 case &quot;tag&quot;:
-<span class="nc" id="L770">                                    populateTagFileDetailsTagDirective(</span>
-<span class="nc" id="L771">                                            tagFileNode, doc, directive);</span>
-<span class="nc" id="L772">                                    break;</span>
+<span class="fc" id="L770">                                    populateTagFileDetailsTagDirective(</span>
+                                            tagFileNode, doc, directive);
+<span class="fc" id="L772">                                    break;</span>
                                 case &quot;attribute&quot;:
-<span class="nc" id="L774">                                    populateTagFileDetailsAttributeDirective(</span>
-<span class="nc" id="L775">                                            tagFileNode, doc, directive);</span>
-<span class="nc" id="L776">                                    break;</span>
+<span class="fc" id="L774">                                    populateTagFileDetailsAttributeDirective(</span>
+                                            tagFileNode, doc, directive);
+<span class="fc" id="L776">                                    break;</span>
                                 case &quot;variable&quot;:
-<span class="nc" id="L778">                                    populateTagFileDetailsVariableDirective(</span>
-<span class="nc" id="L779">                                            tagFileNode, doc, directive);</span>
-<span class="nc" id="L780">                                    break;</span>
+<span class="fc" id="L778">                                    populateTagFileDetailsVariableDirective(</span>
+                                            tagFileNode, doc, directive);
+<span class="fc" id="L780">                                    break;</span>
                                 default:
                                     break;
                             }
-                        }
+<span class="fc" id="L784">                        }</span>
 
-<span class="nc" id="L786">                        populateTagFileDetailsTagDefaults(tagFileNode, doc,</span>
-<span class="nc" id="L787">                                path);</span>
+<span class="fc" id="L786">                        populateTagFileDetailsTagDefaults(tagFileNode, doc,</span>
+                                path);
                     }
 <span class="nc" id="L789">                } catch (IOException e) {</span>
 <span class="nc" id="L790">                    println(&quot;WARNING: Could not read tag file '&quot;</span>
-<span class="nc" id="L791">                            + path + &quot;' for tag library &quot;</span>
+                            + path + &quot;' for tag library &quot;
 <span class="nc" id="L792">                            + tagLibrary.getPathDescription()</span>
                             + &quot;.  Data will be incomplete for this tag.&quot;
 <span class="nc" id="L794">                            + &quot;  Reason: &quot; + e.getMessage());</span>
 <span class="nc" id="L795">                } catch (ParseException e) {</span>
 <span class="nc" id="L796">                    println(&quot;WARNING: Could not parse tag file '&quot;</span>
-<span class="nc" id="L797">                            + path + &quot;' for tag library &quot;</span>
+                            + path + &quot;' for tag library &quot;
 <span class="nc" id="L798">                            + tagLibrary.getPathDescription()</span>
                             + &quot;.  Data will be incomplete for this tag.&quot;
 <span class="nc" id="L800">                            + &quot;  Reason: &quot; + e.getMessage());</span>
-                }
+<span class="pc" id="L801">                }</span>
             }
         }
-<span class="nc" id="L804">    }</span>
+<span class="fc" id="L804">    }</span>
 
     /**
      * Populates the given tag-file node with information from the given tag directive.
@@ -813,34 +813,34 @@ public class TldDocGenerator {
     private void populateTagFileDetailsTagDirective(Element tagFileNode, Document doc,
             Directive directive) {
 
-<span class="nc bnc" id="L816" title="All 2 branches missed.">        for (Attribute attribute : directive.getAttributes()) {</span>
-<span class="nc" id="L817">            String name = attribute.getName();</span>
-<span class="nc" id="L818">            String value = attribute.getValue();</span>
+<span class="fc bfc" id="L816" title="All 2 branches covered.">        for (Attribute attribute : directive.getAttributes()) {</span>
+<span class="fc" id="L817">            String name = attribute.getName();</span>
+<span class="fc" id="L818">            String value = attribute.getValue();</span>
             Element element;
-<span class="nc bnc" id="L820" title="All 2 branches missed.">            if (name.equals(&quot;display-name&quot;)</span>
-<span class="nc bnc" id="L821" title="All 2 branches missed.">                    || name.equals(&quot;body-content&quot;)</span>
-<span class="nc bnc" id="L822" title="All 2 branches missed.">                    || name.equals(&quot;dynamic-attributes&quot;)</span>
-<span class="nc bnc" id="L823" title="All 2 branches missed.">                    || name.equals(&quot;description&quot;)</span>
-<span class="nc bnc" id="L824" title="All 2 branches missed.">                    || name.equals(&quot;example&quot;)) {</span>
-<span class="nc" id="L825">                element = doc.createElementNS(Constants.NS_JAKARTAEE, name);</span>
-<span class="nc" id="L826">                element.appendChild(doc.createTextNode(value));</span>
-<span class="nc" id="L827">                tagFileNode.appendChild(element);</span>
-<span class="nc bnc" id="L828" title="All 2 branches missed.">            } else if (name.equals(&quot;small-icon&quot;)</span>
-<span class="nc bnc" id="L829" title="All 2 branches missed.">                    || name.equals(&quot;large-icon&quot;)) {</span>
-<span class="nc" id="L830">                NodeList icons = tagFileNode.getElementsByTagNameNS(&quot;*&quot;, &quot;icon&quot;);</span>
+<span class="fc bfc" id="L820" title="All 2 branches covered.">            if (name.equals(&quot;display-name&quot;)</span>
+<span class="fc bfc" id="L821" title="All 2 branches covered.">                    || name.equals(&quot;body-content&quot;)</span>
+<span class="fc bfc" id="L822" title="All 2 branches covered.">                    || name.equals(&quot;dynamic-attributes&quot;)</span>
+<span class="fc bfc" id="L823" title="All 2 branches covered.">                    || name.equals(&quot;description&quot;)</span>
+<span class="fc bfc" id="L824" title="All 2 branches covered.">                    || name.equals(&quot;example&quot;)) {</span>
+<span class="fc" id="L825">                element = doc.createElementNS(Constants.NS_JAKARTAEE, name);</span>
+<span class="fc" id="L826">                element.appendChild(doc.createTextNode(value));</span>
+<span class="fc" id="L827">                tagFileNode.appendChild(element);</span>
+<span class="fc bfc" id="L828" title="All 2 branches covered.">            } else if (name.equals(&quot;small-icon&quot;)</span>
+<span class="fc bfc" id="L829" title="All 2 branches covered.">                    || name.equals(&quot;large-icon&quot;)) {</span>
+<span class="fc" id="L830">                NodeList icons = tagFileNode.getElementsByTagNameNS(&quot;*&quot;, &quot;icon&quot;);</span>
                 Element icon;
-<span class="nc bnc" id="L832" title="All 2 branches missed.">                if (icons.getLength() == 0) {</span>
+<span class="pc bpc" id="L832" title="1 of 2 branches missed.">                if (icons.getLength() == 0) {</span>
 <span class="nc" id="L833">                    icon = doc.createElementNS(Constants.NS_JAKARTAEE, &quot;icon&quot;);</span>
 <span class="nc" id="L834">                    tagFileNode.appendChild(icon);</span>
-<span class="nc" id="L835">                } else {</span>
-<span class="nc" id="L836">                    icon = (Element) icons.item(0);</span>
+                } else {
+<span class="fc" id="L836">                    icon = (Element) icons.item(0);</span>
                 }
-<span class="nc" id="L838">                element = doc.createElementNS(Constants.NS_JAKARTAEE, name);</span>
-<span class="nc" id="L839">                element.appendChild(doc.createTextNode(value));</span>
-<span class="nc" id="L840">                icon.appendChild(element);</span>
+<span class="fc" id="L838">                element = doc.createElementNS(Constants.NS_JAKARTAEE, name);</span>
+<span class="fc" id="L839">                element.appendChild(doc.createTextNode(value));</span>
+<span class="fc" id="L840">                icon.appendChild(element);</span>
             }
-        }
-<span class="nc" id="L843">    }</span>
+<span class="fc" id="L842">        }</span>
+<span class="fc" id="L843">    }</span>
 
     /**
      * Populates the given tag-file node with default values, for those values not specified via tag
@@ -851,14 +851,14 @@ public class TldDocGenerator {
      * @param path        The path to the tag file
      */
     private void populateTagFileDetailsTagDefaults(Element tagFileNode, Document doc, String path) {
-<span class="nc" id="L854">        String displayName = path.substring(</span>
-<span class="nc" id="L855">                path.lastIndexOf('/') + 1);</span>
-<span class="nc" id="L856">        displayName = displayName.substring(0,</span>
-<span class="nc" id="L857">                displayName.lastIndexOf('.'));</span>
-<span class="nc" id="L858">        populateDefault(doc, tagFileNode, &quot;display-name&quot;, displayName);</span>
-<span class="nc" id="L859">        populateDefault(doc, tagFileNode, &quot;body-content&quot;, &quot;scriptless&quot;);</span>
-<span class="nc" id="L860">        populateDefault(doc, tagFileNode, &quot;dynamic-attributes&quot;, &quot;false&quot;);</span>
-<span class="nc" id="L861">    }</span>
+<span class="fc" id="L854">        String displayName = path.substring(</span>
+<span class="fc" id="L855">                path.lastIndexOf('/') + 1);</span>
+<span class="fc" id="L856">        displayName = displayName.substring(0,</span>
+<span class="fc" id="L857">                displayName.lastIndexOf('.'));</span>
+<span class="fc" id="L858">        populateDefault(doc, tagFileNode, &quot;display-name&quot;, displayName);</span>
+<span class="fc" id="L859">        populateDefault(doc, tagFileNode, &quot;body-content&quot;, &quot;scriptless&quot;);</span>
+<span class="fc" id="L860">        populateDefault(doc, tagFileNode, &quot;dynamic-attributes&quot;, &quot;false&quot;);</span>
+<span class="fc" id="L861">    }</span>
 
     /**
      * Searches for the value of the given element. If no value is found, a default value is
@@ -871,12 +871,12 @@ public class TldDocGenerator {
      */
     private void populateDefault(Document doc, Element parent, String tagName,
             String defaultValue) {
-<span class="nc bnc" id="L874" title="All 2 branches missed.">        if (findElementValue(parent, tagName) == null) {</span>
+<span class="pc bpc" id="L874" title="1 of 2 branches missed.">        if (findElementValue(parent, tagName) == null) {</span>
 <span class="nc" id="L875">            Element element = doc.createElementNS(Constants.NS_JAKARTAEE, tagName);</span>
 <span class="nc" id="L876">            element.appendChild(doc.createTextNode(defaultValue));</span>
 <span class="nc" id="L877">            parent.appendChild(element);</span>
         }
-<span class="nc" id="L879">    }</span>
+<span class="fc" id="L879">    }</span>
 
     /**
      * Populates the given tag-file node with information from the given attribute directive.
@@ -887,31 +887,31 @@ public class TldDocGenerator {
      */
     private void populateTagFileDetailsAttributeDirective(
             Element tagFileNode, Document doc, Directive directive) {
-<span class="nc" id="L890">        Element attributeNode = doc.createElementNS(Constants.NS_JAKARTAEE,</span>
-<span class="nc" id="L891">                &quot;attribute&quot;);</span>
-<span class="nc" id="L892">        tagFileNode.appendChild(attributeNode);</span>
-<span class="nc" id="L893">        String deferredValueType = null;</span>
-<span class="nc" id="L894">        String deferredMethodSignature = null;</span>
-<span class="nc bnc" id="L895" title="All 2 branches missed.">        for (Attribute attribute : directive.getAttributes()) {</span>
-<span class="nc" id="L896">            String name = attribute.getName();</span>
-<span class="nc" id="L897">            String value = attribute.getValue();</span>
+<span class="fc" id="L890">        Element attributeNode = doc.createElementNS(Constants.NS_JAKARTAEE,</span>
+                &quot;attribute&quot;);
+<span class="fc" id="L892">        tagFileNode.appendChild(attributeNode);</span>
+<span class="fc" id="L893">        String deferredValueType = null;</span>
+<span class="fc" id="L894">        String deferredMethodSignature = null;</span>
+<span class="fc bfc" id="L895" title="All 2 branches covered.">        for (Attribute attribute : directive.getAttributes()) {</span>
+<span class="fc" id="L896">            String name = attribute.getName();</span>
+<span class="fc" id="L897">            String value = attribute.getValue();</span>
             Element element;
-<span class="nc bnc" id="L899" title="All 6 branches missed.">            switch (name) {</span>
+<span class="pc bpc" id="L899" title="5 of 6 branches missed.">            switch (name) {</span>
                 case &quot;name&quot;:
                 case &quot;required&quot;:
                 case &quot;fragment&quot;:
                 case &quot;rtexprvalue&quot;:
                 case &quot;type&quot;:
                 case &quot;description&quot;:
-<span class="nc" id="L906">                    element = doc.createElementNS(Constants.NS_JAKARTAEE, name);</span>
-<span class="nc" id="L907">                    element.appendChild(doc.createTextNode(value));</span>
-<span class="nc" id="L908">                    attributeNode.appendChild(element);</span>
-<span class="nc" id="L909">                    break;</span>
+<span class="fc" id="L906">                    element = doc.createElementNS(Constants.NS_JAKARTAEE, name);</span>
+<span class="fc" id="L907">                    element.appendChild(doc.createTextNode(value));</span>
+<span class="fc" id="L908">                    attributeNode.appendChild(element);</span>
+<span class="fc" id="L909">                    break;</span>
                 case &quot;deferredValue&quot;:
 <span class="nc bnc" id="L911" title="All 2 branches missed.">                    if (deferredValueType == null) {</span>
 <span class="nc" id="L912">                        deferredValueType = &quot;java.lang.Object&quot;;</span>
                     }
-<span class="nc" id="L914">                    break;</span>
+                    break;
                 case &quot;deferredValueType&quot;:
 <span class="nc" id="L916">                    deferredValueType = value;</span>
 <span class="nc" id="L917">                    break;</span>
@@ -919,15 +919,15 @@ public class TldDocGenerator {
 <span class="nc bnc" id="L919" title="All 2 branches missed.">                    if (deferredMethodSignature == null) {</span>
 <span class="nc" id="L920">                        deferredMethodSignature = &quot;void methodname()&quot;;</span>
                     }
-<span class="nc" id="L922">                    break;</span>
+                    break;
                 case &quot;deferredMethodSignature&quot;:
 <span class="nc" id="L924">                    deferredMethodSignature = value;</span>
 <span class="nc" id="L925">                    break;</span>
                 default:
                     break;
             }
-        }
-<span class="nc bnc" id="L930" title="All 2 branches missed.">        if (deferredValueType != null) {</span>
+<span class="fc" id="L929">        }</span>
+<span class="pc bpc" id="L930" title="1 of 2 branches missed.">        if (deferredValueType != null) {</span>
 <span class="nc" id="L931">            Element deferredValueElement</span>
 <span class="nc" id="L932">                    = doc.createElementNS(Constants.NS_JAKARTAEE, &quot;deferred-value&quot;);</span>
 <span class="nc" id="L933">            attributeNode.appendChild(deferredValueElement);</span>
@@ -936,7 +936,7 @@ public class TldDocGenerator {
 <span class="nc" id="L936">            typeElement.appendChild(doc.createTextNode(deferredValueType));</span>
 <span class="nc" id="L937">            deferredValueElement.appendChild(typeElement);</span>
         }
-<span class="nc bnc" id="L939" title="All 2 branches missed.">        if (deferredMethodSignature != null) {</span>
+<span class="pc bpc" id="L939" title="1 of 2 branches missed.">        if (deferredMethodSignature != null) {</span>
 <span class="nc" id="L940">            Element deferredMethodElement</span>
 <span class="nc" id="L941">                    = doc.createElementNS(Constants.NS_JAKARTAEE, &quot;deferred-method&quot;);</span>
 <span class="nc" id="L942">            attributeNode.appendChild(deferredMethodElement);</span>
@@ -946,20 +946,20 @@ public class TldDocGenerator {
 <span class="nc" id="L946">                    doc.createTextNode(deferredMethodSignature));</span>
 <span class="nc" id="L947">            deferredMethodElement.appendChild(methodSignatureElement);</span>
         }
-<span class="nc" id="L949">        populateDefault(doc, attributeNode, &quot;required&quot;, &quot;false&quot;);</span>
-<span class="nc" id="L950">        populateDefault(doc, attributeNode, &quot;fragment&quot;, &quot;false&quot;);</span>
-<span class="nc" id="L951">        populateDefault(doc, attributeNode, &quot;rtexprvalue&quot;, &quot;false&quot;);</span>
+<span class="fc" id="L949">        populateDefault(doc, attributeNode, &quot;required&quot;, &quot;false&quot;);</span>
+<span class="fc" id="L950">        populateDefault(doc, attributeNode, &quot;fragment&quot;, &quot;false&quot;);</span>
+<span class="fc" id="L951">        populateDefault(doc, attributeNode, &quot;rtexprvalue&quot;, &quot;false&quot;);</span>
 
         // Default is String if this is not a fragment attribute, or
         // javax.servlet.jsp.tagext.JspFragment if this is a fragment
         // attribute.
-<span class="nc" id="L956">        String fragmentValue = findElementValue(attributeNode, &quot;fragment&quot;);</span>
-<span class="nc bnc" id="L957" title="All 2 branches missed.">        boolean fragment = !(fragmentValue == null</span>
-<span class="nc bnc" id="L958" title="All 2 branches missed.">                || fragmentValue.equalsIgnoreCase(&quot;false&quot;));</span>
-<span class="nc" id="L959">        populateDefault(doc, attributeNode, &quot;type&quot;,</span>
-<span class="nc bnc" id="L960" title="All 2 branches missed.">                fragment ? &quot;javax.servlet.jsp.tagext.JspFragment&quot;</span>
-<span class="nc" id="L961">                        : &quot;java.lang.String&quot;);</span>
-<span class="nc" id="L962">    }</span>
+<span class="fc" id="L956">        String fragmentValue = findElementValue(attributeNode, &quot;fragment&quot;);</span>
+<span class="pc bpc" id="L957" title="1 of 2 branches missed.">        boolean fragment = !(fragmentValue == null</span>
+<span class="fc bfc" id="L958" title="All 2 branches covered.">                || fragmentValue.equalsIgnoreCase(&quot;false&quot;));</span>
+<span class="fc" id="L959">        populateDefault(doc, attributeNode, &quot;type&quot;,</span>
+<span class="fc bfc" id="L960" title="All 2 branches covered.">                fragment ? &quot;javax.servlet.jsp.tagext.JspFragment&quot;</span>
+<span class="fc" id="L961">                        : &quot;java.lang.String&quot;);</span>
+<span class="fc" id="L962">    }</span>
 
     /**
      * Populates the given tag-file node with information from the given variable directive.
@@ -970,29 +970,29 @@ public class TldDocGenerator {
      */
     private void populateTagFileDetailsVariableDirective(
             Element tagFileNode, Document doc, Directive directive) {
-<span class="nc" id="L973">        Element variableNode = doc.createElementNS(Constants.NS_JAKARTAEE,</span>
-<span class="nc" id="L974">                &quot;variable&quot;);</span>
-<span class="nc" id="L975">        tagFileNode.appendChild(variableNode);</span>
-<span class="nc bnc" id="L976" title="All 2 branches missed.">        for (Attribute attribute : directive.getAttributes()) {</span>
-<span class="nc" id="L977">            String name = attribute.getName();</span>
-<span class="nc" id="L978">            String value = attribute.getValue();</span>
+<span class="fc" id="L973">        Element variableNode = doc.createElementNS(Constants.NS_JAKARTAEE,</span>
+                &quot;variable&quot;);
+<span class="fc" id="L975">        tagFileNode.appendChild(variableNode);</span>
+<span class="fc bfc" id="L976" title="All 2 branches covered.">        for (Attribute attribute : directive.getAttributes()) {</span>
+<span class="fc" id="L977">            String name = attribute.getName();</span>
+<span class="fc" id="L978">            String value = attribute.getValue();</span>
             Element element;
-<span class="nc bnc" id="L980" title="All 2 branches missed.">            if (name.equals(&quot;name-given&quot;)</span>
-<span class="nc bnc" id="L981" title="All 2 branches missed.">                    || name.equals(&quot;name-from-attribute&quot;)</span>
-<span class="nc bnc" id="L982" title="All 2 branches missed.">                    || name.equals(&quot;variable-class&quot;)</span>
-<span class="nc bnc" id="L983" title="All 2 branches missed.">                    || name.equals(&quot;declare&quot;)</span>
-<span class="nc bnc" id="L984" title="All 2 branches missed.">                    || name.equals(&quot;scope&quot;)</span>
-<span class="nc bnc" id="L985" title="All 2 branches missed.">                    || name.equals(&quot;description&quot;)) {</span>
-<span class="nc" id="L986">                element = doc.createElementNS(Constants.NS_JAKARTAEE, name);</span>
-<span class="nc" id="L987">                element.appendChild(doc.createTextNode(value));</span>
-<span class="nc" id="L988">                variableNode.appendChild(element);</span>
+<span class="fc bfc" id="L980" title="All 2 branches covered.">            if (name.equals(&quot;name-given&quot;)</span>
+<span class="fc bfc" id="L981" title="All 2 branches covered.">                    || name.equals(&quot;name-from-attribute&quot;)</span>
+<span class="fc bfc" id="L982" title="All 2 branches covered.">                    || name.equals(&quot;variable-class&quot;)</span>
+<span class="fc bfc" id="L983" title="All 2 branches covered.">                    || name.equals(&quot;declare&quot;)</span>
+<span class="fc bfc" id="L984" title="All 2 branches covered.">                    || name.equals(&quot;scope&quot;)</span>
+<span class="fc bfc" id="L985" title="All 2 branches covered.">                    || name.equals(&quot;description&quot;)) {</span>
+<span class="fc" id="L986">                element = doc.createElementNS(Constants.NS_JAKARTAEE, name);</span>
+<span class="fc" id="L987">                element.appendChild(doc.createTextNode(value));</span>
+<span class="fc" id="L988">                variableNode.appendChild(element);</span>
             }
-        }
-<span class="nc" id="L991">        populateDefault(doc, variableNode, &quot;variable-class&quot;,</span>
-<span class="nc" id="L992">                &quot;java.lang.String&quot;);</span>
-<span class="nc" id="L993">        populateDefault(doc, variableNode, &quot;declare&quot;, &quot;true&quot;);</span>
-<span class="nc" id="L994">        populateDefault(doc, variableNode, &quot;scope&quot;, &quot;NESTED&quot;);</span>
-<span class="nc" id="L995">    }</span>
+<span class="fc" id="L990">        }</span>
+<span class="fc" id="L991">        populateDefault(doc, variableNode, &quot;variable-class&quot;,</span>
+                &quot;java.lang.String&quot;);
+<span class="fc" id="L993">        populateDefault(doc, variableNode, &quot;declare&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L994">        populateDefault(doc, variableNode, &quot;scope&quot;, &quot;NESTED&quot;);</span>
+<span class="fc" id="L995">    }</span>
 
     /**
      * Check to see if there's a short-name element. If not, the TLD is technically invalid, but
@@ -1004,19 +1004,19 @@ public class TldDocGenerator {
      */
     private void checkOrAddShortName(TagLibrary tagLibrary, Document doc,
             Element root) {
-<span class="nc bnc" id="L1007" title="All 2 branches missed.">        if (root.getElementsByTagNameNS(&quot;*&quot;, &quot;short-name&quot;).getLength() == 0) {</span>
+<span class="pc bpc" id="L1007" title="1 of 2 branches missed.">        if (root.getElementsByTagNameNS(&quot;*&quot;, &quot;short-name&quot;).getLength() == 0) {</span>
 <span class="nc" id="L1008">            String prefix = &quot;prefix&quot; + substitutePrefix;</span>
 <span class="nc" id="L1009">            substitutePrefix++;</span>
 <span class="nc" id="L1010">            Element shortName = doc.createElementNS(Constants.NS_JAKARTAEE,</span>
-<span class="nc" id="L1011">                    &quot;short-name&quot;);</span>
+                    &quot;short-name&quot;);
 <span class="nc" id="L1012">            shortName.appendChild(doc.createTextNode(prefix));</span>
 <span class="nc" id="L1013">            root.appendChild(shortName);</span>
 <span class="nc" id="L1014">            println(&quot;WARNING: &quot;</span>
 <span class="nc" id="L1015">                    + tagLibrary.getPathDescription()</span>
                     + &quot; is missing a short-name element.  Using &quot;
-<span class="nc" id="L1017">                    + prefix + &quot;.&quot;);</span>
+                    + prefix + &quot;.&quot;);
         }
-<span class="nc" id="L1019">    }</span>
+<span class="fc" id="L1019">    }</span>
 
     /**
      * Check for empty attribute types and fill in the correct value. This is more difficult for the
@@ -1027,37 +1027,37 @@ public class TldDocGenerator {
      * @param root The root element of the TLD DOM being populated.
      */
     private void checkOrAddAttributeType(Document doc, Element root) {
-<span class="nc" id="L1030">        NodeList tagNodes = root.getElementsByTagNameNS(&quot;*&quot;, &quot;tag&quot;);</span>
-<span class="nc bnc" id="L1031" title="All 2 branches missed.">        for (int i = 0; i &lt; tagNodes.getLength(); i++) {</span>
-<span class="nc" id="L1032">            Element tagElement = (Element) tagNodes.item(i);</span>
-<span class="nc" id="L1033">            NodeList attributeNodes</span>
-<span class="nc" id="L1034">                    = tagElement.getElementsByTagNameNS(&quot;*&quot;, &quot;attribute&quot;);</span>
-<span class="nc bnc" id="L1035" title="All 2 branches missed.">            for (int j = 0; j &lt; attributeNodes.getLength(); j++) {</span>
-<span class="nc" id="L1036">                Element attributeElement = (Element) attributeNodes.item(j);</span>
-<span class="nc bnc" id="L1037" title="All 2 branches missed.">                if (attributeElement.getElementsByTagNameNS(&quot;*&quot;,</span>
-<span class="nc" id="L1038">                        &quot;type&quot;).getLength() == 0) {</span>
+<span class="fc" id="L1030">        NodeList tagNodes = root.getElementsByTagNameNS(&quot;*&quot;, &quot;tag&quot;);</span>
+<span class="fc bfc" id="L1031" title="All 2 branches covered.">        for (int i = 0; i &lt; tagNodes.getLength(); i++) {</span>
+<span class="fc" id="L1032">            Element tagElement = (Element) tagNodes.item(i);</span>
+<span class="fc" id="L1033">            NodeList attributeNodes</span>
+<span class="fc" id="L1034">                    = tagElement.getElementsByTagNameNS(&quot;*&quot;, &quot;attribute&quot;);</span>
+<span class="fc bfc" id="L1035" title="All 2 branches covered.">            for (int j = 0; j &lt; attributeNodes.getLength(); j++) {</span>
+<span class="fc" id="L1036">                Element attributeElement = (Element) attributeNodes.item(j);</span>
+<span class="fc" id="L1037">                if (attributeElement.getElementsByTagNameNS(&quot;*&quot;,</span>
+<span class="fc bfc" id="L1038" title="All 2 branches covered.">                        &quot;type&quot;).getLength() == 0) {</span>
                     // No attribute type specified.
-<span class="nc" id="L1040">                    String defaultType = &quot;java.lang.String&quot;;</span>
+<span class="fc" id="L1040">                    String defaultType = &quot;java.lang.String&quot;;</span>
 
                     // Check if there is a fragment element set to true:
-<span class="nc" id="L1043">                    String fragment = findElementValue(attributeElement,</span>
-<span class="nc" id="L1044">                            &quot;fragment&quot;);</span>
-<span class="nc bnc" id="L1045" title="All 2 branches missed.">                    if (fragment != null</span>
-<span class="nc bnc" id="L1046" title="All 2 branches missed.">                            &amp;&amp; (fragment.trim().equalsIgnoreCase(&quot;true&quot;)</span>
-<span class="nc bnc" id="L1047" title="All 2 branches missed.">                            || fragment.trim().equalsIgnoreCase(&quot;yes&quot;))) {</span>
-<span class="nc" id="L1048">                        defaultType = &quot;javax.servlet.jsp.tagext.JspFragment&quot;;</span>
+<span class="fc" id="L1043">                    String fragment = findElementValue(attributeElement,</span>
+                            &quot;fragment&quot;);
+<span class="fc bfc" id="L1045" title="All 2 branches covered.">                    if (fragment != null</span>
+<span class="fc bfc" id="L1046" title="All 2 branches covered.">                            &amp;&amp; (fragment.trim().equalsIgnoreCase(&quot;true&quot;)</span>
+<span class="pc bpc" id="L1047" title="1 of 2 branches missed.">                            || fragment.trim().equalsIgnoreCase(&quot;yes&quot;))) {</span>
+<span class="fc" id="L1048">                        defaultType = &quot;javax.servlet.jsp.tagext.JspFragment&quot;;</span>
                     }
 
                     // Create &lt;type&gt; element and append to attribute
-<span class="nc" id="L1052">                    Element typeElement = doc.createElementNS(</span>
-<span class="nc" id="L1053">                            Constants.NS_JAKARTAEE, &quot;type&quot;);</span>
-<span class="nc" id="L1054">                    typeElement.appendChild(</span>
-<span class="nc" id="L1055">                            doc.createTextNode(defaultType));</span>
-<span class="nc" id="L1056">                    attributeElement.appendChild(typeElement);</span>
+<span class="fc" id="L1052">                    Element typeElement = doc.createElementNS(</span>
+                            Constants.NS_JAKARTAEE, &quot;type&quot;);
+<span class="fc" id="L1054">                    typeElement.appendChild(</span>
+<span class="fc" id="L1055">                            doc.createTextNode(defaultType));</span>
+<span class="fc" id="L1056">                    attributeElement.appendChild(typeElement);</span>
                 }
             }
         }
-<span class="nc" id="L1060">    }</span>
+<span class="fc" id="L1060">    }</span>
 
     /**
      * Generates all overview files, summarizing all TLDs.
@@ -1074,18 +1074,18 @@ public class TldDocGenerator {
     private void generateOverview() throws TransformerFactoryConfigurationError,
             TransformerConfigurationException, TransformerException {
 
-<span class="nc" id="L1077">        generatePage(outputDirectory.resolve(&quot;index.html&quot;), RESOURCE_PATH + &quot;/index.html.xsl&quot;);</span>
-<span class="nc" id="L1078">        generatePage(outputDirectory.resolve(&quot;help-doc.html&quot;),</span>
-<span class="nc" id="L1079">                RESOURCE_PATH + &quot;/help-doc.html.xsl&quot;);</span>
-<span class="nc" id="L1080">        generatePage(outputDirectory.resolve(&quot;overview-frame.html&quot;),</span>
-<span class="nc" id="L1081">                RESOURCE_PATH + &quot;/overview-frame.html.xsl&quot;);</span>
-<span class="nc" id="L1082">        generatePage(outputDirectory.resolve(&quot;alltags-frame.html&quot;),</span>
-<span class="nc" id="L1083">                RESOURCE_PATH + &quot;/alltags-frame.html.xsl&quot;);</span>
-<span class="nc" id="L1084">        generatePage(outputDirectory.resolve(&quot;alltags-noframe.html&quot;),</span>
-<span class="nc" id="L1085">                RESOURCE_PATH + &quot;/alltags-noframe.html.xsl&quot;);</span>
-<span class="nc" id="L1086">        generatePage(outputDirectory.resolve(&quot;overview-summary.html&quot;),</span>
-<span class="nc" id="L1087">                RESOURCE_PATH + &quot;/overview-summary.html.xsl&quot;);</span>
-<span class="nc" id="L1088">    }</span>
+<span class="fc" id="L1077">        generatePage(outputDirectory.resolve(&quot;index.html&quot;), RESOURCE_PATH + &quot;/index.html.xsl&quot;);</span>
+<span class="fc" id="L1078">        generatePage(outputDirectory.resolve(&quot;help-doc.html&quot;),</span>
+                RESOURCE_PATH + &quot;/help-doc.html.xsl&quot;);
+<span class="fc" id="L1080">        generatePage(outputDirectory.resolve(&quot;overview-frame.html&quot;),</span>
+                RESOURCE_PATH + &quot;/overview-frame.html.xsl&quot;);
+<span class="fc" id="L1082">        generatePage(outputDirectory.resolve(&quot;alltags-frame.html&quot;),</span>
+                RESOURCE_PATH + &quot;/alltags-frame.html.xsl&quot;);
+<span class="fc" id="L1084">        generatePage(outputDirectory.resolve(&quot;alltags-noframe.html&quot;),</span>
+                RESOURCE_PATH + &quot;/alltags-noframe.html.xsl&quot;);
+<span class="fc" id="L1086">        generatePage(outputDirectory.resolve(&quot;overview-summary.html&quot;),</span>
+                RESOURCE_PATH + &quot;/overview-summary.html.xsl&quot;);
+<span class="fc" id="L1088">    }</span>
 
     /**
      * Generates all the detail folders for each TLD.
@@ -1096,58 +1096,58 @@ public class TldDocGenerator {
      * @throws GeneratorException   any error during generation
      */
     private void generateTldDetail() throws IOException, TransformerException, GeneratorException {
-<span class="nc" id="L1099">        ArrayList&lt;String&gt; shortNames = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L1100">        Element root = summaryTld.getDocumentElement();</span>
-<span class="nc" id="L1101">        NodeList taglibs = root.getElementsByTagNameNS(&quot;*&quot;, &quot;taglib&quot;);</span>
-<span class="nc" id="L1102">        int size = taglibs.getLength();</span>
-<span class="nc bnc" id="L1103" title="All 2 branches missed.">        for (int i = 0; i &lt; size; i++) {</span>
-<span class="nc" id="L1104">            Element taglib = (Element) taglibs.item(i);</span>
-<span class="nc" id="L1105">            String shortName = findElementValue(taglib, &quot;short-name&quot;);</span>
-<span class="nc" id="L1106">            String displayName = findElementValue(taglib, &quot;display-name&quot;);</span>
-<span class="nc bnc" id="L1107" title="All 2 branches missed.">            if (shortNames.contains(shortName)) {</span>
+<span class="fc" id="L1099">        ArrayList&lt;String&gt; shortNames = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L1100">        Element root = summaryTld.getDocumentElement();</span>
+<span class="fc" id="L1101">        NodeList taglibs = root.getElementsByTagNameNS(&quot;*&quot;, &quot;taglib&quot;);</span>
+<span class="fc" id="L1102">        int size = taglibs.getLength();</span>
+<span class="fc bfc" id="L1103" title="All 2 branches covered.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="fc" id="L1104">            Element taglib = (Element) taglibs.item(i);</span>
+<span class="fc" id="L1105">            String shortName = findElementValue(taglib, &quot;short-name&quot;);</span>
+<span class="fc" id="L1106">            String displayName = findElementValue(taglib, &quot;display-name&quot;);</span>
+<span class="pc bpc" id="L1107" title="1 of 2 branches missed.">            if (shortNames.contains(shortName)) {</span>
 <span class="nc" id="L1108">                throw new GeneratorException(&quot;Two tag libraries exist with the same short-name '&quot;</span>
-<span class="nc" id="L1109">                        + shortName + &quot;'.  This is not yet supported.&quot;);</span>
+                        + shortName + &quot;'.  This is not yet supported.&quot;);
             }
-<span class="nc" id="L1111">            String name = displayName;</span>
-<span class="nc bnc" id="L1112" title="All 2 branches missed.">            if (name == null) {</span>
-<span class="nc" id="L1113">                name = shortName;</span>
+<span class="fc" id="L1111">            String name = displayName;</span>
+<span class="fc bfc" id="L1112" title="All 2 branches covered.">            if (name == null) {</span>
+<span class="fc" id="L1113">                name = shortName;</span>
             }
-<span class="nc" id="L1115">            println(&quot;Generating docs for &quot; + name + &quot;...&quot;);</span>
-<span class="nc" id="L1116">            shortNames.add(shortName);</span>
-<span class="nc" id="L1117">            Path outDir = outputDirectory.resolve(shortName);</span>
-<span class="nc" id="L1118">            Files.createDirectories(outDir);</span>
+<span class="fc" id="L1115">            println(&quot;Generating docs for &quot; + name + &quot;...&quot;);</span>
+<span class="fc" id="L1116">            shortNames.add(shortName);</span>
+<span class="fc" id="L1117">            Path outDir = outputDirectory.resolve(shortName);</span>
+<span class="fc" id="L1118">            Files.createDirectories(outDir);</span>
 
             // Generate information for each TLD:
-<span class="nc" id="L1121">            generateTldDetail(outDir, shortName);</span>
+<span class="fc" id="L1121">            generateTldDetail(outDir, shortName);</span>
 
             // Generate information for each tag:
-<span class="nc" id="L1124">            NodeList tags = taglib.getElementsByTagNameNS(&quot;*&quot;, &quot;tag&quot;);</span>
-<span class="nc" id="L1125">            int numTags = tags.getLength();</span>
-<span class="nc bnc" id="L1126" title="All 2 branches missed.">            for (int j = 0; j &lt; numTags; j++) {</span>
-<span class="nc" id="L1127">                Element tag = (Element) tags.item(j);</span>
-<span class="nc" id="L1128">                String tagName = findElementValue(tag, &quot;name&quot;);</span>
-<span class="nc" id="L1129">                generateTagDetail(outDir, shortName, tagName);</span>
+<span class="fc" id="L1124">            NodeList tags = taglib.getElementsByTagNameNS(&quot;*&quot;, &quot;tag&quot;);</span>
+<span class="fc" id="L1125">            int numTags = tags.getLength();</span>
+<span class="fc bfc" id="L1126" title="All 2 branches covered.">            for (int j = 0; j &lt; numTags; j++) {</span>
+<span class="fc" id="L1127">                Element tag = (Element) tags.item(j);</span>
+<span class="fc" id="L1128">                String tagName = findElementValue(tag, &quot;name&quot;);</span>
+<span class="fc" id="L1129">                generateTagDetail(outDir, shortName, tagName);</span>
             }
 
             // Generate information for each tag-file:
-<span class="nc" id="L1133">            NodeList tagFiles = taglib.getElementsByTagNameNS(&quot;*&quot;, &quot;tag-file&quot;);</span>
-<span class="nc" id="L1134">            int numTagFiles = tagFiles.getLength();</span>
-<span class="nc bnc" id="L1135" title="All 2 branches missed.">            for (int j = 0; j &lt; numTagFiles; j++) {</span>
-<span class="nc" id="L1136">                Element tagFile = (Element) tagFiles.item(j);</span>
-<span class="nc" id="L1137">                String tagFileName = findElementValue(tagFile, &quot;name&quot;);</span>
-<span class="nc" id="L1138">                generateTagDetail(outDir, shortName, tagFileName);</span>
+<span class="fc" id="L1133">            NodeList tagFiles = taglib.getElementsByTagNameNS(&quot;*&quot;, &quot;tag-file&quot;);</span>
+<span class="fc" id="L1134">            int numTagFiles = tagFiles.getLength();</span>
+<span class="fc bfc" id="L1135" title="All 2 branches covered.">            for (int j = 0; j &lt; numTagFiles; j++) {</span>
+<span class="fc" id="L1136">                Element tagFile = (Element) tagFiles.item(j);</span>
+<span class="fc" id="L1137">                String tagFileName = findElementValue(tagFile, &quot;name&quot;);</span>
+<span class="fc" id="L1138">                generateTagDetail(outDir, shortName, tagFileName);</span>
             }
 
             // Generate information for each function:
-<span class="nc" id="L1142">            NodeList functions = taglib.getElementsByTagNameNS(&quot;*&quot;, &quot;function&quot;);</span>
-<span class="nc" id="L1143">            int numFunctions = functions.getLength();</span>
-<span class="nc bnc" id="L1144" title="All 2 branches missed.">            for (int j = 0; j &lt; numFunctions; j++) {</span>
-<span class="nc" id="L1145">                Element function = (Element) functions.item(j);</span>
-<span class="nc" id="L1146">                String functionName = findElementValue(function, &quot;name&quot;);</span>
-<span class="nc" id="L1147">                generateFunctionDetail(outDir, shortName, functionName);</span>
+<span class="fc" id="L1142">            NodeList functions = taglib.getElementsByTagNameNS(&quot;*&quot;, &quot;function&quot;);</span>
+<span class="fc" id="L1143">            int numFunctions = functions.getLength();</span>
+<span class="fc bfc" id="L1144" title="All 2 branches covered.">            for (int j = 0; j &lt; numFunctions; j++) {</span>
+<span class="fc" id="L1145">                Element function = (Element) functions.item(j);</span>
+<span class="fc" id="L1146">                String functionName = findElementValue(function, &quot;name&quot;);</span>
+<span class="fc" id="L1147">                generateFunctionDetail(outDir, shortName, functionName);</span>
             }
         }
-<span class="nc" id="L1150">    }</span>
+<span class="fc" id="L1150">    }</span>
 
     /**
      * Generates the detail content for the tag library with the given short-name. Files will be
@@ -1163,14 +1163,14 @@ public class TldDocGenerator {
     private void generateTldDetail(Path outDir, String shortName) throws IOException,
             TransformerException {
 
-<span class="nc" id="L1166">        HashMap&lt;String, String&gt; parameters = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L1167">        parameters.put(&quot;tlddoc-shortName&quot;, shortName);</span>
+<span class="fc" id="L1166">        HashMap&lt;String, String&gt; parameters = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L1167">        parameters.put(&quot;tlddoc-shortName&quot;, shortName);</span>
 
-<span class="nc" id="L1169">        generatePage(outDir.resolve(&quot;tld-frame.html&quot;),</span>
-<span class="nc" id="L1170">                RESOURCE_PATH + &quot;/tld-frame.html.xsl&quot;, parameters);</span>
-<span class="nc" id="L1171">        generatePage(outDir.resolve(&quot;tld-summary.html&quot;),</span>
-<span class="nc" id="L1172">                RESOURCE_PATH + &quot;/tld-summary.html.xsl&quot;, parameters);</span>
-<span class="nc" id="L1173">    }</span>
+<span class="fc" id="L1169">        generatePage(outDir.resolve(&quot;tld-frame.html&quot;),</span>
+                RESOURCE_PATH + &quot;/tld-frame.html.xsl&quot;, parameters);
+<span class="fc" id="L1171">        generatePage(outDir.resolve(&quot;tld-summary.html&quot;),</span>
+                RESOURCE_PATH + &quot;/tld-summary.html.xsl&quot;, parameters);
+<span class="fc" id="L1173">    }</span>
 
     /**
      * Generates the detail content for the tag with the given name in the tag library with the
@@ -1187,13 +1187,13 @@ public class TldDocGenerator {
     private void generateTagDetail(Path outDir, String shortName, String tagName) throws
             IOException, TransformerException {
 
-<span class="nc" id="L1190">        HashMap&lt;String, String&gt; parameters = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L1191">        parameters.put(&quot;tlddoc-shortName&quot;, shortName);</span>
-<span class="nc" id="L1192">        parameters.put(&quot;tlddoc-tagName&quot;, tagName);</span>
+<span class="fc" id="L1190">        HashMap&lt;String, String&gt; parameters = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L1191">        parameters.put(&quot;tlddoc-shortName&quot;, shortName);</span>
+<span class="fc" id="L1192">        parameters.put(&quot;tlddoc-tagName&quot;, tagName);</span>
 
-<span class="nc" id="L1194">        generatePage(outDir.resolve(tagName + &quot;.html&quot;),</span>
-<span class="nc" id="L1195">                RESOURCE_PATH + &quot;/tag.html.xsl&quot;, parameters);</span>
-<span class="nc" id="L1196">    }</span>
+<span class="fc" id="L1194">        generatePage(outDir.resolve(tagName + &quot;.html&quot;),</span>
+                RESOURCE_PATH + &quot;/tag.html.xsl&quot;, parameters);
+<span class="fc" id="L1196">    }</span>
 
     /**
      * Generates the detail content for the function with the given name in the tag library with the
@@ -1210,13 +1210,13 @@ public class TldDocGenerator {
     private void generateFunctionDetail(Path outDir, String shortName, String functionName) throws
             IOException, TransformerException {
 
-<span class="nc" id="L1213">        HashMap&lt;String, String&gt; parameters = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L1214">        parameters.put(&quot;tlddoc-shortName&quot;, shortName);</span>
-<span class="nc" id="L1215">        parameters.put(&quot;tlddoc-functionName&quot;, functionName);</span>
+<span class="fc" id="L1213">        HashMap&lt;String, String&gt; parameters = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L1214">        parameters.put(&quot;tlddoc-shortName&quot;, shortName);</span>
+<span class="fc" id="L1215">        parameters.put(&quot;tlddoc-functionName&quot;, functionName);</span>
 
-<span class="nc" id="L1217">        generatePage(outDir.resolve(functionName + &quot;.fn.html&quot;),</span>
-<span class="nc" id="L1218">                RESOURCE_PATH + &quot;/function.html.xsl&quot;, parameters);</span>
-<span class="nc" id="L1219">    }</span>
+<span class="fc" id="L1217">        generatePage(outDir.resolve(functionName + &quot;.fn.html&quot;),</span>
+                RESOURCE_PATH + &quot;/function.html.xsl&quot;, parameters);
+<span class="fc" id="L1219">    }</span>
 
     /**
      * Searches through the given element and returns the value of the body of the element. Returns
@@ -1228,16 +1228,16 @@ public class TldDocGenerator {
      * @return the value of the body of the element
      */
     private String findElementValue(Element parent, String tagName) {
-<span class="nc" id="L1231">        String result = null;</span>
-<span class="nc" id="L1232">        NodeList elements = parent.getElementsByTagNameNS(&quot;*&quot;, tagName);</span>
-<span class="nc bnc" id="L1233" title="All 2 branches missed.">        if (elements.getLength() &gt;= 1) {</span>
-<span class="nc" id="L1234">            Element child = (Element) elements.item(0);</span>
-<span class="nc" id="L1235">            Node body = child.getFirstChild();</span>
-<span class="nc bnc" id="L1236" title="All 2 branches missed.">            if (body.getNodeType() == Node.TEXT_NODE) {</span>
-<span class="nc" id="L1237">                result = body.getNodeValue();</span>
+<span class="fc" id="L1231">        String result = null;</span>
+<span class="fc" id="L1232">        NodeList elements = parent.getElementsByTagNameNS(&quot;*&quot;, tagName);</span>
+<span class="fc bfc" id="L1233" title="All 2 branches covered.">        if (elements.getLength() &gt;= 1) {</span>
+<span class="fc" id="L1234">            Element child = (Element) elements.item(0);</span>
+<span class="fc" id="L1235">            Node body = child.getFirstChild();</span>
+<span class="pc bpc" id="L1236" title="1 of 2 branches missed.">            if (body.getNodeType() == Node.TEXT_NODE) {</span>
+<span class="fc" id="L1237">                result = body.getNodeValue();</span>
             }
         }
-<span class="nc" id="L1240">        return result;</span>
+<span class="fc" id="L1240">        return result;</span>
     }
 
     /**
@@ -1260,8 +1260,8 @@ public class TldDocGenerator {
             TransformerFactoryConfigurationError, TransformerConfigurationException,
             TransformerException {
 
-<span class="nc" id="L1263">        generatePage(outFile, inputXsl, null);</span>
-<span class="nc" id="L1264">    }</span>
+<span class="fc" id="L1263">        generatePage(outFile, inputXsl, null);</span>
+<span class="fc" id="L1264">    }</span>
 
     /**
      * Generates the given page dynamically, by running the summary document through the given XSLT
@@ -1284,16 +1284,16 @@ public class TldDocGenerator {
             TransformerFactoryConfigurationError, TransformerConfigurationException,
             TransformerException {
 
-<span class="nc" id="L1287">        InputStream xsl = getResourceAsStream(inputXsl);</span>
-<span class="nc" id="L1288">        Transformer transformer = TransformerFactory.newInstance().newTransformer(</span>
-<span class="nc" id="L1289">                new StreamSource(xsl));</span>
-<span class="nc bnc" id="L1290" title="All 2 branches missed.">        if (parameters != null) {</span>
-<span class="nc bnc" id="L1291" title="All 2 branches missed.">            for (Entry&lt;String, String&gt; entry : parameters.entrySet()) {</span>
-<span class="nc" id="L1292">                transformer.setParameter(entry.getKey(), entry.getValue());</span>
-            }
+<span class="fc" id="L1287">        InputStream xsl = getResourceAsStream(inputXsl);</span>
+<span class="fc" id="L1288">        Transformer transformer = TransformerFactory.newInstance().newTransformer(</span>
+                new StreamSource(xsl));
+<span class="fc bfc" id="L1290" title="All 2 branches covered.">        if (parameters != null) {</span>
+<span class="fc bfc" id="L1291" title="All 2 branches covered.">            for (Entry&lt;String, String&gt; entry : parameters.entrySet()) {</span>
+<span class="fc" id="L1292">                transformer.setParameter(entry.getKey(), entry.getValue());</span>
+<span class="fc" id="L1293">            }</span>
         }
-<span class="nc" id="L1295">        transformer.transform(new DOMSource(summaryTld), new StreamResult(outFile.toFile()));</span>
-<span class="nc" id="L1296">    }</span>
+<span class="fc" id="L1295">        transformer.transform(new DOMSource(summaryTld), new StreamResult(outFile.toFile()));</span>
+<span class="fc" id="L1296">    }</span>
 
     /**
      * Copy the given resource to the given output file. The classloader that loaded TldDocGenerator
@@ -1306,10 +1306,10 @@ public class TldDocGenerator {
      * @throws IOException if an I/O error has occurred
      */
     private void copyResourceToFile(Path outputFile, String resource) throws IOException {
-<span class="nc" id="L1309">        try (InputStream in = getResourceAsStream(resource)) {</span>
-<span class="nc" id="L1310">            Files.copy(in, outputFile, StandardCopyOption.REPLACE_EXISTING);</span>
+<span class="fc" id="L1309">        try (InputStream in = getResourceAsStream(resource)) {</span>
+<span class="fc" id="L1310">            Files.copy(in, outputFile, StandardCopyOption.REPLACE_EXISTING);</span>
         }
-<span class="nc" id="L1312">    }</span>
+<span class="fc" id="L1312">    }</span>
 
     /**
      * Outputs the given message to {@code stdout}, only if {@code !quiet}.
@@ -1317,10 +1317,10 @@ public class TldDocGenerator {
      * @param message the message to {@code stdout}
      */
     private void println(String message) {
-<span class="nc bnc" id="L1320" title="All 2 branches missed.">        if (!quiet) {</span>
-<span class="nc" id="L1321">            System.out.println(message);</span>
+<span class="pc bpc" id="L1320" title="1 of 2 branches missed.">        if (!quiet) {</span>
+<span class="fc" id="L1321">            System.out.println(message);</span>
         }
-<span class="nc" id="L1323">    }</span>
+<span class="fc" id="L1323">    }</span>
 
     /**
      * If {@code xsltDirectory} is {@code null}, obtains an {@code InputStream} of the given
@@ -1333,9 +1333,9 @@ public class TldDocGenerator {
      * @return An InputStream for the given resource.
      */
     private InputStream getResourceAsStream(String resource) {
-<span class="nc" id="L1336">        InputStream result = null;</span>
+<span class="fc" id="L1336">        InputStream result = null;</span>
 
-<span class="nc bnc" id="L1338" title="All 2 branches missed.">        if (xsltDirectory != null) {</span>
+<span class="pc bpc" id="L1338" title="1 of 2 branches missed.">        if (xsltDirectory != null) {</span>
 <span class="nc" id="L1339">            Path resourceFile = xsltDirectory.resolve(</span>
 <span class="nc" id="L1340">                    resource.substring(RESOURCE_PATH.length() + 1));</span>
             try {
@@ -1343,21 +1343,21 @@ public class TldDocGenerator {
 <span class="nc" id="L1343">            } catch (IOException e) {</span>
                 // result will be null and we'll default to default stylesheet
 <span class="nc" id="L1345">                println(&quot;XSLT-Directory not found, use default-stylesheet: &quot; + e.getMessage());</span>
-            }
+<span class="nc" id="L1346">            }</span>
         }
 
-<span class="nc bnc" id="L1349" title="All 2 branches missed.">        if (result == null) {</span>
-<span class="nc" id="L1350">            result = TldDocGenerator.class.getResourceAsStream(resource);</span>
+<span class="pc bpc" id="L1349" title="1 of 2 branches missed.">        if (result == null) {</span>
+<span class="fc" id="L1350">            result = TldDocGenerator.class.getResourceAsStream(resource);</span>
         }
 
-<span class="nc" id="L1353">        return result;</span>
+<span class="fc" id="L1353">        return result;</span>
     }
 
     /**
      * Displays a &quot;success&quot; message.
      */
     private void outputSuccessMessage() {
-<span class="nc" id="L1360">        println(&quot;\nDocumentation generated.&quot;);</span>
-<span class="nc" id="L1361">    }</span>
+<span class="fc" id="L1360">        println(&quot;\nDocumentation generated.&quot;);</span>
+<span class="fc" id="L1361">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

@@ -104,7 +104,7 @@ public class TagDirImplicitTagLibrary implements TagLibrary {
 <span class="nc" id="L104">        int index = path.indexOf(&quot;/WEB-INF/&quot;);</span>
 <span class="nc bnc" id="L105" title="All 2 branches missed.">        if (index != -1) {</span>
 <span class="nc" id="L106">            path = path.substring(index);</span>
-<span class="nc" id="L107">        } else {</span>
+        } else {
 <span class="nc" id="L108">            path = &quot;unknown&quot;;</span>
         }
 <span class="nc bnc" id="L110" title="All 2 branches missed.">        if (!path.endsWith(&quot;/&quot;)) {</span>
@@ -134,7 +134,7 @@ public class TagDirImplicitTagLibrary implements TagLibrary {
 <span class="nc" id="L134">                final String tagPath = p + fileName;</span>
 
 <span class="nc" id="L136">                createTagEntry(result, tagName, tagPath, taglibElement);</span>
-            }
+<span class="nc" id="L137">            }</span>
         }
 
 <span class="nc" id="L140">        return recreateDocument(documentBuilder, result);</span>
@@ -153,13 +153,13 @@ public class TagDirImplicitTagLibrary implements TagLibrary {
 <span class="nc" id="L153">        Element taglibElement = result.createElementNS(Constants.NS_JAKARTAEE, &quot;taglib&quot;);</span>
         // JDK 1.4 does not add xmlns for some reason - add it manually:
 <span class="nc" id="L155">        taglibElement.setAttributeNS(&quot;http://www.w3.org/2000/xmlns/&quot;,</span>
-<span class="nc" id="L156">                &quot;xmlns&quot;, Constants.NS_JAKARTAEE);</span>
+                &quot;xmlns&quot;, Constants.NS_JAKARTAEE);
 <span class="nc" id="L157">        taglibElement.setAttributeNS(&quot;http://www.w3.org/2000/xmlns/&quot;,</span>
-<span class="nc" id="L158">                &quot;xmlns:xsi&quot;, &quot;http://www.w3.org/2001/XMLSchema-instance&quot;);</span>
+                &quot;xmlns:xsi&quot;, &quot;http://www.w3.org/2001/XMLSchema-instance&quot;);
 <span class="nc" id="L159">        taglibElement.setAttributeNS(</span>
-<span class="nc" id="L160">                &quot;http://www.w3.org/2001/XMLSchema-instance&quot;,</span>
-<span class="nc" id="L161">                &quot;xsi:schemaLocation&quot;,</span>
-<span class="nc" id="L162">                Constants.NS_JAKARTAEE</span>
+                &quot;http://www.w3.org/2001/XMLSchema-instance&quot;,
+                &quot;xsi:schemaLocation&quot;,
+                Constants.NS_JAKARTAEE
                 + &quot; https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_0.xsd&quot;);
 <span class="nc" id="L164">        taglibElement.setAttribute(&quot;version&quot;, &quot;3.0&quot;);</span>
 <span class="nc" id="L165">        result.appendChild(taglibElement);</span>
@@ -167,7 +167,7 @@ public class TagDirImplicitTagLibrary implements TagLibrary {
         // Add &lt;description&gt;
 <span class="nc" id="L168">        Element descriptionElement = result.createElement(&quot;description&quot;);</span>
 <span class="nc" id="L169">        descriptionElement.appendChild(result.createTextNode(</span>
-<span class="nc" id="L170">                &quot;Implicit tag library for tag file directory &quot; + path));</span>
+                &quot;Implicit tag library for tag file directory &quot; + path));
 <span class="nc" id="L171">        taglibElement.appendChild(descriptionElement);</span>
 
         // Add &lt;tlib-version&gt; of 1.0

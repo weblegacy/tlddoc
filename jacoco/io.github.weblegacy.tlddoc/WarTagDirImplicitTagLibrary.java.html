@@ -75,7 +75,7 @@ public class WarTagDirImplicitTagLibrary extends WarJarTagLibrary {
         }
 
 <span class="nc" id="L77">        Element taglibElement = TagDirImplicitTagLibrary.createRootTaglibNode(result,</span>
-<span class="nc" id="L78">                '/' + path);</span>
+                '/' + path);
 
         // According to the JSP 2.0 specification:
         // A &lt;tag-file&gt; element is considered to exist for each tag file in
@@ -98,10 +98,10 @@ public class WarTagDirImplicitTagLibrary extends WarJarTagLibrary {
 <span class="nc" id="L98">                    String tagPath = &quot;/&quot; + entryName;</span>
 
 <span class="nc" id="L100">                    TagDirImplicitTagLibrary.createTagEntry(result, tagName, tagPath,</span>
-<span class="nc" id="L101">                            taglibElement);</span>
+                            taglibElement);
                 }
             }
-        }
+<span class="nc" id="L104">        }</span>
 
 <span class="nc" id="L106">        return TagDirImplicitTagLibrary.recreateDocument(documentBuilder, result);</span>
     }
