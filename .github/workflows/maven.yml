@@ -19,8 +19,21 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      actions: write
+      artifact-metadata: write
+      attestations: write
+      checks: write
+      contents: write
+      deployments: write
+      discussions: write
+      id-token: write
+      issues: write
+      models: write
+      packages: write
       pages: write
+      pull-requests: write
+      security-events: write
+      statuses: write
 
     steps:
     - uses: actions/checkout@v6
@@ -35,7 +48,7 @@ jobs:
       run: mvn -B verify --file pom.xml
 
     - name: Deploy documentation with Maven
-      run: mvn -B site-deploy -X
+      run: mvn -B site-deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
