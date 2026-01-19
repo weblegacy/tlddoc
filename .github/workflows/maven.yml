@@ -15,8 +15,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: write
-  id-token: write
+  contents: read
   pages: write
 
 jobs:
@@ -37,7 +36,7 @@ jobs:
       run: mvn -B verify --file pom.xml
 
     - name: Deploy documentation with Maven
-      run: mvn site-deploy
+      run: mvn site-deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
