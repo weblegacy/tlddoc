@@ -35,7 +35,7 @@ jobs:
       run: mvn -B verify --file pom.xml
 
     - name: Deploy documentation with Maven
-      run: mvn -B site-deploy
+      run: mvn -B site-deploy -X
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
