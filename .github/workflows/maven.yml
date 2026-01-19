@@ -28,7 +28,7 @@ jobs:
       discussions: write
       id-token: write
       issues: write
-      models: write
+      models: read
       packages: write
       pages: write
       pull-requests: write
