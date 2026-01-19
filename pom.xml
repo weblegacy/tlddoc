@@ -712,7 +712,7 @@
         </repository>
         <site>
             <id>github</id>
-            <url>scm:git:ssh://git@github.com/weblegacy/tlddoc.git</url>
+            <url>scm:git:https://github.com/weblegacy/tlddoc.git</url>
         </site>
         <downloadUrl>https://github.com/weblegacy/tlddoc/releases</downloadUrl>
     </distributionManagement>
