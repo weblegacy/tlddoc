@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TldDoc</a> &gt; <a href="index.source.html" class="el_package">io.github.weblegacy.tlddoc</a> &gt; <span class="el_source">Utils.java</span></div><h1>Utils.java</h1><pre class="source lang-java linenums">/*
+ * &lt;license&gt;
+ * Copyright (c) 2003-2004, Sun Microsystems, Inc.
+ * Copyright (c) 2022-2026, Web-Legacy
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Sun Microsystems, Inc. nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * &lt;/license&gt;
+ */
+
+package io.github.weblegacy.tlddoc;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.DirectoryStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Locale;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
+/**
+ * Various utils used by TldDoc.
+ *
+ * @author ste-gr
+ */
+public final class Utils {
+
+    /**
+     * Private constructor as this is a utility class.
+     */
+    private Utils() {
+    }
+
+    /**
+     * The name separator as a string from the default-file-system.
+     */
+<span class="nc" id="L60">    public static final String DEFAULT_SEPARATOR = FileSystems.getDefault().getSeparator();</span>
+
+    /**
+     * Tests if the path is the WEB-INF directory.
+     *
+     * @param p the path
+     *
+     * @return {@code true} when it is the WEB-INF directory
+     */
+    public static boolean isWebInf(final Path p) {
+<span class="nc" id="L70">        final Path fn = p.getFileName();</span>
+<span class="nc bnc" id="L71" title="All 6 branches missed.">        return fn != null &amp;&amp; Files.isDirectory(p) &amp;&amp; &quot;WEB-INF&quot;.equalsIgnoreCase(fn.toString());</span>
+    }
+
+    /**
+     * Tests if the path contains the directory-part.
+     *
+     * @param p path to test
+     * @param s the directory-part
+     *
+     * @return {@code true} when the path contains the directory-part
+     */
+    public static boolean pathContains(final Path p, final String s) {
+<span class="nc" id="L83">        return pathString(p).contains(s);</span>
+    }
+
+    /**
+     * Retuns the neutral string of the path (path-name-separator is always '/').
+     *
+     * @param p path to test
+     *
+     * @return the neutral string of the path
+     */
+    public static String pathString(final Path p) {
+<span class="nc" id="L94">        final Path absolutePath = p.toAbsolutePath();</span>
+<span class="nc" id="L95">        final String separator = absolutePath.getFileSystem().getSeparator();</span>
+
+<span class="nc" id="L97">        String path = absolutePath.toString();</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (!&quot;/&quot;.equals(separator)) {</span>
+<span class="nc" id="L99">            path = path.replace(separator, &quot;/&quot;);</span>
+        }
+
+<span class="nc" id="L102">        return path;</span>
+    }
+
+    /**
+     * Returns from the file the file-name-part in lower-case.
+     *
+     * @param file the file
+     *
+     * @return file-name-part in lower-case
+     */
+    public static String getLowerFileName(final Path file) {
+<span class="nc" id="L113">        final Path fn = file.getFileName();</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        return fn == null ? &quot;&quot; : fn.toString().toLowerCase(Locale.ROOT);</span>
+    }
+
+    /**
+     * Checks if the file is a tag-file (ends with {@code .tag} or {@code .tagx}).
+     *
+     * @param file to check
+     *
+     * @return {@code true} if tag-file
+     */
+    public static boolean isTag(final Path file) {
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        if (Files.isDirectory(file)) {</span>
+<span class="nc" id="L126">            return false;</span>
+        }
+
+<span class="nc" id="L129">        final String lowerFileName = getLowerFileName(file);</span>
+<span class="nc bnc" id="L130" title="All 4 branches missed.">        return lowerFileName.endsWith(&quot;.tag&quot;) || lowerFileName.endsWith(&quot;.tagx&quot;);</span>
+    }
+
+    /**
+     * Checks if the file is a tag-file (ends with {@code .tag} or {@code .tagx}).
+     *
+     * @param file to check
+     *
+     * @return {@code true} if tag-file
+     */
+    public static boolean isTag(final String file) {
+<span class="nc" id="L141">        final String lowerFileName = file.toLowerCase(Locale.ROOT);</span>
+<span class="nc bnc" id="L142" title="All 4 branches missed.">        return lowerFileName.endsWith(&quot;.tag&quot;) || lowerFileName.endsWith(&quot;.tagx&quot;);</span>
+    }
+
+    /**
+     * Checks if the file is a tld-file (ends with {@code .tld}).
+     *
+     * @param file to check
+     *
+     * @return {@code true} if tld-file
+     */
+    public static boolean isTld(final Path file) {
+<span class="nc" id="L153">        return getLowerFileName(file).endsWith(&quot;.tld&quot;);</span>
+    }
+
+    /**
+     * Checks if the file is a tld-file (ends with {@code .tld}).
+     *
+     * @param file to check
+     *
+     * @return {@code true} if tld-file
+     */
+    public static boolean isTld(final String file) {
+<span class="nc" id="L164">        return file.toLowerCase(Locale.ROOT).endsWith(&quot;.tld&quot;);</span>
+    }
+
+    /**
+     * Checks if the file is a jar-file (ends with {@code .jar}).
+     *
+     * @param file to check
+     *
+     * @return {@code true} if jar-file
+     */
+    public static boolean isJar(final Path file) {
+<span class="nc" id="L175">        return getLowerFileName(file).endsWith(&quot;.jar&quot;);</span>
+    }
+
+    /**
+     * Checks if the file is a jar-file (ends with {@code .jar}).
+     *
+     * @param file to check
+     *
+     * @return {@code true} if jar-file
+     */
+    public static boolean isJar(final String file) {
+<span class="nc" id="L186">        return file.toLowerCase(Locale.ROOT).endsWith(&quot;.jar&quot;);</span>
+    }
+
+    /**
+     * Process all filtered files under the given directory, recursively.
+     *
+     * @param path    The path to search (recursively).
+     * @param filter  call process when filter is {@code true}
+     * @param process process filtered files
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    public static void processFiles(final Path path, final Predicate&lt;Path&gt; filter,
+            final Consumer&lt;Path&gt; process) throws IOException {
+
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        if (Files.isDirectory(path)) {</span>
+<span class="nc" id="L202">            processFiles0(path, filter, process);</span>
+        }
+<span class="nc" id="L204">    }</span>
+
+    /**
+     * Process all filtered files under the given directory, recursively.
+     *
+     * @param path    The path to search (recursively).
+     * @param filter  call process when filter is {@code true}
+     * @param process process filtered files
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    private static void processFiles0(final Path path, final Predicate&lt;Path&gt; filter,
+            final Consumer&lt;Path&gt; process) throws IOException {
+
+<span class="nc" id="L218">        try (DirectoryStream&lt;Path&gt; files = Files.newDirectoryStream(path)) {</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            for (Path file : files) {</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">                if (Files.isDirectory(file)) {</span>
+<span class="nc" id="L221">                    processFiles0(file, filter, process);</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">                } else if (filter.test(file)) {</span>
+<span class="nc" id="L223">                    process.accept(file);</span>
+                }
+            }
+        }
+<span class="nc" id="L227">    }</span>
+
+    /**
+     * Process all directories under the given directory, recursively.
+     *
+     * @param path    The path to search (recursively).
+     * @param process process directory
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    public static void processDirs(final Path path, final Consumer&lt;Path&gt; process)
+            throws IOException {
+
+<span class="nc bnc" id="L240" title="All 2 branches missed.">        if (Files.isDirectory(path)) {</span>
+<span class="nc" id="L241">            processDirs0(path, process);</span>
+        }
+<span class="nc" id="L243">    }</span>
+
+    /**
+     * Process all directories under the given directory, recursively.
+     *
+     * @param path    The path to search (recursively).
+     * @param process process directory
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    private static void processDirs0(final Path path, final Consumer&lt;Path&gt; process)
+            throws IOException {
+
+<span class="nc" id="L256">        process.accept(path);</span>
+
+<span class="nc" id="L258">        try (DirectoryStream&lt;Path&gt; files = Files.newDirectoryStream(path, Files::isDirectory)) {</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">            for (Path file : files) {</span>
+<span class="nc" id="L260">                processDirs0(file, process);</span>
+            }
+        }
+<span class="nc" id="L263">    }</span>
+
+    /**
+     * Start from the dir and backtrack, using the path as a relative path.
+     *
+     * &lt;p&gt;For example:&lt;/p&gt;
+     * &lt;ul&gt;
+     * &lt;li&gt;dir: /home/mroth/test/sample/WEB-INF/tags/mytags&lt;/li&gt;
+     * &lt;li&gt;path: /WEB-INF/tags/mytags/tag1.tag&lt;/li&gt;
+     * &lt;li&gt;returns: /home/mroth/test/sample/WEB-INF/tags/mytags/tag1.tag&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * @param dir  the start-directory
+     * @param path the path to backtrack
+     *
+     * @return resolved path as {@link InputStream} or {@code null} when not found
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    public static InputStream backtrackPath(Path dir, String path) throws IOException {
+<span class="nc bnc" id="L283" title="All 2 branches missed.">        if (path.startsWith(&quot;/&quot;)) {</span>
+<span class="nc" id="L284">            path = path.substring(1);</span>
+        }
+
+<span class="nc" id="L287">        Path look = null;</span>
+<span class="nc bnc" id="L288" title="All 4 branches missed.">        while (dir != null &amp;&amp; !Files.exists(look = dir.resolve(path))) {</span>
+<span class="nc" id="L289">            dir = dir.getParent();</span>
+        }
+
+<span class="nc bnc" id="L292" title="All 4 branches missed.">        return look != null &amp;&amp; Files.exists(look) ? Files.newInputStream(look) : null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

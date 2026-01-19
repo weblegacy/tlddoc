@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"io.github.weblegacy.tlddoc"}];updateSearchResults();

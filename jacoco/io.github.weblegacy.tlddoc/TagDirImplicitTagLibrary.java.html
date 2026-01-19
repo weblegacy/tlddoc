@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TagDirImplicitTagLibrary.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TldDoc</a> &gt; <a href="index.source.html" class="el_package">io.github.weblegacy.tlddoc</a> &gt; <span class="el_source">TagDirImplicitTagLibrary.java</span></div><h1>TagDirImplicitTagLibrary.java</h1><pre class="source lang-java linenums">/*
+ * &lt;license&gt;
+ * Copyright (c) 2003-2004, Sun Microsystems, Inc.
+ * Copyright (c) 2022-2026, Web-Legacy
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Sun Microsystems, Inc. nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * &lt;/license&gt;
+ */
+
+package io.github.weblegacy.tlddoc;
+
+import io.github.weblegacy.tlddoc.main.TagLibrary;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+/**
+ * Implicit Tag Library for a directory of tag files.
+ *
+ * @author mroth
+ */
+public class TagDirImplicitTagLibrary implements TagLibrary {
+
+    /**
+     * The directory containing the tag files.
+     */
+    private final Path dir;
+
+    /**
+     * Creates a new instance of {@link TagDirImplicitTagLibrary}.
+     *
+     * @param dir directory containing the tag files
+     */
+<span class="nc" id="L72">    public TagDirImplicitTagLibrary(Path dir) {</span>
+<span class="nc" id="L73">        this.dir = dir;</span>
+<span class="nc" id="L74">    }</span>
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPathDescription() {
+<span class="nc" id="L81">        return dir.toAbsolutePath().toString();</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InputStream getResource(String path) throws IOException {
+<span class="nc" id="L89">        return Utils.backtrackPath(dir, path);</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Document getTldDocument(DocumentBuilder documentBuilder) throws IOException,
+            SAXException, TransformerFactoryConfigurationError, TransformerException {
+
+<span class="nc" id="L99">        Document result = documentBuilder.newDocument();</span>
+
+        // Determine path from root of web application (this is somewhat of
+        // a guess):
+<span class="nc" id="L103">        String path = Utils.pathString(dir);</span>
+<span class="nc" id="L104">        int index = path.indexOf(&quot;/WEB-INF/&quot;);</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (index != -1) {</span>
+<span class="nc" id="L106">            path = path.substring(index);</span>
+<span class="nc" id="L107">        } else {</span>
+<span class="nc" id="L108">            path = &quot;unknown&quot;;</span>
+        }
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (!path.endsWith(&quot;/&quot;)) {</span>
+<span class="nc" id="L111">            path += &quot;/&quot;;</span>
+        }
+
+        // Create root taglib node:
+<span class="nc" id="L115">        Element taglibElement = createRootTaglibNode(result, path);</span>
+
+        // According to the JSP 2.0 specification:
+        // A &lt;tag-file&gt; element is considered to exist for each tag file in
+        // this directory, with the following sub-elements:
+        //    - The &lt;name&gt; for each is the filename of the tag file,
+        //      without the .tag extension.
+        //    - The &lt;path&gt; for each is the path of the tag file, relative
+        //      to the root of the web application.
+<span class="nc" id="L124">        final String p = path;</span>
+<span class="nc" id="L125">        try (DirectoryStream&lt;Path&gt; files = Files.newDirectoryStream(dir, Utils::isTag)) {</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            for (Path file : files) {</span>
+<span class="nc" id="L127">                final Path fn = file.getFileName();</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">                if (fn == null) {</span>
+<span class="nc" id="L129">                    continue;</span>
+                }
+
+<span class="nc" id="L132">                final String fileName = fn.toString();</span>
+<span class="nc" id="L133">                final String tagName = fileName.substring(0, fileName.lastIndexOf('.'));</span>
+<span class="nc" id="L134">                final String tagPath = p + fileName;</span>
+
+<span class="nc" id="L136">                createTagEntry(result, tagName, tagPath, taglibElement);</span>
+            }
+        }
+
+<span class="nc" id="L140">        return recreateDocument(documentBuilder, result);</span>
+    }
+
+    /**
+     * Creates an implicit tag library root node, with default values. Shared by
+     * WarTagDirImplicitTagLibrary.
+     *
+     * @param result XML-document to add new tag-element
+     * @param path   path to the TLD Files
+     *
+     * @return new created tag library root node
+     */
+    static Element createRootTaglibNode(Document result, String path) {
+<span class="nc" id="L153">        Element taglibElement = result.createElementNS(Constants.NS_JAKARTAEE, &quot;taglib&quot;);</span>
+        // JDK 1.4 does not add xmlns for some reason - add it manually:
+<span class="nc" id="L155">        taglibElement.setAttributeNS(&quot;http://www.w3.org/2000/xmlns/&quot;,</span>
+<span class="nc" id="L156">                &quot;xmlns&quot;, Constants.NS_JAKARTAEE);</span>
+<span class="nc" id="L157">        taglibElement.setAttributeNS(&quot;http://www.w3.org/2000/xmlns/&quot;,</span>
+<span class="nc" id="L158">                &quot;xmlns:xsi&quot;, &quot;http://www.w3.org/2001/XMLSchema-instance&quot;);</span>
+<span class="nc" id="L159">        taglibElement.setAttributeNS(</span>
+<span class="nc" id="L160">                &quot;http://www.w3.org/2001/XMLSchema-instance&quot;,</span>
+<span class="nc" id="L161">                &quot;xsi:schemaLocation&quot;,</span>
+<span class="nc" id="L162">                Constants.NS_JAKARTAEE</span>
+                + &quot; https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_0.xsd&quot;);
+<span class="nc" id="L164">        taglibElement.setAttribute(&quot;version&quot;, &quot;3.0&quot;);</span>
+<span class="nc" id="L165">        result.appendChild(taglibElement);</span>
+
+        // Add &lt;description&gt;
+<span class="nc" id="L168">        Element descriptionElement = result.createElement(&quot;description&quot;);</span>
+<span class="nc" id="L169">        descriptionElement.appendChild(result.createTextNode(</span>
+<span class="nc" id="L170">                &quot;Implicit tag library for tag file directory &quot; + path));</span>
+<span class="nc" id="L171">        taglibElement.appendChild(descriptionElement);</span>
+
+        // Add &lt;tlib-version&gt; of 1.0
+<span class="nc" id="L174">        Element tlibVersionElement = result.createElement(&quot;tlib-version&quot;);</span>
+<span class="nc" id="L175">        tlibVersionElement.appendChild(result.createTextNode(&quot;1.0&quot;));</span>
+<span class="nc" id="L176">        taglibElement.appendChild(tlibVersionElement);</span>
+
+        // According to the JSP 2.0 specification, &lt;short-name&gt; is derived
+        // from the directory name. If the directory is /WEB-INF/tags/, the
+        // short name is simply tags. Otherwise, the full directory path
+        // (relative to the web application) is taken, minus the
+        // /WEB-INF/tags/ prefix. Then, all / characters are replaced
+        // with -, which yields the short name. Note that short names are
+        // not guaranteed to be unique.
+        String shortName;
+<span class="nc bnc" id="L186" title="All 3 branches missed.">        switch (path) {</span>
+            case &quot;unknown&quot;:
+<span class="nc" id="L188">                shortName = path;</span>
+<span class="nc" id="L189">                break;</span>
+            case &quot;/WEB-INF/tags&quot;:
+            case &quot;/WEB-INF/tags/&quot;:
+<span class="nc" id="L192">                shortName = &quot;tags&quot;;</span>
+<span class="nc" id="L193">                break;</span>
+            default:
+<span class="nc" id="L195">                shortName = path;</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">                if (shortName.startsWith(&quot;/WEB-INF/tags&quot;)) {</span>
+<span class="nc" id="L197">                    shortName = shortName.substring(&quot;/WEB-INF/tags&quot;.length());</span>
+                }
+<span class="nc bnc" id="L199" title="All 2 branches missed.">                if (shortName.startsWith(&quot;/&quot;)) {</span>
+<span class="nc" id="L200">                    shortName = shortName.substring(1);</span>
+                }
+<span class="nc bnc" id="L202" title="All 2 branches missed.">                if (shortName.endsWith(&quot;/&quot;)) {</span>
+<span class="nc" id="L203">                    shortName = shortName.substring(0, shortName.length() - 1);</span>
+                }
+<span class="nc" id="L205">                shortName = shortName.replace('/', '-');</span>
+                break;
+        }
+<span class="nc" id="L208">        Element shortNameElement = result.createElement(&quot;short-name&quot;);</span>
+<span class="nc" id="L209">        shortNameElement.appendChild(result.createTextNode(shortName));</span>
+<span class="nc" id="L210">        taglibElement.appendChild(shortNameElement);</span>
+
+<span class="nc" id="L212">        Element uriElement = result.createElement(&quot;uri&quot;);</span>
+<span class="nc" id="L213">        uriElement.appendChild(result.createTextNode(path));</span>
+<span class="nc" id="L214">        taglibElement.appendChild(uriElement);</span>
+
+<span class="nc" id="L216">        return taglibElement;</span>
+    }
+
+    /**
+     * Creates an tag-entry into tag library root node. Shared by WarTagDirImplicitTagLibrary.
+     *
+     * @param result        XML-document to add new tag-element
+     * @param tagName       name of the tag-entry
+     * @param tagPath       path of the tag-entry
+     * @param taglibElement tag library root node
+     *
+     * @throws DOMException if an XML error has occurred
+     */
+    static void createTagEntry(final Document result, final String tagName, final String tagPath,
+            Element taglibElement) throws DOMException {
+
+<span class="nc" id="L232">        final Element tagFileElement = result.createElement(&quot;tag-file&quot;);</span>
+<span class="nc" id="L233">        final Element nameElement = result.createElement(&quot;name&quot;);</span>
+<span class="nc" id="L234">        nameElement.appendChild(result.createTextNode(tagName));</span>
+<span class="nc" id="L235">        tagFileElement.appendChild(nameElement);</span>
+
+<span class="nc" id="L237">        final Element pathElement = result.createElement(&quot;path&quot;);</span>
+<span class="nc" id="L238">        pathElement.appendChild(result.createTextNode(tagPath));</span>
+<span class="nc" id="L239">        tagFileElement.appendChild(pathElement);</span>
+<span class="nc" id="L240">        taglibElement.appendChild(tagFileElement);</span>
+<span class="nc" id="L241">    }</span>
+
+    /**
+     * Recreates the XML document. JDK 1.4 does not correctly import the node into the tree, so
+     * simulate reading this entry from a file. There might be a better / more efficient way to do
+     * this, but this works.
+     *
+     * @param documentBuilder {@code DocumentBuilder} to obtain DOM Document for creating an
+     *                        XML-document.
+     * @param result          XML-document to recreate
+     *
+     * @return the recreated XML-document
+     *
+     * @throws IOException                          if an I/O error has occurred
+     * @throws SAXException                         If any parse errors occur.
+     * @throws TransformerFactoryConfigurationError Thrown in case of {@linkplain
+     * java.util.ServiceConfigurationError service configuration error} or if the implementation is
+     *                                              not available or cannot be instantiated.
+     * @throws TransformerException                 If an unrecoverable error occurs during the
+     *                                              course of the transformation.
+     */
+    static Document recreateDocument(final DocumentBuilder documentBuilder, final Document result)
+            throws IOException, TransformerFactoryConfigurationError, TransformerException,
+            SAXException {
+
+<span class="nc" id="L266">        final StringWriter buffer = new StringWriter();</span>
+<span class="nc" id="L267">        Transformer transformer = TransformerFactory.newInstance().newTransformer();</span>
+<span class="nc" id="L268">        transformer.transform(new DOMSource(result), new StreamResult(buffer));</span>
+
+<span class="nc" id="L270">        return documentBuilder.parse(new InputSource(new StringReader(buffer.toString())));</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws IOException {
+        // Nothing to do
+<span class="nc" id="L279">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

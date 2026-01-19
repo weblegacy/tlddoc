@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WarJarTagLibrary.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TldDoc</a> &gt; <a href="index.source.html" class="el_package">io.github.weblegacy.tlddoc</a> &gt; <span class="el_source">WarJarTagLibrary.java</span></div><h1>WarJarTagLibrary.java</h1><pre class="source lang-java linenums">/*
+ * &lt;license&gt;
+ * Copyright (c) 2003-2004, Sun Microsystems, Inc.
+ * Copyright (c) 2022-2026, Web-Legacy
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Sun Microsystems, Inc. nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * &lt;/license&gt;
+ */
+
+package io.github.weblegacy.tlddoc;
+
+import io.github.weblegacy.tlddoc.main.TagLibrary;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+/**
+ * Base class for a WAR/JAR container-file.
+ *
+ * @author ste-gr
+ */
+public class WarJarTagLibrary implements TagLibrary {
+
+    /**
+     * The WAR/JAR container-file.
+     */
+    private final Path warJar;
+
+    /**
+     * The WAR/JAR-file itself.
+     */
+<span class="nc" id="L61">    private JarFile warJarFile = null;</span>
+
+    /**
+     * The name of the jarEntry.
+     */
+    private final String entry;
+
+    /**
+     * Creates a new instance of {@link WarJarTagLibrary}.
+     *
+     * @param warJar WAR/JAR container-file
+     * @param entry  name of the {@code JarEntry}
+     */
+<span class="nc" id="L74">    public WarJarTagLibrary(final Path warJar, final String entry) {</span>
+<span class="nc" id="L75">        this.warJar = warJar;</span>
+<span class="nc" id="L76">        this.entry = entry;</span>
+<span class="nc" id="L77">    }</span>
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getPathDescription() {
+<span class="nc" id="L84">        return warJar.toAbsolutePath().toString() + &quot;!&quot; + entry;</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public InputStream getResource(String path) throws IOException {
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (path.startsWith(&quot;/&quot;)) {</span>
+<span class="nc" id="L93">            path = path.substring(1);</span>
+        }
+
+<span class="nc" id="L96">        return getInputStream(path);</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Document getTldDocument(final DocumentBuilder documentBuilder) throws IOException,
+            SAXException, TransformerFactoryConfigurationError, TransformerException {
+
+<span class="nc" id="L106">        try (InputStream in = getInputStream(entry)) {</span>
+<span class="nc bnc" id="L107" title="All 4 branches missed.">            if (documentBuilder != null &amp;&amp; in != null) {</span>
+<span class="nc" id="L108">                return documentBuilder.parse(in);</span>
+            }
+        }
+
+<span class="nc" id="L112">        return null;</span>
+    }
+
+    /**
+     * Returns an input stream for reading the contents of the specified WAR/JAR-file entry.
+     *
+     * @param path the path to the resource
+     *
+     * @return an input stream for reading the contents of the specified JAR-file entry
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    protected InputStream getInputStream(String path) throws IOException {
+<span class="nc" id="L125">        ensureOpen();</span>
+<span class="nc" id="L126">        final JarEntry jarEntry = warJarFile.getJarEntry(path);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        return jarEntry == null ? null : warJarFile.getInputStream(jarEntry);</span>
+    }
+
+    /**
+     * Returns the WAR/JAR container-file.
+     *
+     * @return the WAR/JAR container-file
+     */
+    protected Path getWarJar() {
+<span class="nc" id="L136">        return warJar;</span>
+    }
+
+    /**
+     * Returns the WAR/JAR-file itself.
+     *
+     * @return the WAR/JAR-file itself
+     */
+    protected JarFile getWarJarFile() {
+<span class="nc" id="L145">        return warJarFile;</span>
+    }
+
+    /**
+     * Returns the name of the JarEntry.
+     *
+     * @return the name of the JarEntry
+     */
+    protected String getEntry() {
+<span class="nc" id="L154">        return entry;</span>
+    }
+
+    /**
+     * Opens the WAR/JAR-file if it is not open yet.
+     *
+     * @throws IOException if an I/O error has occurred
+     */
+    protected void ensureOpen() throws IOException {
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (warJarFile == null) {</span>
+<span class="nc" id="L164">            warJarFile = new JarFile(warJar.toFile());</span>
+        }
+<span class="nc" id="L166">    }</span>
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void close() throws IOException {
+<span class="nc bnc" id="L173" title="All 2 branches missed.">        if (warJarFile == null) {</span>
+<span class="nc" id="L174">            return;</span>
+        }
+
+        try {
+<span class="nc" id="L178">            warJarFile.close();</span>
+<span class="nc" id="L179">        } finally {</span>
+<span class="nc" id="L180">            warJarFile = null;</span>
+        }
+<span class="nc" id="L182">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

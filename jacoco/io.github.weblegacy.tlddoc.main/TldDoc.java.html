@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TldDoc.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TldDoc</a> &gt; <a href="index.source.html" class="el_package">io.github.weblegacy.tlddoc.main</a> &gt; <span class="el_source">TldDoc.java</span></div><h1>TldDoc.java</h1><pre class="source lang-java linenums">/*
+ * &lt;license&gt;
+ * Copyright (c) 2003-2004, Sun Microsystems, Inc.
+ * Copyright (c) 2022-2026, Web-Legacy
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Sun Microsystems, Inc. nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * &lt;/license&gt;
+ */
+
+package io.github.weblegacy.tlddoc.main;
+
+import io.github.weblegacy.tlddoc.Utils;
+import io.github.weblegacy.tlddoc.Version;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.function.Consumer;
+
+/**
+ * Main entry point for TldDoc. Allows commandline access.
+ *
+ * @author Mark Roth
+ */
+public class TldDoc {
+
+    /**
+     * Defines the Help-text for TldDoc.
+     */
+    private static final String USAGE
+            = &quot;Tag Library Documentation Generator &quot; + Version.VERSION + &quot; by\n&quot;
+            + &quot; * Mark Roth, Sun Microsystems, Inc. and\n&quot;
+            + &quot; * Stefan Graff, Web-Legacy\n&quot;
+            + &quot;\n&quot;
+            + &quot;Usage: tlddoc [options] taglib1 [taglib2 [taglib3 ...]]\n&quot;
+            + &quot;Options:\n&quot;
+            + &quot;  -help                  Displays this help message\n&quot;
+            + &quot;  -xslt &lt;directory&gt;      Use the XSLT files in the given directory\n&quot;
+            + &quot;                         instead of the defaults.\n&quot;
+            + &quot;  -d &lt;directory&gt;         Destination directory for output files\n&quot;
+            + &quot;                         (defaults to new dir called 'out')\n&quot;
+            + &quot;  -doctitle &lt;html-code&gt;  Include title for the TLD index (first) page\n&quot;
+            + &quot;  -windowtitle &lt;text&gt;    Browser window title\n&quot;
+            + &quot;  -v                     Verbose Mode\n&quot;
+            + &quot;  -q                     Quiet Mode\n&quot;
+            + &quot;\n&quot;
+            + &quot;taglib{1,2,3,...}:\n&quot;
+            + &quot;  * If the path is a file that ends in .tld, process an\n&quot;
+            + &quot;    individual TLD file.\n&quot;
+            + &quot;  * If the path is a file that ends in .jar, process a\n&quot;
+            + &quot;    tag library JAR file.\n&quot;
+            + &quot;  * If the path is a file that ends in .war, process all\n&quot;
+            + &quot;    tag libraries in this web application.\n&quot;
+            + &quot;  * If the path is a directory that includes /WEB-INF/tags\n&quot;
+            + &quot;    process the implicit tag library for the given directory\n&quot;
+            + &quot;    of tag files.\n&quot;
+            + &quot;  * If the path is a directory containing a WEB-INF subdirectory,\n&quot;
+            + &quot;    process all tag libraries in this web application.\n&quot;
+            + &quot;  * Otherwise, error.&quot;;
+
+    /**
+     * Private constructor as this is the main class.
+     */
+    private TldDoc() {
+    }
+
+    /**
+     * The main-entry-point for TldDoc.
+     *
+     * @param args Arguments from command line
+     */
+    public static void main(String[] args) {
+<span class="nc" id="L99">        TldDocGenerator generator = new TldDocGenerator();</span>
+
+        try {
+<span class="nc" id="L102">            initGenerator(args, generator);</span>
+<span class="nc" id="L103">            generator.generate();</span>
+<span class="nc" id="L104">        } catch (IOException | GeneratorException e) {</span>
+<span class="nc" id="L105">            e.printStackTrace(System.err);</span>
+<span class="nc" id="L106">            System.exit(1);</span>
+        }
+<span class="nc" id="L108">    }</span>
+
+    private static void initGenerator(final String[] args, final TldDocGenerator generator)
+            throws IOException {
+
+<span class="nc" id="L113">        Iterator&lt;String&gt; iter = Arrays.asList(args).iterator();</span>
+<span class="nc" id="L114">        boolean atLeastOneTld = false;</span>
+
+        try {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">            while (iter.hasNext()) {</span>
+<span class="nc" id="L118">                String arg = iter.next();</span>
+
+<span class="nc bnc" id="L120" title="All 11 branches missed.">                switch (arg) {</span>
+                    case &quot;-xslt&quot;:
+<span class="nc" id="L122">                        arg = iter.next();</span>
+<span class="nc" id="L123">                        generator.setXsltDirectory(Paths.get(arg));</span>
+<span class="nc" id="L124">                        break;</span>
+                    case &quot;-d&quot;:
+<span class="nc" id="L126">                        arg = iter.next();</span>
+<span class="nc" id="L127">                        generator.setOutputDirectory(Paths.get(arg));</span>
+<span class="nc" id="L128">                        break;</span>
+                    case &quot;-help&quot;:
+<span class="nc" id="L130">                        usage(null);</span>
+<span class="nc" id="L131">                        break;</span>
+                    case &quot;-q&quot;:
+<span class="nc" id="L133">                        generator.setQuiet(true);</span>
+<span class="nc" id="L134">                        break;</span>
+                    case &quot;-v&quot;:
+<span class="nc" id="L136">                        generator.setVerbose(true);</span>
+<span class="nc" id="L137">                        break;</span>
+                    case &quot;-doctitle&quot;:
+<span class="nc" id="L139">                        arg = iter.next();</span>
+<span class="nc" id="L140">                        generator.setDocTitle(arg);</span>
+<span class="nc" id="L141">                        break;</span>
+                    case &quot;-windowtitle&quot;:
+<span class="nc" id="L143">                        arg = iter.next();</span>
+<span class="nc" id="L144">                        generator.setWindowTitle(arg);</span>
+<span class="nc" id="L145">                        break;</span>
+                    case &quot;-webapp&quot;:
+<span class="nc" id="L147">                        atLeastOneTld |= addPath(iter, generator::addWebApp, &quot;Web app&quot;);</span>
+<span class="nc" id="L148">                        break;</span>
+                    case &quot;-jar&quot;:
+<span class="nc" id="L150">                        atLeastOneTld |= addPath(iter, generator::addJar, &quot;JAR&quot;);</span>
+<span class="nc" id="L151">                        break;</span>
+                    case &quot;-tagdir&quot;:
+<span class="nc" id="L153">                        atLeastOneTld |= addPath(iter, generator::addTagDir, &quot;Tag Directory&quot;);</span>
+<span class="nc" id="L154">                        break;</span>
+                    default:
+<span class="nc" id="L156">                        Path f = Paths.get(arg);</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">                        if (Files.exists(f)) {</span>
+<span class="nc" id="L158">                            String fn = Utils.getLowerFileName(f);</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">                            if (fn.endsWith(&quot;.tld&quot;)) {</span>
+                                // If the path is a file that ends in .tld,
+                                // process an individual TLD file.
+<span class="nc" id="L162">                                generator.addTld(f);</span>
+<span class="nc" id="L163">                                atLeastOneTld = true;</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">                            } else if (fn.endsWith(&quot;.jar&quot;)) {</span>
+                                // If the path is a file that ends in .jar,
+                                // process a tag library JAR file.
+<span class="nc" id="L167">                                generator.addJar(f);</span>
+<span class="nc" id="L168">                                atLeastOneTld = true;</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">                            } else if (fn.endsWith(&quot;.war&quot;)) {</span>
+                                // If the path is a file that ends in .war,
+                                // process all tag libraries in this web app.
+<span class="nc" id="L172">                                generator.addWar(f);</span>
+<span class="nc" id="L173">                                atLeastOneTld = true;</span>
+<span class="nc" id="L174">                            } else {</span>
+<span class="nc" id="L175">                                boolean foundWebInf = false;</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">                                if (Files.isDirectory(f)) {</span>
+                                    // If the path is a directory that includes
+                                    // /WEB-INF/tags process the implicit tag library
+                                    // for the given directory of tag files.
+<span class="nc bnc" id="L180" title="All 2 branches missed.">                                    if (Utils.pathContains(f, &quot;/WEB-INF/tags&quot;)) {</span>
+<span class="nc" id="L181">                                        generator.addTagDir(f);</span>
+<span class="nc" id="L182">                                        foundWebInf = true;</span>
+<span class="nc" id="L183">                                    } else {</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">                                        if (f.endsWith(&quot;WEB-INF&quot;)) {</span>
+<span class="nc" id="L185">                                            foundWebInf = true;</span>
+<span class="nc" id="L186">                                        } else {</span>
+<span class="nc" id="L187">                                            try (DirectoryStream&lt;Path&gt; files = Files</span>
+<span class="nc" id="L188">                                                    .newDirectoryStream(f, Utils::isWebInf)) {</span>
+
+<span class="nc" id="L190">                                                foundWebInf = files.iterator().hasNext();</span>
+                                            }
+                                        }
+
+<span class="nc bnc" id="L194" title="All 2 branches missed.">                                        if (foundWebInf) {</span>
+<span class="nc" id="L195">                                            generator.addWebApp(f);</span>
+                                        }
+                                    }
+                                }
+<span class="nc bnc" id="L199" title="All 2 branches missed.">                                if (foundWebInf) {</span>
+<span class="nc" id="L200">                                    atLeastOneTld = true;</span>
+<span class="nc" id="L201">                                } else {</span>
+<span class="nc" id="L202">                                    usage(&quot;Cannot determine tag library &quot;</span>
+<span class="nc" id="L203">                                            + &quot;type for &quot; + f.toAbsolutePath());</span>
+                                }
+                            }
+<span class="nc" id="L206">                        } else {</span>
+<span class="nc" id="L207">                            usage(&quot;File/directory not found: &quot; + arg);</span>
+                        }
+                        break;
+                }
+            }
+<span class="nc bnc" id="L212" title="All 2 branches missed.">            if (!atLeastOneTld) {</span>
+<span class="nc" id="L213">                usage(&quot;Please specify at least one TLD file.&quot;);</span>
+            }
+<span class="nc" id="L215">        } catch (NoSuchElementException e) {</span>
+<span class="nc" id="L216">            usage(&quot;Invalid Syntax.&quot;);</span>
+        }
+<span class="nc" id="L218">    }</span>
+
+    private static boolean addPath(final Iterator&lt;String&gt; iter, final Consumer&lt;Path&gt; addDirFunction,
+            final String type) throws IOException {
+
+<span class="nc" id="L223">        final String arg = iter.next();</span>
+<span class="nc" id="L224">        final Path dir = Paths.get(arg);</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">        if (Files.exists(dir)) {</span>
+<span class="nc" id="L226">            addDirFunction.accept(dir);</span>
+<span class="nc" id="L227">            return true;</span>
+        }
+<span class="nc" id="L229">        usage(type + &quot; not found: &quot; + arg);</span>
+<span class="nc" id="L230">        return false;</span>
+    }
+
+    private static void usage(String message) {
+<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (message != null) {</span>
+<span class="nc" id="L235">            System.out.println(&quot;Error: &quot; + message);</span>
+        }
+<span class="nc" id="L237">        System.out.println(USAGE);</span>
+<span class="nc" id="L238">        System.exit(0);</span>
+<span class="nc" id="L239">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>

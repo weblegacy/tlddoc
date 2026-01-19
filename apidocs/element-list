@@ -1,0 +1,5 @@
+module:io.github.weblegacy.tlddoc
+io.github.weblegacy.tlddoc
+io.github.weblegacy.tlddoc.main
+io.github.weblegacy.tlddoc.tagfileparser
+io.github.weblegacy.tlddoc.tagfileparser.javacc
