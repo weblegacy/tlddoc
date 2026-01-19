@@ -2,6 +2,7 @@
 
 ## 2.0.0 / YYYY-MM-DD
 
+* Correct scm-url in POM
 * Set Version to 2.0.0-SNAPSHOT
 * Move plugin-configs into pluginManagement
 * Adapting configurations from `maven-compiler-plugin`

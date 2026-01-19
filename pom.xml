@@ -70,7 +70,7 @@
     </organization>
 
     <scm>
-        <connection>scm:git:https://github.com/weblegacy/tlddoc.git</connection>
+        <connection>scm:git:git@github.com/weblegacy/tlddoc.git</connection>
         <developerConnection>scm:git:git@github.com:weblegacy/tlddoc.git</developerConnection>
         <url>https://github.com/weblegacy/tlddoc</url>
     </scm>
@@ -712,7 +712,7 @@
         </repository>
         <site>
             <id>github</id>
-            <url>scm:git:git@github.com:weblegacy/tlddoc.git</url>
+            <url>scm:git:ssh://git@github.com/weblegacy/tlddoc.git</url>
         </site>
         <downloadUrl>https://github.com/weblegacy/tlddoc/releases</downloadUrl>
     </distributionManagement>
