@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="FORMAT" timestamp="1770679474107">
-    <module artifactId="tlddoc" groupId="io.github.weblegacy" version="2.0.0-SNAPSHOT"/>
+<licensePluginReport goal="FORMAT" timestamp="1770680397124">
+    <module artifactId="tlddoc" groupId="io.github.weblegacy" version="2.0.0"/>
     <files>
         <file path="pom.xml" result="NOOP"/>
         <file path="src/main/java-templates/io/github/weblegacy/tlddoc/Version.java" result="NOOP"/>

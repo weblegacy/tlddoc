@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content="Apache Maven Doxia Site Renderer 2.0.0" />
-    <title>Usage Instructions – taglibrarydoc: Tag Library Documentation Generator 2.0.0-SNAPSHOT</title>
+    <title>Usage Instructions – taglibrarydoc: Tag Library Documentation Generator 2.0.0</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-2.1.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -31,7 +31,7 @@
           <ul class="breadcrumb">
         <li id="publishDate">Last Published: 2026-02-09<span class="divider">|</span>
 </li>
-          <li id="projectVersion">Version: 2.0.0-SNAPSHOT</li>
+          <li id="projectVersion">Version: 2.0.0</li>
           </ul>
         </div>
       </header>
@@ -78,7 +78,7 @@ generate documentation for a single TLD file, a set of TLD files, a JAR file, a
 WAR file, a directory of tag files, or all the tag libraries in a web
 application. Then, simply invoke as follows:</p>
 
-<pre class="prettyprint linenums"><code class="language-bash">java -jar tlddoc-2.0.0-SNAPSHOT.jar -d &lt;outdir&gt; &lt;tlds&gt;
+<pre class="prettyprint linenums"><code class="language-bash">java -jar tlddoc-2.0.0.jar -d &lt;outdir&gt; &lt;tlds&gt;
 </code></pre>
 <p>Where &lt;outdir&gt; is the directory in which to produce the output and &lt;tlds&gt; is
 the list of files or directories to examine. The -doctitle and -windowtitle
@@ -90,7 +90,7 @@ the information from various tag libraries into a single XML document,
 annotates it in various ways, and then runs that document through a number of
 XSLT stylesheets to produce the final output. You can edit or replace the XSLT
 stylesheets to change how the output looks or the way it is structured.</p>
-<p>To do this, first extract the contents of tlddoc-2.0.0-SNAPSHOT.jar to an
+<p>To do this, first extract the contents of tlddoc-2.0.0.jar to an
 empty directory. Then, edit the files in io/github/weblegacy/tlddoc/resources/*
 to change the output. Finally, run with the -xslt option, pointing to the
 directory with the modified files. For any file that does not appear in the
@@ -101,7 +101,7 @@ build process using the <code>&lt;java&gt;</code> task. Just add the following c
 <code>build.xml</code>.</p>
 <p>Using JDK 11 or greater:</p>
 
-<pre class="prettyprint linenums"><code class="language-xml">&lt;java fork=&quot;true&quot; jar=&quot;${tlddoc.path}/tlddoc-2.0.0-SNAPSHOT.jar&quot;
+<pre class="prettyprint linenums"><code class="language-xml">&lt;java fork=&quot;true&quot; jar=&quot;${tlddoc.path}/tlddoc-2.0.0.jar&quot;
       failonerror=&quot;true&quot;&gt;
   &lt;arg line=&quot;-d ${build}/taglibs/doc&quot;/&gt;
   &lt;arg value=&quot;${src}/taglibs/tld/my1.tld&quot;/&gt;
