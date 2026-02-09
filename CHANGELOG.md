@@ -2,6 +2,7 @@
 
 ## 2.0.0 / YYYY-MM-DD
 
+* Add `central-publishing-maven-plugin`
 * Bump `maven-dependency-plugin` from 3.9.0 to 3.10.0
 * Update `checkstyle.xml`
 * Bump `checkstyle` from 13.0.0 to 13.2.0
