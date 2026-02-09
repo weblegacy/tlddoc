@@ -2,6 +2,7 @@
 
 ## 2.0.0 / YYYY-MM-DD
 
+* Bump `maven-dependency-plugin` from 3.9.0 to 3.10.0
 * Update `checkstyle.xml`
 * Bump `checkstyle` from 13.0.0 to 13.2.0
 * Bump `maven-compiler-plugin` from 3.14.1 to 3.15.0
