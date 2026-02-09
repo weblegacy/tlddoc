@@ -573,6 +573,10 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
                 <executions>
@@ -711,10 +715,6 @@
     </reporting>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>central</id>
-            <url>https://central.sonatype.com/repository/maven-snapshots</url>
-        </snapshotRepository>
         <site>
             <id>github</id>
             <url>scm:git:https://github.com/weblegacy/tlddoc.git</url>
