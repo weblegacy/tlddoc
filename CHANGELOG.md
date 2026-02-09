@@ -1,7 +1,8 @@
 # Change-Log
 
-## 2.0.0 / YYYY-MM-DD
+## 2.0.0 / 2026-02-10
 
+* Set Version to 2.0.0
 * Add `central-publishing-maven-plugin`
 * Bump `maven-dependency-plugin` from 3.9.0 to 3.10.0
 * Update `checkstyle.xml`
