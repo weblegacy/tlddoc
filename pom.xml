@@ -127,7 +127,7 @@
         <javaVersion>11</javaVersion>
         <mainClass>io.github.weblegacy.tlddoc.main.TldDoc</mainClass>
         <fluidoVersion>2.1.0</fluidoVersion>
-        <surefireVersion>3.5.4</surefireVersion>
+        <surefireVersion>3.5.5</surefireVersion>
         <junitVersion>6.0.2</junitVersion>
     </properties>
 
